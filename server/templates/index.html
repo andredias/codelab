@@ -21,10 +21,13 @@
     <textarea name="output" rows="10" cols="80"></textarea>
     <textarea name="errors" rows="10" cols="80"></textarea>
     <select name="language">
-        <option value="python" selected="selected">Python 3</option>
-        <option value="c_cpp">C/C++</option>
+        <option value="c" data-ace-mode="c_cpp">C</option>
+        <option value="cpp" data-ace-mode="c_cpp">C++</option>
         <option value="csharp">C#</option>
+        <option value="go">Go</option>
         <option value="javascript">Javascript</option>
+        <option value="python" selected="selected">Python 3</option>
+        <option value="ruby">Ruby</option>
     </select>
     <a href="#" class="button" id="submit">Run</a>
 {% endblock %}

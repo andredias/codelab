@@ -19,7 +19,9 @@ $(function() {
     );
     $('select[name="language"]').bind('change',
         function() {
-            $('juicy-ace-editor').attr('mode', 'ace/mode/' + $(this).val());
+            option = $(this).find('option:selected');
+            mode = $(option).data('ace-mode') || $(option).attr('name');
+            $('juicy-ace-editor').attr('mode', 'ace/mode/' + mode);
         }
     );
 });

@@ -2,7 +2,8 @@
 
 import sh
 import json
-
+import logging
+from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, jsonify, request
 from flask.ext.script import Manager
 
@@ -20,11 +21,18 @@ def do_the_thing():
     language = request.args.get('language', 'python')
     source = request.args.get('code')
     _input = request.args.get('input')
-    params = {'_input': _input, 'source': source, 'language': language}
-    output = codebox(_in=json.dumps(params))
+    params = {'input': _input, 'source': source, 'language': language}
+    params_json = json.dumps(params)
+    if app.debug:
+        app.logger.info(params_json)
+    output = codebox(_in=params_json)
     stdout = output.stdout.decode('utf-8')
     stderr = output.stderr.decode('utf-8')
     return jsonify(stdout=stdout, stderr=stderr)
 
+
 if __name__ == '__main__':
+    handler = RotatingFileHandler('/tmp/codebox.log', maxBytes=10000, backupCount=1)
+    handler.setLevel(logging.INFO)
+    app.logger.addHandler(handler)
     manager.run()
