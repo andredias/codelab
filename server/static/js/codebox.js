@@ -10,8 +10,8 @@ $(function() {
                 input: $('textarea[name="input"]').val()
                 },
                 function(evaluation) {
-                    $('textarea[name="output"]').text(evaluation.stdout);
-                    $('textarea[name="errors"]').text(evaluation.stderr);
+                    $('textarea[name="output"]').text(evaluation.execution.stdout);
+                    $('textarea[name="errors"]').text(evaluation.execution.stderr);
                 }
             );
             return false;

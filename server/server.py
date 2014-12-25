@@ -12,9 +12,11 @@ codebox = sh.docker.run.bake('-i', '--rm', '--net', 'none', 'codebox', _ok_code=
 app = Flask(__name__)
 manager = Manager(app)
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/_do_the_thing')
 def do_the_thing():
@@ -26,9 +28,7 @@ def do_the_thing():
     if app.debug:
         app.logger.info(params_json)
     output = codebox(_in=params_json)
-    stdout = output.stdout.decode('utf-8')
-    stderr = output.stderr.decode('utf-8')
-    return jsonify(stdout=stdout, stderr=stderr)
+    return output.stdout.decode('utf-8')
 
 
 if __name__ == '__main__':
