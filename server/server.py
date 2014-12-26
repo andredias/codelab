@@ -25,9 +25,9 @@ def do_the_thing():
     _input = request.args.get('input')
     params = {'input': _input, 'source': source, 'language': language}
     params_json = json.dumps(params)
-    if app.debug:
-        app.logger.info(params_json)
+    app.logger.info(params_json)
     output = codebox(_in=params_json)
+    app.logger.info(output)
     return output.stdout.decode('utf-8')
 
 
