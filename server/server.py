@@ -4,7 +4,7 @@ import sh
 import json
 import logging
 from logging.handlers import RotatingFileHandler
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, request
 from flask.ext.script import Manager
 
 codebox = sh.docker.run.bake('-i', '--rm', '--net', 'none', 'codebox', _ok_code=[0, 1, 2])
