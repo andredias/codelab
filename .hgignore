@@ -4,3 +4,4 @@ syntax: glob
 *~
 .tox
 *.egg-info
+node_modules

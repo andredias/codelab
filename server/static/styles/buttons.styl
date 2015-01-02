@@ -1,0 +1,130 @@
+
+button
+  // [small, big]
+  // [round, pill]
+  // [border]
+  // [primary, success, info, warning, danger]
+  // [invert]
+  // [stretch]
+
+  cursor: pointer
+  transition: all 200ms ease
+  border: 0
+  background: darken(white, 5%)
+  color: lighten(black, 20%)
+  padding: .5em 1.75em
+  &:hover
+    background: darken(white, 10%)
+
+  &[mui*="small"]
+    padding: .25em 1em
+    font-size: .75em
+
+  &[mui*="big"]
+    padding: 1em 3em
+    font-size: 1.25em
+
+  &[mui*="round"]
+    border-radius: 5px
+
+  &[mui*="pill"]
+    border-radius: 999em
+
+  &[mui*="border"]
+    border: 1px solid darken(white, 10%)
+    &:hover
+      border-color: darken(white, 15%)
+
+  &[mui*="primary"]
+    background: color.primary
+    color: white
+    &:hover
+      background: darken(color.primary, 5%)
+  &[mui*="border"][mui*="primary"]
+    border-color: darken(color.primary, 5%)
+    &:hover
+      border-color: darken(color.primary, 10%)
+
+  &[mui*="success"]
+    background: color.success
+    color: white
+    &:hover
+      background: darken(color.success, 5%)
+  &[mui*="border"][mui*="success"]
+    border-color: darken(color.success, 5%)
+    &:hover
+      border-color: darken(color.success, 10%)
+
+  &[mui*="info"]
+    background: color.info
+    color: white
+    &:hover
+      background: darken(color.info, 5%)
+  &[mui*="border"][mui*="info"]
+    border-color: darken(color.info, 5%)
+    &:hover
+      border-color: darken(color.info, 10%)
+
+  &[mui*="warning"]
+    background: color.warning
+    color: white
+    &:hover
+      background: darken(color.warning, 5%)
+  &[mui*="border"][mui*="warning"]
+    border-color: darken(color.warning, 5%)
+    &:hover
+      border-color: darken(color.warning, 10%)
+
+  &[mui*="danger"]
+    background: color.danger
+    color: white
+    &:hover
+      background: darken(color.danger, 5%)
+  &[mui*="border"][mui*="danger"]
+    border-color: darken(color.danger, 5%)
+    &:hover
+      border-color: darken(color.danger, 10%)
+
+  &[mui*="invert"]
+    border: 2px solid darken(white, 5%)
+    background: none
+    &:hover
+      background: darken(white, 5%)
+
+  &[mui*="invert"][mui*="primary"]
+    color: color.primary
+    border-color: color.primary
+    &:hover
+      color: white
+      background: color.primary
+
+  &[mui*="invert"][mui*="success"]
+    color: color.success
+    border-color: color.success
+    &:hover
+      color: white
+      background: color.success
+
+  &[mui*="invert"][mui*="info"]
+    color: color.info
+    border-color: color.info
+    &:hover
+      color: white
+      background: color.info
+
+  &[mui*="invert"][mui*="warning"]
+    color: color.warning
+    border-color: color.warning
+    &:hover
+      color: white
+      background: color.warning
+
+  &[mui*="invert"][mui*="danger"]
+    color: color.danger
+    border-color: color.danger
+    &:hover
+      color: white
+      background: color.danger
+
+  &[mui*="stretch"]
+    width: 100%
