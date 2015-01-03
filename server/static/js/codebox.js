@@ -1,4 +1,5 @@
 $(function() {
+    var editor = ace.edit("editor");
     $('a#submit').bind('click',
         function() {
             $('textarea[name="output"]').text('');
@@ -6,7 +7,7 @@ $(function() {
             $.getJSON($SCRIPT_ROOT + '/_do_the_thing',
                 {
                 language: $('select[name="language"]').val(),
-                code: $('juicy-ace-editor').prop('editor').getValue(),
+                code: editor.getValue(),
                 input: $('textarea[name="input"]').val()
                 },
                 function(evaluation) {
@@ -20,8 +21,10 @@ $(function() {
     $('select[name="language"]').bind('change',
         function() {
             option = $(this).find('option:selected');
-            mode = $(option).data('ace-mode') || $(option).attr('name');
-            $('juicy-ace-editor').attr('mode', 'ace/mode/' + mode);
+            mode = $(option).data('ace-mode') || $(option).val();
+            editor.getSession().setMode('ace/mode/' + mode);
         }
     );
+    $('select[name="language"]').change();
+    editor.setTheme("ace/theme/cobalt");
 });

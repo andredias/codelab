@@ -87,6 +87,7 @@ figure {
   margin: 1em 40px;
 }
 hr {
+  -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
@@ -146,6 +147,8 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 input[type="search"] {
   -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
 input[type="search"]::-webkit-search-cancel-button,
@@ -177,8 +180,7 @@ th {
 }
 button {
   cursor: pointer;
-  -webkit-transition: all 200ms ease;
-          transition: all 200ms ease;
+  transition: all 200ms ease;
   border: 0;
   background: #f2f2f2;
   color: #333;
@@ -324,17 +326,46 @@ button[mui*="stretch"] {
 }
 html {
   padding: 2rem;
-  font-size: 24px;
   font-weight: 100;
   line-height: 1.5;
 }
-@media (max-width: 900px) {
+@media only screen and (min-width: 25em) and (max-width: 65.625em) {
   html {
     font-size: 20px;
   }
 }
-@media (max-width: 500px) {
-  html {
-    font-size: 14px;
+#editor {
+  width: 100%;
+  height: 14em;
+}
+.message,
+.warning,
+.error,
+.fatal {
+  padding: 10px;
+  font: 1rem Helvetica;
+  border: 1px solid #eee;
+}
+.warning {
+  border-color: #ff0;
+  background: #ffffb3;
+}
+.error,
+.fatal {
+  border-color: #f00;
+  background: #ffb3b3;
+}
+.fatal {
+  font-weight: bold;
+  color: #f00;
+}
+.some-ui-element {
+  width: 50%;
+  float: left;
+}
+@media only screen and (max-width: 31.25em) {
+  .some-ui-element {
+    width: 100%;
+    float: none;
   }
 }
