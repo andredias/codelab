@@ -4,7 +4,7 @@ import sh
 import json
 import logging
 from logging.handlers import RotatingFileHandler
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from flask.ext.script import Manager
 
 codebox = sh.docker.run.bake('-i', '--rm', '--net', 'none', 'codebox', _ok_code=[0, 1, 2])
@@ -15,7 +15,31 @@ manager = Manager(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    languages = (
+        ('Python', url_for('static', filename='images/python.svg')),
+        ('C', url_for('static', filename='images/c.svg')),
+        ('C++', url_for('static', filename='images/cpp.svg')),
+        ('Go', url_for('static', filename='images/go.png')),
+        ('Javascript', url_for('static', filename='images/javascript.png')),
+        ('Ruby', url_for('static', filename='images/ruby.svg')),
+    )
+    return render_template('landing_page.html', languages=languages)
+
+
+@app.route('/dojo/<language>')
+def dojo(language):
+    language = language.lower()
+    ace_mode_map = {
+        'c': 'c_cpp',
+        'c++': 'c_cpp',
+        'c#': 'csharp',
+        'go': 'golang',
+    }
+    editor_params = {
+        'mode': 'ace/mode/' + ace_mode_map.get(language, language),
+        'theme': 'ace/theme/cobalt',
+    }
+    return render_template('dojo.html', language=language, editor_params=editor_params)
 
 
 @app.route('/_do_the_thing')

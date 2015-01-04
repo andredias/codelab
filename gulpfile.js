@@ -3,7 +3,10 @@ var stylus = require('gulp-stylus');
 var autoprefixer = require('gulp-autoprefixer');
 var comprimir = true;
 var paths = {
-    styles: ['server/static/styles/main.styl'],
+    styles: [
+        'server/static/styles/main.styl',
+        'server/static/styles/menus.styl'
+    ],
     dest: 'server/static/css'
 };
 

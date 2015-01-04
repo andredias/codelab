@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}CodeBox{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menus.css') }}" />
+{% endblock %}
+{% block scripts %}{% endblock %}
+{% block body %}
+<body id="landing_page">
+    <section class="languages">
+        <nav id="menu">
+            <ul>
+            {% for name, image in languages %}
+                <li>
+                    <a href="{{ url_for('dojo', language=name.lower()) }}" data-lang="{{ name }}">
+                        <span class="imagem"><img src="{{ image }}" alt="{{ name }}" height="40px" /></span>
+                        <span>{{ name }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </nav>
+    </section>
+    <footer></footer>
+</body>
+{% endblock %}

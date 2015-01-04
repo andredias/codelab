@@ -1,0 +1,134 @@
+// http://tympanus.net/codrops/2013/05/08/responsive-retina-ready-menu/
+@import 'colors'
+@import 'rupture'
+
+menu_colors(colors)
+    for value, i in values(colors)
+        &:nth-child({length(colors)}n+{i})
+            background value
+
+menu_darken_colors(colors, border=true)
+    for value, i in values(colors)
+        &:nth-child({length(colors)}n+{i})
+            a:hover
+            a:active
+            a:focus
+                if border
+                    border-bottom 4px solid darken(value, 30%)
+                else
+                    background darken(value, 30%)
+
+nav
+    ul
+        max-width 1240px
+        margin 0
+        padding 0
+        list-style none
+        font-size 1.5em
+        font-weight 300
+        &:hover a
+            color rgba(249, 249, 249, .5)
+            &:hover
+                color rgba(249, 249, 249, .99)
+    li
+        span
+            display block
+        menu_colors(swatches)
+    a
+        display block
+        color rgba(249, 249, 249, .9)
+        text-decoration none
+        transition color .5s, background .5s, height .5s
+    i
+        transform translate3d(0, 0, 0)
+
++above(50em)
+    nav
+        li
+            float left
+            width 16.6666667%
+            text-align center
+            transition border .5s
+            menu_darken_colors(swatches)
+        a
+            display block
+            width auto
+            height 9em
+            &:hover
+            &:active
+            &:focus
+                height 10em
+                i
+                    box-shadow 0 0 0px 0px rgba(255, 255, 255, 0.2)
+                    transition box-shadow .4s ease-in-out
+            &:hover .icon + span
+                margin-top 3.2em
+                transition margin .5s
+        i
+            position relative
+            display inline-block
+            margin 0 auto
+            padding 0.4em
+            border-radius 50%
+            font-size 1.8em
+            box-shadow 0 0 0 0.8em transparent
+            background rgba(255, 255, 255, 0.1)
+            transform translate3d(0, 0, 0)
+            transition box-shadow .6s ease-in-out
+    .icon
+        position relative
+        padding-top 1.4em
+        + span
+            margin-top 2.1em
+            transition margin .5s
+
+
++between(50em, 61.25em)
+    nav
+        ul
+            font-size 1.2em
+
++below(49.938em)
+    nav
+        ul
+            li
+                menu_darken_colors(swatches, border=false)
+
++between(32.5em, 49.938em)
+    nav
+        li
+            display block
+            float left
+            width 50%
+            i
+                display inline-block
+                padding 8% 9%
+                border 4px solid transparent
+                border-radius 50%
+                font-size 1.5em
+                background rgba(255, 255, 255, 0.1)
+                transition border .5s
+                &:hover
+                &:active
+                &:focus
+                    border 4px solid rgba(255, 255, 255, 0.1)
+        span
+        span.icon
+            display inline-block
+        span.icon
+            width 50%
+        .icon + span
+            font-size 1em
+        a
+            padding 0.8em
+    .icon + span
+        position relative
+        top -0.2em
+
++between(32.5em, 38.688em)
+    nav
+        li
+            span.icon
+                width 50%
+            .icon + span
+                font-size 0.9em
