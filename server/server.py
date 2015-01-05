@@ -35,11 +35,9 @@ def dojo(language):
         'c#': 'csharp',
         'go': 'golang',
     }
-    editor_params = {
-        'mode': 'ace/mode/' + ace_mode_map.get(language, language),
-        'theme': 'ace/theme/cobalt',
-    }
-    return render_template('dojo.html', language=language, editor_params=editor_params)
+    ace_mode = 'ace/mode/' + ace_mode_map.get(language, language)
+    ace_theme = 'ace/theme/cobalt'
+    return render_template('dojo.html', language=language, ace_mode=ace_mode, ace_theme=ace_theme)
 
 
 @app.route('/_do_the_thing')

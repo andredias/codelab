@@ -3,16 +3,13 @@
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
     <script src="//cdn.jsdelivr.net/ace/latest/min/ace.js"></script>
-    <script>
-        var language = {{ language | tojson | safe }};
-        var EditorParams = {{ editor_params | tojson | safe }};
-    </script>
     <script src="{{ url_for('static', filename='js/codebox.js') }}"></script>
 {% endblock %}
 {% block scripts %}{% endblock %}
 {% block body %}
 <body id="landing_page">
-    <div id="editor"></div>
+    <div id="editor" data-language="{{ language }}" data-ace-mode="{{ ace_mode }}"
+         data-ace-theme="{{ ace_theme }}"></div>
     <textarea name="input" rows="10" cols="50"></textarea>
     <textarea name="output" rows="10" cols="80"></textarea>
     <textarea name="errors" rows="10" cols="80"></textarea>
