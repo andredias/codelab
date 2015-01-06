@@ -1,5 +1,5 @@
 // http://tympanus.net/codrops/2013/05/08/responsive-retina-ready-menu/
-@import 'colors'
+@require 'colors'
 
 menu_colors(colors)
     for value, i in values(colors)
@@ -17,7 +17,9 @@ menu_darken_colors(colors, border=true)
                 else
                     background darken(value, 30%)
 
-nav.languages
+.languages nav
+    width 100%
+    display inline-block
     ul
         max-width 1240px
         margin 0
@@ -42,7 +44,7 @@ nav.languages
         transform translate3d(0, 0, 0)
 
 +above(50em)
-    nav.languages
+    .languages nav
         li
             float left
             width 16.6666667%
@@ -83,18 +85,18 @@ nav.languages
 
 
 +between(50em, 61.25em)
-    nav.languages
+    .languages nav
         ul
             font-size 1.2em
 
 +below(49.938em)
-    nav.languages
+    .languages nav
         ul
             li
                 menu_darken_colors(swatches, border=false)
 
 +between(32.5em, 49.938em)
-    nav.languages
+    .languages nav
         li
             display block
             float left
@@ -125,7 +127,7 @@ nav.languages
         top -0.2em
 
 +between(32.5em, 38.688em)
-    nav.languages
+    .languages nav
         li
             span.icon
                 width 50%

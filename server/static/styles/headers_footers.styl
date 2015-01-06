@@ -1,33 +1,61 @@
 // http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
 
-vertical-align ()
+@require 'colors'
+
+fundo_escuro = #1b1c1d
+cor_titulo = swatches.clouds
+
+vertical-aligned()
     position relative
     top 50%
     transform translateY(-50%)
 
-header.page
-    text-align justify
-    letter spacing 1px
+header
     height 2em
-    padding 10%
-    background #2c3e50
-    color #fff
-    transform-style preserve-3d
+    h1
+        vertical-aligned()
 
+header
+footer
+    padding 0 1em
+    a
+        display block
+        text-decoration none
+        color cor_titulo
+        &:hover
+            color white
+
+.page
+    letter spacing 1px
+    color #fff
+    background fundo_escuro
+    transform-style preserve-3d
+    h1
+        font-size 1em
+        margin 0
+        padding 0
+        color cor_titulo
+        display block
 
 footer.page
-    width 100%
-    background #2a3744
+    height auto
     font-size 0.9em
-    line-height 1.6em
+    padding 0
     header
-        height 3em
+    footer
+        background darken(fundo_escuro, 20%)
     section
+        padding 0 1em
+        margin-top 1em
         h1
-            color #fff
-            line-height 1.2em
-            margin-bottom 0.5em
-        a
-            display inline-block
-            color #bbb
+            font-size 0.9em
+            color darken(cor_titulo, 15%)
+        nav
+            margin 0.5em 1em 0
+            a
+                color darken(cor_titulo, 20%)
+                line-height 1.2rem
+                font-size 0.9em
+                &:hover
+                    color white
 

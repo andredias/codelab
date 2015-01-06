@@ -8,9 +8,7 @@ var watch = require('gulp-watch');
 var comprimir = true;
 var paths = {
     styles: [
-        'server/static/styles/main.styl',
-        'server/static/styles/menus.styl',
-        'server/static/styles/headers_footers.styl'
+        'server/static/styles/styles.styl'
     ],
     dest: 'server/static/css'
 };
@@ -28,7 +26,7 @@ gulp.task('stylus', function() {
 });
 
 gulp.task('watch', function() {
-    return watch(paths.styles, function() {
+    return watch('server/static/styles/*.styl', function() {
         return gulp.start('stylus');
     });
 });
