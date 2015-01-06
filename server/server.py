@@ -53,6 +53,11 @@ def do_the_thing():
     return output.stdout.decode('utf-8')
 
 
+@app.route('/help/<topic>')
+def help(topic):
+    return render_template(topic + '.html')
+
+
 if __name__ == '__main__':
     handler = RotatingFileHandler('/tmp/codebox.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.INFO)

@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 {% block title %}CodeBox{% endblock %}
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menus.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
 {% endblock %}
 {% block scripts %}{% endblock %}
 {% block body %}
 <body id="landing_page">
+    <header class="page">
+        <h1>Code Cloud</h1>
+<!--         <nav>
+            <a href="">item 1</a>
+            <a href="">item 2</a>
+            <a href="">item 3</a>
+        </nav> -->
+    </header>
     <section class="languages">
-        <nav id="menu">
+        <nav>
             <ul>
             {% for name, image in languages %}
                 <li>
@@ -21,6 +28,31 @@
             </ul>
         </nav>
     </section>
-    <footer></footer>
+    <footer class="page">
+        <header>
+            <h1>Code Cloud</h1>
+        </header>
+        <section>
+            <h1>Help and Support</h1>
+            <nav>
+                <a href="{{ url_for('help', topic='faq') }}">FAQ</a>
+                <a href="{{ url_for('help', topic='terms') }}">Terms of Use</a>
+                <a href="{{ url_for('help', topic='contact') }}">Contact</a>
+                <a href="{{ url_for('help', topic='about') }}">About</a>
+                <a href="{{ url_for('help', topic='advertise') }}">Advertise</a>
+            </nav>
+        </section>
+        <section>
+            <h1>Follow Us</h1>
+            <a href="#" class="social-link"><i></i></a>
+            <a href="#" class="social-link"><i></i></a>
+            <a href="#" class="social-link"><i></i></a>
+        </section>
+        <footer>
+            <div class="copyright">Copyright</div>
+            <div class="pronuslogo"></div>
+        </footer>
+
+    </footer>
 </body>
 {% endblock %}
