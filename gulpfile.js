@@ -1,9 +1,6 @@
 var gulp = require('gulp');
 var stylus = require('gulp-stylus');
 var autoprefixer = require('gulp-autoprefixer');
-var stylus_normalize = require('stylus-normalize');
-var elf_grid = require('elf-grid');
-var rupture = require('rupture');
 var watch = require('gulp-watch');
 var comprimir = true;
 var paths = {
@@ -14,6 +11,9 @@ var paths = {
 };
 
 gulp.task('stylus', function() {
+    var stylus_normalize = require('stylus-normalize');
+    var elf_grid = require('elf-grid');
+    var rupture = require('rupture');
     return gulp.src(paths.styles)
         .pipe(stylus(
             {
@@ -27,6 +27,7 @@ gulp.task('stylus', function() {
 
 gulp.task('watch', function() {
     return watch('server/static/styles/*.styl', function() {
+        comprimir = false;
         return gulp.start('stylus');
     });
 });

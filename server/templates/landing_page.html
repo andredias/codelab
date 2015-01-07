@@ -7,52 +7,54 @@
 {% block body %}
 <body id="landing_page">
     <header class="page">
-        <h1>Code Cloud</h1>
-<!--         <nav>
+        <a href="#" class="logo">Code Worker</a>
+        <nav>
             <a href="">item 1</a>
             <a href="">item 2</a>
             <a href="">item 3</a>
-        </nav> -->
+        </nav>
     </header>
-    <section class="languages">
-        <nav>
-            <ul>
-            {% for name, image in languages %}
-                <li>
-                    <a href="{{ url_for('dojo', language=name.lower()) }}" data-lang="{{ name }}">
-                        <span class="imagem"><img src="{{ image }}" alt="{{ name }}" height="40px" /></span>
-                        <span>{{ name }}</span>
-                    </a>
-                </li>
-            {% endfor %}
-            </ul>
+    <section>
+        <nav class="languages">
+        {% for name, image in languages %}
+            <div>
+                <a href="{{ url_for('dojo', language=name.lower()) }}" data-lang="{{ name }}">
+                <img src="{{ image }}" alt="{{ name }}" />
+                <span>{{ name }}</span>
+                </a>
+            </div>
+        {% endfor %}
         </nav>
     </section>
     <footer class="page">
         <header>
             <h1>Code Cloud</h1>
         </header>
-        <section>
-            <h1>Help and Support</h1>
-            <nav>
-                <a href="{{ url_for('help', topic='faq') }}">FAQ</a>
-                <a href="{{ url_for('help', topic='terms') }}">Terms of Use</a>
-                <a href="{{ url_for('help', topic='contact') }}">Contact</a>
-                <a href="{{ url_for('help', topic='about') }}">About</a>
-                <a href="{{ url_for('help', topic='advertise') }}">Advertise</a>
-            </nav>
-        </section>
-        <section>
-            <h1>Follow Us</h1>
-            <a href="#" class="social-link"><i></i></a>
-            <a href="#" class="social-link"><i></i></a>
-            <a href="#" class="social-link"><i></i></a>
-        </section>
-        <footer>
+        <div class="footer">
+            <section>
+                <h1>Help and Support</h1>
+                <nav>
+                    <a href="{{ url_for('help', topic='faq') }}">FAQ</a>
+                    <a href="{{ url_for('help', topic='terms') }}">Terms of Use</a>
+                    <a href="{{ url_for('help', topic='contact') }}">Contact</a>
+                    <a href="{{ url_for('help', topic='about') }}">About</a>
+                    <a href="{{ url_for('help', topic='advertise') }}">Advertise</a>
+                </nav>
+            </section>
+            <section>
+                <h1>Follow Us</h1>
+                <nav>
+                    <a href="#" class="social-link"><i></i>Item 1</a>
+                    <a href="#" class="social-link"><i></i>Item 2</a>
+                    <a href="#" class="social-link"><i></i>Item 3</a>
+                </nav>
+            </section>
+        </div>
+        <footer class="bottom">
             <div class="copyright">Copyright</div>
             <div class="pronuslogo"></div>
         </footer>
-
     </footer>
+
 </body>
 {% endblock %}
