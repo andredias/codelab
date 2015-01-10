@@ -1,0 +1,48 @@
+@require 'elf'
+@require 'rupture'
+@require 'colors'
+
+rupture.enable-em-breakpoints = true
+cor_menu_status = swatches.clouds
+
+section.editor
+    overflow hidden
+    header
+        align-children(vertical)
+        margin-bottom 0
+        background cor_menu_status
+    div#editor
+        column(1)
+        height 25em
+        font-size 1em
+    footer
+        background cor_menu_status
+        font-size: smaller
+
+article.input_output
+    overflow hidden
+    h1
+        font-size 1em
+    section.input
+        column(1/4)
+        textarea
+            background cor_menu_status
+    section.output
+        column(3/4)
+        textarea
+            width 100%
+            box-sizing border-box
+            background black
+            color white
+
+article.lint-metrics
+    overflow hidden
+    h1
+        font-size 1em
+    section
+        column(1/2)
+        textarea
+            width 100%
+            box-sizing border-box
+            background black
+            color white

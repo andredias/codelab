@@ -1,19 +1,61 @@
 {% extends "base.html" %}
 {% block title %}CodeBox{% endblock %}
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
-    <script src="//cdn.jsdelivr.net/ace/latest/min/ace.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
+   <script src="//cdn.jsdelivr.net/ace/latest/min/ace.js"></script>
     <script src="{{ url_for('static', filename='js/codebox.js') }}"></script>
 {% endblock %}
 {% block scripts %}{% endblock %}
 {% block body %}
-<body id="landing_page">
-    <div id="editor" data-language="{{ language }}" data-ace-mode="{{ ace_mode }}"
-         data-ace-theme="{{ ace_theme }}"></div>
-    <textarea name="input" rows="10" cols="50"></textarea>
-    <textarea name="output" rows="10" cols="80"></textarea>
-    <textarea name="errors" rows="10" cols="80"></textarea>
-    <a href="#" class="button" id="submit">Run</a>
-    <footer></footer>
+<body id="dojo">
+    <section class="editor">
+        <header>
+            <select name="languages">
+            {% for language in languages %}
+                <option value="{{ language['name'] }}" {% if 'mode' in language %} data-ace-mode="{{ language['mode'] }}" {% endif %} {% if 'selected' in language %}selected{% endif %}>{{ language['name'] }}</option>
+            {% endfor %}
+            </select>
+            <button class="editor" name="run"><i></i><span>Run</span></button>
+            <button class="editor" name="increase_font"><i></i><span>A+</span></button>
+            <button class="editor" name="decrease_font"><i></i><span>A-</span></button>
+        </header>
+        <div id="editor" data-language="{{ language }}" data-ace-mode="{{ ace_mode }}" data-ace-theme="{{ ace_theme }}"></div>
+        <footer>
+            Line: <span id="line_position"></span>
+            Col: <span id="column_position"></span>
+        </footer>
+    </section>
+    <article class="input_output">
+        <section class="input">
+            <h1>Input</h1>
+            <textarea name="input" id="" cols="30" rows="10"></textarea>
+        </section>
+        <section class="output">
+            <h1>Output</h1>
+            <textarea name="output" id="" cols="30" rows="10" readonly></textarea>
+        </section>
+    </article>
+    <article class="lint-metrics">
+        <section class="lint">
+            <h1>Lint</h1>
+            <table id="lint_results">
+                <thead>
+                    <tr>
+                        <th>Line</th>
+                        <th>Column</th>
+                        <th>Code</th>
+                        <th>Message</th>
+                        <th>Level</th>
+                    </tr>
+                    <tbody></tbody>
+                </thead>
+            </table>
+        </section>
+        <section class="metrics">
+            <h1>Metrics</h1>
+            <textarea name="" id="" cols="30" rows="6" readonly></textarea>
+        </section>
+    </article>
+
 </body>
 {% endblock %}

@@ -70,7 +70,7 @@ nav.languages
             color black
             background darken(fundo, 10%)
             font-weight bolder
-            transition all .5s ease
+            transition background .5s ease
         &:active
             box-shadow 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1)
         img
@@ -87,7 +87,9 @@ footer.page
         overflow hidden
         background green
     section
-        column(1/2)
+        column(1/4)
+        .logo
+            offset(1/4)
         +mobile()
             column(1)
         nav
@@ -97,10 +99,13 @@ footer.page
                 color darken(white, 20%)
                 line-height 1.2rem
                 font-size 0.9em
+                font-weight bolder
                 &:hover
                     color white
-
-#editor
-    width 100%
-    height 14em
+    div.logo
+        column(1/4)
+        offset(1/4)
+        +mobile()
+            column(1)
+            offset(0)
 

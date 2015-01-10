@@ -4,7 +4,7 @@ import sh
 import json
 import logging
 from logging.handlers import RotatingFileHandler
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 from flask.ext.script import Manager
 
 codebox = sh.docker.run.bake('-i', '--rm', '--net', 'none', 'codebox', _ok_code=[0, 1, 2])
@@ -15,18 +15,31 @@ manager = Manager(app)
 
 @app.route('/')
 def index():
+    # projeto = project_or_new(session['project_id'])
+    language = 'python'
+    ace_mode = 'ace/mode/python'
+    ace_theme = 'ace/theme/cobalt'
     languages = (
-        ('Python', url_for('static', filename='images/python.svg')),
-        ('C', url_for('static', filename='images/c.svg')),
-        ('C++', url_for('static', filename='images/cpp.svg')),
-        ('Go', url_for('static', filename='images/go.png')),
-        ('Javascript', url_for('static', filename='images/javascript.png')),
-        ('Ruby', url_for('static', filename='images/ruby.svg')),
+        {'name': 'python'},
+        {'name': 'c', 'mode': 'c_cpp'},
+        {'name': 'c++', 'mode': 'c_cpp'},
+        {'name': 'go', 'mode': 'golang'},
+        {'name': 'javascript'},
+        {'name': 'ruby'},
     )
-    return render_template('landing_page.html', languages=languages)
+
+    # ('Python', url_for('static', filename='images/python.svg')),
+    # ('C', url_for('static', filename='images/c.svg')),
+    # ('C++', url_for('static', filename='images/cpp.svg')),
+    # ('Go', url_for('static', filename='images/go.png')),
+    # ('Javascript', url_for('static', filename='images/javascript.png')),
+    # ('Ruby', url_for('static', filename='images/ruby.svg')),
+
+    return render_template('dojo.html', languages=languages, language=language, ace_mode=ace_mode,
+                           ace_theme=ace_theme)
 
 
-@app.route('/dojo/<language>')
+@app.route('/project/new/<language>')
 def dojo(language):
     language = language.lower()
     ace_mode_map = {
@@ -57,6 +70,8 @@ def do_the_thing():
 def help(topic):
     return render_template(topic + '.html')
 
+app.secret_key = b'\xf06\xe34\x93\xf0\xad\xa5\xe7\xde\xf1R' \
+                 b'\xb3\xef\xd9\xaa\x92J\x14\xea'
 
 if __name__ == '__main__':
     handler = RotatingFileHandler('/tmp/codebox.log', maxBytes=10000, backupCount=1)
