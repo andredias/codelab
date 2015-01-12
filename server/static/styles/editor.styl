@@ -3,21 +3,35 @@
 @require 'colors'
 
 rupture.enable-em-breakpoints = true
-cor_menu_status = swatches.clouds
+cor_menu = swatches.clouds
+cor_fonte_status = darken(swatches.clouds, 25%)
 
 section.editor
     overflow hidden
+    position relative
     header
         align-children(vertical)
         margin-bottom 0
-        background cor_menu_status
+        background cor_menu
     div#editor
         column(1)
         height 25em
         font-size 1em
     footer
-        background cor_menu_status
-        font-size: smaller
+        background transparent
+        font-size 0.75em
+        color cor_fonte_status
+        position absolute
+        bottom 0
+        right 1.5em
+        div
+            display inline-block
+            padding 0.5em
+            a
+                color cor_fonte_status
+        .linecol
+            min-width 3.5em
+            text-align right
 
 article.input_output
     overflow hidden
@@ -26,7 +40,7 @@ article.input_output
     section.input
         column(1/4)
         textarea
-            background cor_menu_status
+            background cor_status
     section.output
         column(3/4)
         textarea

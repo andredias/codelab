@@ -10,6 +10,7 @@ function changedCursor(e) {
 function process_lint_results(lint_results) {
     var lint_table = $("#lint_results > tbody");
     var editor = ace.edit('editor');
+    var annotations = [];
     $.each(lint_results, function(i, result) {
         if (typeof result.column == 'undefined') {
             result.column = 1;
@@ -27,7 +28,13 @@ function process_lint_results(lint_results) {
             editor.gotoLine(result.line, result.column - 1, true);
         });
         lint_table.append($tr);
+        annotations[i] = {
+            row: result.line - 1,  // gotoLine starts at 1, but annotations at 0 ?!?
+            text: result.code + ': ' + result.message,
+            type: result.level || 'info'
+        }
     });
+    editor.getSession().setAnnotations(annotations);
 }
 
 
@@ -70,6 +77,7 @@ $(function() {
             $('textarea[name="output"]').text('');
             $('textarea[name="metrics"]').text('');
             $("#lint_results > tbody").html('');
+            editor.getSession().clearAnnotations();
             $.getJSON($SCRIPT_ROOT + '/_do_the_thing',
                 {
                 language: $('#editor').data('language'),
