@@ -10,7 +10,19 @@ function changedCursor(e) {
 function process_lint_results(lint_results) {
     var lint_table = $("#lint_results > tbody");
     var editor = ace.edit('editor');
+    var session = editor.getSession();
     var annotations = [];
+
+    // TODO: improve gutter icons
+    var getLevelType = function(level) {
+        level = level.toLowerCase();
+        var levelmap = {
+            'fatal': 'error',
+            'convention': 'info',
+            'refactor': 'info'
+        };
+        return levelmap[level] || level;
+    }
     $.each(lint_results, function(i, result) {
         if (typeof result.column == 'undefined') {
             result.column = 1;
@@ -31,10 +43,10 @@ function process_lint_results(lint_results) {
         annotations[i] = {
             row: result.line - 1,  // gotoLine starts at 1, but annotations at 0 ?!?
             text: result.code + ': ' + result.message,
-            type: result.level || 'info'
-        }
+            type: getLevelType(result.level)
+        };
     });
-    editor.getSession().setAnnotations(annotations);
+    session.setAnnotations(annotations);
 }
 
 
