@@ -5,8 +5,14 @@
 rupture.enable-em-breakpoints = true
 cor_menu = swatches.clouds
 cor_fonte_status = darken(swatches.clouds, 25%)
+cor_painel = swatches.concrete
+pumpkin = swatches.pumpkin
+
+article.editor
+    column(1)
 
 section.editor
+    column(1)
     overflow hidden
     position relative
     header
@@ -14,7 +20,8 @@ section.editor
         margin-bottom 0
         background cor_menu
     div#editor
-        column(1)
+        float left
+        width 100%
         height 25em
         font-size 1em
     footer
@@ -32,6 +39,29 @@ section.editor
         .linecol
             min-width 3.5em
             text-align right
+
+aside.results
+    color red
+    position absolute
+    top -2px
+    right 0
+    width 2em
+    nav
+        transform rotate(90deg)
+        transform-origin bottom left
+        transform-style preserve-3d
+        width 10000px
+        background cor_painel
+    a
+        display inline-block
+        padding 0.5em 1em
+        font-size 0.75em
+        line-height 1.5em
+        color lighten(cor_painel, 85%)
+        &:hover
+            color white
+            background pumpkin
+
 
 article.input_output
     overflow hidden
