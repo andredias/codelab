@@ -9,6 +9,38 @@
 {% block body %}
 <body id="dojo">
     <article class="editor">
+        <aside class="inputs">
+            <nav>
+                <a href="#">item1</a>
+                <a href="#">item2</a>
+                <a href="#">item3</a>
+            </nav>
+        </aside>
+        <div class="central">
+            <aside class="input_panel active">
+                <p>input_panel</p>
+            </aside>
+            <section class="editor input_panel output_panel">
+                <header>
+                    <select name="languages">
+                    {% for language in languages %}
+                        <option value="{{ language['name'] }}" {% if 'mode' in language %} data-ace-mode="{{ language['mode'] }}" {% endif %} {% if 'selected' in language %}selected{% endif %}>{{ language['name'] }}</option>
+                    {% endfor %}
+                    </select>
+                    <button class="editor" name="run"><i></i><span>Run</span></button>
+                    <button class="editor" name="increase_font"><i></i><span>A+</span></button>
+                    <button class="editor" name="decrease_font"><i></i><span>A-</span></button>
+                </header>
+                <div id="editor" data-language="{{ language }}" data-ace-mode="{{ ace_mode }}" data-ace-theme="{{ ace_theme }}"></div>
+                <footer>
+                    <div><a href="#" id="a-language">{{ language }}</a></div>
+                    <div class="linecol"><span id="line_position"></span>:<span id="column_position"></span></div>
+                </footer>
+            </section>
+            <aside class="output_panel active">
+                <p>output panel</p>
+            </aside>
+        </div>
         <aside class="results">
             <nav>
                 <a href="#">Lint</a>
@@ -16,23 +48,6 @@
                 <a href="#">Output</a>
             </nav>
         </aside>
-        <section class="editor">
-            <header>
-                <select name="languages">
-                {% for language in languages %}
-                    <option value="{{ language['name'] }}" {% if 'mode' in language %} data-ace-mode="{{ language['mode'] }}" {% endif %} {% if 'selected' in language %}selected{% endif %}>{{ language['name'] }}</option>
-                {% endfor %}
-                </select>
-                <button class="editor" name="run"><i></i><span>Run</span></button>
-                <button class="editor" name="increase_font"><i></i><span>A+</span></button>
-                <button class="editor" name="decrease_font"><i></i><span>A-</span></button>
-            </header>
-            <div id="editor" data-language="{{ language }}" data-ace-mode="{{ ace_mode }}" data-ace-theme="{{ ace_theme }}"></div>
-            <footer>
-                <div><a href="#" id="a-language">{{ language }}</a></div>
-                <div class="linecol"><span id="line_position"></span>:<span id="column_position"></span></div>
-            </footer>
-        </section>
     </article>
     <article class="input_output">
         <section class="input">

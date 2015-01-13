@@ -7,14 +7,62 @@ cor_menu = swatches.clouds
 cor_fonte_status = darken(swatches.clouds, 25%)
 cor_painel = swatches.concrete
 pumpkin = swatches.pumpkin
+panel_width = 2em
 
 article.editor
-    column(1)
+    position relative
+    overflow hidden
+    div.central
+        float left
+        width s('calc(100% - 2*%s)', panel_width)
+        overflow hidden
+        position relative
+
+aside.inputs
+aside.results
+    float left
+    width panel_width
+    top 0
+    position relative
+    nav
+        width 10000px
+        background cor_painel
+    a
+        display inline-block
+        font-size 0.75em
+        color lighten(cor_painel, 85%)
+        padding 0 1.5em
+        &:hover
+            color white
+            background pumpkin
+
+aside.inputs
+    nav
+        transform rotate(-90deg)
+        transform-origin bottom right
+        float right
+        position relative
+        float right
+    a
+        float right
+aside.results
+    nav
+        transform rotate(90deg)
+        transform-origin bottom left
+
+aside.input_panel
+aside.output_panel
+    column(0, gutter: 0px)
+    &.active
+        column(1/5, gutter: 0px)
 
 section.editor
     column(1)
-    overflow hidden
-    position relative
+    &.input_panel
+    &.output_panel
+        column(4/5, gutter: 0px)
+    &.input_panel.output_panel
+        column(3/5, gutter: 0px)
     header
         align-children(vertical)
         margin-bottom 0
@@ -28,9 +76,11 @@ section.editor
         background transparent
         font-size 0.75em
         color cor_fonte_status
-        position absolute
-        bottom 0
+        position relative
+        bottom 3em
         right 1.5em
+        height 0
+        text-align right
         div
             display inline-block
             padding 0.5em
@@ -39,28 +89,6 @@ section.editor
         .linecol
             min-width 3.5em
             text-align right
-
-aside.results
-    color red
-    position absolute
-    top -2px
-    right 0
-    width 2em
-    nav
-        transform rotate(90deg)
-        transform-origin bottom left
-        transform-style preserve-3d
-        width 10000px
-        background cor_painel
-    a
-        display inline-block
-        padding 0.5em 1em
-        font-size 0.75em
-        line-height 1.5em
-        color lighten(cor_painel, 85%)
-        &:hover
-            color white
-            background pumpkin
 
 
 article.input_output
