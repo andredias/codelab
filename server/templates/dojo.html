@@ -11,16 +11,20 @@
     <article class="editor">
         <aside class="inputs">
             <nav>
-                <a href="#">item1</a>
-                <a href="#">item2</a>
-                <a href="#">item3</a>
+                <a href="#input_data">item1</a>
+                <a href="#configuration">item2</a>
             </nav>
         </aside>
         <div class="central">
-            <aside class="input_panel active">
-                <p>input_panel</p>
+            <aside class="input_panel">
+                <section id="input_data">
+                    <h1>Input Data</h1>
+                </section>
+                <section id="configuration">
+                    <h1>Configuration</h1>
+                </section>
             </aside>
-            <section class="editor input_panel output_panel">
+            <section class="editor">
                 <header>
                     <select name="languages">
                     {% for language in languages %}
@@ -37,15 +41,23 @@
                     <div class="linecol"><span id="line_position"></span>:<span id="column_position"></span></div>
                 </footer>
             </section>
-            <aside class="output_panel active">
-                <p>output panel</p>
+            <aside class="output_panel">
+                <section id="compilation">
+                    <h1>Compilation</h1>
+                </section>
+                <section id="lint">
+                    <h1>Lint</h1>
+                </section>
+                <section id="metrics">
+                    <h1>Metrics</h1>
+                </section>
             </aside>
         </div>
         <aside class="results">
             <nav>
-                <a href="#">Lint</a>
-                <a href="#">Metrics</a>
-                <a href="#">Output</a>
+                <a href="#compilation">Compilation</a>
+                <a href="#lint">Lint</a>
+                <a href="#metrics">Metrics</a>
             </nav>
         </aside>
     </article>

@@ -7,6 +7,7 @@ function changedCursor(e) {
     // $('#file_status').html(total_lines);
 };
 
+
 function process_lint_results(lint_results) {
     var lint_table = $("#lint_results > tbody");
     var editor = ace.edit('editor');
@@ -62,6 +63,7 @@ function process_output(evaluation) {
     $('textarea[name="output"]').text(output);
 }
 
+
 function increaseFontSize(editor, value) {
     var currentFontSize = parseFloat($('#editor').css('font-size'), 10);
     currentFontSize += value;
@@ -71,6 +73,7 @@ function increaseFontSize(editor, value) {
     editor.setFontSize(currentFontSize);
 }
 
+
 function changeLanguage(editor) {
     option = $('select[name="languages"]').find('option:selected');
     mode = $(option).data('ace-mode') || $(option).val();
@@ -78,29 +81,50 @@ function changeLanguage(editor) {
     $("#editor").data('language', $(option).val());
 }
 
+
+function run(editor) {
+    $('textarea[name="output"]').text('');
+    $('textarea[name="metrics"]').text('');
+    $("#lint_results > tbody").html('');
+    editor.getSession().clearAnnotations();
+    $.getJSON($SCRIPT_ROOT + '/_do_the_thing',
+        {
+        language: $('#editor').data('language'),
+        code: editor.getValue(),
+        input: $('textarea[name="input"]').val()
+        },
+        process_output
+    );
+    return false;
+}
+
+
+function init_asides() {
+    $('article.editor aside nav a').bind('click', function(e) {
+        e.preventDefault();
+        var section = $($(this).attr('href'));
+        $(this).toggleClass('active').siblings().removeClass('active');
+        if ($(this).hasClass('active')) {
+            section.parent().removeClass('active');
+            $('section.editor').addClass(section.parent().attr('class'));
+            section.parent().addClass('active');
+            section.addClass('active').siblings().removeClass('active');
+        } else {
+            section.parent().removeClass('active').children().removeClass('active');
+            $('section.editor').removeClass(section.parent().attr('class'));
+        }
+        return false;
+    })
+}
+
+
 $(function() {
     var editor = ace.edit("editor");
     editor.getSession().setMode($("#editor").data('ace-mode'));
     editor.setTheme($("#editor").data('ace-theme'));
     editor.getSession().selection.on('changeCursor', changedCursor);
     changedCursor();
-    $('button[name=run]').bind('click',
-        function() {
-            $('textarea[name="output"]').text('');
-            $('textarea[name="metrics"]').text('');
-            $("#lint_results > tbody").html('');
-            editor.getSession().clearAnnotations();
-            $.getJSON($SCRIPT_ROOT + '/_do_the_thing',
-                {
-                language: $('#editor').data('language'),
-                code: editor.getValue(),
-                input: $('textarea[name="input"]').val()
-                },
-                process_output
-            );
-            return false;
-        }
-    );
+    $('button[name=run]').bind('click', function() { return run(editor) });
     $('select[name="languages"]').bind('change', function() {
         changeLanguage(editor);
     });
@@ -110,6 +134,7 @@ $(function() {
     $("button[name='decrease_font']").bind('click', function() {
         increaseFontSize(editor, -1);
     })
+    init_asides();
     increaseFontSize(editor, 0);
     editor.focus();
 });

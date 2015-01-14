@@ -7,6 +7,7 @@ cor_menu = swatches.clouds
 cor_fonte_status = darken(swatches.clouds, 25%)
 cor_painel = swatches.concrete
 pumpkin = swatches.pumpkin
+orange = swatches.orange
 panel_width = 2em
 
 article.editor
@@ -35,6 +36,9 @@ aside.results
         &:hover
             color white
             background pumpkin
+        &.active
+            color white
+            background orange
 
 aside.inputs
     nav
@@ -55,6 +59,10 @@ aside.output_panel
     column(0, gutter: 0px)
     &.active
         column(1/5, gutter: 0px)
+    section
+        display none
+        &.active
+            display block
 
 section.editor
     column(1)
