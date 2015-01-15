@@ -106,9 +106,11 @@ function increaseFontSize(editor, value) {
 
 function changeLanguage(editor) {
     option = $('select[name="languages"]').find('option:selected');
-    mode = $(option).data('ace-mode') || $(option).val();
+    language = $(option).val();
+    mode = $(option).data('ace-mode') || language;
     editor.getSession().setMode('ace/mode/' + mode);
-    $("#editor").data('language', $(option).val());
+    $("#editor").data('language', language);
+    $('#a-language').html(language);
 }
 
 
