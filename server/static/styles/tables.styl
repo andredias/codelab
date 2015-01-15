@@ -1,0 +1,30 @@
+table
+    width 100%
+    font-family Arial, Helvetica, sans-serif
+    color #666
+    font-size 0.9em
+    background #fafafa
+    border #ccc 1px solid
+    th
+        border-top 1px solid #fafafa
+        border-bottom 1px solid #e0e0e0
+        background  #ededed
+        text-shadow  1px 1px 0px #fff
+        padding 0.5em
+    tr
+        &:last-child td
+            border-bottom 0
+        &:hover td
+            background  #f2f2f2
+            cursor pointer
+        &:nth-child(2n)
+            background yellow
+    td
+        padding 0.5em
+        border-top  1px solid #ffffff
+        border-bottom 1px solid #e0e0e0
+        border-left  1px solid #e0e0e0
+
+#lint table td:first-child
+    text-align center
+

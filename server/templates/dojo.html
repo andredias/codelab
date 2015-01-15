@@ -11,17 +11,13 @@
     <article class="editor">
         <aside class="inputs">
             <nav>
-                <a href="#input_data">item1</a>
-                <a href="#configuration">item2</a>
+                <a href="#input_data">Input</a>
             </nav>
         </aside>
         <div class="central">
             <aside class="input_panel">
                 <section id="input_data">
-                    <h1>Input Data</h1>
-                </section>
-                <section id="configuration">
-                    <h1>Configuration</h1>
+                    <textarea name="input"></textarea>
                 </section>
             </aside>
             <section class="editor">
@@ -41,55 +37,16 @@
                     <div class="linecol"><span id="line_position"></span>:<span id="column_position"></span></div>
                 </footer>
             </section>
-            <aside class="output_panel">
-                <section id="compilation">
-                    <h1>Compilation</h1>
-                </section>
-                <section id="lint">
-                    <h1>Lint</h1>
-                </section>
-                <section id="metrics">
-                    <h1>Metrics</h1>
-                </section>
-            </aside>
+            <aside class="output_panel"></aside>
         </div>
         <aside class="results">
-            <nav>
-                <a href="#compilation">Compilation</a>
-                <a href="#lint">Lint</a>
-                <a href="#metrics">Metrics</a>
-            </nav>
+            <nav></nav>
         </aside>
     </article>
     <article class="input_output">
-        <section class="input">
-            <h1>Input</h1>
-            <textarea name="input" id="" cols="30" rows="10"></textarea>
-        </section>
         <section class="output">
             <h1>Output</h1>
             <textarea name="output" id="" cols="30" rows="10" readonly></textarea>
-        </section>
-    </article>
-    <article class="lint-metrics">
-        <section class="lint">
-            <h1>Lint</h1>
-            <table id="lint_results">
-                <thead>
-                    <tr>
-                        <th>Line</th>
-                        <th>Column</th>
-                        <th>Code</th>
-                        <th>Message</th>
-                        <th>Level</th>
-                    </tr>
-                    <tbody></tbody>
-                </thead>
-            </table>
-        </section>
-        <section class="metrics">
-            <h1>Metrics</h1>
-            <textarea name="" id="" cols="30" rows="6" readonly></textarea>
         </section>
     </article>
 

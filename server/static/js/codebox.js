@@ -8,11 +8,41 @@ function changedCursor(e) {
 };
 
 
+function init_asides() {
+    $('article.editor aside nav a').unbind('click').bind('click', function(e) {
+        e.preventDefault();
+        var section = $($(this).attr('href'));
+        $(this).toggleClass('active').siblings().removeClass('active');
+        if ($(this).hasClass('active')) {
+            section.parent().removeClass('active');
+            $('section.editor').addClass(section.parent().attr('class'));
+            section.parent().addClass('active');
+            section.addClass('active').siblings().removeClass('active');
+        } else {
+            section.parent().removeClass('active').children().removeClass('active');
+            $('section.editor').removeClass(section.parent().attr('class'));
+        }
+        return false;
+    })
+}
+
+
 function process_lint_results(lint_results) {
-    var lint_table = $("#lint_results > tbody");
+    if (lint_results.length == 0) {
+        return;
+    }
     var editor = ace.edit('editor');
     var session = editor.getSession();
     var annotations = [];
+    $('aside.results nav').append('<a href="#lint">lint</a>');
+    $('aside.output_panel').append('<section id="lint">\
+    <table>\
+        <thead>\
+            <tr><th>Pos</th><th>Message</th><th>Level</th></tr>\
+        </thead>\
+        <tbody></tbody>\
+    </table></section>');
+    var lint_table = $("section#lint table > tbody");
 
     // TODO: improve gutter icons
     var getLevelType = function(level) {
@@ -29,9 +59,8 @@ function process_lint_results(lint_results) {
             result.column = 1;
         }
         var $tr = $('<tr>').append(
-            $('<td>').text(result.line),
-            $('<td>').text(result.column),
-            $('<td>').text(result.code),
+            $('<td>').text(result.line + ':' + result.column),
+            // $('<td>').text(result.code),
             $('<td>').text(result.message),
             $('<td>').text(result.level)
         );
@@ -61,6 +90,7 @@ function process_output(evaluation) {
         output += evaluation.execution.stdout + evaluation.execution.stderr;
     }
     $('textarea[name="output"]').text(output);
+    init_asides();
 }
 
 
@@ -85,7 +115,9 @@ function changeLanguage(editor) {
 function run(editor) {
     $('textarea[name="output"]').text('');
     $('textarea[name="metrics"]').text('');
-    $("#lint_results > tbody").html('');
+    $("aside.output_panel").html('');
+    $('aside.results nav').html('');
+    $('section.editor').removeClass('output_panel');
     editor.getSession().clearAnnotations();
     $.getJSON($SCRIPT_ROOT + '/_do_the_thing',
         {
@@ -96,25 +128,6 @@ function run(editor) {
         process_output
     );
     return false;
-}
-
-
-function init_asides() {
-    $('article.editor aside nav a').bind('click', function(e) {
-        e.preventDefault();
-        var section = $($(this).attr('href'));
-        $(this).toggleClass('active').siblings().removeClass('active');
-        if ($(this).hasClass('active')) {
-            section.parent().removeClass('active');
-            $('section.editor').addClass(section.parent().attr('class'));
-            section.parent().addClass('active');
-            section.addClass('active').siblings().removeClass('active');
-        } else {
-            section.parent().removeClass('active').children().removeClass('active');
-            $('section.editor').removeClass(section.parent().attr('class'));
-        }
-        return false;
-    })
 }
 
 

@@ -9,15 +9,22 @@ cor_painel = swatches.concrete
 pumpkin = swatches.pumpkin
 orange = swatches.orange
 panel_width = 2em
+number_of_lines = 25rem
 
 article.editor
     position relative
     overflow hidden
+    background cor_painel
     div.central
         float left
         width s('calc(100% - 2*%s)', panel_width)
         overflow hidden
         position relative
+        aside section
+            padding 0.2em
+            font-size 0.8em
+            h1
+                font-size 1em
 
 aside.inputs
 aside.results
@@ -27,7 +34,6 @@ aside.results
     position relative
     nav
         width 10000px
-        background cor_painel
     a
         display inline-block
         font-size 0.75em
@@ -57,8 +63,10 @@ aside.results
 aside.input_panel
 aside.output_panel
     column(0, gutter: 0px)
+    overflow-y auto
+    max-height number_of_lines
     &.active
-        column(1/5, gutter: 0px)
+        column(1/4, gutter: 0px)
     section
         display none
         &.active
@@ -68,9 +76,9 @@ section.editor
     column(1)
     &.input_panel
     &.output_panel
-        column(4/5, gutter: 0px)
+        column(3/4, gutter: 0px)
     &.input_panel.output_panel
-        column(3/5, gutter: 0px)
+        column(2/4, gutter: 0px)
     header
         align-children(vertical)
         margin-bottom 0
@@ -78,7 +86,7 @@ section.editor
     div#editor
         float left
         width 100%
-        height 25em
+        height number_of_lines
         font-size 1em
     footer
         background transparent
@@ -99,30 +107,11 @@ section.editor
             text-align right
 
 
-article.input_output
-    overflow hidden
-    h1
-        font-size 1em
-    section.input
-        column(1/4)
-        textarea
-            background cor_status
-    section.output
-        column(3/4)
-        textarea
-            width 100%
-            box-sizing border-box
-            background black
-            color white
-
-article.lint-metrics
-    overflow hidden
-    h1
-        font-size 1em
-    section
-        column(1/2)
-        textarea
-            width 100%
-            box-sizing border-box
-            background black
-            color white
+section#input_data
+section.output
+    textarea
+        width 100%
+        height number_of_lines
+        box-sizing border-box
+        background black
+        color white
