@@ -6,16 +6,10 @@
 {% block scripts %}{% endblock %}
 {% block body %}
 <body id="landing_page">
-    <header class="page">
-        <a href="#" class="logo">Code Worker</a>
+    <h1 class="title">Code Lab</h1>
+    <h2><span>Run</span>, <span>improve</span> and <span>share</span> your code online!</h2>
+    <section class="languages">
         <nav>
-            <a href="">item 1</a>
-            <a href="">item 2</a>
-            <a href="">item 3</a>
-        </nav>
-    </header>
-    <section>
-        <nav class="languages">
         {% for name, image in languages %}
             <div>
                 <a href="{{ url_for('dojo', language=name.lower()) }}" data-lang="{{ name }}">
@@ -27,33 +21,25 @@
         </nav>
     </section>
     <footer class="page">
-        <header>
-            <h1>Code Cloud</h1>
-        </header>
-        <div class="footer">
-            <section>
-                <h1>Help and Support</h1>
-                <nav>
-                    <a href="{{ url_for('help', topic='faq') }}">FAQ</a>
-                    <a href="{{ url_for('help', topic='terms') }}">Terms of Use</a>
-                    <a href="{{ url_for('help', topic='contact') }}">Contact</a>
-                    <a href="{{ url_for('help', topic='about') }}">About</a>
-                    <a href="{{ url_for('help', topic='advertise') }}">Advertise</a>
-                </nav>
-            </section>
-            <section>
-                <h1>Follow Us</h1>
-                <nav>
-                    <a href="#" class="social-link"><i></i>Item 1</a>
-                    <a href="#" class="social-link"><i></i>Item 2</a>
-                    <a href="#" class="social-link"><i></i>Item 3</a>
-                </nav>
-            </section>
+        <section>
+            <nav>
+                <a href="{{ url_for('help', topic='faq') }}">FAQ</a>
+                <a href="{{ url_for('help', topic='terms') }}">Terms of Use</a>
+                <a href="{{ url_for('help', topic='contact') }}">Contact</a>
+                <a href="{{ url_for('help', topic='about') }}">About</a>
+                <a href="{{ url_for('help', topic='advertise') }}">Advertise</a>
+            </nav>
+        </section>
+        <section>
+            <nav>
+                <a href="#" class="social-link"><i></i>Facebook</a>
+                <a href="#" class="social-link"><i></i>Twitter</a>
+                <a href="#" class="social-link"><i></i>Google+</a>
+            </nav>
+        </section>
+        <div class="copyright">
+            <span>Copyright <a href="http://www.pronus.eng.br">Pronus</a></span>
         </div>
-        <footer class="bottom">
-            <div class="copyright">Copyright</div>
-            <div class="pronuslogo"></div>
-        </footer>
     </footer>
 
 </body>

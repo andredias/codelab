@@ -13,6 +13,9 @@ html
 a
     text-decoration none
 
+body#landing_page
+    background linear-gradient(#0d86b3, #11a9e2)
+
 header
     align-children(vertical)
     margin-bottom 30px
@@ -46,15 +49,22 @@ header
 section
     overflow hidden
 
-nav.languages
+h2
+    font-size 3em
+    text-align center
+    margin 2em 0 2em
+    font-weight normal
+    span
+        color #CFCFCF
+        text-shadow 4px 4px 6px rgba(0,0,0,0.5)
+
+.languages nav
     overflow hidden
+    margin 0 35% 3em
     div
-        column(1/4)
-        cycle(4)
+        column(1/2)
+        cycle(2)
         margin-bottom 30px
-        +tablet()
-            column(1/2)
-            cycle(2)
         +mobile()
             column(1)
             cycle(1)
@@ -83,30 +93,30 @@ nav.languages
 
 footer.page
     overflow hidden
-    background blue
-    div.footer
-        overflow hidden
-        background green
+    background linear-gradient(#222, #121212)
+    box-shadow 0 8px 4px 0 rgba(0,0,0,0.5) inset;
+    margin 1em -2em 0
+    padding 1.5em 0 1.5em
     section
         column(1/4)
-        .logo
-            offset(1/4)
         +mobile()
             column(1)
         nav
             margin 0.5em 1em 0
             a
                 display block
-                color darken(white, 20%)
+                color darken(white, 50%)
                 line-height 1.2rem
                 font-size 0.9em
                 font-weight bolder
                 &:hover
                     color white
-    div.logo
-        column(1/4)
+    div.copyright
         offset(1/4)
-        +mobile()
-            column(1)
-            offset(0)
+        column(1/4)
+        text-align right
+        color darken(white, 60%)
+        font-size 0.9em
+        padding 0.5em 1em
+        box-sizing border-box
 

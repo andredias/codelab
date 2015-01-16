@@ -4,7 +4,7 @@ import sh
 import json
 import logging
 from logging.handlers import RotatingFileHandler
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from flask.ext.script import Manager
 
 codebox = sh.docker.run.bake('-i', '--rm', '--net', 'none', 'codebox', _ok_code=[0, 1, 2])
@@ -13,8 +13,8 @@ app = Flask(__name__)
 manager = Manager(app)
 
 
-@app.route('/')
-def index():
+@app.route('/project/new/<language>')
+def dojo(language):
     # projeto = project_or_new(session['project_id'])
     language = 'python'
     ace_mode = 'ace/mode/python'
@@ -27,30 +27,21 @@ def index():
         {'name': 'javascript'},
         {'name': 'ruby'},
     )
-
-    # ('Python', url_for('static', filename='images/python.svg')),
-    # ('C', url_for('static', filename='images/c.svg')),
-    # ('C++', url_for('static', filename='images/cpp.svg')),
-    # ('Go', url_for('static', filename='images/go.png')),
-    # ('Javascript', url_for('static', filename='images/javascript.png')),
-    # ('Ruby', url_for('static', filename='images/ruby.svg')),
-
     return render_template('dojo.html', languages=languages, language=language, ace_mode=ace_mode,
                            ace_theme=ace_theme)
 
 
-@app.route('/project/new/<language>')
-def dojo(language):
-    language = language.lower()
-    ace_mode_map = {
-        'c': 'c_cpp',
-        'c++': 'c_cpp',
-        'c#': 'csharp',
-        'go': 'golang',
-    }
-    ace_mode = 'ace/mode/' + ace_mode_map.get(language, language)
-    ace_theme = 'ace/theme/cobalt'
-    return render_template('dojo.html', language=language, ace_mode=ace_mode, ace_theme=ace_theme)
+@app.route('/')
+def landing():
+    languages = (
+        ('Python', url_for('static', filename='images/python.svg')),
+        ('C', url_for('static', filename='images/c.svg')),
+        ('C++', url_for('static', filename='images/cpp.svg')),
+        ('Go', url_for('static', filename='images/go.png')),
+        ('Javascript', url_for('static', filename='images/javascript.png')),
+        ('Ruby', url_for('static', filename='images/ruby.svg')),
+    )
+    return render_template('landing_page.html', languages=languages)
 
 
 @app.route('/_do_the_thing')
