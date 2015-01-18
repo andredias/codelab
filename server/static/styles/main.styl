@@ -6,7 +6,6 @@ rupture.enable-em-breakpoints = true
 fundo = swatches.clouds
 
 html
-    padding 0 2em
     line-height 1.5em
     text-rendering optimizeLegibility
 
@@ -14,6 +13,7 @@ a
     text-decoration none
 
 body#landing_page
+    padding 0 2em
     background linear-gradient(#0d86b3, #11a9e2)
 
 header
@@ -70,7 +70,7 @@ h2
             cycle(1)
     a
         display block
-        box-shadow 0 1px 3px 0px rgba(0, 0, 0, 0.4)
+        box-shadow 0 3px 3px 0px rgba(0, 0, 0, 0.4)
         text-shadow 1px 1px 0px white
         background fundo
         padding 6px 12px
@@ -80,7 +80,6 @@ h2
         &:focus
             color black
             background darken(fundo, 10%)
-            font-weight bolder
             transition background .5s ease
         &:active
             box-shadow 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1)
@@ -95,7 +94,7 @@ footer.page
     overflow hidden
     background linear-gradient(#222, #121212)
     box-shadow 0 8px 4px 0 rgba(0,0,0,0.5) inset;
-    margin 1em -2em 0
+    margin 0
     padding 1.5em 0 1.5em
     section
         column(1/4)
@@ -120,3 +119,5 @@ footer.page
         padding 0.5em 1em
         box-sizing border-box
 
+#landing_page > footer.page
+    margin 1em -2em 0

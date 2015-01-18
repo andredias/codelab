@@ -16,8 +16,7 @@ manager = Manager(app)
 @app.route('/project/new/<language>')
 def dojo(language):
     # projeto = project_or_new(session['project_id'])
-    language = 'python'
-    ace_mode = 'ace/mode/python'
+    ace_mode = 'ace/mode/' + language.lower()
     ace_theme = 'ace/theme/cobalt'
     languages = (
         {'name': 'python'},

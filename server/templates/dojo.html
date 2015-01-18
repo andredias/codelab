@@ -8,47 +8,40 @@
 {% block scripts %}{% endblock %}
 {% block body %}
 <body id="dojo">
-    <article class="editor">
-        <aside class="inputs">
-            <nav>
-                <a href="#input_data">Input</a>
-            </nav>
-        </aside>
+    <header>
+        <h1>Code Lab</h1>
+        <select name="languages">
+        {% for language in languages %}
+            <option value="{{ language['name'] }}" {% if 'mode' in language %} data-ace-mode="{{ language['mode'] }}" {% endif %} {% if 'selected' in language %}selected{% endif %}>{{ language['name'] }}</option>
+        {% endfor %}
+        </select>
+        <button class="editor" name="run"><i></i><span>Run</span></button>
+        <button class="editor" name="increase_font"><i></i><span>A+</span></button>
+        <button class="editor" name="decrease_font"><i></i><span>A-</span></button>
+    </header>
+    <article class="content">
+        <aside class="panel_1"></aside>
         <div class="central">
-            <aside class="input_panel">
-                <section id="input_data">
-                    <textarea name="input"></textarea>
-                </section>
-            </aside>
             <section class="editor">
-                <header>
-                    <select name="languages">
-                    {% for language in languages %}
-                        <option value="{{ language['name'] }}" {% if 'mode' in language %} data-ace-mode="{{ language['mode'] }}" {% endif %} {% if 'selected' in language %}selected{% endif %}>{{ language['name'] }}</option>
-                    {% endfor %}
-                    </select>
-                    <button class="editor" name="run"><i></i><span>Run</span></button>
-                    <button class="editor" name="increase_font"><i></i><span>A+</span></button>
-                    <button class="editor" name="decrease_font"><i></i><span>A-</span></button>
-                </header>
                 <div id="editor" data-language="{{ language }}" data-ace-mode="{{ ace_mode }}" data-ace-theme="{{ ace_theme }}"></div>
                 <footer>
                     <div><a href="#" id="a-language">{{ language }}</a></div>
                     <div class="linecol"><span id="line_position"></span>:<span id="column_position"></span></div>
                 </footer>
             </section>
-            <aside class="output_panel"></aside>
+            <dl class="terminals">
+                <dt>Input</dt>
+                <dd>
+                    <textarea id="input_data" rows="10"></textarea>
+                </dd>
+                <dt>Output</dt>
+                <dd>
+                    <textarea id="output_data" rows="10"></textarea>
+                </dd>
+            </dl>
         </div>
-        <aside class="results">
-            <nav></nav>
-        </aside>
+        <aside class="panel_2"></aside>
     </article>
-    <article class="input_output">
-        <section class="output">
-            <h1>Output</h1>
-            <textarea name="output" id="" cols="30" rows="10" readonly></textarea>
-        </section>
-    </article>
-
+{% include 'footer.html' %}
 </body>
 {% endblock %}
