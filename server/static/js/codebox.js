@@ -71,7 +71,7 @@ function process_lint_results(lint_results) {
     session.setAnnotations(annotations);
     var lint_table = $('<table>\
         <thead>\
-            <tr><th>Pos</th><th>Message</th><th>Level</th></tr>\
+            <tr><th>Position</th><th>Message</th><th>Level</th></tr>\
         </thead>\
     </table>').append(tbody);
     dd = $('<dd></dd>').append(lint_table);
