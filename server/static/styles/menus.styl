@@ -3,152 +3,45 @@
 
 fundo = swatches.clouds
 
-menu_colors(colors)
-    for value, i in values(colors)
-        &:nth-child({length(colors)}n+{i})
-            background value
+.link
+    position relative
+    cursor pointer
+    outline none
+    .dropdown
+        display none
+        position absolute
+        bottom 140%
+        right 0
+        padding 0
+        text-align left
 
-menu_darken_colors(colors, border=true)
-    for value, i in values(colors)
-        &:nth-child({length(colors)}n+{i})
-            a:hover
-            a:active
-            a:focus
-                if border
-                    border-bottom 4px solid darken(value, 30%)
-                else
-                    background darken(value, 30%)
+        background white
+        border-radius inherit
+        border 1px solid rgba(0,0,0,0.17)
+        box-shadow 0 0 5px rgba(0,0,0,0.1)
+        font-weight normal
+        transition all 0.5s ease-in
+        list-style none
 
-nav
-    a
-        text-decoration none
-        cursor pointer
+        /* Hiding */
+        opacity 0
+        pointer-events none
+        li
+            display block
+            padding 10px
+            color #8aa8bd
+            border-bottom 1px solid #e6e8ea
+            box-shadow inset 0 1px 0 rgba(255,255,255,1)
+            transition all 0.3s ease-out
 
-
-nav.languages
-    div
-        display inline-block
-        box-shadow 0 1px 3px 0px rgba(0, 0, 0, 0.4)
-        text-shadow 1px 1px 0px white
-        background fundo
-    a
+            &:first-child
+                border-radius 7px 7px 0 0
+            &:last-child
+                border none
+                border-radius 0 0 7px 7px
+            &:hover
+                background #f3f8f8
+    &.active .dropdown
+        opacity 1
+        pointer-events auto
         display block
-        padding 6px 12px
-        color #777
-        &:hover
-        &:active
-        &:focus
-            color black
-            background darken(fundo, 10%)
-            font-weight bolder
-            transition all .5s ease
-        &:active
-            box-shadow 0px 1px 1px 1px rgba(0,0,0,0.2) inset, 0px 1px 1px 0 rgba(255,255,255,1)
-        img
-        span
-            vertical-align middle
-        img
-            height 2em
-
-+mobile()
-    nav.languages
-        div
-            min-width s('calc')
-
-+tablet()
-
-
-+desktop()
-
-
-
-+above(50em)
-//     nav.languages
-//         li
-//             float left
-//             width 16.6666667%
-//             text-align center
-//             transition border .5s
-//             menu_darken_colors(swatches)
-//         a
-//             display block
-//             width auto
-//             height 9em
-//             &:hover
-//             &:active
-//             &:focus
-//                 height 10em
-//                 i
-//                     box-shadow 0 0 0px 0px rgba(255, 255, 255, 0.2)
-//                     transition box-shadow .4s ease-in-out
-//             &:hover .icon + span
-//                 margin-top 3.2em
-//                 transition margin .5s
-//         i
-//             position relative
-//             display inline-block
-//             margin 0 auto
-//             padding 0.4em
-//             border-radius 50%
-//             font-size 1.8em
-//             box-shadow 0 0 0 0.8em transparent
-//             background rgba(255, 255, 255, 0.1)
-//             transform translate3d(0, 0, 0)
-//             transition box-shadow .6s ease-in-out
-//     .icon
-//         position relative
-//         padding-top 1.4em
-//         + span
-//             margin-top 2.1em
-//             transition margin .5s
-
-
-// +between(50em, 61.25em)
-//     nav.languages
-//         ul
-//             font-size 1.2em
-
-// +below(49.938em)
-//     nav.languages
-//         ul
-//             li
-//                 menu_darken_colors(swatches, border=false)
-
-// +between(32.5em, 49.938em)
-//     nav.languages
-//         li
-//             display block
-//             float left
-//             width 50%
-//             i
-//                 display inline-block
-//                 padding 8% 9%
-//                 border 4px solid transparent
-//                 border-radius 50%
-//                 font-size 1.5em
-//                 background rgba(255, 255, 255, 0.1)
-//                 transition border .5s
-//                 &:hover
-//                 &:active
-//                 &:focus
-//                     border 4px solid rgba(255, 255, 255, 0.1)
-//         span
-//         span.icon
-//             display inline-block
-//         span.icon
-//             width 50%
-//         .icon + span
-//             font-size 1em
-//         a
-//             padding 0.8em
-//     .icon + span
-//         position relative
-//         top -0.2em
-
-// +between(32.5em, 38.688em)
-//     nav.languages
-//         li
-//             span.icon
-//                 width 50%
-//             .icon + span
-//                 font-size 0.9em

@@ -2,31 +2,41 @@
 {% block title %}CodeBox{% endblock %}
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
-   <script src="//cdn.jsdelivr.net/ace/latest/min/ace.js"></script>
+    <script src="//cdn.jsdelivr.net/ace/latest/min/ace.js"></script>
+    <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
     <script src="{{ url_for('static', filename='js/codebox.js') }}"></script>
 {% endblock %}
 {% block scripts %}{% endblock %}
 {% block body %}
 <body id="dojo">
     <header>
-        <h1>Code Lab</h1>
-        <select name="languages">
-        {% for language in languages %}
-            <option value="{{ language['name'] }}" {% if 'mode' in language %} data-ace-mode="{{ language['mode'] }}" {% endif %} {% if 'selected' in language %}selected{% endif %}>{{ language['name'] }}</option>
-        {% endfor %}
-        </select>
-        <button class="editor" name="run"><i></i><span>Run</span></button>
-        <button class="editor" name="increase_font"><i></i><span>A+</span></button>
-        <button class="editor" name="decrease_font"><i></i><span>A-</span></button>
+        <h1><a href="/">Code Lab</a></h1>
+        <button name="run"><i class="icon-play3"></i> <span>Run</span></button>
+        <button name="increase_font"><i></i><span>A+</span></button>
+        <button name="decrease_font"><i></i><span>A-</span></button>
     </header>
     <article class="content">
         <aside class="panel_1"></aside>
         <div class="central">
             <section class="editor">
-                <div id="editor" data-language="{{ language }}" data-ace-mode="{{ ace_mode }}" data-ace-theme="{{ ace_theme }}"></div>
+                <div id="editor" data-ace-theme="{{ ace_theme }}"></div>
                 <footer>
-                    <div><a href="#" id="a-language">{{ language }}</a></div>
+                    <div class="link" id="a-language">
+                        <span>{{ language }}</span>
+                        <ul class="dropdown">
+                        {% for name, mode in languages.items()|sort %}
+                            <li data-ace-mode="{{ mode }}">{{ name }}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
                     <div class="linecol"><span id="line_position"></span>:<span id="column_position"></span></div>
+                    <div class="link">
+                        <i class="icon-wrench"></i>
+                        <ul class="dropdown">
+                            <li>Increase Font Size</li>
+                            <li>Decrease Font Size</li>
+                        </ul>
+                    </div>
                 </footer>
             </section>
             <dl class="terminals">

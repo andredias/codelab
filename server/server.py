@@ -16,18 +16,17 @@ manager = Manager(app)
 @app.route('/project/new/<language>')
 def dojo(language):
     # projeto = project_or_new(session['project_id'])
-    ace_mode = 'ace/mode/' + language.lower()
+    language = language.lower()
     ace_theme = 'ace/theme/cobalt'
-    languages = (
-        {'name': 'python'},
-        {'name': 'c', 'mode': 'c_cpp'},
-        {'name': 'c++', 'mode': 'c_cpp'},
-        {'name': 'go', 'mode': 'golang'},
-        {'name': 'javascript'},
-        {'name': 'ruby'},
-    )
-    return render_template('dojo.html', languages=languages, language=language, ace_mode=ace_mode,
-                           ace_theme=ace_theme)
+    languages = {  # name: mode
+        'python': 'python',
+        'c': 'c_cpp',
+        'c++': 'c_cpp',
+        'go': 'golang',
+        'javascript': 'javascript',
+        'ruby': 'ruby',
+    }
+    return render_template('dojo.html', languages=languages, language=language, ace_theme=ace_theme)
 
 
 @app.route('/')

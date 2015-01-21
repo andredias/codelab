@@ -4,6 +4,7 @@
 
 rupture.enable-em-breakpoints = true
 fundo = swatches.clouds
+header_color = lighten(#1d1d1d, 50%)
 
 html
     line-height 1.5em
@@ -18,7 +19,15 @@ body#landing_page
 
 header
     align-children(vertical)
-    margin-bottom 30px
+    background linear-gradient(#333, #1d1d1d)
+    color header_color
+    h1
+        font-size 1rem
+        text-shadow 2px 2px 2px rgba(0,153,255,1)
+        margin 0.75em 1em
+        color white
+    a:visited
+        color white
     +below(rupture.desktop-cutoff)
         display block
         overflow hidden
