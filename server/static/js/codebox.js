@@ -88,14 +88,23 @@ $(function() {
     editor.setTheme($("#editor").data('ace-theme'));
     editor.getSession().selection.on('changeCursor', changedCursor);
     changedCursor();
-    $("button[name='increase_font']").bind('click', function() {
+    $("#increase_font").on('click', function() {
         increaseFontSize(editor, 1);
+        return false;
     })
-    $("button[name='decrease_font']").bind('click', function() {
+    $("#decrease_font").on('click', function() {
         increaseFontSize(editor, -1);
+        return false;
     })
     var terminals = new Terminals($('dl.terminals'));
     var ddl = new DropDownLanguage(editor, $('#a-language'));
+    var config = new DropDown(editor, $('#config'));
+
+    $(document).on('click', function() {
+        // disable all dropdowns
+        $('.menu').removeClass('active');
+    });
+
     $('button[name=run]').on('click', function() {
         terminals.clear();
         editor.getSession().clearAnnotations();

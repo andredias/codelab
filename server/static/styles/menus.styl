@@ -3,22 +3,21 @@
 
 fundo = swatches.clouds
 
-.link
+.menu
     position relative
     cursor pointer
     outline none
     .dropdown
         display none
         position absolute
-        bottom 140%
+        bottom 2em
         right 0
         padding 0
         text-align left
 
-        background white
         border-radius inherit
-        border 1px solid rgba(0,0,0,0.17)
-        box-shadow 0 0 5px rgba(0,0,0,0.1)
+        border 1px solid rgba(255,255,255,0.3)
+        box-shadow 0 0 5px rgba(0,0,0,0.5)
         font-weight normal
         transition all 0.5s ease-in
         list-style none
@@ -27,20 +26,16 @@ fundo = swatches.clouds
         opacity 0
         pointer-events none
         li
+            min-width 10em
             display block
             padding 10px
-            color #8aa8bd
-            border-bottom 1px solid #e6e8ea
-            box-shadow inset 0 1px 0 rgba(255,255,255,1)
+            color white
+            border-bottom 1px solid rgba(0, 0, 0, 0.4)
+            border-top 1px solid rgba(255, 255, 255, 0.3)
+            background rgba(255, 255, 255, 0.2)
             transition all 0.3s ease-out
-
-            &:first-child
-                border-radius 7px 7px 0 0
-            &:last-child
-                border none
-                border-radius 0 0 7px 7px
             &:hover
-                background #f3f8f8
+                background rgba(255, 255, 255, 0.4)
     &.active .dropdown
         opacity 1
         pointer-events auto

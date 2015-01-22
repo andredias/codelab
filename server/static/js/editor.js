@@ -1,5 +1,28 @@
 'use strict';
 
+// ref: http://tympanus.net/codrops/2012/10/04/custom-drop-down-list-styling/
+function DropDown(editor, elem) {
+    this.editor = editor;
+    this.dd = elem;
+    this.opts = this.dd.find('ul.dropdown > li');
+    this.initEvents();
+}
+
+DropDown.prototype = {
+    initEvents : function() {
+        var obj = this;
+
+        obj.dd.on('click', function(event) {
+            $(this).toggleClass('active');
+            return false;
+        });
+
+        obj.opts.on('click', function(event) {
+            obj.dd.removeClass('active');
+        });
+    }
+}
+
 function DropDownLanguage(editor, elem) {
     this.editor = editor;
     this.dd = elem;
@@ -9,6 +32,7 @@ function DropDownLanguage(editor, elem) {
     this.index = -1;
     this.initEvents();
 }
+
 
 DropDownLanguage.prototype = {
     initEvents : function() {
@@ -30,7 +54,9 @@ DropDownLanguage.prototype = {
             return false;
         });
 
-        obj.opts.filter(function(){return $(this).text() === obj.placeholder.text()}).click();
+        obj.opts.filter(function(){
+            return $(this).text() === obj.placeholder.text()
+        }).click();
     },
     getValue : function() {
         return this.val;

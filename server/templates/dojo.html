@@ -12,8 +12,6 @@
     <header>
         <h1><a href="/">Code Lab</a></h1>
         <button name="run"><i class="icon-play3"></i> <span>Run</span></button>
-        <button name="increase_font"><i></i><span>A+</span></button>
-        <button name="decrease_font"><i></i><span>A-</span></button>
     </header>
     <article class="content">
         <aside class="panel_1"></aside>
@@ -21,7 +19,7 @@
             <section class="editor">
                 <div id="editor" data-ace-theme="{{ ace_theme }}"></div>
                 <footer>
-                    <div class="link" id="a-language">
+                    <div class="menu" id="a-language">
                         <span>{{ language }}</span>
                         <ul class="dropdown">
                         {% for name, mode in languages.items()|sort %}
@@ -30,11 +28,11 @@
                         </ul>
                     </div>
                     <div class="linecol"><span id="line_position"></span>:<span id="column_position"></span></div>
-                    <div class="link">
+                    <div class="menu" id="config">
                         <i class="icon-wrench"></i>
                         <ul class="dropdown">
-                            <li>Increase Font Size</li>
-                            <li>Decrease Font Size</li>
+                            <li id='increase_font'>Increase Font Size</li>
+                            <li id='decrease_font'>Decrease Font Size</li>
                         </ul>
                     </div>
                 </footer>
