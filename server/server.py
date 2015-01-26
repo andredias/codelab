@@ -7,6 +7,7 @@ from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, url_for
 from flask.ext.script import Manager
 
+
 codebox = sh.docker.run.bake('-i', '--rm', '--net', 'none', 'codebox', _ok_code=[0, 1, 2])
 
 app = Flask(__name__)
@@ -55,12 +56,25 @@ def do_the_thing():
     return output.stdout.decode('utf-8')
 
 
+from model import ContactForm
+
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    form = ContactForm()
+    if form.validate_on_submit():
+        # enviar e-mail
+        return render_template('message_sent.html')
+    app.logger.info(request)
+    return render_template('contact_form.html', form=form)
+
+
 @app.route('/help/<topic>')
 def help(topic):
     return render_template(topic + '.html')
 
-app.secret_key = b'\xf06\xe34\x93\xf0\xad\xa5\xe7\xde\xf1R' \
-                 b'\xb3\xef\xd9\xaa\x92J\x14\xea'
+WTF_CSRF_SECRET_KEY = app.secret_key = b'\xf06\xe34\x93\xf0\xad\xa5\xe7\xde\xf1R' \
+                                       b'\xb3\xef\xd9\xaa\x92J\x14\xea'
 
 if __name__ == '__main__':
     handler = RotatingFileHandler('/tmp/codebox.log', maxBytes=10000, backupCount=1)

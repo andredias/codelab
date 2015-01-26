@@ -1,0 +1,31 @@
+        {% from "_form_helpers.html" import render_field %}
+        <div class="dialog">
+            <header>
+                <h1>Contact</h1>
+            </header>
+            {% if form.errors %}
+            <div class="error">
+                Some validation errors occurred. Please correct the fields and submit the form again.
+            </div>
+            {% endif %}
+            <form name="contact_form">
+                {{ form.hidden_tag() }}
+                {{ render_field(form.type_) }}
+                {{ render_field(form.subject) }}
+                {{ render_field(form.description, rows=7) }}
+                {{ render_field(form.name) }}
+                {{ render_field(form.email) }}
+            </form>
+            <footer>
+                <a href="javascript:void(0)" class="button" onclick="closeModalDialog()">Close</a>
+                <a href="javascript:void(0)" class="button" onclick="submitForm()">Submit</button>
+            </footer>
+        </div>
+        <script>
+        function submitForm() {
+            $.post('{{ url_for("contact") }}', $('form[name="contact_form"]').serialize(), function(data) {
+                $("#dialog").html(data);
+            });
+            return False;
+        }
+        </script>

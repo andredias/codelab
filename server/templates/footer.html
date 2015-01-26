@@ -1,7 +1,7 @@
     <footer class="page">
         <section>
             <nav>
-                <a href="{{ url_for('help', topic='contact') }}">Contact</a>
+                <a href="javascript:void(0)" onclick="openModalDialog('/contact')">Contact</a>
                 <a href="{{ url_for('help', topic='faq') }}">FAQ</a>
                 <a href="{{ url_for('help', topic='terms') }}">Terms of Use</a>
                 <a href="{{ url_for('help', topic='advertise') }}">Advertise</a>
@@ -19,3 +19,15 @@
             <span>Copyright <a href="http://www.pronus.eng.br">Pronus</a></span>
         </div>
     </footer>
+    <div class="modal_dialog" id="dialog"></div>
+    <script>
+    function openModalDialog(url) {
+        $.get(url, function(data) {
+            $('#dialog').addClass('active').html(data);
+        });
+    }
+
+    function closeModalDialog() {
+        $('#dialog').removeClass('active');
+    }
+    </script>
