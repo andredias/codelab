@@ -1,4 +1,4 @@
 flask
 flask-script
 Flask-WTF
-
+Flask-Mail

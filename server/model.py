@@ -8,7 +8,7 @@ class ContactForm(Form):
     type_ = RadioField('Type', choices=[('bug', 'Bug'),
                                         ('suggestion', 'Suggestion'), ('question', 'Question')],
                        validators=[DataRequired()])
-    subject = TextField('Subject', validators=[Length(min=5)])
+    subject = TextField('Subject', validators=[Length(min=5), DataRequired()])
     description = TextAreaField('description', validators=[DataRequired()])
     name = TextField('name', validators=[DataRequired()])
-    email = EmailField('email', validators=[Email()])
+    email = EmailField('email', validators=[Email(), DataRequired()])
