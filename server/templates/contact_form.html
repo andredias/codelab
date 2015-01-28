@@ -4,21 +4,20 @@
                 <h1>Contact</h1>
             </header>
             {% if form.errors %}
-            <div class="error">
-                Some validation errors occurred. Please correct the fields and submit the form again.
-            </div>
+            <div class="error">Some validation errors occurred. Please correct the fields and submit the form again.</div>
             {% endif %}
             <form name="contact_form">
                 {{ form.hidden_tag() }}
                 {{ render_field(form.type_) }}
-                {{ render_field(form.subject) }}
-                {{ render_field(form.description, rows=7) }}
-                {{ render_field(form.name) }}
-                {{ render_field(form.email) }}
+                {{ render_field(form.subject, size=50) }}
+                {{ render_field(form.description, rows=5) }}
+                {{ render_field(form.name, size=50) }}
+                {{ render_field(form.email, size=50) }}
+                <div class="required_field">* Required Field</div>
             </form>
             <footer>
-                <a href="javascript:void(0)" class="button" onclick="closeModalDialog()">Close</a>
-                <a href="javascript:void(0)" class="button" onclick="submitForm()">Submit</button>
+                <button class="btn cancel" onclick="closeModalDialog()">Close</button>
+                <button class="btn submit" onclick="submitForm()">Submit</button>
             </footer>
         </div>
         <script>

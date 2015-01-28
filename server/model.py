@@ -9,6 +9,6 @@ class ContactForm(Form):
                                         ('suggestion', 'Suggestion'), ('question', 'Question')],
                        validators=[DataRequired()])
     subject = TextField('Subject', validators=[Length(min=5), DataRequired()])
-    description = TextAreaField('description', validators=[DataRequired()])
-    name = TextField('name', validators=[DataRequired()])
-    email = EmailField('email', validators=[Email(), DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    name = TextField('Name', validators=[DataRequired()])
+    email = EmailField('E-mail', validators=[Email(), DataRequired()])

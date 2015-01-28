@@ -12,6 +12,7 @@ from flask.ext.mail import Mail, Message
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 app.config.from_pyfile('non_versioned_config.py')
+app.jinja_env.add_extension('jinja2.ext.do')
 manager = Manager(app)
 mail = Mail(app)
 
