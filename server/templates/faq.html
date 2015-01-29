@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}CodeBox | FAQ{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
+{% endblock %}
+{% block body %}
+<body id="faq_page">
+    <header>
+        <h1><a href="/">Code Lab</a></h1>
+    </header>
+    <section>
+        <h1>Frequent Asked Questions (FAQ)</h1>
+        <dl class="faq">
+
+            <dt>What is Code Lab?</dt>
+            <dd>Code Lab is an online compiler and lint tool which allows you to run,
+                improve and share your code using several programming languages.</dd>
+
+            <dt>Are there any memory or time constraints for the submitted programs?</dt>
+            <dd>Yes, they are as follows:
+                <ul>
+                    <li>compilation time: 10 seconds,</li>
+                    <li>execution time: 5 seconds (for not logged in users) or 15 seconds (for registered users),</li>
+                    <li>memory usage: 256 MiB.</li>
+                </ul>
+            </dd>
+
+            <dt>Can I access the Internet from my program?</dt>
+            <dd>No, access to the network is blocked.</dd>
+
+            <dt>Can I write or read files in my program?</dt>
+            <dd>Yes, but there is an 1 MiB limit of disk space.</dd>
+
+            <dt>How long my codes will be stored on Code Lab?</dt>
+            <dd>6 months</dd>
+
+            <dt>What is the size limit for the source code, input and output?</dt>
+            <dd>128 KiB.</dd>
+
+            <dt>How many processes can I create in my program?</dt>
+            <dd>Programs are allowed to create up to 15 processes. It means, for example, that you can use together up to 14 pipelines in the Bash.</dd>
+
+            <dt>What encoding is used in the source code and in the input stream?</dt>
+            <dd>UTF-8.</dd>
+
+            <dt>How is end of line (EOL) represented in the source code and in the input stream?</dt>
+            <dd>
+                <em>End of line</em> is represented by <code>&#92;n</code> (LF, Linux style).
+                Even if you submit input or source code with Windows EOL (<code>&#92;r&#92;n</code>, CRLF)
+                or Mac OS EOL (<code>&#92;r</code>, CR), end-of-lines will be converted to the Linux style.
+            </dd>
+
+            <dt>My program seems to have a correct syntax. Why does it fail to execute?</dt>
+            <dd>
+                Be sure to place "main" class/program/module/function/procedure in your code
+                (<a href="/samples">here you will find a sample</a> for every language).
+            </dd>
+
+            <dt>I would like to see a new language or library on Code Lab. Is there anything I can do about that?</dt>
+            <dd>Yes, please <a href="javascript:void(0)" onclick="openModalDialog('/contact')">contact us</a>.<dd>
+
+        <!--
+            <dt>How can I get in touch with you?</dt>
+            <dd>Follow us on Twitter.</dd>
+        -->
+        </dl>
+</section>
+{% include 'footer.html' %}
+</body>
+{% endblock %}
