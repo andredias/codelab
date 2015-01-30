@@ -35,19 +35,19 @@
             <dd>6 months</dd>
 
             <dt>What is the size limit for the source code, input and output?</dt>
-            <dd>128 KiB.</dd>
+            <dd>128 KiB</dd>
 
             <dt>How many processes can I create in my program?</dt>
             <dd>Programs are allowed to create up to 15 processes. It means, for example, that you can use together up to 14 pipelines in the Bash.</dd>
 
             <dt>What encoding is used in the source code and in the input stream?</dt>
-            <dd>UTF-8.</dd>
+            <dd>UTF-8</dd>
 
             <dt>How is end of line (EOL) represented in the source code and in the input stream?</dt>
             <dd>
-                <em>End of line</em> is represented by <code>&#92;n</code> (LF, Linux style).
-                Even if you submit input or source code with Windows EOL (<code>&#92;r&#92;n</code>, CRLF)
-                or Mac OS EOL (<code>&#92;r</code>, CR), end-of-lines will be converted to the Linux style.
+                <em>End of line</em> is represented by <code>\n</code> (LF, Linux style).
+                Even if you submit input or source code with Windows EOL (<code>\r\n</code>, CRLF)
+                or Mac OS EOL (<code>\r</code>, CR), end-of-lines will be converted to the Linux style.
             </dd>
 
             <dt>My program seems to have a correct syntax. Why does it fail to execute?</dt>
@@ -57,12 +57,12 @@
             </dd>
 
             <dt>I would like to see a new language or library on Code Lab. Is there anything I can do about that?</dt>
-            <dd>Yes, please <a href="javascript:void(0)" onclick="openModalDialog('/contact')">contact us</a>.<dd>
+            <dd>Yes, please <a href="javascript:void(0)" onclick="openModalDialog('/contact')">contact us</a>.</dd>
 
-        <!--
+        {#
             <dt>How can I get in touch with you?</dt>
             <dd>Follow us on Twitter.</dd>
-        -->
+        #}
         </dl>
 </section>
 {% include 'footer.html' %}

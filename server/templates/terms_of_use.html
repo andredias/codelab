@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}CodeBox | FAQ{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
+{% endblock %}
+{% block body %}
+<body id="faq_page">
+    <header>
+        <h1><a href="/">Code Lab</a></h1>
+    </header>
+    <section>
+        <h1>Terms of Use</h1>
+        <ol>
+            <li>The service is provided "AS IS", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall Code Lab or its licensors be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the service or the use or other dealings in the service.</li>
+            <li>Code Lab and its licensors disclaim any warranties regarding the security, reliability, timeliness, and performance of the services. Code Lab and its licensors disclaim, any warranties for any information, content or advice obtained through the services.</li>
+            <li>
+                Code Lab takes no responsibility for the content of pastes published by users, and for the content of comments they post on the Code Lab site.
+            </li>
+            <li>By submitting, posting or displaying content on the Code Lab Site, you grant Code Lab and other users of the Services a worldwide, non-exclusive, royalty-free license (with the right to sublicense) to use, copy, reproduce, process, adapt, modify, publish, transmit, display and distribute such Content in any and all media or distribution methods (now known or later developed). Specifically, the <a href="http://opensource.org/licenses/MIT">MIT license</a>.
+            </li>
+            <li>You are responsible for your use of the Code Lab service, for any content you provide, and for any consequences thereof, including the use of your content by other users and third party partners. You understand that your content may be republished and if you do not have the right to submit content for such use, it may subject you to liability. Code Lab will not be responsible or liable for any use of your Content in accordance with these Terms of Use.
+            </li>
+            <li>In the course of using the Code Lab Site, you may provide Code Lab with feedback, including but not limited to suggestions, observations, errors, problems, and defects regarding the Code Lab Site (collectively “Feedback”). You hereby grant Code Lab a worldwide, irrevocable, perpetual, royalty-free, transferable and sub-licensable, non-exclusive right to use, copy, modify, distribute, display, perform, create derivative works from and otherwise exploit all such Feedback.</li>
+        </ol>
+    </section>
+{% include 'footer.html' %}
+</body>
+{% endblock %}
