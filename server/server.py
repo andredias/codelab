@@ -2,8 +2,6 @@
 
 import sh
 import json
-import logging
-from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, url_for
 from flask.ext.script import Manager
 from flask.ext.mail import Mail, Message
@@ -88,10 +86,3 @@ def contact():
 @app.route('/help/<topic>')
 def help(topic):
     return render_template(topic + '.html')
-
-
-if __name__ == '__main__':
-    handler = RotatingFileHandler('/tmp/codebox.log', maxBytes=10000, backupCount=1)
-    handler.setLevel(logging.INFO)
-    app.logger.addHandler(handler)
-    manager.run()

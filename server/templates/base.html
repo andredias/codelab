@@ -3,6 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ config['DESCRIPTION'] }}" />
+
+    <meta property="og:site_name" value="{{ config['APP_NAME'] }}"/>
+    <meta property="og:title" content="{{ config['DESCRIPTION'] }}" />
+    <meta property="og:url" content="{{ url_for('landing', _external=True) }}" />
+    <meta property="og:image" content="{{ url_for('static', filename='images/codelab-logo.png', _external=True) }}" />
+    <meta property="og:image:url" content="{{ url_for('static', filename='images/codelab-logo.png', _external=True) }}" />
+    <meta property="og:image:width" content="329" />
+    <meta property="og:image:height" content="92" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:description" content="{{ config['DESCRIPTION'] }}" />
+
+    <!-- Twitter Deep Linking -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{ config['APP_NAME'] }}" />
+    <meta name="twitter:description" content="{{ config['DESCRIPTION'] }}" />
+    {#
+    <meta name="twitter:site" content="@pronus.io" />
+    #}
+
     <title>{% block title %}{% endblock %}</title>
     <link async href="//fonts.googleapis.com/css?family=Patua%20One&text=CodeLabs" rel="stylesheet" />
     <link async href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
