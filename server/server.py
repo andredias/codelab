@@ -2,6 +2,8 @@
 
 import sh
 import json
+import logging
+from logging.handlers import SMTPHandler
 from flask import Flask, render_template, request, url_for
 from flask.ext.script import Manager
 from flask.ext.mail import Mail, Message
@@ -13,6 +15,13 @@ app.config.from_pyfile('non_versioned_config.py')
 app.jinja_env.add_extension('jinja2.ext.do')
 manager = Manager(app)
 mail = Mail(app)
+mail_handler = SMTPHandler((app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
+                           'codelab@pronus.io',
+                           app.config['ADMINS'],
+                           '{} Error'.format(app.config['APP_NAME']),
+                           (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD']),)
+mail_handler.setLevel(logging.ERROR)
+app.logger.addHandler(mail_handler)
 
 
 @app.route('/project/new/<language>')

@@ -16,3 +16,5 @@ MAIL_USERNAME = 'pronus@pronus.eng.br'
 
 # Configurar em um outro arquivo não versionado as seguintes constantes:
 # MAIL_PASSWORD = 'PasswordHere'
+
+ADMINS = ['andref.dias@pronus.eng.br', 'codelab@pronus.io']
