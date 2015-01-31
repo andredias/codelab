@@ -43,3 +43,15 @@ class TestCodeLab(object):
             assert 'Your message was sent successfully!' in str(rv.data)
             assert len(outbox) == 1
             assert outbox[0].subject == 'codelab:bug: testing contact form'
+
+    def test_pt_br(self):
+        with app.test_request_context():
+            app.config['BABEL_DEFAULT_LOCALE'] = 'pt_BR'
+            rv = app.test_client().get('/')
+            assert '<span>Execute</span>, <span>aprimore</span>' in str(rv.data)
+
+    def test_en_us(self):
+        with app.test_request_context():
+            app.config['BABEL_DEFAULT_LOCALE'] = 'en_US'
+            rv = app.test_client().get('/')
+            assert '<span>Run</span>, <span>improve</span>' in str(rv.data)

@@ -7,7 +7,9 @@
 {% block body %}
 <body id="landing_page">
     <h1 class="title">Code Lab</h1>
-    <h2><span>Run</span>, <span>improve</span> and <span>share</span> your code online!</h2>
+    {% autoescape false %}
+    <h2>{{ _('<span>Run</span>, <span>improve</span> and <span>share</span> your code online!') }}</h2>
+    {% endautoescape %}
     <section class="languages">
         <nav>
         {% for name, image in languages %}

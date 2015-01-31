@@ -7,6 +7,7 @@ from logging.handlers import SMTPHandler
 from flask import Flask, render_template, request, url_for
 from flask.ext.script import Manager
 from flask.ext.mail import Mail, Message
+from flask.ext.babel import Babel
 
 
 app = Flask(__name__)
@@ -22,6 +23,14 @@ mail_handler = SMTPHandler((app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
                            (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD']),)
 mail_handler.setLevel(logging.ERROR)
 app.logger.addHandler(mail_handler)
+babel = Babel(app)
+
+
+@babel.localeselector
+def get_locale():
+    # try to guess the language from the user accept
+    # header the browser transmits.
+    return request.accept_languages.best_match(['pt_BR', 'en'])
 
 
 @app.route('/project/new/<language>')
