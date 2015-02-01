@@ -76,7 +76,7 @@ def do_the_thing():
     return output.stdout.decode('utf-8')
 
 
-from .model import ContactForm
+from .forms import ContactForm
 from .decorators import async
 
 
