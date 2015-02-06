@@ -3,18 +3,19 @@
 import sh
 import json
 import logging
-from logging.handlers import SMTPHandler
+from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask import Flask, render_template, request, url_for
 from flask.ext.script import Manager
 from flask.ext.mail import Mail, Message
 from flask.ext.babel import Babel
 
+
 CONTAINER = 'codelab'
 
 
 app = Flask(__name__)
-app.config.from_pyfile('config.py')
-app.config.from_pyfile('non_versioned_config.py')
+app.config.from_object('app.config')
+app.config.from_object('app.non_versioned_config')
 app.jinja_env.add_extension('jinja2.ext.do')
 manager = Manager(app)
 mail = Mail(app)
@@ -25,6 +26,11 @@ mail_handler = SMTPHandler((app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
                            (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD']),)
 mail_handler.setLevel(logging.ERROR)
 app.logger.addHandler(mail_handler)
+handler = RotatingFileHandler('/tmp/%s.log' % CONTAINER, maxBytes=100000, backupCount=1)
+handler.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(name)s | %(funcName)s | %(message)s')
+handler.setFormatter(formatter)
+app.logger.addHandler(handler)
 babel = Babel(app)
 
 
