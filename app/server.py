@@ -9,6 +9,8 @@ from flask.ext.script import Manager
 from flask.ext.mail import Mail, Message
 from flask.ext.babel import Babel
 
+CONTAINER = 'codelab'
+
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -70,7 +72,7 @@ def do_the_thing():
     params = {'input': _input, 'source': source, 'language': language}
     params_json = json.dumps(params)
     app.logger.info(params_json)
-    output = sh.docker.run('-i', '--rm', '--net', 'none', 'codebox', _ok_code=[0, 1, 2],
+    output = sh.docker.run('-i', '--rm', '--net', 'none', CONTAINER, _ok_code=[0, 1, 2],
                            _in=params_json)
     app.logger.info(output)
     return output.stdout.decode('utf-8')

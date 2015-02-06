@@ -3,3 +3,4 @@ flask-script
 Flask-WTF
 Flask-Mail
 Flask-Babel
+sh
