@@ -21,7 +21,7 @@ manager = Manager(app)
 mail = Mail(app)
 mail_handler = SMTPHandler((app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
                            'codelab@pronus.io',
-                           app.config['ADMINS'],
+                           app.config['MAIL_RECEIVER'],
                            '{} Error'.format(app.config['APP_NAME']),
                            (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD']),)
 mail_handler.setLevel(logging.ERROR)
@@ -98,11 +98,12 @@ def send_async_mail(app, msg):
 def contact():
     form = ContactForm()
     if form.validate_on_submit():
+        # Zoho mail does not allow to use a sender who is not at @pronus.io
         message = Message(
-            subject='codelab:{0}: {1}'.format(form.type_.data, form.subject.data),
-            sender=(form.name.data, form.email.data),
-            recipients=['suporte@pronus.eng.br'],
-            body=form.description.data,
+            subject='{0}: {1}'.format(form.type_.data, form.subject.data),
+            sender=app.config['MAIL_DEFAULT_SENDER'],
+            recipients=app.config['MAIL_RECEIVER'],
+            body='from: %s <%s>\n\n%s' % (form.name.data, form.email.data, form.description.data),
         )
         send_async_mail(app, message)
         return render_template('message_sent.html')

@@ -11,12 +11,13 @@ SECRET_KEY = b'\xf06\xe34\x93\xf0\xad\xa5\xe7\xde\xf1R' \
 
 # TESTING = True
 
-MAIL_SERVER = 'data9.nspmanaged.com'
+MAIL_SERVER = 'smtp.zoho.com'
 MAIL_PORT = 465
 MAIL_USE_SSL = True
-MAIL_USERNAME = 'pronus@pronus.eng.br'
+MAIL_USERNAME = 'admin@pronus.io'
+MAIL_DEFAULT_SENDER = 'codelab@pronus.io'
 
 # Configurar em um outro arquivo não versionado as seguintes constantes:
 # MAIL_PASSWORD = 'PasswordHere'
 
-ADMINS = ['andref.dias@pronus.eng.br', 'codelab@pronus.io']
+MAIL_RECEIVER = ['codelab@pronus.io']

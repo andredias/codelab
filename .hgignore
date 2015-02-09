@@ -7,3 +7,4 @@ syntax: glob
 node_modules
 *.css
 non_versioned_config.py
+venv
