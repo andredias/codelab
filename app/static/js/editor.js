@@ -13,7 +13,11 @@ DropDown.prototype = {
         var obj = this;
 
         obj.dd.on('click', function(event) {
-            $(this).toggleClass('active');
+            var activate = !$(this).hasClass('active');
+            $('.menu').removeClass('active');
+            if (activate) {
+                $(this).addClass('active');
+            }
             return false;
         });
 
@@ -39,7 +43,11 @@ DropDownLanguage.prototype = {
         var obj = this;
 
         obj.dd.on('click', function(event) {
-            $(this).toggleClass('active');
+            var activate = !$(this).hasClass('active');
+            $('.menu').removeClass('active');
+            if (activate) {
+                $(this).addClass('active');
+            }
             return false;
         });
 

@@ -69,7 +69,7 @@ function process_output(evaluation) {
     if (evaluation.execution) {
         output += evaluation.execution.stdout + evaluation.execution.stderr;
     }
-    return $('<textarea rows="10" />').text(output)
+    return $('<textarea rows="10" readonly="readonly" />').text(output)
 }
 
 
