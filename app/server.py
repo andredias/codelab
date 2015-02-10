@@ -25,6 +25,17 @@ mail_handler = SMTPHandler((app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
                            '{} Error'.format(app.config['APP_NAME']),
                            (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD']),)
 mail_handler.setLevel(logging.ERROR)
+mail_handler.setFormatter(logging.Formatter('''
+Message type:       %(levelname)s
+Location:           %(pathname)s:%(lineno)d
+Module:             %(module)s
+Function:           %(funcName)s
+Time:               %(asctime)s
+
+Message:
+
+%(message)s
+'''))
 app.logger.addHandler(mail_handler)
 handler = RotatingFileHandler('/tmp/%s.log' % CONTAINER, maxBytes=100000, backupCount=1)
 handler.setLevel(logging.INFO)
@@ -70,11 +81,11 @@ def landing():
     return render_template('landing_page.html', languages=languages)
 
 
-@app.route('/_do_the_thing')
+@app.route('/_do_the_thing', methods=['POST'])
 def do_the_thing():
-    language = request.args.get('language', 'python')
-    source = request.args.get('code')
-    _input = request.args.get('input')
+    language = request.form['language']
+    source = request.form['code']
+    _input = request.form['input']
     params = {'input': _input, 'source': source, 'language': language}
     params_json = json.dumps(params)
     app.logger.info(params_json)

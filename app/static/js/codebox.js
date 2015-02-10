@@ -109,7 +109,7 @@ $(function() {
         $('#spinner').addClass('active');
         terminals.clear();
         editor.getSession().clearAnnotations();
-        $.getJSON($SCRIPT_ROOT + '/_do_the_thing',
+        $.post($SCRIPT_ROOT + '/_do_the_thing',
             {
             language: ddl.getValue(),
             code: ddl.editor.getValue(),
@@ -117,6 +117,7 @@ $(function() {
             },
             function(evaluation) {
                 $('#spinner').removeClass('active');
+                evaluation = JSON.parse(evaluation)
                 var lint_results = process_lint_results(editor, evaluation);
                 if (lint_results) {
                     terminals.addTab('Lint', lint_results);
