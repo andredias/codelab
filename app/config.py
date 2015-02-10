@@ -4,12 +4,11 @@ from flask.ext.babel import gettext as _
 
 # SERVER_NAME = 'codelab.pronus.io'
 APP_NAME = 'Code Lab'
-DESCRIPTION = _('You can run, improve and share your sourcecode online with Code Lab!')
+DESCRIPTION = _('Code Lab is an online editor, runner and linter for Python, Ruby, C/C++ and '
+                'other programming languages')
 
 SECRET_KEY = b'\xf06\xe34\x93\xf0\xad\xa5\xe7\xde\xf1R' \
              b'\xb3\xef\xd9\xaa\x92J\x14\xea'
-
-# TESTING = True
 
 MAIL_SERVER = 'smtp.zoho.com'
 MAIL_PORT = 465

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-31 21:37-0200\n"
+"POT-Creation-Date: 2015-02-09 22:41-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,38 +18,40 @@ msgstr ""
 "Generated-By: Babel 1.3\n"
 
 #: config.py:7
-msgid "You can run, improve and share your sourcecode online with Code Lab!"
+msgid ""
+"Code Lab is an online editor, runner and linter for Python, Ruby, C/C++ "
+"and other programming languages"
 msgstr ""
 
-#: model.py:9
+#: forms.py:9
 msgid "Type"
 msgstr ""
 
-#: model.py:9
+#: forms.py:9
 msgid "Bug"
 msgstr ""
 
-#: model.py:10
+#: forms.py:10
 msgid "Suggestion"
 msgstr ""
 
-#: model.py:11
+#: forms.py:11
 msgid "Question"
 msgstr ""
 
-#: model.py:13
+#: forms.py:13
 msgid "Subject"
 msgstr ""
 
-#: model.py:14
+#: forms.py:14
 msgid "Description"
 msgstr ""
 
-#: model.py:15
+#: forms.py:15
 msgid "Name"
 msgstr ""
 
-#: model.py:16
+#: forms.py:16
 msgid "E-mail"
 msgstr ""
 
@@ -208,6 +210,10 @@ msgstr ""
 
 #: templates/footer.html:22
 msgid "Copyright"
+msgstr ""
+
+#: templates/landing_page.html:2
+msgid "Run, improve and share your source code online!"
 msgstr ""
 
 #: templates/landing_page.html:11

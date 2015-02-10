@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-31 21:37-0200\n"
-"PO-Revision-Date: 2015-01-31 21:49-0300\n"
+"POT-Creation-Date: 2015-02-09 22:41-0200\n"
+"PO-Revision-Date: 2015-02-09 22:42-0300\n"
 "Last-Translator: \n"
 "Language-Team: pt_BR <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -19,38 +19,38 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 
 #: config.py:7
-msgid "You can run, improve and share your sourcecode online with Code Lab!"
-msgstr "Você pode executar, melhorar e compartilhar online seu código fonte com Code Lab!"
+msgid "Code Lab is an online editor, runner and linter for Python, Ruby, C/C++ and other programming languages"
+msgstr "Code Lab é um conjunto de ferramentas online para editar, executar e aprimorar programas em Python, Ruby, C/C++ e várias outras linguagens"
 
-#: model.py:9
+#: forms.py:9
 msgid "Type"
 msgstr "Tipo"
 
-#: model.py:9
+#: forms.py:9
 msgid "Bug"
 msgstr "Defeito"
 
-#: model.py:10
+#: forms.py:10
 msgid "Suggestion"
 msgstr "Sugestão"
 
-#: model.py:11
+#: forms.py:11
 msgid "Question"
 msgstr "Pergunta"
 
-#: model.py:13
+#: forms.py:13
 msgid "Subject"
 msgstr "Assunto"
 
-#: model.py:14
+#: forms.py:14
 msgid "Description"
 msgstr "Descrição"
 
-#: model.py:15
+#: forms.py:15
 msgid "Name"
 msgstr "Nome"
 
-#: model.py:16
+#: forms.py:16
 msgid "E-mail"
 msgstr "E-mail"
 
@@ -201,6 +201,10 @@ msgstr "Termos de Uso"
 #: templates/footer.html:22
 msgid "Copyright"
 msgstr "Direitos Reservados a "
+
+#: templates/landing_page.html:2
+msgid "Run, improve and share your source code online!"
+msgstr "Execute, melhore e compartilhe online seu código fonte!"
 
 #: templates/landing_page.html:11
 msgid "<span>Run</span>, <span>improve</span> and <span>share</span> your code online!"
