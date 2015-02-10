@@ -1,11 +1,12 @@
 
 .modal_dialog
     font-size 0.9em
+    display none
 
     // This is modal bg
     &:before
         content ""
-        display none
+        display block
         background rgba(0, 0, 0, .6)
         position fixed
         top 0
@@ -14,22 +15,12 @@
         bottom 0
         z-index 100
     &.active
-        &:before
-        .dialog
-            display block
+        display block
     > div
-        display none
         z-index 101
-        background #eee
-        border solid 1px #eee
-        border-radius 5px
         position fixed
         left 50%
         top 50%
-        max-width 100%
-        min-width 40%
-        max-height 95%
-        overflow auto
         transform translateX(-50%) translateY(-50%)
         +mobile()
             width 100%
@@ -109,6 +100,13 @@ header_footer_color = linear-gradient(#222, #121212)
 border_dialog = 1px solid rgba(0, 0, 0, 0.2)
 
 .dialog
+    max-width 100%
+    min-width 40%
+    max-height 95%
+    overflow auto
+    background #eee
+    border solid 1px #eee
+    border-radius 5px
     footer
         margin-top 0.5em
         border-top border_dialog

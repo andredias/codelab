@@ -106,6 +106,7 @@ $(function() {
     });
 
     $('button[name=run]').on('click', function() {
+        $('#spinner').addClass('active');
         terminals.clear();
         editor.getSession().clearAnnotations();
         $.getJSON($SCRIPT_ROOT + '/_do_the_thing',
@@ -115,6 +116,7 @@ $(function() {
             input: $('#input_data').val()
             },
             function(evaluation) {
+                $('#spinner').removeClass('active');
                 var lint_results = process_lint_results(editor, evaluation);
                 if (lint_results) {
                     terminals.addTab('Lint', lint_results);

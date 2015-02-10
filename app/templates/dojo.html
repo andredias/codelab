@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}CodeBox | Dojo{% endblock %}
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
     <script src="//cdn.jsdelivr.net/ace/latest/min/ace.js"></script>
     <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
     <script src="{{ url_for('static', filename='js/codebox.js') }}"></script>
@@ -46,5 +46,12 @@
         <aside class="panel_2"></aside>
     </article>
 {% include 'footer.html' %}
+<div class="modal_dialog" id="spinner">
+    <div class="spinner">
+    {%- for i in range(10) %}
+        <div></div>
+    {%- endfor %}
+    </div>
+</div>
 </body>
 {% endblock %}
