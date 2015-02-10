@@ -4,3 +4,6 @@ http://repl.it/
 https://compilr.com
 https://github.com/pgbovine/OnlinePythonTutor/
 http://ide.c9.io
+http://www.programmr.com/
+https://www.hackerrank.com
+http://runnable.com/
