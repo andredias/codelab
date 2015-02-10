@@ -60,7 +60,7 @@ def dojo(language):
 @app.route('/')
 def landing():
     languages = (
-        ('Python', url_for('static', filename='images/python.svg')),
+        ('Python (3)', url_for('static', filename='images/python.svg')),
         ('C', url_for('static', filename='images/c.svg')),
         ('C++', url_for('static', filename='images/cpp.svg')),
         ('Go', url_for('static', filename='images/go.png')),

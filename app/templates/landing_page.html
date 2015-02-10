@@ -14,7 +14,7 @@
         <nav>
         {% for name, image in languages %}
             <div>
-                <a href="{{ url_for('dojo', language=name.lower()) }}" data-lang="{{ name }}" class="button">
+                <a href="{{ url_for('dojo', language=name.lower().split()[0]) }}" data-lang="{{ name }}" class="button">
                 <img src="{{ image }}" alt="{{ name }}" />
                 <span>{{ name }}</span>
                 </a>
