@@ -42,6 +42,7 @@ handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(name)s | %(funcName)s | %(message)s')
 handler.setFormatter(formatter)
 app.logger.addHandler(handler)
+app.logger.setLevel(logging.DEBUG)
 babel = Babel(app)
 
 
