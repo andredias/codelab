@@ -76,7 +76,7 @@ def landing():
         ('C', url_for('static', filename='images/c.svg')),
         ('C++', url_for('static', filename='images/cpp.svg')),
         ('Go', url_for('static', filename='images/go.png')),
-        ('Javascript', url_for('static', filename='images/javascript.png')),
+        ('Javascript (Node.js)', url_for('static', filename='images/javascript.png')),
         ('Ruby', url_for('static', filename='images/ruby.svg')),
     )
     return render_template('landing_page.html', languages=languages)
