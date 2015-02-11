@@ -37,7 +37,7 @@ Message:
 %(message)s
 '''))
 app.logger.addHandler(mail_handler)
-handler = RotatingFileHandler('/tmp/%s.log' % CONTAINER, maxBytes=100000, backupCount=1)
+handler = RotatingFileHandler('/tmp/%s.log' % CONTAINER, maxBytes=1000000, backupCount=1)
 handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(name)s | %(funcName)s | %(message)s')
 handler.setFormatter(formatter)
