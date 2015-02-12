@@ -3,11 +3,14 @@
 import sh
 import json
 import logging
-from logging.handlers import SMTPHandler, RotatingFileHandler
+from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, url_for
 from flask.ext.script import Manager
 from flask.ext.mail import Mail, Message
 from flask.ext.babel import Babel
+from .mail_handler import MailHandler
+from .forms import ContactForm
+from .decorators import async
 
 
 CONTAINER = 'codelab'
@@ -19,18 +22,26 @@ app.config.from_object('app.non_versioned_config')
 app.jinja_env.add_extension('jinja2.ext.do')
 manager = Manager(app)
 mail = Mail(app)
-mail_handler = SMTPHandler((app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
-                           'codelab@pronus.io',
-                           app.config['MAIL_RECEIVER'],
-                           '{} Error'.format(app.config['APP_NAME']),
-                           (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD']),)
+
+
+@async
+def send_async_mail(msg):
+    with app.app_context():
+        mail.send(msg)
+
+
+mail_handler = MailHandler(
+    send_async_mail,
+    subject='{} Error'.format(app.config['APP_NAME']),
+    sender=app.config['MAIL_DEFAULT_SENDER'],
+    recipients=app.config['MAIL_RECEIVERS'])
 mail_handler.setLevel(logging.ERROR)
 mail_handler.setFormatter(logging.Formatter('''
-Message type:       %(levelname)s
-Location:           %(pathname)s:%(lineno)d
-Module:             %(module)s
-Function:           %(funcName)s
-Time:               %(asctime)s
+Message type: %(levelname)s
+Location:     %(pathname)s:%(lineno)d
+Module:       %(module)s
+Function:     %(funcName)s
+Time:         %(asctime)s
 
 Message:
 
@@ -96,16 +107,6 @@ def do_the_thing():
     return output.stdout.decode('utf-8')
 
 
-from .forms import ContactForm
-from .decorators import async
-
-
-@async
-def send_async_mail(app, msg):
-    with app.app_context():
-        mail.send(msg)
-
-
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     form = ContactForm()
@@ -114,10 +115,10 @@ def contact():
         message = Message(
             subject='{0}: {1}'.format(form.type_.data, form.subject.data),
             sender=app.config['MAIL_DEFAULT_SENDER'],
-            recipients=app.config['MAIL_RECEIVER'],
+            recipients=app.config['MAIL_RECEIVERS'],
             body='from: %s <%s>\n\n%s' % (form.name.data, form.email.data, form.description.data),
         )
-        send_async_mail(app, message)
+        send_async_mail(message)
         return render_template('message_sent.html')
     return render_template('contact_form.html', form=form)
 

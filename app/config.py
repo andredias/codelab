@@ -20,4 +20,4 @@ MAIL_DEFAULT_SENDER = 'codelab@pronus.io'
 # Configurar em um outro arquivo não versionado as seguintes constantes:
 # MAIL_PASSWORD = 'PasswordHere'
 
-MAIL_RECEIVER = ['codelab@pronus.io']
+MAIL_RECEIVERS = ['codelab@pronus.io']
