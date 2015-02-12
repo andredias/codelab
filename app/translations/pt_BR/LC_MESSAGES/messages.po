@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-11 11:32-0200\n"
-"PO-Revision-Date: 2015-02-11 11:33-0300\n"
+"POT-Creation-Date: 2015-02-11 23:25-0200\n"
+"PO-Revision-Date: 2015-02-11 23:25-0300\n"
 "Last-Translator: \n"
 "Language-Team: pt_BR <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -21,6 +21,10 @@ msgstr ""
 #: config.py:7
 msgid "Code Lab is an online editor, runner and linter for Python, Ruby, C/C++ and other programming languages"
 msgstr "Code Lab é um conjunto de ferramentas online para editar, executar e aprimorar programas em Python, Ruby, C/C++ e várias outras linguagens"
+
+#: config.py:9
+msgid "Code Lab: Nothing like being able to run my code online..."
+msgstr "Code Lab: Nada como poder rodar meu código online..."
 
 #: forms.py:9
 msgid "Type"

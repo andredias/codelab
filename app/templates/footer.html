@@ -12,10 +12,10 @@
         </section>
         <section>
             {#- http://css-tricks.com/snippets/javascript/async-sharing-buttons-g-facebook-twitter/ #}
-            <nav>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=http://codelab.pronus.io" target="_blank"><i></i><span>Facebook</span></a>
-                <a href="https://twitter.com/home?status={{ _(config['DESCRIPTION']) | urlencode }}%20http://codelab.pronus.io" target="_blank"><i></i><span>Twitter</span></a>
-                <a href="https://plus.google.com/share?url=http://codelab.pronus.io" target="_blank"><i></i><span>Google+</span></a>
+            <nav class="social">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=http://codelab.pronus.io" target="_blank" class="facebook"><i class="icon-facebook"></i><span>Facebook</span></a>
+                <a href="https://twitter.com/home?status={{ _(config['SOCIAL_MEDIA']) | urlencode }}%20http://codelab.pronus.io" target="_blank" class="twitter"><i class="icon-twitter"></i><span>Twitter</span></a>
+                <a href="https://plus.google.com/share?url=http://codelab.pronus.io" target="_blank" class="google-plus"><i class="icon-google-plus"></i><span>Google+</span></a>
             </nav>
         </section>
         <div class="copyright">

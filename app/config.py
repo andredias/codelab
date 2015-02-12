@@ -6,6 +6,7 @@ from flask.ext.babel import gettext as _
 APP_NAME = 'Code Lab'
 DESCRIPTION = _('Code Lab is an online editor, runner and linter for Python, Ruby, C/C++ and '
                 'other programming languages')
+SOCIAL_MEDIA = _('Code Lab: Nothing like being able to run my code online...')
 
 SECRET_KEY = b'\xf06\xe34\x93\xf0\xad\xa5\xe7\xde\xf1R' \
              b'\xb3\xef\xd9\xaa\x92J\x14\xea'
