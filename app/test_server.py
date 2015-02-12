@@ -42,7 +42,7 @@ class TestCodeLab(object):
                                                      description='this is a test\nLâmpada, Açúcar'))
             assert 'Your message was sent successfully!' in str(rv.data)
             assert len(outbox) == 1
-            assert outbox[0].subject == 'codelab:bug: testing contact form'
+            assert outbox[0].subject == 'bug: testing contact form'
 
     def test_pt_br(self):
         with app.test_request_context():
