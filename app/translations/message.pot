@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-11 23:25-0200\n"
+"POT-Creation-Date: 2015-02-14 16:32-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Decrease Font Size"
 msgstr ""
 
-#: templates/dojo.html:40
+#: templates/dojo.html:40 templates/landing_page.html:47
 msgid "Input"
 msgstr ""
 
@@ -97,119 +97,8 @@ msgstr ""
 msgid "Input Data"
 msgstr ""
 
-#: templates/faq.html:2 templates/footer.html:5
+#: templates/footer.html:5
 msgid "FAQ"
-msgstr ""
-
-#: templates/faq.html:12
-msgid "Frequent Asked Questions (FAQ)"
-msgstr ""
-
-#: templates/faq.html:16
-msgid "What is Code Lab?"
-msgstr ""
-
-#: templates/faq.html:17
-msgid ""
-"Code Lab is an online compiler and lint tool which allows you to run,\n"
-"                improve and share your code using several programming "
-"languages."
-msgstr ""
-
-#: templates/faq.html:20
-msgid "Are there any memory or time constraints for the submitted programs?"
-msgstr ""
-
-#: templates/faq.html:21
-msgid "Yes, they are as follows:"
-msgstr ""
-
-#: templates/faq.html:23
-msgid "compilation time"
-msgstr ""
-
-#: templates/faq.html:23 templates/faq.html:24
-msgid "seconds"
-msgstr ""
-
-#: templates/faq.html:24
-msgid "execution time"
-msgstr ""
-
-#: templates/faq.html:25
-msgid "memory usage"
-msgstr ""
-
-#: templates/faq.html:29
-msgid "Can I access the Internet from my program?"
-msgstr ""
-
-#: templates/faq.html:30
-msgid "No, access to the network is blocked."
-msgstr ""
-
-#: templates/faq.html:32
-msgid "Can I write or read files in my program?"
-msgstr ""
-
-#: templates/faq.html:33
-msgid "Yes, but there is an 1 MiB limit of disk space."
-msgstr ""
-
-#: templates/faq.html:35
-msgid "How long my codes will be stored on Code Lab?"
-msgstr ""
-
-#: templates/faq.html:36
-msgid "months"
-msgstr ""
-
-#: templates/faq.html:38
-msgid "What is the size limit for the source code, input and output?"
-msgstr ""
-
-#: templates/faq.html:41
-msgid "What encoding is used in the source code and in the input stream?"
-msgstr ""
-
-#: templates/faq.html:44
-msgid ""
-"How is end of line (EOL) represented in the source code and in the input "
-"stream?"
-msgstr ""
-
-#: templates/faq.html:45
-msgid ""
-"<em>End of line</em> is represented by <code>\n"
-"</code> (LF, Linux style). Even if you submit input or source code with "
-"Windows EOL (<code>\r\n"
-"</code>, CRLF) or Mac OS EOL (<code>\r"
-"</code>, CR), end-of-lines will be converted to the Linux style."
-msgstr ""
-
-#: templates/faq.html:47
-msgid "My program seems to have a correct syntax. Why does it fail to execute?"
-msgstr ""
-
-#: templates/faq.html:48
-msgid ""
-"Be sure to place \"main\" class/program/module/function/procedure in your"
-" code (<a href=\"/samples\">here you will find a sample</a> for every "
-"language)."
-msgstr ""
-
-#: templates/faq.html:50
-msgid ""
-"I would like to see a new language or library on Code Lab. Is there "
-"anything I can do about that?"
-msgstr ""
-
-#: templates/faq.html:51
-msgid "Yes, please "
-msgstr ""
-
-#: templates/faq.html:51
-msgid "contact us"
 msgstr ""
 
 #: templates/footer.html:6 templates/terms_of_use.html:12
@@ -224,10 +113,104 @@ msgstr ""
 msgid "Run, improve and share your source code online!"
 msgstr ""
 
-#: templates/landing_page.html:11
+#: templates/landing_page.html:12
 msgid ""
 "<span>Run</span>, <span>improve</span> and <span>share</span> your code "
 "online!"
+msgstr ""
+
+#: templates/landing_page.html:27
+msgid "How It Works"
+msgstr ""
+
+#: templates/landing_page.html:30
+msgid ""
+"Code Lab uses <a "
+"href=\"http://en.wikipedia.org/wiki/Batch_processing\">batch "
+"processing</a>. It means that your program executes without human "
+"interaction."
+msgstr ""
+
+#: templates/landing_page.html:32
+msgid ""
+"Despite of the execution flow or processing type, all input data are sent"
+" at once to the standard input (<code>stdin</code>) from where your "
+"program can read as needed."
+msgstr ""
+
+#: templates/landing_page.html:34
+msgid ""
+"The processing takes place into a controlled environment "
+"(<em>sandbox</em>) which has some restrictions of time (5s processing "
+"max), memory (256MiB), disk (1MiB), user (not <code>root</code>) and "
+"netword access (no access at all)."
+msgstr ""
+
+#: templates/landing_page.html:36
+msgid ""
+"The processing output is collected from standard output and error streams"
+" (<code>stdout</code> and <code>stderr</code>) and presented back to you."
+msgstr ""
+
+#: templates/landing_page.html:44
+msgid "Example"
+msgstr ""
+
+#: templates/landing_page.html:52
+msgid "Program"
+msgstr ""
+
+#: templates/landing_page.html:54 templates/landing_page.html:57
+#: templates/landing_page.html:59
+msgid "border"
+msgstr ""
+
+#: templates/landing_page.html:54 templates/landing_page.html:64
+msgid "Enter the border:"
+msgstr ""
+
+#: templates/landing_page.html:55 templates/landing_page.html:57
+#: templates/landing_page.html:58 templates/landing_page.html:59
+msgid "title"
+msgstr ""
+
+#: templates/landing_page.html:55 templates/landing_page.html:65
+msgid "Enter the title:"
+msgstr ""
+
+#: templates/landing_page.html:63
+msgid "Output"
+msgstr ""
+
+#: templates/landing_page.html:75
+msgid "Improve"
+msgstr ""
+
+#: templates/landing_page.html:76
+msgid ""
+"Code Lab executes a static analysis over your code in search for "
+"optimization improvements, potential defects and inconsistencies with a "
+"programming style guide. The analysis report is presented in a tab called"
+" \"Lint\"."
+msgstr ""
+
+#: templates/landing_page.html:78
+msgid "Use those suggestions to improve your code!"
+msgstr ""
+
+#: templates/landing_page.html:81
+msgid "Share"
+msgstr ""
+
+#: templates/landing_page.html:82
+msgid ""
+"Each combination of input data and source code produces a unique address "
+"(URL) that should be used to share your code and results to others, "
+"forums, social media, IRC etc."
+msgstr ""
+
+#: templates/landing_page.html:84
+msgid "Soon..."
 msgstr ""
 
 #: templates/message_sent.html:5
@@ -284,10 +267,10 @@ msgstr ""
 msgid ""
 "In the course of using the Code Lab Site, you may provide Code Lab with "
 "feedback, including but not limited to suggestions, observations, errors,"
-" problems, and defects regarding the Code Lab Site (collectively "
-"“Feedback”). You hereby grant Code Lab a worldwide, irrevocable, "
-"perpetual, royalty-free, transferable and sub-licensable, non-exclusive "
-"right to use, copy, modify, distribute, display, perform, create "
-"derivative works from and otherwise exploit all such Feedback."
+" problems, and defects regarding the Code Lab Site. You hereby grant Code"
+" Lab a worldwide, irrevocable, perpetual, royalty-free, transferable and "
+"sub-licensable, non-exclusive right to use, copy, modify, distribute, "
+"display, perform, create derivative works from and otherwise exploit all "
+"such feedback."
 msgstr ""
 

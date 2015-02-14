@@ -14,22 +14,94 @@ html
 a
     text-decoration none
 
+section
+    overflow hidden
+
 body#landing_page
-    padding 0 2em
     background linear-gradient(#0d86b3, #11a9e2)
-    h2
-        font-size 3em
-        text-align center
-        margin 2em 0 2em
-        font-weight normal
-        line-height normal
+    section
+        overflow hidden
+        padding 0 2em
+
+    #execute
+    .execute-example
+        background-color rgba(255, 255, 255, 0.8)
+        margin 0
+
+    #execute
+        .description
+            column(2/5)
+            +below(rupture.desktop-cutoff)
+                column(1)
+        .fig
+            column(3/5)
+            align-children(both)
+            +below(rupture.desktop-cutoff)
+                column(1)
+        div
+            column(1)
+
+    div.example
+        div
+            column(1/3)
+            +below(rupture.desktop-cutoff)
+                column(1)
+        pre
+            background-color #000
+            color #ddd
+            padding 0.5em
+
+    #improve-share
+        background rgba(255, 255, 255, 1)
+        div
+            column(1/2)
+            +mobile()
+                column(1)
+
+    p
+        color #333
         +mobile()
-            font-size 1.5em
+            font-size 0.9em
+        a
+        a:visited
+            color #2727A1
+
+    h1
+    h2
+    h3
+        font-weight normal
+        margin-bottom 0
+
+    pre
+        margin-top 0.3em
+        min-height 10em
+        line-height 1.3em
+        +mobile()
+            font-size 0.8em
         +tablet()
-            font-size 2.2em
-        span
-            color #fff
-            text-shadow 4px 4px 6px rgba(0,0,0,0.5)
+            font-size 0.9em
+
+
+    .slogan
+        h1
+            font-size 6em
+            +mobile()
+                font-size 4em
+            +tablet()
+                font-size 5em
+        h2
+            font-size 3em
+            text-align center
+            margin 2em 0 2em
+            font-weight normal
+            line-height normal
+            +mobile()
+                font-size 1.5em
+            +tablet()
+                font-size 2.2em
+            span
+                color #fff
+                text-shadow 4px 4px 6px rgba(0,0,0,0.5)
 
 header
     align-children(vertical)
@@ -55,15 +127,12 @@ header
             margin-bottom 15px
 
 
-section
-    overflow hidden
-
-
 .languages nav
     overflow hidden
     margin 0 32% 3em
     +below(rupture.desktop-cutoff)
         margin 0
+        margin-bottom 2em
     div
         column(1/2)
         cycle(2)
@@ -150,5 +219,4 @@ footer.page
             font-weight bolder
 
 #landing_page > footer.page
-    margin 1em -2em 0
-
+    margin 0
