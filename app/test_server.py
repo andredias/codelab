@@ -1,3 +1,4 @@
+from flask import url_for
 from .server import app, mail
 
 # see: http://flask.pocoo.org/docs/0.10/testing/
@@ -48,10 +49,26 @@ class TestCodeLab(object):
         with app.test_request_context():
             app.config['BABEL_DEFAULT_LOCALE'] = 'pt_BR'
             rv = app.test_client().get('/')
-            assert '<span>Execute</span>, <span>aprimore</span>' in str(rv.data)
+            assert '<span>Execute</span>, <span>melhore</span>' in str(rv.data)
 
     def test_en_us(self):
         with app.test_request_context():
             app.config['BABEL_DEFAULT_LOCALE'] = 'en_US'
             rv = app.test_client().get('/')
             assert '<span>Run</span>, <span>improve</span>' in str(rv.data)
+
+    def test_faq(self):
+        resp = self.app.get('/help/faq')
+        assert resp.status_code == 200
+
+    def test_terms(self):
+        resp = self.app.get('/help/terms_of_use')
+        assert resp.status_code == 200
+
+    def test_dojo(self):
+        languages = ('python', 'c', 'c++', 'ruby', 'javascript', 'go')
+        with app.test_request_context():
+            for language in languages:
+                resp = self.app.get(url_for('dojo', language=language))
+                assert resp.status_code == 200
+                assert '<span>%s</span>' % language in str(resp.data)
