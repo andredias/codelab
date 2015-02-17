@@ -21,3 +21,15 @@ MAIL_DEFAULT_SENDER = 'codelab@pronus.io'
 # MAIL_PASSWORD = 'PasswordHere'
 
 MAIL_RECEIVERS = ['codelab@pronus.io']
+
+
+LANGUAGES = {  # name: mode
+    'python': 'python',
+    'c': 'c_cpp',
+    'c++': 'c_cpp',
+    'go': 'golang',
+    'javascript': 'javascript',
+    'ruby': 'ruby',
+}
+
+ACE_THEME = 'ace/theme/cobalt'

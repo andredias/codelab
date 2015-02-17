@@ -4,3 +4,5 @@ Flask-WTF
 Flask-Mail
 Flask-Babel
 sh
+redis
+hiredis

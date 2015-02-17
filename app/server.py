@@ -3,11 +3,13 @@
 import sh
 import json
 import logging
+from redis import Redis
 from logging.handlers import RotatingFileHandler
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, abort, redirect
 from flask.ext.script import Manager
 from flask.ext.mail import Mail, Message
 from flask.ext.babel import Babel
+from hashlib import md5
 from .mail_handler import MailHandler
 from .forms import ContactForm
 from .decorators import async
@@ -22,6 +24,8 @@ app.config.from_object('app.non_versioned_config')
 app.jinja_env.add_extension('jinja2.ext.do')
 manager = Manager(app)
 mail = Mail(app)
+
+redis = Redis(app.config['REDIS_HOST'])
 
 
 @async
@@ -68,16 +72,51 @@ def get_locale():
 def dojo(language):
     # projeto = project_or_new(session['project_id'])
     language = language.lower()
-    ace_theme = 'ace/theme/cobalt'
-    languages = {  # name: mode
-        'python': 'python',
-        'c': 'c_cpp',
-        'c++': 'c_cpp',
-        'go': 'golang',
-        'javascript': 'javascript',
-        'ruby': 'ruby',
-    }
-    return render_template('dojo.html', languages=languages, language=language, ace_theme=ace_theme)
+    return render_template('dojo.html', language=language, lint_data=[])
+
+
+@app.route('/project/<id>')
+def project_page(id):
+    project = redis.hgetall(id)
+    if not project:
+        abort(404)
+    params = json.loads(project[b'params'].decode('utf-8'))
+    output = json.loads(project[b'output'].decode('utf-8'))
+    lint_data = output.get('lint', [])
+    output_data = ''
+    if output.get('compilation'):
+        output_data += '%s%s' % (output['compilation'].get('stdout', ''),
+                                 output['compilation'].get('stderr', ''))
+    if output.get('execution'):
+        output_data += '%s%s' % (output['execution'].get('stdout', ''),
+                                 output['execution'].get('stderr', ''))
+    return render_template('dojo.html',
+                           input_data=params['input'],
+                           source=params['source'],
+                           language=params['language'],
+                           lint_data=lint_data,
+                           output_data=output_data)
+
+
+def run(params_json):
+    return sh.docker.run('-i', '--rm', '--net', 'none', CONTAINER, _ok_code=[0, 1, 2],
+                         _in=params_json)
+
+
+@app.route('/_do_the_thing', methods=['POST'])
+def do_the_thing():
+    params = {'input': request.form['input'], 'source': request.form['source'],
+              'language': request.form['language']}
+    id = md5('{input}{source}{language}'.format(**params).encode('utf-8')).hexdigest()
+    destination = url_for('project_page', id=id)
+    if not redis.exists(id):
+        params_json = json.dumps(params)
+        output_json = run(params_json)
+        redis.hmset(id, {'params': params_json, 'output': output_json})
+        app.logger.info('NOT CACHED:\n\tparams: %s\n\toutput: %s' % (params_json, output_json))
+    else:
+        app.logger.info('Cached: %s' % destination)
+    return redirect(destination)
 
 
 @app.route('/')
@@ -91,20 +130,6 @@ def landing():
         ('Ruby', url_for('static', filename='images/ruby.svg')),
     )
     return render_template('landing_page.html', languages=languages)
-
-
-@app.route('/_do_the_thing', methods=['POST'])
-def do_the_thing():
-    language = request.form['language']
-    source = request.form['code']
-    _input = request.form['input']
-    params = {'input': _input, 'source': source, 'language': language}
-    params_json = json.dumps(params)
-    app.logger.info(params_json)
-    output = sh.docker.run('-i', '--rm', '--net', 'none', CONTAINER, _ok_code=[0, 1, 2],
-                           _in=params_json)
-    app.logger.info(output)
-    return output.stdout.decode('utf-8')
 
 
 @app.route('/contact', methods=['GET', 'POST'])

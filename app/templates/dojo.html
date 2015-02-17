@@ -5,6 +5,9 @@
     <script src="//cdn.jsdelivr.net/ace/latest/min/ace.js"></script>
     <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
     <script src="{{ url_for('static', filename='js/codebox.js') }}"></script>
+    <script>
+        var lint_data = {{ lint_data | tojson | safe }};
+    </script>
 {% endblock %}
 {% block body %}
 <body id="dojo">
@@ -16,12 +19,12 @@
         <aside class="panel_1"></aside>
         <div class="central">
             <section class="editor">
-                <div id="editor" data-ace-theme="{{ ace_theme }}"></div>
+                <div id="editor" data-ace-theme="{{ config['ACE_THEME'] }}">{{ source }}</div>
                 <footer>
                     <div class="menu" id="a-language">
                         <span>{{ language }}</span>
                         <ul class="dropdown">
-                        {% for name, mode in languages.items()|sort %}
+                        {% for name, mode in config['LANGUAGES'].items()|sort %}
                             <li data-ace-mode="{{ mode }}">{{ name }}</li>
                         {% endfor %}
                         </ul>
@@ -40,12 +43,42 @@
                 <dt>{{ _('Input') }}</dt>
                 <dd>
                     {{ _('Input Data') }} (stdin):
-                    <textarea id="input_data" rows="10"></textarea>
+                    <textarea id="input_data" rows="10">{{ input_data }}</textarea>
                 </dd>
+                {% if output_data %}
+                <dt>{{ _('Output') }}</dt>
+                <dd>
+                    <pre>{{ output_data }}</pre>
+                </dd>
+                {% endif %}
+                {% if lint_data %}
+                <dt>{{ _('Lint') }}</dt>
+                <dd>
+                    <table id="lint_table">
+                        <thead>
+                            <tr>
+                                <th>{{ _('Position') }}</th>
+                                <th>{{ _('Message') }}</th>
+                                <th>{{ _('Level') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for line in lint_data %}
+                            <tr>
+                                <td>{{ line['line'] }}:{{ line.get('column', 1) }}</td>
+                                <td>{{ line['message'] }}</td>
+                                <td>{{ line['level'] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </dd>
+                {% endif %}
             </dl>
         </div>
         <aside class="panel_2"></aside>
     </article>
+    <form id="run_code" method="post" action="{{ url_for('do_the_thing') }}" style="visibility:hidden"></form>
 {% include 'footer.html' %}
 <div class="modal_dialog" id="spinner">
     <div class="spinner">

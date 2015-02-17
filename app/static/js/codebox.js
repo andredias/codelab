@@ -10,14 +10,19 @@ function changedCursor(e) {
 };
 
 
-function process_lint_results(editor, evaluation) {
-    var lint_results = evaluation.lint;
-    if (lint_results.length == 0) {
+function process_lint_data(editor, lint_data) {
+    if (lint_data.length == 0) {
         return null;
     }
-    var session = editor.getSession();
-    var annotations = [];
-    var tbody = $("<tbody />");
+    $.each($('#lint_table tbody tr'), function(i, elem) {
+        var coord = $(elem).first().text().split(':');
+        coord = [parseInt(coord[0]), parseInt(coord[1])];
+        $(elem).bind('click', function() {
+            editor.focus();
+            // in ace, line starts at 1, but column at 0?!?
+            editor.gotoLine(coord[0], coord[1] - 1, true);
+        });
+    });
 
     // TODO: improve gutter icons
     var getLevelType = function(level) {
@@ -29,47 +34,15 @@ function process_lint_results(editor, evaluation) {
         };
         return levelmap[level] || level;
     }
-    $.each(lint_results, function(i, result) {
-        if (typeof result.column == 'undefined') {
-            result.column = 1;
-        }
-        var $tr = $('<tr>').append(
-            $('<td>').text(result.line + ':' + result.column),
-            // $('<td>').text(result.code),
-            $('<td>').text(result.message),
-            $('<td>').text(result.level)
-        );
-        $tr.bind('click', function() {
-            editor.focus();
-            // in ace, line starts at 1, but column at 0?!?
-            editor.gotoLine(result.line, result.column - 1, true);
-        });
-        tbody.append($tr);
+    var annotations = [];
+    $.each(lint_data, function(i, result) {
         annotations[i] = {
             row: result.line - 1,  // gotoLine starts at 1, but annotations at 0 ?!?
             text: result.code + ': ' + result.message,
             type: getLevelType(result.level)
         };
     });
-    session.setAnnotations(annotations);
-    var lint_table = $('<table>\
-        <thead>\
-            <tr><th>Position</th><th>Message</th><th>Level</th></tr>\
-        </thead>\
-    </table>').append(tbody);
-    return lint_table;
-}
-
-
-function process_output(evaluation) {
-    var output = '';
-    if (evaluation.compilation) {
-        output += evaluation.compilation.stdout + evaluation.compilation.stderr;
-    }
-    if (evaluation.execution) {
-        output += evaluation.execution.stdout + evaluation.execution.stderr;
-    }
-    return $('<textarea rows="10" readonly="readonly" />').text(output)
+    editor.getSession().setAnnotations(annotations);
 }
 
 
@@ -99,7 +72,6 @@ $(function() {
     var terminals = new Terminals($('dl.terminals'));
     var ddl = new DropDownLanguage(editor, $('#a-language'));
     var config = new DropDown(editor, $('#config'));
-
     $(document).on('click', function() {
         // disable all dropdowns
         $('.menu').removeClass('active');
@@ -107,26 +79,13 @@ $(function() {
 
     $('button[name=run]').on('click', function() {
         $('#spinner').addClass('active');
-        terminals.clear();
-        editor.getSession().clearAnnotations();
-        $.post($SCRIPT_ROOT + '/_do_the_thing',
-            {
-            language: ddl.getValue(),
-            code: ddl.editor.getValue(),
-            input: $('#input_data').val()
-            },
-            function(evaluation) {
-                $('#spinner').removeClass('active');
-                evaluation = JSON.parse(evaluation)
-                var lint_results = process_lint_results(editor, evaluation);
-                if (lint_results) {
-                    terminals.addTab('Lint', lint_results);
-                }
-                terminals.addTab('Output', process_output(evaluation)).click();
-            }
-        );
-        return false;
+        var input = $('<textarea />').attr('name', 'input').val($('#input_data').val());
+        var source = $('<textarea />').attr('name', 'source').val(ddl.editor.getValue());
+        var language = $('<input>').attr('type', 'text').attr('name', 'language')
+                                   .val(ddl.getValue());
+        $('#run_code').append(input).append(source).append(language).submit();
     });
     increaseFontSize(editor, 0);
     editor.focus();
+    process_lint_data(editor, lint_data);
 });

@@ -85,6 +85,7 @@ Terminals.prototype = {
         this.terminals.find('> dd:not(:first)').hide();
         this.terminals.find('> dt:first-child').addClass('active');
         this.terminals.find('> dt').on('click', this._tabClick);
+        this.terminals.find('dt:nth-child(3)').click();  // output tab, segunda aba
     },
 
     clear: function() {
