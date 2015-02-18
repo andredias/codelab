@@ -3,12 +3,14 @@
 import sh
 import json
 import logging
-from redis import Redis
 from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, url_for, abort, redirect
 from flask.ext.script import Manager
 from flask.ext.mail import Mail, Message
 from flask.ext.babel import Babel
+from flask.ext.webcache import easy_setup
+from flask.ext.webcache.modifiers import cache_for
+from werkzeug.contrib.cache import RedisCache
 from hashlib import md5
 from .mail_handler import MailHandler
 from .forms import ContactForm
@@ -25,7 +27,8 @@ app.jinja_env.add_extension('jinja2.ext.do')
 manager = Manager(app)
 mail = Mail(app)
 
-redis = Redis(app.config['REDIS_HOST'])
+cache = RedisCache(app.config['CACHE_REDIS_HOST'])
+easy_setup(app, cache)
 
 
 @async
@@ -76,50 +79,50 @@ def dojo(language):
 
 
 @app.route('/project/<id>')
+@cache_for(minutes=2)
 def project_page(id):
-    project = redis.hgetall(id)
+    project = cache.get(id)
     if not project:
         abort(404)
-    params = json.loads(project[b'params'].decode('utf-8'))
-    output = json.loads(project[b'output'].decode('utf-8'))
-    lint_data = output.get('lint', [])
     output_data = ''
-    if output.get('compilation'):
-        output_data += '%s%s' % (output['compilation'].get('stdout', ''),
-                                 output['compilation'].get('stderr', ''))
-    if output.get('execution'):
-        output_data += '%s%s' % (output['execution'].get('stdout', ''),
-                                 output['execution'].get('stderr', ''))
+    if project.get('compilation'):
+        output_data += '%s%s' % (project['compilation'].get('stdout', ''),
+                                 project['compilation'].get('stderr', ''))
+    if project.get('execution'):
+        output_data += '%s%s' % (project['execution'].get('stdout', ''),
+                                 project['execution'].get('stderr', ''))
     return render_template('dojo.html',
-                           input_data=params['input'],
-                           source=params['source'],
-                           language=params['language'],
-                           lint_data=lint_data,
+                           input_data=project['input'],
+                           source=project['source'],
+                           language=project['language'],
+                           lint_data=project.get('lint', []),
                            output_data=output_data)
 
 
 def run(params_json):
-    return sh.docker.run('-i', '--rm', '--net', 'none', CONTAINER, _ok_code=[0, 1, 2],
-                         _in=params_json)
+    output = sh.docker.run('-i', '--rm', '--net', 'none', CONTAINER, _ok_code=[0, 1, 2],
+                           _in=params_json)
+    return json.loads(output.stdout.decode('utf-8'))
 
 
 @app.route('/_do_the_thing', methods=['POST'])
 def do_the_thing():
-    params = {'input': request.form['input'], 'source': request.form['source'],
-              'language': request.form['language']}
-    id = md5('{input}{source}{language}'.format(**params).encode('utf-8')).hexdigest()
+    project = {'input': request.form['input'], 'source': request.form['source'],
+               'language': request.form['language']}
+    id = md5('{input}{source}{language}'.format(**project).encode('utf-8')).hexdigest()
     destination = url_for('project_page', id=id)
-    if not redis.exists(id):
-        params_json = json.dumps(params)
-        output_json = run(params_json)
-        redis.hmset(id, {'params': params_json, 'output': output_json})
-        app.logger.info('NOT CACHED:\n\tparams: %s\n\toutput: %s' % (params_json, output_json))
+    if not cache.get(id):
+        output = run(json.dumps(project))
+        project.update(output)
+        cache.set(id, project)
+        app.logger.info('NOT CACHED:\n\tparams: %s' % project)
     else:
         app.logger.info('Cached: %s' % destination)
     return redirect(destination)
 
 
 @app.route('/')
+@cache_for(hours=1)
 def landing():
     languages = (
         ('Python (3)', url_for('static', filename='images/python.svg')),
@@ -149,5 +152,6 @@ def contact():
 
 
 @app.route('/help/<topic>')
+@cache_for(days=7)
 def help(topic):
     return render_template(topic + '.html')

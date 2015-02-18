@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block title %}CodeBox | Dojo{% endblock %}
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
     <script src="//cdn.jsdelivr.net/ace/latest/min/ace.js"></script>
     <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
     <script src="{{ url_for('static', filename='js/codebox.js') }}"></script>

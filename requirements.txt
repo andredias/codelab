@@ -6,3 +6,4 @@ Flask-Babel
 sh
 redis
 hiredis
+-e git+https://github.com/fusic-com/flask-webcache#egg=flask-webcache
