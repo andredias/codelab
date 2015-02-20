@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-import sh
-import json
 import logging
 from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, url_for, abort, redirect
@@ -11,13 +9,10 @@ from flask.ext.babel import Babel
 from flask.ext.webcache import easy_setup
 from flask.ext.webcache.modifiers import cache_for
 from werkzeug.contrib.cache import RedisCache
-from hashlib import md5
 from .mail_handler import MailHandler
 from .forms import ContactForm
 from .decorators import async
-
-
-CONTAINER = 'codelab'
+from .core import project_id, cache_project
 
 
 app = Flask(__name__)
@@ -55,7 +50,8 @@ Message:
 %(message)s
 '''))
 app.logger.addHandler(mail_handler)
-handler = RotatingFileHandler('/tmp/%s.log' % CONTAINER, maxBytes=1000000, backupCount=1)
+handler = RotatingFileHandler('/tmp/%s.log' % '_'.join(app.config['APP_NAME'].lower().split()),
+                              maxBytes=(2 ** 20))
 handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(name)s | %(funcName)s | %(message)s')
 handler.setFormatter(formatter)
@@ -79,7 +75,7 @@ def dojo(language):
 
 
 @app.route('/project/<id>')
-@cache_for(minutes=2)
+@cache_for(days=1)
 def project_page(id):
     project = cache.get(id)
     if not project:
@@ -99,22 +95,14 @@ def project_page(id):
                            output_data=output_data)
 
 
-def run(params_json):
-    output = sh.docker.run('-i', '--rm', '--net', 'none', CONTAINER, _ok_code=[0, 1, 2],
-                           _in=params_json)
-    return json.loads(output.stdout.decode('utf-8'))
-
-
 @app.route('/_do_the_thing', methods=['POST'])
 def do_the_thing():
     project = {'input': request.form['input'], 'source': request.form['source'],
                'language': request.form['language']}
-    id = md5('{input}{source}{language}'.format(**project).encode('utf-8')).hexdigest()
+    id = project_id(**project)
     destination = url_for('project_page', id=id)
     if not cache.get(id):
-        output = run(json.dumps(project))
-        project.update(output)
-        cache.set(id, project)
+        cache_project(cache, project)
         app.logger.info('NOT CACHED:\n\tparams: %s' % project)
     else:
         app.logger.info('Cached: %s' % destination)
