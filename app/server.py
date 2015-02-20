@@ -13,12 +13,14 @@ from .mail_handler import MailHandler
 from .forms import ContactForm
 from .decorators import async
 from .core import project_id, cache_project
+from .snippets import pygmentize
 
 
 app = Flask(__name__)
 app.config.from_object('app.config')
 app.config.from_object('app.non_versioned_config')
 app.jinja_env.add_extension('jinja2.ext.do')
+app.jinja_env.globals.update(pygmentize=pygmentize)
 manager = Manager(app)
 mail = Mail(app)
 
@@ -88,7 +90,7 @@ def project_page(id):
         output_data += '%s%s' % (project['execution'].get('stdout', ''),
                                  project['execution'].get('stderr', ''))
     return render_template('dojo.html',
-                           input_data=project['input'],
+                           input_data=project.get('input', ''),
                            source=project['source'],
                            language=project['language'],
                            lint_data=project.get('lint', []),
@@ -143,3 +145,19 @@ def contact():
 @cache_for(days=7)
 def help(topic):
     return render_template(topic + '.html')
+
+
+@app.route('/samples')
+@cache_for(days=60)
+def examples():
+    from .snippets import snippets
+    languages = ('python', 'javascript', 'go', 'ruby', 'c', 'c++')
+    samples = (snippet for snippet in snippets
+               if snippet['language'] in languages)
+    recent = []
+    most_visited = []
+    return render_template('snippets.html',
+                           languages=languages,
+                           samples=samples,
+                           recent=recent,
+                           most_visited=most_visited)

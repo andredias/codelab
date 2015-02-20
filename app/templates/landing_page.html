@@ -41,14 +41,17 @@
     <section class="execute-example">
         <h2>{{ _('Example') }}</h2>
         <div class="example">
-            <div class="input">
+            <article class="input">
                 <h3>{{ _('Input') }}</h3>
-                <pre>=
+                <div class="highlight">
+                    <pre>=
 Hello World</pre>
-            </div>
-            <div class="program">
+                </div>
+            </article>
+            <article class="program">
                 <h3>{{ _('Program') }}</h3>
-                <pre><span class="c"># Python 3</span>
+                <div class="highlight">
+                    <pre><span class="c"># Python 3</span>
 <span class="n">{{ _('border') }}</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;{{ _('Enter the border:') }}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
 <span class="n">{{ _('title') }}</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;{{ _('Enter the title:') }}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">()</span>
@@ -56,16 +59,18 @@ Hello World</pre>
 <span class="k">print</span><span class="p">(</span><span class="n">{{ _('title') }}</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">{{ _('border') }}</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">{{ _('title') }}</span><span class="p">))</span>
 </pre>
-            </div>
-            <div class="output">
+            </article>
+            <article class="output">
                 <h3>{{ _('Output') }}</h3>
-                <pre>{{ _('Enter the border:') }}
+                <div class="highlight">
+                    <pre>{{ _('Enter the border:') }}
 {{ _('Enter the title:') }}
 
 ===========
 Hello World
 ===========</pre>
-            </div>
+                </div>
+            </article>
         </div>
     </section>
     <section id="improve-share">

@@ -1,0 +1,64 @@
+@require 'elf'
+@require 'rupture'
+
+margem = 1em 2em
+
+#snippets_page
+    background #f0f6f0
+    article
+        margin margem
+
+nav.choices
+nav.languages
+    overflow hidden
+    font-weight normal
+    margin margem
+    a
+        color #adadad
+        border-left 1px solid #ccc
+        padding 0.75em
+        display inline-block
+        float left
+        &:first-child
+            border 0
+        &.active
+            color #333
+            &:hover
+                color #333
+        &:hover
+            color #834dab
+
+section.project
+    border-bottom 1px solid #d5d5d5;
+    border-top 2px solid #fff;
+    padding 0.75rem 0 0.75rem
+    h1
+        margin 0
+    a
+        font-size 1.25rem
+        color #333
+        &:hover
+            color darken(#cf7f00, 20%)
+
+span.tag
+    color #cf7f00
+    text-transform capitalize
+    font-size 0.9em
+
+div.highlight
+div.linenodiv
+    pre
+        background-color #000
+        color #ddd
+        padding 0.5em
+        margin-top 0.3em
+        line-height 1.3em
+        +mobile()
+            font-size 0.8em
+        +tablet()
+            font-size 0.9em
+
+div.linenodiv
+    pre
+        color #b6b6b6
+        background-color lighten(#000, 10%)
