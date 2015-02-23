@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import logging
+from datetime import timedelta
 from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, url_for, abort, redirect
 from flask.ext.script import Manager
@@ -12,8 +13,7 @@ from werkzeug.contrib.cache import RedisCache
 from .mail_handler import MailHandler
 from .forms import ContactForm
 from .decorators import async
-from .core import project_id, cache_project
-from .snippets import pygmentize
+from .projects import pygmentize, last_visited, most_visited, count_visit, project_id, cache_project
 
 
 app = Flask(__name__)
@@ -77,6 +77,7 @@ def dojo(language):
 
 
 @app.route('/project/<id>')
+@count_visit(cache=cache)
 @cache_for(days=1)
 def project_page(id):
     project = cache.get(id)
@@ -104,7 +105,7 @@ def do_the_thing():
     id = project_id(**project)
     destination = url_for('project_page', id=id)
     if not cache.get(id):
-        cache_project(cache, project)
+        cache_project(cache, project, timeout=int(timedelta(days=180).total_seconds()))
         app.logger.info('NOT CACHED:\n\tparams: %s' % project)
     else:
         app.logger.info('Cached: %s' % destination)
@@ -150,14 +151,14 @@ def help(topic):
 @app.route('/samples')
 @cache_for(days=60)
 def examples():
-    from .snippets import snippets
+    from .projects import snippets
     languages = ('python', 'javascript', 'go', 'ruby', 'c', 'c++')
-    samples = (snippet for snippet in snippets
-               if snippet['language'] in languages)
-    recent = []
-    most_visited = []
+    samples = [snippet for snippet in snippets
+               if snippet['language'] in languages]
+    l_visited = last_visited(cache, languages)
+    m_visited = most_visited(cache, languages)
     return render_template('snippets.html',
                            languages=languages,
                            samples=samples,
-                           recent=recent,
-                           most_visited=most_visited)
+                           last_visited=l_visited,
+                           most_visited=m_visited)

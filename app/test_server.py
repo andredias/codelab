@@ -72,3 +72,10 @@ class TestCodeLab(object):
                 resp = self.app.get(url_for('dojo', language=language))
                 assert resp.status_code == 200
                 assert '<span>%s</span>' % language in str(resp.data)
+
+    def test_samples_page(self):
+        resp = self.app.get('/samples')
+        data = str(resp.data)
+        assert resp.status_code == 200
+        assert data.count('Hello, world!') >= 6  # one for each language at least
+        assert 'Python' in data

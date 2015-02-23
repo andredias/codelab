@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-15 20:18-0200\n"
-"PO-Revision-Date: 2015-02-15 20:21-0300\n"
+"POT-Creation-Date: 2015-02-22 21:48-0300\n"
+"PO-Revision-Date: 2015-02-22 21:49-0300\n"
 "Last-Translator: \n"
 "Language-Team: pt_BR <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -78,99 +78,119 @@ msgstr "Cancelar"
 msgid "Submit"
 msgstr "Enviar"
 
-#: templates/dojo.html:33
+#: templates/dojo.html:35
 msgid "Increase Font Size"
 msgstr "Aumentar o tamanho da fonte"
 
-#: templates/dojo.html:34
+#: templates/dojo.html:36
 msgid "Decrease Font Size"
 msgstr "Diminuir o tamanho da fonte"
 
-#: templates/dojo.html:40 templates/landing_page.html:47
+#: templates/dojo.html:42 templates/landing_page.html:45
 msgid "Input"
 msgstr "Entrada"
 
-#: templates/dojo.html:42
+#: templates/dojo.html:44
 msgid "Input Data"
 msgstr "Dados de Entrada"
+
+#: templates/dojo.html:48 templates/landing_page.html:64
+msgid "Output"
+msgstr "Saída"
+
+#: templates/dojo.html:54
+msgid "Lint"
+msgstr ""
+
+#: templates/dojo.html:59
+msgid "Position"
+msgstr "Posição"
+
+#: templates/dojo.html:60
+msgid "Message"
+msgstr "Mensagem"
+
+#: templates/dojo.html:61
+msgid "Level"
+msgstr "Nível"
 
 #: templates/faq.html:2 templates/footer.html:5
 msgid "FAQ"
 msgstr "Perguntas Frequentes"
 
-#: templates/faq.html:12
+#: templates/faq.html:10
 msgid "Frequent Asked Questions (FAQ)"
 msgstr "Perguntas Frequentes (Frequent Asked Questions - FAQ)"
 
-#: templates/faq.html:16
+#: templates/faq.html:14
 msgid "What is Code Lab?"
 msgstr "O que é o Code Lab?"
 
-#: templates/faq.html:17
+#: templates/faq.html:15
 msgid "Code Lab is an online compiler and lint tool which allows you to run, improve and share your code using several programming languages."
 msgstr "Code Lab é uma ferramenta online de compilação e lint que permite executar, aprimorar e compartilhar seu código-fonte em várias linguagens de programação."
 
-#: templates/faq.html:19
+#: templates/faq.html:17
 msgid "Are there any memory or time constraints for the submitted programs?"
 msgstr "Existem restrições de memória e tempo para os programas submetidos?"
 
-#: templates/faq.html:20
+#: templates/faq.html:18
 msgid "Yes, they are as follows:"
 msgstr "Sim, conforme listado a seguir:"
 
-#: templates/faq.html:22
+#: templates/faq.html:20
 msgid "compilation time"
 msgstr "tempo de compilação"
 
-#: templates/faq.html:22 templates/faq.html:23
+#: templates/faq.html:20 templates/faq.html:21
 msgid "seconds"
 msgstr "segundos"
 
-#: templates/faq.html:23
+#: templates/faq.html:21
 msgid "execution time"
 msgstr "Tempo de execução"
 
-#: templates/faq.html:24
+#: templates/faq.html:22
 msgid "memory usage"
 msgstr "Uso de memória"
 
-#: templates/faq.html:28
+#: templates/faq.html:26
 msgid "Can I access the Internet from my program?"
 msgstr "Posso acessar a internet do meu programa?"
 
-#: templates/faq.html:29
+#: templates/faq.html:27
 msgid "No, access to the network is blocked."
 msgstr "Não, o acesso à internet é bloqueado."
 
-#: templates/faq.html:31
+#: templates/faq.html:29
 msgid "Can I write or read files in my program?"
 msgstr "Meu programa pode ler ou escrever arquivos?"
 
-#: templates/faq.html:32
+#: templates/faq.html:30
 msgid "Yes, but there is an 1 MiB limit of disk space."
 msgstr "Sim, mas há um limite de 1 MiB de espaço em disco."
 
-#: templates/faq.html:34
+#: templates/faq.html:32
 msgid "How long my codes will be stored on Code Lab?"
 msgstr "Quanto tempo meu programa fica armazenado no Code Lab?"
 
-#: templates/faq.html:35
+#: templates/faq.html:33
 msgid "months"
 msgstr "meses"
 
-#: templates/faq.html:37
+#: templates/faq.html:35
 msgid "What is the size limit for the source code, input and output?"
 msgstr "Qual é o limite de tamanho para o código-fonte, entrada e saída?"
 
-#: templates/faq.html:40
+#: templates/faq.html:38
 msgid "What encoding is used in the source code and in the input stream?"
 msgstr "Qual a codificação do código fonte e dos valores de entrada?"
 
-#: templates/faq.html:43
+#: templates/faq.html:41
 msgid "How is end of line (EOL) represented in the source code and in the input stream?"
 msgstr "Como o caracter de fim de linha (EoL) é representado?"
 
-#: templates/faq.html:44
+#: templates/faq.html:42
 msgid ""
 "<em>End of line</em> is represented by <code>\\n"
 "</code> (LF, Linux style). Even if you submit input or source code with Windows EOL (<code>\\r\\n"
@@ -180,27 +200,28 @@ msgstr ""
 "</code> (LF). Mesmo que você submeta seu código com a quebra de linha usada no Windows (<code>\\r\\n"
 "</code>, CRLF) ou no Mac OS (<code>\\r</code>, CR), os caracteres serão convertidos para LF."
 
-#: templates/faq.html:46
+#: templates/faq.html:44
 msgid "My program seems to have a correct syntax. Why does it fail to execute?"
 msgstr "Meu programa parece estar sintaticamente correto. Por que ele não executa?"
 
-#: templates/faq.html:47
+#: templates/faq.html:45
 msgid "Be sure to place \"main\" class/program/module/function/procedure in your code (<a href=\"/samples\">here you will find a sample</a> for every language)."
 msgstr "Verifique que seu programa tenha uma classe/programa/módulo/função/procedimento chamado \"main\"."
 
-#: templates/faq.html:49
+#: templates/faq.html:47
 msgid "I would like to see a new language or library on Code Lab. Is there anything I can do about that?"
 msgstr "Eu gostaria de ver uma nova linguagem ou biblioteca no Code lab. Há algo que eu possa fazer sobre isso?"
 
-#: templates/faq.html:50
+#: templates/faq.html:48
 msgid "Yes, please "
 msgstr "Sim, por favor"
 
-#: templates/faq.html:50
+#: templates/faq.html:48
 msgid "contact us"
 msgstr "entre em contato"
 
-#: templates/footer.html:6 templates/terms_of_use.html:12
+#: templates/footer.html:6 templates/terms_of_use.html:2
+#: templates/terms_of_use.html:10
 msgid "Terms of Use"
 msgstr "Termos de Uso"
 
@@ -212,31 +233,31 @@ msgstr "Direitos Reservados a "
 msgid "Run, improve and share your source code online!"
 msgstr "Execute, melhore e compartilhe online seu código fonte!"
 
-#: templates/landing_page.html:12
+#: templates/landing_page.html:10
 msgid "<span>Run</span>, <span>improve</span> and <span>share</span> your code online!"
 msgstr "<span>Execute</span>, <span>melhore</span> e <span>compartilhe</span> seu código-fonte online!"
 
-#: templates/landing_page.html:27
+#: templates/landing_page.html:25
 msgid "How It Works"
 msgstr "Como Funciona"
 
-#: templates/landing_page.html:30
+#: templates/landing_page.html:28
 msgid "Code Lab uses <a href=\"http://en.wikipedia.org/wiki/Batch_processing\">batch processing</a>. It means that your program executes without human interaction."
 msgstr "O processamento é em lotes (<a href=\"http://en.wikipedia.org/wiki/Batch_processing\">batch processing</a>). Isto significa que a execução do programa acontece sem interação humana."
 
-#: templates/landing_page.html:32
+#: templates/landing_page.html:30
 msgid "Despite of the execution flow or processing type, all input data are sent at once to the standard input (<code>stdin</code>) from where your program can read as needed."
 msgstr "Independentemente do fluxo de execução ou tipo de processamento, todos os dados de entrada são enviados de uma só vez à entrada padrão (<code>stdin</code>) para que seu programa os leia à medida que forem necessários."
 
-#: templates/landing_page.html:34
+#: templates/landing_page.html:32
 msgid "The processing takes place into a controlled environment (<em>sandbox</em>) which has some restrictions of time (5s processing max), memory (256MiB), disk (1MiB), user (not <code>root</code>) and netword access (no access at all)."
 msgstr "O processamento acontece em um ambiente controlado (<em>sandbox</em>), que possui restrições de tempo (máximo de 5s de processamento), memória (256MiB), disco (1MiB), usuário (não é o <code>root</code>) e acesso à rede (sem acesso)."
 
-#: templates/landing_page.html:36
+#: templates/landing_page.html:34
 msgid "The processing output is collected from standard output and error streams (<code>stdout</code> and <code>stderr</code>) and presented back to you."
 msgstr "O resultado apresentado é a combinação do que foi enviado pelo programa à saída padrão (<code>stdout</code>) e à saída de erros (<code>stderr</code>)."
 
-#: templates/landing_page.html:44
+#: templates/landing_page.html:42
 msgid "Example"
 msgstr "Exemplo"
 
@@ -244,49 +265,45 @@ msgstr "Exemplo"
 msgid "Program"
 msgstr "Programa"
 
-#: templates/landing_page.html:54 templates/landing_page.html:57
-#: templates/landing_page.html:59
+#: templates/landing_page.html:55 templates/landing_page.html:58
+#: templates/landing_page.html:60
 msgid "border"
 msgstr "borda"
 
-#: templates/landing_page.html:54 templates/landing_page.html:64
+#: templates/landing_page.html:55 templates/landing_page.html:66
 msgid "Enter the border:"
 msgstr "Digite a borda:"
 
-#: templates/landing_page.html:55 templates/landing_page.html:57
-#: templates/landing_page.html:58 templates/landing_page.html:59
+#: templates/landing_page.html:56 templates/landing_page.html:58
+#: templates/landing_page.html:59 templates/landing_page.html:60
 msgid "title"
 msgstr "titulo"
 
-#: templates/landing_page.html:55 templates/landing_page.html:65
+#: templates/landing_page.html:56 templates/landing_page.html:67
 msgid "Enter the title:"
 msgstr "Digite o título:"
 
-#: templates/landing_page.html:63
-msgid "Output"
-msgstr "Saída"
-
-#: templates/landing_page.html:75
+#: templates/landing_page.html:78
 msgid "Improve"
 msgstr "Melhore"
 
-#: templates/landing_page.html:76
+#: templates/landing_page.html:79
 msgid "Code Lab executes a static analysis over your code in search for optimization improvements, potential defects and inconsistencies with a programming style guide. The analysis report is presented in a tab called \"Lint\"."
 msgstr "O Code Lab faz uma análise estática sobre seu código para otimização, verificação de defeitos em potencial e sugestões de padronização de estilo. O relatório da análise é apresentado em uma aba chamada \"Lint\"."
 
-#: templates/landing_page.html:78
+#: templates/landing_page.html:81
 msgid "Use those suggestions to improve your code!"
 msgstr "Use essas sugestões para melhorar seu código!"
 
-#: templates/landing_page.html:81
+#: templates/landing_page.html:84
 msgid "Share"
 msgstr "Compartilhe"
 
-#: templates/landing_page.html:82
+#: templates/landing_page.html:85
 msgid "Each combination of input data and source code produces a unique address (URL) that should be used to share your code and results to others, forums, social media, IRC etc."
 msgstr "Cada combinação dos dados de entrada com o código fonte corresponde a um endereço único (URL) que deve ser usado para compartilhar seu código e os resultados diretamente com outras pessoas ou em fóruns, redes sociais, IRC etc."
 
-#: templates/landing_page.html:84
+#: templates/landing_page.html:87
 msgid "Soon..."
 msgstr "Em breve..."
 
@@ -294,27 +311,47 @@ msgstr "Em breve..."
 msgid "Your message was sent successfully!"
 msgstr "Sua mensagem foi enviada com sucesso!"
 
-#: templates/terms_of_use.html:14
+#: templates/snippets.html:2
+msgid "Snippets"
+msgstr "Trechos"
+
+#: templates/snippets.html:21
+msgid "Examples"
+msgstr "Exemplos"
+
+#: templates/snippets.html:22
+msgid "Recent"
+msgstr "Recentes"
+
+#: templates/snippets.html:23
+msgid "Most Visited"
+msgstr "Mais Visitados"
+
+#: templates/snippets.html:26
+msgid "All"
+msgstr "Todos"
+
+#: templates/terms_of_use.html:12
 msgid "The service is provided \"AS IS\", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall Code Lab or its licensors be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the service or the use or other dealings in the service."
 msgstr "O serviço é prestado \"COMO ESTÁ\", sem qualquer tipo de garantia, expressa ou implícita, incluindo, mas não limitado às garantias de comercialização, adequação a um propósito e não-infração. Em nenhum caso o Code Lab ou algum de seus licenciadores será responsável por qualquer reivindicação, dano ou outra responsabilidade, seja em uma ação de contrato, ato ilícito ou de outra forma, resultantes do uso do serviço."
 
-#: templates/terms_of_use.html:15
+#: templates/terms_of_use.html:13
 msgid "Code Lab and its licensors disclaim any warranties regarding the security, reliability, timeliness, and performance of the services. Code Lab and its licensors disclaim, any warranties for any information, content or advice obtained through the services."
 msgstr "O Code Lab e seus licenciadores renunciam quaisquer garantias relativas à segurança, confiabilidade, pontualidade e desempenho dos serviços. O Code Lab e seus licenciadores renunciam quaisquer garantias para qualquer informação, conteúdo ou conselhos obtidos através dos serviços."
 
-#: templates/terms_of_use.html:16
+#: templates/terms_of_use.html:14
 msgid "Code Lab takes no responsibility for the content published by users, and for the content of comments they post on the Code Lab site."
 msgstr "O Code Lab não se responsabiliza pelo conteúdo publicado pelos usuários e pelo conteúdo dos comentários publicados no site do Code Lab."
 
-#: templates/terms_of_use.html:17
+#: templates/terms_of_use.html:15
 msgid "By submitting, posting or displaying content on the Code Lab Site, you grant Code Lab and other users of the Services a worldwide, non-exclusive, royalty-free license (with the right to sublicense) to use, copy, reproduce, process, adapt, modify, publish, transmit, display and distribute such Content in any and all media or distribution methods (now known or later developed). Specifically, the"
 msgstr "Ao enviar, postar ou exibir conteúdo no site do Code Lab Código, você concede ao Code Lab e a outros usuários dos serviços uma licença mundial, não-exclusiva, livre de royalties (com o direito de sublicenciar) para usar, copiar, reproduzir, processar, adaptar, modificar, publicar, transmitir, exibir e distribuir esse conteúdo em toda e qualquer mídia ou métodos de distribuição (agora conhecida ou desenvolvida posteriormente). Especificamente, seguindo a"
 
-#: templates/terms_of_use.html:19
+#: templates/terms_of_use.html:17
 msgid "You are responsible for your use of the Code Lab service, for any content you provide, and for any consequences thereof, including the use of your content by other users and third party partners. You understand that your content may be republished and if you do not have the right to submit content for such use, it may subject you to liability. Code Lab will not be responsible or liable for any use of your Content in accordance with these Terms of Use."
 msgstr "Você é responsável por seu uso do serviço Code Lab, por qualquer conteúdo por você fornecido, e por todas as consequências, incluindo o uso de seu conteúdo por outros usuários e parceiros de terceiros. Você entende que o seu conteúdo pode ser republicado e se você não tem o direito de enviar conteúdo para tal uso, pode sujeitá-lo à responsabilidade. O Code Lab não será responsável por qualquer uso de seu conteúdo, de acordo com estes Termos de Uso."
 
-#: templates/terms_of_use.html:21
+#: templates/terms_of_use.html:19
 msgid "In the course of using the Code Lab Site, you may provide Code Lab with feedback, including but not limited to suggestions, observations, errors, problems, and defects regarding the Code Lab Site. You hereby grant Code Lab a worldwide, irrevocable, perpetual, royalty-free, transferable and sub-licensable, non-exclusive right to use, copy, modify, distribute, display, perform, create derivative works from and otherwise exploit all such feedback."
 msgstr "No decurso da utilização do site do Code Lab, você pode fornecer comentários relativos (mas não limitadas) a sugestões, observações, erros, problemas e defeitos em relação ao site do Code Lab. Você concede ao Code Lab uma licença mundial, perpétua, irrevogável, livre de royalties transferível e sub-licenciável, não exclusiva para usar, copiar, modificar, distribuir, exibir, executar, criar trabalhos derivados e de outro modo explorar todos esses comentários."
 

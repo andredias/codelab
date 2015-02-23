@@ -1,4 +1,94 @@
-from .core import cache_project, project_id
+from hashlib import md5
+from datetime import datetime
+from functools import wraps
+from pygments import highlight
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters import HtmlFormatter
+from .core import run
+
+
+def pygmentize(code, language):
+    lexer = get_lexer_by_name(language, stripall=True)
+    formatter = HtmlFormatter(linenos='table')
+    return highlight(code, lexer, formatter)
+
+
+LAST_VISITED_KEY = 'last_visited'
+MOST_VISITED_KEY = 'most_visited'
+MAX_HISTORY = 30
+
+
+def _visited(cache, key):
+    return [get_project(cache, project_id.decode())
+            for project_id in cache._client.zrevrange(key, 0, MAX_HISTORY)
+            if cache._client.exists(project_id)]
+
+
+def last_visited(cache, languages):
+    return _visited(cache, LAST_VISITED_KEY)
+
+
+def most_visited(cache, languages):
+    return _visited(cache, MOST_VISITED_KEY)
+
+
+def project_id(source, language, input='', **kwargs):
+    s = '{input}{source}{language}'.format(input=input, source=source, language=language)
+    return md5(s.encode('utf-8')).hexdigest()
+
+
+def get_project(cache, id):
+    project = cache.get(id)
+    if project:
+        redis = cache._client
+        project.update(visits=int(redis.zscore(MOST_VISITED_KEY, id)),
+                       last_visited=redis.zscore(LAST_VISITED_KEY, id))
+    return project
+
+
+def cache_project(cache, project, timeout=None):
+    if 'id' not in project:
+        project['id'] = project_id(**project)
+    output = run(project)
+    if output:
+        project.update(output, created=datetime.utcnow().timestamp())
+        cache.set(project['id'], project, timeout)
+        if not timeout:
+            cache._client.persist(project['id'].encode())
+    return
+
+
+class count_visit(object):
+
+    def __init__(self, cache):
+        '''
+        werkzeug.contrib.cache.RedisCache expected
+        '''
+        self.cache = cache
+        self.redis = cache._client
+
+    def last_visited(self):
+        key = LAST_VISITED_KEY
+        self.redis.zadd(key, self.project['id'], datetime.utcnow().timestamp())
+        return
+
+    def most_visited(self):
+        key = MOST_VISITED_KEY
+        self.redis.zincrby(key, self.project['id'].encode('utf-8'))
+        return
+
+    def __call__(self, function):
+        @wraps(function)
+        def wrapper(*args, **kwargs):
+            # cache counting
+            key = kwargs['id']
+            if self.redis.exists(key):
+                self.project = self.cache.get(key)
+                self.last_visited()
+                self.most_visited()
+            return function(*args, **kwargs)
+        return wrapper
+
 
 snippets = [
 
@@ -227,14 +317,3 @@ def cache_snippets(cache):
     for project in snippets:
         cache_project(cache, project)
     return
-
-
-from pygments import highlight
-from pygments.lexers import get_lexer_by_name
-from pygments.formatters import HtmlFormatter
-
-
-def pygmentize(code, language):
-    lexer = get_lexer_by_name(language, stripall=True)
-    formatter = HtmlFormatter(linenos='table')
-    return highlight(code, lexer, formatter)
