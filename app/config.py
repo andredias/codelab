@@ -33,3 +33,12 @@ LANGUAGES = {  # name: mode
 }
 
 ACE_THEME = 'ace/theme/cobalt'
+
+
+def get_redis_host():
+    import sh
+    redis_image = 'redis-server'
+    host = sh.awk(sh.grep(sh.docker('inspect', redis_image), 'IPAddress'), '-F', '"', '{print $4}')
+    return host
+
+CACHE_REDIS_HOST = get_redis_host()
