@@ -39,6 +39,6 @@ def get_redis_host():
     import sh
     redis_image = 'redis-server'
     host = sh.awk(sh.grep(sh.docker('inspect', redis_image), 'IPAddress'), '-F', '"', '{print $4}')
-    return host
+    return str(host).strip()
 
 CACHE_REDIS_HOST = get_redis_host()
