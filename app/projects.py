@@ -94,7 +94,7 @@ snippets = [
 
     {'title': 'Hello, world!',
      'language': 'python',
-     'source': 'print("Hello world")\n', },
+     'source': 'print("Hello, world!")\n', },
 
     # http://pythonfiddle.com/
 
@@ -218,7 +218,7 @@ print(factorial(5), combination(33, 6), permutation(33, 6))
      'source': r'''#include <stdio.h>
 
 int main() {
-    printf("Hello, world!\n");
+    printf("Hello, world!");
     return 0;
 }
 ''', },
