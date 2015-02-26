@@ -566,6 +566,41 @@ footer.page div.copyright a {
 #landing_page > footer.page {
   margin: 0;
 }
+.project_info {
+  background: #011e3a;
+  font-size: 0.8em;
+}
+.project_info div {
+  padding: 1em 1.5em;
+  color: #a7babe;
+}
+.project_info div h1 {
+  margin: 0;
+}
+.project_info div h1 i {
+  font-size: 0.7em;
+  color: #5b767b;
+  padding-left: 0.5em;
+}
+.project_info div p {
+  font-size: 1em;
+  margin: 0;
+}
+.project_info div a {
+  cursor: pointer;
+}
+.project_info div input:not([type="radio"]):not([type="checkbox"]),
+.project_info div textarea,
+.project_info div button {
+  box-shadow: none;
+  margin-top: 0.5em;
+  color: #666;
+}
+.project_info div input:not([type="radio"]):not([type="checkbox"]).destaque,
+.project_info div textarea.destaque,
+.project_info div button.destaque {
+  font-size: 1.2em;
+}
 article.editor {
   position: relative;
   overflow: hidden;
@@ -1134,6 +1169,9 @@ textarea {
   text-shadow: none;
   color: #eee;
   font-size: 2em;
+}
+.hidden {
+  display: none;
 }
 #faq_page > section,
 #help_page > section {

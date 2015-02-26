@@ -79,11 +79,16 @@ $(function() {
 
     $('button[name=run]').on('click', function() {
         $('#spinner').addClass('active');
+        var title = $('<input />').attr('type', 'text').attr('name', 'title')
+                                .val($('#project_title').text());
+        var description = $('<textarea />').attr('name', 'description')
+                                           .val($('#project_description').text());
         var input = $('<textarea />').attr('name', 'input').val($('#input_data').val());
         var source = $('<textarea />').attr('name', 'source').val(ddl.editor.getValue());
-        var language = $('<input>').attr('type', 'text').attr('name', 'language')
-                                   .val(ddl.getValue());
-        $('#run_code').append(input).append(source).append(language).submit();
+        var language = $('<input />').attr('type', 'text').attr('name', 'language')
+                                     .val(ddl.getValue());
+        $('#run_code').append(title).append(description)
+                      .append(input).append(source).append(language).submit();
     });
     increaseFontSize(editor, 0);
     editor.focus();

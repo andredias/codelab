@@ -5,11 +5,43 @@
 rupture.enable-em-breakpoints = true
 cor_menu = swatches.clouds
 cor_fonte_status = darken(swatches.clouds, 25%)
+cor_projeto = cor_fonte_status
 cor_painel = swatches.concrete
 pumpkin = swatches.pumpkin
 orange = swatches.orange
 panel_width = 2em
 number_of_lines = 25rem
+
+.project_info
+    background #011E3A
+    font-size 0.8em
+
+    div
+        padding 1em 1.5em
+        color cor_fonte_status
+        h1
+            margin 0
+            i
+                font-size 0.7em
+                color darken(cor_projeto, 40%)
+                padding-left 0.5em
+        p
+            font-size 1em
+            margin 0
+        a
+            cursor pointer
+
+        input:not([type="radio"]):not([type="checkbox"])
+        textarea
+        button
+            box-shadow none
+            margin-top 0.5em
+            color #666
+
+            &.destaque
+                font-size 1.2em
+
+
 
 article.editor
     position relative

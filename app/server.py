@@ -91,6 +91,8 @@ def project_page(id):
         output_data += '%s%s' % (project['execution'].get('stdout', ''),
                                  project['execution'].get('stderr', ''))
     return render_template('dojo.html',
+                           title=(project.get('title') or project['id']),
+                           description=project.get('description', ''),
                            input_data=project.get('input', ''),
                            source=project['source'],
                            language=project['language'],
@@ -101,7 +103,9 @@ def project_page(id):
 @app.route('/_do_the_thing', methods=['POST'])
 def do_the_thing():
     project = {'input': request.form['input'], 'source': request.form['source'],
-               'language': request.form['language']}
+               'language': request.form['language'],
+               'title': request.form['title'],
+               'description': request.form['description'], }
     id = project_id(**project)
     destination = url_for('project_page', id=id)
     if not cache.get(id):

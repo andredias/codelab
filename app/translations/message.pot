@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-22 21:48-0300\n"
+"POT-Creation-Date: 2015-02-26 14:02-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Required Field"
 msgstr ""
 
-#: templates/contact_form.html:19
+#: templates/contact_form.html:19 templates/dojo.html:27
 msgid "Cancel"
 msgstr ""
 
@@ -81,39 +81,51 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: templates/dojo.html:35
+#: templates/dojo.html:24
+msgid "Project Title"
+msgstr ""
+
+#: templates/dojo.html:25
+msgid "Project description"
+msgstr ""
+
+#: templates/dojo.html:26
+msgid "Save Project Info"
+msgstr ""
+
+#: templates/dojo.html:48
 msgid "Increase Font Size"
 msgstr ""
 
-#: templates/dojo.html:36
+#: templates/dojo.html:49
 msgid "Decrease Font Size"
 msgstr ""
 
-#: templates/dojo.html:42 templates/landing_page.html:45
+#: templates/dojo.html:55 templates/landing_page.html:45
 msgid "Input"
 msgstr ""
 
-#: templates/dojo.html:44
+#: templates/dojo.html:57
 msgid "Input Data"
 msgstr ""
 
-#: templates/dojo.html:48 templates/landing_page.html:64
+#: templates/dojo.html:61 templates/landing_page.html:64
 msgid "Output"
 msgstr ""
 
-#: templates/dojo.html:54
+#: templates/dojo.html:67
 msgid "Lint"
 msgstr ""
 
-#: templates/dojo.html:59
+#: templates/dojo.html:72
 msgid "Position"
 msgstr ""
 
-#: templates/dojo.html:60
+#: templates/dojo.html:73
 msgid "Message"
 msgstr ""
 
-#: templates/dojo.html:61
+#: templates/dojo.html:74
 msgid "Level"
 msgstr ""
 

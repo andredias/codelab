@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-22 21:48-0300\n"
-"PO-Revision-Date: 2015-02-22 21:49-0300\n"
+"POT-Creation-Date: 2015-02-26 14:02-0300\n"
+"PO-Revision-Date: 2015-02-26 14:02-0300\n"
 "Last-Translator: \n"
 "Language-Team: pt_BR <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -70,7 +70,7 @@ msgstr "Alguns erros aconteceram durante a validação. Por favor, corrija os ca
 msgid "Required Field"
 msgstr "Campo obrigatório"
 
-#: templates/contact_form.html:19
+#: templates/contact_form.html:19 templates/dojo.html:27
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -78,39 +78,51 @@ msgstr "Cancelar"
 msgid "Submit"
 msgstr "Enviar"
 
-#: templates/dojo.html:35
+#: templates/dojo.html:24
+msgid "Project Title"
+msgstr "Título do Projeto"
+
+#: templates/dojo.html:25
+msgid "Project description"
+msgstr "Descrição do projeto"
+
+#: templates/dojo.html:26
+msgid "Save Project Info"
+msgstr "Salvar Informação do Projeto"
+
+#: templates/dojo.html:48
 msgid "Increase Font Size"
 msgstr "Aumentar o tamanho da fonte"
 
-#: templates/dojo.html:36
+#: templates/dojo.html:49
 msgid "Decrease Font Size"
 msgstr "Diminuir o tamanho da fonte"
 
-#: templates/dojo.html:42 templates/landing_page.html:45
+#: templates/dojo.html:55 templates/landing_page.html:45
 msgid "Input"
 msgstr "Entrada"
 
-#: templates/dojo.html:44
+#: templates/dojo.html:57
 msgid "Input Data"
 msgstr "Dados de Entrada"
 
-#: templates/dojo.html:48 templates/landing_page.html:64
+#: templates/dojo.html:61 templates/landing_page.html:64
 msgid "Output"
 msgstr "Saída"
 
-#: templates/dojo.html:54
+#: templates/dojo.html:67
 msgid "Lint"
 msgstr ""
 
-#: templates/dojo.html:59
+#: templates/dojo.html:72
 msgid "Position"
 msgstr "Posição"
 
-#: templates/dojo.html:60
+#: templates/dojo.html:73
 msgid "Message"
 msgstr "Mensagem"
 
-#: templates/dojo.html:61
+#: templates/dojo.html:74
 msgid "Level"
 msgstr "Nível"
 
@@ -432,3 +444,9 @@ msgstr "No decurso da utilização do site do Code Lab, você pode fornecer come
 
 #~ msgid "Exemplo"
 #~ msgstr ""
+
+#~ msgid "Add project description"
+#~ msgstr ""
+
+#~ msgid "Save Title"
+#~ msgstr "titulo"

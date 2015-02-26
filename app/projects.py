@@ -32,8 +32,10 @@ def most_visited(cache, languages):
     return _visited(cache, MOST_VISITED_KEY)
 
 
-def project_id(source, language, input='', **kwargs):
-    s = '{input}{source}{language}'.format(input=input, source=source, language=language)
+def project_id(source, language, input='', title='', description='', **kwargs):
+    s = '{title}{description}{input}{source}{language}'.format(
+        title=title, description=description, input=input, source=source, language=language,
+    )
     return md5(s.encode('utf-8')).hexdigest()
 
 
