@@ -159,10 +159,17 @@ def examples():
     languages = ('python', 'javascript', 'go', 'ruby', 'c', 'c++')
     samples = [snippet for snippet in snippets
                if snippet['language'] in languages]
-    l_visited = last_visited(cache, languages)
-    m_visited = most_visited(cache, languages)
     return render_template('snippets.html',
                            languages=languages,
-                           samples=samples,
-                           last_visited=l_visited,
-                           most_visited=m_visited)
+                           projects=samples)
+
+
+@app.route('/visited')
+def visited():
+    option = request.args['option']
+    languages = app.config['LANGUAGES'].keys()
+    if option == 'last_visited':
+        projects = last_visited(cache, languages)
+    else:
+        projects = most_visited(cache, languages)
+    return render_template('fill_project.html', projects=projects)

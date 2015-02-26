@@ -1,0 +1,9 @@
+    {% for project in projects %}
+        <section class="project" data-language="{{ project['language'] }}">
+            <h1><a href="{{ url_for('project_page', id=project['id']) }}">{{ project.get('title') or project['id'] }}</a></h1>
+            <div>
+                <span class="tag">{{ project['language'] }}</span>
+            </div>
+            {{ pygmentize(project['source'], project['language']) | safe }}
+        </section>
+    {% endfor %}

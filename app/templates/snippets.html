@@ -5,22 +5,11 @@
 {% endblock %}
 {% block body %}
 
-{% macro fill_project(projects) -%}
-    {% for project in projects %}
-        <section class="project" data-language="{{ project['language'] }}">
-            <h1><a href="{{ url_for('project_page', id=project['id']) }}">{{ project.get('title') or project['id'] }}</a></h1>
-            <div>
-                <span class="tag">{{ project['language'] }}</span>
-            </div>
-            {{ pygmentize(project['source'], project['language']) | safe }}
-        </section>
-    {% endfor %}
-{%- endmacro %}
 <body id="snippets_page">
     <nav class="choices">
         <a href="javascript:void(0)" onclick="showSnippets(this, 'samples');" class="active">{{ _('Examples') }}</a>
-        <a href="javascript:void(0)" onclick="showSnippets(this, 'recent');">{{ _('Recent') }}</a>
-        <a href="javascript:void(0)" onclick="showSnippets(this, 'most-visited');">{{ _('Most Visited') }}</a>
+        <a href="javascript:void(0)" onclick="getVisitedProjects(this, 'last_visited');">{{ _('Recent') }}</a>
+        <a href="javascript:void(0)" onclick="getVisitedProjects(this, 'most_visited');">{{ _('Most Visited') }}</a>
     </nav>
     <nav class="languages">
         <a href="javascript:void(0)" onclick="enableAll(this);" class="active">{{ _('All') }}</a>
@@ -29,13 +18,11 @@
     {% endfor %}
     </nav>
     <article id="samples">
-        {{ fill_project(samples) }}
+        {% include 'fill_project.html' %}
     </article>
-    <article id="recent">
-        {{ fill_project(last_visited) }}
+    <article id="last_visited">
     </article>
-    <article id="most-visited">
-        {{ fill_project(most_visited) }}
+    <article id="most_visited">
     </article>
 {% include 'footer.html' %}
 </body>

@@ -79,3 +79,11 @@ class TestCodeLab(object):
         assert resp.status_code == 200
         assert data.count('Hello, world!') >= 6  # one for each language at least
         assert 'Python' in data
+
+    def test_last_visited(self):
+        resp = self.app.get('/visited?option=last_visited')
+        assert resp.status_code == 200
+
+    def test_most_visited(self):
+        resp = self.app.get('/visited?option=most_visited')
+        assert resp.status_code == 200

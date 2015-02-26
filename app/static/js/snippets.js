@@ -15,10 +15,19 @@ function enableAll(ref) {
     $('section.project').css('display', '');
 }
 
+
 function filterLanguage(ref) {
     setActive(ref);
     var language = $(ref).text().toLowerCase();
     $('section.project[data-language="' + language + '"]').css('display', '');
     $('section.project[data-language!="' + language + '"]').css('display', 'none');
     return false;
+}
+
+
+function getVisitedProjects(ref, option) {
+    $.get('/visited', {'option': option}, function(data) {
+        $('#' + option).html(data);
+        showSnippets(ref, option);
+    });
 }
