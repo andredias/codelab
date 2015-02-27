@@ -1,7 +1,10 @@
 @require 'elf'
 @require 'rupture'
 
-margem = 1em 2em
+margem = 1em 2em 0
+texto_sem_destaque = #adadad
+texto_ativo = #333
+texto_hover = darken(#cf7f00, 20%)
 
 #snippets_page
     background #f0f6f0
@@ -14,7 +17,7 @@ nav.languages
     font-weight normal
     margin margem
     a
-        color #adadad
+        color texto_sem_destaque
         border-left 1px solid #ccc
         padding 0.75em
         display inline-block
@@ -22,23 +25,44 @@ nav.languages
         &:first-child
             border 0
         &.active
-            color #333
+            color texto_ativo
             &:hover
-                color #333
+                color texto_ativo
         &:hover
-            color #834dab
+            color texto_hover
 
 section.project
     border-bottom 1px solid #d5d5d5;
-    border-top 2px solid #fff;
-    padding 0.75rem 0 0.75rem
+    border-top 1px solid #fff;
+    padding 0.5rem 0 0.5rem
+    display flex
+    align-items baseline
     h1
         margin 0
+    p
+        margin 0
+        color #5a5a5a
+        font-size 0.9em
+        font-style italic
     a
         font-size 1.25rem
-        color #333
+        color texto_ativo
         &:hover
-            color darken(#cf7f00, 20%)
+            color texto_hover
+    i
+        cursor pointer
+        color texto_sem_destaque
+        &:hover
+            color texto_hover
+    .show_detail
+        display none
+    &.detail-hidden
+        .detail
+            display none
+        .show_detail
+            display inherit
+    .expand_contract
+        margin 0 1em
 
 span.tag
     color #cf7f00

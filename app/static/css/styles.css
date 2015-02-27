@@ -182,6 +182,7 @@ html {
 }
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 section {
   overflow: hidden;
@@ -566,6 +567,9 @@ footer.page div.copyright a {
 #landing_page > footer.page {
   margin: 0;
 }
+.hidden {
+  display: none !important;
+}
 .project_info {
   background: #011e3a;
   font-size: 0.8em;
@@ -880,6 +884,12 @@ dd table td:first-child {
 .icon-pencil:before {
   content: "\e905";
 }
+.icon-zoom-in:before {
+  content: "\e987";
+}
+.icon-zoom-out:before {
+  content: "\e988";
+}
 .icon-wrench:before {
   content: "\e991";
 }
@@ -888,6 +898,15 @@ dd table td:first-child {
 }
 .icon-menu:before {
   content: "\e9bd";
+}
+.icon-eye:before {
+  content: "\e9ce";
+}
+.icon-eye-blocked:before {
+  content: "\e9d1";
+}
+.icon-info:before {
+  content: "\ea0c";
 }
 .icon-play3:before {
   content: "\ea1c";
@@ -909,6 +928,9 @@ dd table td:first-child {
 }
 .icon-feed2:before {
   content: "\ea94";
+}
+.icon-lab:before {
+  content: "\e600";
 }
 button,
 .button {
@@ -1169,9 +1191,6 @@ textarea {
   text-shadow: none;
   color: #eee;
   font-size: 2em;
-}
-.hidden {
-  display: none;
 }
 #faq_page > section,
 #help_page > section {
@@ -1523,13 +1542,13 @@ code {
   background: #f0f6f0;
 }
 #snippets_page article {
-  margin: 1em 2em;
+  margin: 1em 2em 0;
 }
 nav.choices,
 nav.languages {
   overflow: hidden;
   font-weight: normal;
-  margin: 1em 2em;
+  margin: 1em 2em 0;
 }
 nav.choices a,
 nav.languages a {
@@ -1553,15 +1572,29 @@ nav.languages a.active:hover {
 }
 nav.choices a:hover,
 nav.languages a:hover {
-  color: #834dab;
+  color: #a66600;
 }
 section.project {
   border-bottom: 1px solid #d5d5d5;
-  border-top: 2px solid #fff;
-  padding: 0.75rem 0 0.75rem;
+  border-top: 1px solid #fff;
+  padding: 0.5rem 0 0.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
 }
 section.project h1 {
   margin: 0;
+}
+section.project p {
+  margin: 0;
+  color: #5a5a5a;
+  font-size: 0.9em;
+  font-style: italic;
 }
 section.project a {
   font-size: 1.25rem;
@@ -1569,6 +1602,25 @@ section.project a {
 }
 section.project a:hover {
   color: #a66600;
+}
+section.project i {
+  cursor: pointer;
+  color: #adadad;
+}
+section.project i:hover {
+  color: #a66600;
+}
+section.project .show_detail {
+  display: none;
+}
+section.project.detail-hidden .detail {
+  display: none;
+}
+section.project.detail-hidden .show_detail {
+  display: inherit;
+}
+section.project .expand_contract {
+  margin: 0 1em;
 }
 span.tag {
   color: #cf7f00;
