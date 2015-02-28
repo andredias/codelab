@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ config['APP_NAME'] }} | {{ _('Snippets') }}{% endblock %}
 {% block head %}
+    <script src="{{ url_for('static', filename='js/jquery.jqpagination.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/snippets.js') }}"></script>
 {% endblock %}
 {% block body %}
@@ -24,6 +25,13 @@
     </article>
     <article id="most_visited" class="hidden">
     </article>
+    <div class="pagination">
+        <a href="#" class="first" data-action="first">&laquo;</a>
+        <a href="#" class="previous" data-action="previous">&lsaquo;</a>
+        <input type="text" readonly="readonly" data-max-page="40" />
+        <a href="#" class="next" data-action="next">&rsaquo;</a>
+        <a href="#" class="last" data-action="last">&raquo;</a>
+    </div>
 {% include 'footer.html' %}
 </body>
 {% endblock %}

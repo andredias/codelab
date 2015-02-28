@@ -1635,6 +1635,9 @@ section.project .expand_contract {
 section.project .visited_time {
   text-align: right;
 }
+section.project.paginate-hidden {
+  display: none;
+}
 span.tag {
   color: #cf7f00;
   text-transform: capitalize;
