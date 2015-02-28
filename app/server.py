@@ -6,6 +6,7 @@ from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, url_for, abort, redirect
 from flask.ext.script import Manager
 from flask.ext.mail import Mail, Message
+from flask.ext.moment import Moment
 from flask.ext.babel import Babel
 from flask.ext.webcache import easy_setup
 from flask.ext.webcache.modifiers import cache_for
@@ -23,6 +24,7 @@ app.jinja_env.add_extension('jinja2.ext.do')
 app.jinja_env.globals.update(pygmentize=pygmentize)
 manager = Manager(app)
 mail = Mail(app)
+moment = Moment(app)
 
 cache = RedisCache(app.config['CACHE_REDIS_HOST'])
 easy_setup(app, cache)
@@ -157,9 +159,9 @@ def help(topic):
 @app.route('/samples')
 @cache_for(days=60)
 def examples():
-    from .projects import snippets
-    languages = ('python', 'javascript', 'go', 'ruby', 'c', 'c++')
-    samples = [snippet for snippet in snippets
+    from .projects import snippets, get_project, project_id
+    languages = app.config['LANGUAGES'].keys()
+    samples = [get_project(cache, project_id(**snippet)) for snippet in snippets
                if snippet['language'] in languages]
     return render_template('snippets.html',
                            languages=languages,

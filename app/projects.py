@@ -43,8 +43,11 @@ def get_project(cache, id):
     project = cache.get(id)
     if project:
         redis = cache._client
-        project.update(visits=int(redis.zscore(MOST_VISITED_KEY, id)),
-                       last_visited=redis.zscore(LAST_VISITED_KEY, id))
+        visits = redis.zscore(MOST_VISITED_KEY, id)
+        visits = int(visits) if visits else 0
+        last_visited = redis.zscore(LAST_VISITED_KEY, id)
+        last_visited = datetime.fromtimestamp(last_visited) if last_visited else None
+        project.update(visits=visits, last_visited=last_visited)
     return project
 
 
@@ -53,7 +56,7 @@ def cache_project(cache, project, timeout=None):
         project['id'] = project_id(**project)
     output = run(project)
     if output:
-        project.update(output, created=datetime.utcnow().timestamp())
+        project.update(output, created=datetime.utcnow())
         cache.set(project['id'], project, timeout)
         if not timeout:
             cache._client.persist(project['id'].encode())

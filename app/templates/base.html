@@ -31,6 +31,8 @@
     <script type=text/javascript>
         var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
+    {{ moment.include_moment() }}
+    {{ moment.lang(get_locale()) }}
     {% block head %}{% endblock %}
     {%- if not (config['TESTING'] or config['DEBUG']) %}
     <script>

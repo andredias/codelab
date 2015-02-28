@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-26 14:02-0300\n"
-"PO-Revision-Date: 2015-02-26 14:02-0300\n"
+"POT-Creation-Date: 2015-02-28 12:49-0300\n"
+"PO-Revision-Date: 2015-02-28 12:51-0300\n"
 "Last-Translator: \n"
 "Language-Team: pt_BR <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -232,6 +232,18 @@ msgstr "Sim, por favor"
 msgid "contact us"
 msgstr "entre em contato"
 
+#: templates/fill_project.html:26
+#, python-format
+msgid "%(num)s visit"
+msgid_plural "%(num)s visits"
+msgstr[0] "%(num)s visita"
+msgstr[1] "%(num)s visitas"
+
+#: templates/fill_project.html:28
+#, python-format
+msgid "visited %(momento)s"
+msgstr "visitado há %(momento)s"
+
 #: templates/footer.html:6 templates/terms_of_use.html:2
 #: templates/terms_of_use.html:10
 msgid "Terms of Use"
@@ -315,10 +327,6 @@ msgstr "Compartilhe"
 msgid "Each combination of input data and source code produces a unique address (URL) that should be used to share your code and results to others, forums, social media, IRC etc."
 msgstr "Cada combinação dos dados de entrada com o código fonte corresponde a um endereço único (URL) que deve ser usado para compartilhar seu código e os resultados diretamente com outras pessoas ou em fóruns, redes sociais, IRC etc."
 
-#: templates/landing_page.html:87
-msgid "Soon..."
-msgstr "Em breve..."
-
 #: templates/message_sent.html:5
 msgid "Your message was sent successfully!"
 msgstr "Sua mensagem foi enviada com sucesso!"
@@ -327,19 +335,19 @@ msgstr "Sua mensagem foi enviada com sucesso!"
 msgid "Snippets"
 msgstr "Trechos"
 
-#: templates/snippets.html:21
+#: templates/snippets.html:10
 msgid "Examples"
 msgstr "Exemplos"
 
-#: templates/snippets.html:22
+#: templates/snippets.html:11
 msgid "Recent"
 msgstr "Recentes"
 
-#: templates/snippets.html:23
+#: templates/snippets.html:12
 msgid "Most Visited"
 msgstr "Mais Visitados"
 
-#: templates/snippets.html:26
+#: templates/snippets.html:15
 msgid "All"
 msgstr "Todos"
 
@@ -450,3 +458,6 @@ msgstr "No decurso da utilização do site do Code Lab, você pode fornecer come
 
 #~ msgid "Save Title"
 #~ msgstr "titulo"
+
+#~ msgid "Soon..."
+#~ msgstr "Em breve..."

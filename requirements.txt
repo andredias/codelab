@@ -3,6 +3,7 @@ flask-script
 Flask-WTF
 Flask-Mail
 Flask-Babel
+flask-moment
 sh
 redis
 hiredis

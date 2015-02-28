@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-26 14:02-0300\n"
+"POT-Creation-Date: 2015-02-28 12:49-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -242,6 +242,18 @@ msgstr ""
 msgid "contact us"
 msgstr ""
 
+#: templates/fill_project.html:26
+#, python-format
+msgid "%(num)s visit"
+msgid_plural "%(num)s visits"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/fill_project.html:28
+#, python-format
+msgid "visited %(momento)s"
+msgstr ""
+
 #: templates/footer.html:6 templates/terms_of_use.html:2
 #: templates/terms_of_use.html:10
 msgid "Terms of Use"
@@ -347,10 +359,6 @@ msgid ""
 "forums, social media, IRC etc."
 msgstr ""
 
-#: templates/landing_page.html:87
-msgid "Soon..."
-msgstr ""
-
 #: templates/message_sent.html:5
 msgid "Your message was sent successfully!"
 msgstr ""
@@ -359,19 +367,19 @@ msgstr ""
 msgid "Snippets"
 msgstr ""
 
-#: templates/snippets.html:21
+#: templates/snippets.html:10
 msgid "Examples"
 msgstr ""
 
-#: templates/snippets.html:22
+#: templates/snippets.html:11
 msgid "Recent"
 msgstr ""
 
-#: templates/snippets.html:23
+#: templates/snippets.html:12
 msgid "Most Visited"
 msgstr ""
 
-#: templates/snippets.html:26
+#: templates/snippets.html:15
 msgid "All"
 msgstr ""
 

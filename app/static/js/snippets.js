@@ -30,6 +30,7 @@ function getVisitedProjects(ref, option) {
         $('#' + option).html(data);
         showSnippets(ref, option);
         bindDetailButtons();
+        flask_moment_render_all();
     });
 }
 

@@ -1586,6 +1586,10 @@ section.project {
   -webkit-align-items: baseline;
       -ms-flex-align: baseline;
           align-items: baseline;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 section.project h1 {
   margin: 0;
@@ -1619,8 +1623,21 @@ section.project.detail-hidden .detail {
 section.project.detail-hidden .show_detail {
   display: inherit;
 }
+section.project .project_container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
 section.project .expand_contract {
   margin: 0 1em;
+}
+section.project .visited_time {
+  text-align: right;
 }
 span.tag {
   color: #cf7f00;
