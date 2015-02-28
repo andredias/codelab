@@ -68,6 +68,8 @@ def get_locale():
     # header the browser transmits.
     return request.accept_languages.best_match(['pt_BR', 'en'])
 
+app.jinja_env.globals.update(get_locale=get_locale)
+
 
 @app.route('/project/new/<language>')
 def dojo(language):
