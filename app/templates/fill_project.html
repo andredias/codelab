@@ -1,31 +1,29 @@
     {% for project in projects %}
         <section class="project detail-hidden" data-language="{{ project['language'] }}">
-            <div class="project_container">
-                <div class="expand_contract show_detail">
-                    <i class="icon-zoom-in"></i>
+            <div class="expand_contract show_detail">
+                <i class="icon-zoom-in"></i>
+            </div>
+            <div class="expand_contract detail">
+                <i class="icon-zoom-out"></i>
+            </div>
+            <div class="project">
+                <h1><a href="{{ url_for('project_page', id=project['id']) }}">{{ project.get('title') or project['id'] }}</a></h1>
+                {% if project.get('description') %}
+                <div class="detail">
+                    <p>{{ project['description'] }}</p>
                 </div>
-                <div class="expand_contract detail">
-                    <i class="icon-zoom-out"></i>
+                {% endif %}
+                <div>
+                    <span class="tag">{{ project['language'] }}</span>
                 </div>
-                <div class="project">
-                    <h1><a href="{{ url_for('project_page', id=project['id']) }}">{{ project.get('title') or project['id'] }}</a></h1>
-                    {% if project.get('description') %}
-                    <div class="detail">
-                        <p>{{ project['description'] }}</p>
-                    </div>
-                    {% endif %}
-                    <div>
-                        <span class="tag">{{ project['language'] }}</span>
-                    </div>
-                    <div class="detail">
-                        {{ pygmentize(project['source'], project['language']) | safe }}
-                    </div>
+                <div class="detail">
+                    {{ pygmentize(project['source'], project['language']) | safe }}
                 </div>
             </div>
             <div class="visited_time">
                 <p>{{ ngettext('%(num)s visit', '%(num)s visits', project['visits']) }}</p>
                 {% if project.get('last_visited') %}
-                <p>{{ _('visited %(momento)s', momento=moment(project['last_visited']).fromNow(True)) }}</p>
+                <p>{{ _('visited %(momento)s', momento=moment(project['last_visited']).fromNow()) }}</p>
                 {% endif %}
             </div>
         </section>

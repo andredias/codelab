@@ -1623,15 +1623,11 @@ section.project.detail-hidden .detail {
 section.project.detail-hidden .show_detail {
   display: inherit;
 }
-section.project .project_container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: baseline;
-  -webkit-align-items: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
+section.project div.project {
+  -webkit-box-flex: 2;
+  -webkit-flex-grow: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
 }
 section.project .expand_contract {
   margin: 0 1em;
