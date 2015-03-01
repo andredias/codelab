@@ -1667,3 +1667,26 @@ div.linenodiv pre {
   color: #b6b6b6;
   background-color: #1a1a1a;
 }
+div.pagination {
+  text-align: center;
+  margin: 1em;
+}
+div.pagination input {
+  text-align: center;
+}
+div.pagination .next,
+div.pagination .previous,
+div.pagination .first,
+div.pagination .last {
+  padding: 0 0.5em;
+  font-size: 1.5em;
+  font-weight: bold;
+  display: inline-block;
+  color: #333;
+}
+div.pagination .next:hover,
+div.pagination .previous:hover,
+div.pagination .first:hover,
+div.pagination .last:hover {
+  color: #a66600;
+}

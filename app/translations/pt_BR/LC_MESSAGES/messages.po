@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-28 12:49-0300\n"
-"PO-Revision-Date: 2015-02-28 12:51-0300\n"
+"POT-Creation-Date: 2015-03-01 18:17-0300\n"
+"PO-Revision-Date: 2015-03-01 18:17-0300\n"
 "Last-Translator: \n"
 "Language-Team: pt_BR <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -232,14 +232,14 @@ msgstr "Sim, por favor"
 msgid "contact us"
 msgstr "entre em contato"
 
-#: templates/fill_project.html:26
+#: templates/fill_project.html:24
 #, python-format
 msgid "%(num)s visit"
 msgid_plural "%(num)s visits"
 msgstr[0] "%(num)s visita"
 msgstr[1] "%(num)s visitas"
 
-#: templates/fill_project.html:28
+#: templates/fill_project.html:26
 #, python-format
 msgid "visited %(momento)s"
 msgstr "visitado há %(momento)s"
@@ -335,19 +335,23 @@ msgstr "Sua mensagem foi enviada com sucesso!"
 msgid "Snippets"
 msgstr "Trechos"
 
-#: templates/snippets.html:10
+#: templates/snippets.html:7
+msgid "Page {current_page} of {max_page}"
+msgstr "Página {current_page} de {max_page}"
+
+#: templates/snippets.html:14
 msgid "Examples"
 msgstr "Exemplos"
 
-#: templates/snippets.html:11
+#: templates/snippets.html:15
 msgid "Recent"
 msgstr "Recentes"
 
-#: templates/snippets.html:12
+#: templates/snippets.html:16
 msgid "Most Visited"
 msgstr "Mais Visitados"
 
-#: templates/snippets.html:15
+#: templates/snippets.html:19
 msgid "All"
 msgstr "Todos"
 

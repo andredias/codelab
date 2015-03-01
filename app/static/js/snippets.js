@@ -88,7 +88,8 @@ function paginate(page) {
 $(function() {
     bindDetailButtons();
     $('.pagination').jqPagination({
-        paged : paginate
+        paged: paginate,
+        page_string: page_string
     });
     setMaxPage();
 });
