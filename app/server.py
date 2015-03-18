@@ -131,7 +131,10 @@ def landing():
         ('Javascript (Node.js)', url_for('static', filename='images/javascript.png')),
         ('Ruby', url_for('static', filename='images/ruby.svg')),
     )
-    return render_template('landing_page.html', languages=languages)
+    from .projects import snippets, get_project, project_id
+    samples = [get_project(cache, project_id(**snippet)) for snippet in snippets
+               if snippet['language'] in app.config['LANGUAGES'].keys()]
+    return render_template('landing_page.html', projects=samples, languages=languages)
 
 
 @app.route('/contact', methods=['GET', 'POST'])

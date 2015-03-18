@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block title %}{{ _('Run, improve and share your source code online!') }}{% endblock %}
-{% block head %}{% endblock %}
-{% block scripts %}{% endblock %}
+{% block head %}
+    <script src="{{ url_for('static', filename='js/jquery.jqpagination.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/snippets.js') }}"></script>
+    <script>
+        var page_string = '{{ _('Page {current_page} of {max_page}') }}';
+    </script>
+{% endblock %}
 {% block body %}
 <body id="landing_page">
 {% autoescape false %}
@@ -20,6 +25,31 @@
             </div>
         {% endfor %}
         </nav>
+    </section>
+    <section id="snippets">
+        <nav class="choices">
+            <a href="javascript:void(0)" onclick="showSnippets(this, 'samples');" class="active">{{ _('Examples') }}</a>
+            <a href="javascript:void(0)" onclick="getVisitedProjects(this, 'last_visited');">{{ _('Recent') }}</a>
+            <a href="javascript:void(0)" onclick="getVisitedProjects(this, 'most_visited');">{{ _('Most Visited') }}</a>
+        </nav>
+        <nav class="languages">
+            <a href="javascript:void(0)" onclick="enableAll(this);" class="active">{{ _('All') }}</a>
+        {% for language in config['LANGUAGES'].keys() %}
+            <a href="javascript:void(0)" onclick="filterLanguage(this);">{{ language.upper() }}</a>
+        {% endfor %}
+        </nav>
+        <article id="samples">
+            {% include 'fill_project.html' %}
+        </article>
+        <article id="last_visited" class="hidden">
+        </article>
+        <article id="most_visited" class="hidden">
+        </article>
+        <div class="pagination">
+            <a href="#" class="previous" data-action="previous">&lsaquo;</a>
+            <input type="text" readonly="readonly" data-max-page="40" />
+            <a href="#" class="next" data-action="next">&rsaquo;</a>
+        </div>
     </section>
     <section id="execute">
         <h1>{{ _('How It Works') }}</h1>

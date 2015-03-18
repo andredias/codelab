@@ -9,7 +9,7 @@
 {% endblock %}
 {% block body %}
 
-<body id="snippets_page">
+<body id="snippets">
     <nav class="choices">
         <a href="javascript:void(0)" onclick="showSnippets(this, 'samples');" class="active">{{ _('Examples') }}</a>
         <a href="javascript:void(0)" onclick="getVisitedProjects(this, 'last_visited');">{{ _('Recent') }}</a>
@@ -17,7 +17,7 @@
     </nav>
     <nav class="languages">
         <a href="javascript:void(0)" onclick="enableAll(this);" class="active">{{ _('All') }}</a>
-    {% for language in languages %}
+    {% for language in config['LANGUAGES'].keys() %}
         <a href="javascript:void(0)" onclick="filterLanguage(this);">{{ language.upper() }}</a>
     {% endfor %}
     </nav>

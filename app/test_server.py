@@ -1,5 +1,5 @@
 from flask import url_for
-from .server import app, mail
+from .server import app, mail, babel
 
 # see: http://flask.pocoo.org/docs/0.10/testing/
 
@@ -47,14 +47,12 @@ class TestCodeLab(object):
 
     def test_pt_br(self):
         with app.test_request_context():
-            app.config['BABEL_DEFAULT_LOCALE'] = 'pt_BR'
-            rv = app.test_client().get('/')
+            rv = self.app.get('/', headers=[("Accept-Language", "pt_BR")])
             assert '<span>Execute</span>, <span>melhore</span>' in str(rv.data)
 
     def test_en_us(self):
         with app.test_request_context():
-            app.config['BABEL_DEFAULT_LOCALE'] = 'en_US'
-            rv = app.test_client().get('/')
+            rv = app.test_client().get('/', headers=[("Accept-Language", "en_US")])
             assert '<span>Run</span>, <span>improve</span>' in str(rv.data)
 
     def test_faq(self):
