@@ -2,7 +2,7 @@
 @require 'rupture'
 
 margem = 1em 2em 0
-texto_sem_destaque = #adadad
+texto_sem_destaque = #787878
 texto_ativo = #333
 texto_hover = darken(#cf7f00, 20%)
 
@@ -10,26 +10,51 @@ texto_hover = darken(#cf7f00, 20%)
     background #f0f6f0
     article
         margin margem
+    section
+        padding 0.5em
+
++mobile()
+    #snippets
+    #snippets article
+    #snippets section
+        margin 0
+        padding 0
+
+    #snippets
+        section
+            margin 0
+            padding 0.5em
+        nav
+            margin 0
+            padding 0
+            a
+                padding 0.35em
+        div.fig
+            margin 0
+
 
 nav.choices
 nav.languages
     overflow hidden
     font-weight normal
-    margin margem
+    margin 0 2em
+    padding 0
+    // border 1px solid #ccc
     a
         color texto_sem_destaque
-        border-left 1px solid #ccc
-        padding 0.75em
+        // border-left 1px solid #ccc
+        padding 0.5em
         display inline-block
         float left
         &:first-child
             border 0
         &.active
-            color texto_ativo
+            color texto_hover
             &:hover
                 color texto_ativo
         &:hover
-            color texto_hover
+            color texto_ativo
+
 
 section.project
     border-bottom 1px solid #d5d5d5;
@@ -65,7 +90,7 @@ section.project
     div.project
         flex-grow 2
     .expand_contract
-        margin 0 1em
+        margin-right 1em
     .visited_time
         text-align right
     &.paginate-hidden
