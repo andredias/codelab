@@ -6,7 +6,7 @@ function setActive(elem) {
 
 function showSnippets(ref, option) {
     setActive(ref);
-    $('article').addClass('hidden');
+    $('#snippets article').addClass('hidden');
     $('article#' + option).removeClass('hidden');
     setMaxPage();
     return false;
