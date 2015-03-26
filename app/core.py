@@ -2,7 +2,7 @@ import sh
 import json
 import logging
 
-CONTAINER = 'codelab'
+CONTAINER = 'codebox'
 
 logger = logging.getLogger('core')
 logger.setLevel(logging.INFO)
@@ -18,4 +18,3 @@ def run(project):
                            _in=params)
     logger.info(output)
     return json.loads(str(output)) if output else {}
-
