@@ -322,6 +322,18 @@ for (var i = 1; i <= 100; i++) {
      'source': _read_snippet('sqlite.sql'),
      },
 
+    {'title': 'Mercurial Named Branches',
+     'description': 'This example shows how Mercurial named branches \
+keep a faithful record of the history of a branch.',
+     'language': 'bash',
+     'source': _read_snippet('ramos_nomeados.sh'),
+     },
+
+     {'title': 'Hello, world!',
+      'language': 'bash',
+      'source': "echo 'Hello, world!'",
+      },
+
 ]
 
 for project in snippets:
