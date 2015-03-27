@@ -1,5 +1,6 @@
 # see: http://flask.pocoo.org/docs/0.10/config/
 
+from collections import OrderedDict
 from flask.ext.babel import gettext as _
 
 # SERVER_NAME = 'codelab.pronus.io'
@@ -23,14 +24,17 @@ MAIL_DEFAULT_SENDER = 'codelab@pronus.io'
 MAIL_RECEIVERS = ['codelab@pronus.io']
 
 
-LANGUAGES = {  # name: mode
-    'python': 'python',
-    'c': 'c_cpp',
-    'c++': 'c_cpp',
-    'go': 'golang',
-    'javascript': 'javascript',
-    'ruby': 'ruby',
-}
+LANGUAGES = OrderedDict([
+    ('python', {'ace-mode': 'python', 'logo': 'images/python.svg', 'label': 'Python (3)'}),
+    ('c', {'ace-mode': 'c_cpp', 'logo': 'images/c.svg', 'label': 'C'}),
+    ('c++', {'ace-mode': 'c_cpp', 'logo': 'images/cpp.svg', 'label': 'C++'}),
+    ('go', {'ace-mode': 'golang', 'logo': 'images/go.png', 'label': 'Go'}),
+    ('javascript', {'ace-mode': 'javascript', 'logo': 'images/javascript.png',
+                    'label': 'Javascript (Node.js)'}),
+    ('ruby', {'ace-mode': 'ruby', 'logo': 'images/ruby.svg', 'label': 'Ruby'}),
+    ('sqlite', {'ace-mode': 'sql', 'logo': 'images/sqlite.svg', 'label': 'SQL (SQLite)'}),
+    ('bash', {'ace-mode': 'sh', 'logo': 'images/terminal.svg', 'label': 'Bash'}),
+])
 
 ACE_THEME = 'ace/theme/cobalt'
 

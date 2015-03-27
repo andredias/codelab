@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import re
 import logging
 from datetime import timedelta
 from logging.handlers import RotatingFileHandler
@@ -75,9 +76,9 @@ app.jinja_env.globals.update(get_locale=get_locale)
 
 @app.route('/project/new/<language>')
 def dojo(language):
-    # projeto = project_or_new(session['project_id'])
     language = language.lower()
-    return render_template('dojo.html', language=language, lint_data=[])
+    return render_template('dojo.html', language=app.config['LANGUAGES'][language]['label'],
+                           lint_data=[])
 
 
 @app.route('/project/<id>')
@@ -95,21 +96,28 @@ def project_page(id):
         output_data += '%s%s' % (project['execution'].get('stdout', ''),
                                  project['execution'].get('stderr', ''))
     return render_template('dojo.html',
-                           title=(project.get('title') or project['id']),
+                           title=project.get('title'),
                            description=project.get('description', ''),
                            input_data=project.get('input', ''),
                            source=project['source'],
-                           language=project['language'],
+                           language=app.config['LANGUAGES'][project['language']]['label'],
                            lint_data=project.get('lint', []),
                            output_data=output_data)
+
+CRLF = r'\r\n'
 
 
 @app.route('/_do_the_thing', methods=['POST'])
 def do_the_thing():
-    project = {'input': request.form['input'], 'source': request.form['source'],
+    # devido ao MIME type application/x-www-form-urlencoded,
+    # o browser envia o formulário com \r\n e precisa ser substituído manualmente
+    # por \n
+    # veja: https://github.com/ajaxorg/ace/issues/1515#issuecomment-20971401
+    project = {'input': re.sub(CRLF, '\n', request.form['input']),
+               'source': re.sub(CRLF, '\n', request.form['source']),
                'language': request.form['language'],
-               'title': request.form['title'],
-               'description': request.form['description'], }
+               'title': re.sub(CRLF, '\n', request.form['title']),
+               'description': re.sub(CRLF, '\n', request.form['description']), }
     id = project_id(**project)
     destination = url_for('project_page', id=id)
     if not cache.get(id):
@@ -123,18 +131,10 @@ def do_the_thing():
 @app.route('/')
 @cache_for(hours=1)
 def landing():
-    languages = (
-        ('Python (3)', url_for('static', filename='images/python.svg')),
-        ('C', url_for('static', filename='images/c.svg')),
-        ('C++', url_for('static', filename='images/cpp.svg')),
-        ('Go', url_for('static', filename='images/go.png')),
-        ('Javascript (Node.js)', url_for('static', filename='images/javascript.png')),
-        ('Ruby', url_for('static', filename='images/ruby.svg')),
-    )
     from .projects import snippets, get_project, project_id
     samples = [get_project(cache, project_id(**snippet)) for snippet in snippets
                if snippet['language'] in app.config['LANGUAGES'].keys()]
-    return render_template('landing_page.html', projects=samples, languages=languages)
+    return render_template('landing_page.html', projects=samples)
 
 
 @app.route('/contact', methods=['GET', 'POST'])

@@ -53,10 +53,10 @@ DropDownLanguage.prototype = {
 
         obj.opts.on('click', function(event) {
             var opt = $(this);
-            obj.val = opt.text();
+            obj.val = opt.data('language');
             obj.index = opt.index();
-            obj.placeholder.text(obj.val);
-            var mode = opt.data('ace-mode') || obj.val;
+            obj.placeholder.text(opt.text());
+            var mode = opt.data('ace-mode');
             obj.editor.getSession().setMode('ace/mode/' + mode);
             obj.dd.removeClass('active');
             return false;

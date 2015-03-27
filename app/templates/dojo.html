@@ -36,8 +36,8 @@
                     <div class="menu" id="a-language">
                         <span>{{ language }}</span>
                         <ul class="dropdown">
-                        {% for name, mode in config['LANGUAGES'].items()|sort %}
-                            <li data-ace-mode="{{ mode }}">{{ name }}</li>
+                        {% for lang, attrs in config['LANGUAGES'].items() %}
+                            <li data-ace-mode="{{ attrs['ace-mode'] }}" data-language="{{ lang }}">{{ attrs['label'] }}</li>
                         {% endfor %}
                         </ul>
                     </div>

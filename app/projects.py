@@ -55,11 +55,10 @@ def cache_project(cache, project, timeout=None):
     if 'id' not in project:
         project['id'] = project_id(**project)
     output = run(project)
-    if output:
-        project.update(output, created=datetime.utcnow())
-        cache.set(project['id'], project, timeout)
-        if not timeout:
-            cache._client.persist(project['id'].encode())
+    project.update(output, created=datetime.utcnow())
+    cache.set(project['id'], project, timeout)
+    if not timeout:
+        cache._client.persist(project['id'].encode())
     return
 
 
