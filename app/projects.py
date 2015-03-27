@@ -96,8 +96,7 @@ class count_visit(object):
 
 
 def _read_snippet(filename, path=abspath(join(dirname(__file__), 'snippets'))):
-    from os.path import join
-    with open(join(path, filename)) as f:
+    with open(join(path, filename), encoding='utf-8') as f:
         return f.read()
 
 snippets = [
@@ -329,10 +328,10 @@ keep a faithful record of the history of a branch.',
      'source': _read_snippet('ramos_nomeados.sh'),
      },
 
-     {'title': 'Hello, world!',
-      'language': 'bash',
-      'source': "echo 'Hello, world!'",
-      },
+    {'title': 'Hello, world!',
+     'language': 'bash',
+     'source': "echo 'Hello, world!'",
+     },
 
 ]
 
