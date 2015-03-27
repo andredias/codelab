@@ -5,6 +5,7 @@ from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 from .core import run
+from os.path import abspath, join, dirname
 
 
 def pygmentize(code, language):
@@ -93,6 +94,11 @@ class count_visit(object):
             return function(*args, **kwargs)
         return wrapper
 
+
+def _read_snippet(filename, path=abspath(join(dirname(__file__), 'snippets'))):
+    from os.path import join
+    with open(join(path, filename)) as f:
+        return f.read()
 
 snippets = [
 
@@ -310,6 +316,11 @@ for (var i = 1; i <= 100; i++) {
      'language': 'ruby',
      'source': '''puts 'Hello, world!'
 ''', },
+
+    {'title': 'Faculdade',
+     'language': 'sqlite',
+     'source': _read_snippet('sqlite.sql'),
+     },
 
 ]
 

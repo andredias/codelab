@@ -25,15 +25,21 @@ MAIL_RECEIVERS = ['codelab@pronus.io']
 
 
 LANGUAGES = OrderedDict([
-    ('python', {'ace-mode': 'python', 'logo': 'images/python.svg', 'label': 'Python (3)'}),
-    ('c', {'ace-mode': 'c_cpp', 'logo': 'images/c.svg', 'label': 'C'}),
-    ('c++', {'ace-mode': 'c_cpp', 'logo': 'images/cpp.svg', 'label': 'C++'}),
-    ('go', {'ace-mode': 'golang', 'logo': 'images/go.png', 'label': 'Go'}),
+    ('python', {'ace-mode': 'python', 'logo': 'images/python.svg', 'label': 'Python (3)',
+                'pygments': 'python'}),
+    ('c', {'ace-mode': 'c_cpp', 'logo': 'images/c.svg', 'label': 'C', 'pygments': 'c'}),
+    ('c++', {'ace-mode': 'c_cpp', 'logo': 'images/cpp.svg', 'label': 'C++',
+             'pygments': 'c++'}),
+    ('go', {'ace-mode': 'golang', 'logo': 'images/go.png', 'label': 'Go',
+            'pygments': 'go'}),
     ('javascript', {'ace-mode': 'javascript', 'logo': 'images/javascript.png',
-                    'label': 'Javascript (Node.js)'}),
-    ('ruby', {'ace-mode': 'ruby', 'logo': 'images/ruby.svg', 'label': 'Ruby'}),
-    ('sqlite', {'ace-mode': 'sql', 'logo': 'images/sqlite.svg', 'label': 'SQL (SQLite)'}),
-    ('bash', {'ace-mode': 'sh', 'logo': 'images/terminal.svg', 'label': 'Bash'}),
+                    'label': 'Javascript (Node.js)', 'pygments': 'javascript'}),
+    ('ruby', {'ace-mode': 'ruby', 'logo': 'images/ruby.svg', 'label': 'Ruby',
+              'pygments': 'ruby'}),
+    ('sqlite', {'ace-mode': 'sql', 'logo': 'images/sqlite.svg', 'label': 'SQL (SQLite)',
+                'pygments': 'sql'}),
+    ('bash', {'ace-mode': 'sh', 'logo': 'images/terminal.svg', 'label': 'Bash',
+              'pygments': 'bash'}),
 ])
 
 ACE_THEME = 'ace/theme/cobalt'
