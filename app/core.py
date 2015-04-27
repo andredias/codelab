@@ -14,7 +14,7 @@ logger.addHandler(sl)
 def run(project):
     params = json.dumps(project)
     logger.info(params)
-    output = sh.docker.run('-i', '--rm', '--net', 'none', CONTAINER, _ok_code=range(3),
+    output = sh.docker.run('-i', '--rm', CONTAINER, _ok_code=range(3),
                            _in=params)
     logger.info(output)
     return json.loads(str(output)) if output else {}
