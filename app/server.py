@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-import re
 import logging
 from datetime import timedelta
 from logging.handlers import RotatingFileHandler
@@ -15,7 +14,10 @@ from werkzeug.contrib.cache import RedisCache
 from .mail_handler import MailHandler
 from .forms import ContactForm
 from .decorators import async
-from .projects import pygmentize, last_visited, most_visited, count_visit, project_id, cache_project
+from .projects import (
+    pygmentize, last_visited, most_visited, count_visit, cache_project,
+    get_project_to_run
+)
 
 
 app = Flask(__name__)
@@ -104,23 +106,12 @@ def project_page(id):
                            lint_data=project.get('lint', []),
                            output_data=output_data)
 
-CRLF = r'\r\n'
-
 
 @app.route('/_do_the_thing', methods=['POST'])
 def do_the_thing():
-    # devido ao MIME type application/x-www-form-urlencoded,
-    # o browser envia o formulário com \r\n e precisa ser substituído manualmente
-    # por \n
-    # veja: https://github.com/ajaxorg/ace/issues/1515#issuecomment-20971401
-    project = {'input': re.sub(CRLF, '\n', request.form['input']),
-               'source': re.sub(CRLF, '\n', request.form['source']),
-               'language': request.form['language'],
-               'title': re.sub(CRLF, '\n', request.form['title']),
-               'description': re.sub(CRLF, '\n', request.form['description']), }
-    id = project_id(**project)
-    destination = url_for('project_page', id=id)
-    if not cache.get(id):
+    project = get_project_to_run(request.form)
+    destination = url_for('project_page', id=project['id'])
+    if not cache.get(project['id']):
         cache_project(cache, project, timeout=int(timedelta(days=180).total_seconds()))
         app.logger.info('NOT CACHED:\n\tparams: %s' % project)
     else:

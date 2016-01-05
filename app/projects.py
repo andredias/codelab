@@ -1,3 +1,5 @@
+import re
+import json
 from hashlib import md5
 from datetime import datetime
 from functools import wraps
@@ -33,11 +35,11 @@ def most_visited(cache, languages):
     return _visited(cache, MOST_VISITED_KEY)
 
 
-def project_id(source, language, input='', title='', description='', **kwargs):
-    s = '{title}{description}{input}{source}{language}'.format(
-        title=title, description=description, input=input, source=source, language=language,
-    )
-    return md5(s.encode('utf-8')).hexdigest()
+def set_project_id(project):
+    if 'id' not in project:
+        j = json.dumps(project)
+        project['id'] = md5(j.encode('utf-8')).hexdigest()
+    return project['id']
 
 
 def get_project(cache, id):
@@ -54,7 +56,7 @@ def get_project(cache, id):
 
 def cache_project(cache, project, timeout=None):
     if 'id' not in project:
-        project['id'] = project_id(**project)
+        set_project_id(project)
     output = run(project)
     project.update(output, created=datetime.utcnow())
     cache.set(project['id'], project, timeout)
@@ -98,6 +100,76 @@ class count_visit(object):
 def _read_snippet(filename, path=abspath(join(dirname(__file__), 'snippets'))):
     with open(join(path, filename), encoding='utf-8') as f:
         return f.read()
+
+CRLF = '\r\n'
+TIMEOUT = 5
+
+
+def get_project_to_run(form):
+    # devido ao MIME type application/x-www-form-urlencoded,
+    # o browser envia o formulário com \r\n e precisa ser substituído manualmente
+    # por \n
+    # veja: https://github.com/ajaxorg/ace/issues/1515#issuecomment-20971401
+    for key, value in form.items():
+        form[key] = re.sub(CRLF, '\n', value)
+
+    lang2project = {
+        'python': {
+            'input': form['input'],
+            'sourcetree': {'source.py': form['source']},
+            'commands': [('run', 'python3 source.py', TIMEOUT)]
+        },
+        'c': {
+            'input': form['input'],
+            'sourcetree': {'source.c': form['source']},
+            'commands': [
+                ('build', 'gcc source.c', TIMEOUT),
+                ('run', './a.out', TIMEOUT)
+            ]
+        },
+        'cpp': {
+            'input': form['input'],
+            'sourcetree': {'source.cpp': form['source']},
+            'commands': [
+                ('build', 'g++ source.cpp', TIMEOUT),
+                ('run', './a.out', TIMEOUT)
+            ]
+        },
+        'ruby': {
+            'input': form['input'],
+            'sourcetree': {'source.rb': form['source']},
+            'commands': [('run', 'ruby source.rb', TIMEOUT)]
+        },
+        'javascript': {
+            'input': form['input'],
+            'sourcetree': {'source.js': form['source']},
+            'commands': [('run', 'nodejs source.js', TIMEOUT)]
+        },
+        'go': {
+            'input': form['input'],
+            'sourcetree': {'source.go': form['source']},
+            'commands': [
+                ('build', 'go build -o a.out source.go', TIMEOUT),
+                ('run', './a.out', TIMEOUT)
+            ]
+        },
+        'sql': {
+            'input': form['source'],
+            'commands': [
+                ('run', 'sqlite3 -bail database.db', TIMEOUT)
+            ]
+        },
+        'bash': {
+            'input': form['input'],
+            'sourcetree': {'source.sh': form['source']},
+            'commands': [('run', 'bash source.sh', TIMEOUT)]
+        }
+    }
+    project = lang2project[form['language']]
+    project['title'] = form['title']
+    project['description'] = form['description']
+    set_project_id(project)
+    return project
 
 snippets = [
 
@@ -335,11 +407,9 @@ keep a faithful record of the history of a branch.',
 
 ]
 
-for project in snippets:
-    project['id'] = project_id(**project)
-
 
 def cache_snippets(cache):
     for project in snippets:
+        project = get_project_to_run(project)
         cache_project(cache, project)
     return
