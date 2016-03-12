@@ -35,9 +35,9 @@ def most_visited(cache, languages):
     return _visited(cache, MOST_VISITED_KEY)
 
 
-def set_project_id(project):
+def get_project_id(project):
     if 'id' not in project:
-        j = json.dumps(project)
+        j = json.dumps('%s%s' % (project['language'], project['source']))
         project['id'] = md5(j.encode('utf-8')).hexdigest()
     return project['id']
 
@@ -56,7 +56,7 @@ def get_project(cache, id):
 
 def cache_project(cache, project, timeout=None):
     if 'id' not in project:
-        set_project_id(project)
+        get_project_id(project)
     output = run(project)
     project.update(output, created=datetime.utcnow())
     cache.set(project['id'], project, timeout)
@@ -105,22 +105,21 @@ CRLF = '\r\n'
 TIMEOUT = 5
 
 
-def get_project_to_run(form):
+def get_project_to_run(iform):
     # devido ao MIME type application/x-www-form-urlencoded,
     # o browser envia o formulário com \r\n e precisa ser substituído manualmente
     # por \n
     # veja: https://github.com/ajaxorg/ace/issues/1515#issuecomment-20971401
-    for key, value in form.items():
+    form = {}
+    for key, value in iform.items():
         form[key] = re.sub(CRLF, '\n', value)
 
     lang2project = {
         'python': {
-            'input': form['input'],
             'sourcetree': {'source.py': form['source']},
             'commands': [('run', 'python3 source.py', TIMEOUT)]
         },
         'c': {
-            'input': form['input'],
             'sourcetree': {'source.c': form['source']},
             'commands': [
                 ('build', 'gcc source.c', TIMEOUT),
@@ -128,7 +127,6 @@ def get_project_to_run(form):
             ]
         },
         'cpp': {
-            'input': form['input'],
             'sourcetree': {'source.cpp': form['source']},
             'commands': [
                 ('build', 'g++ source.cpp', TIMEOUT),
@@ -136,17 +134,14 @@ def get_project_to_run(form):
             ]
         },
         'ruby': {
-            'input': form['input'],
             'sourcetree': {'source.rb': form['source']},
             'commands': [('run', 'ruby source.rb', TIMEOUT)]
         },
         'javascript': {
-            'input': form['input'],
             'sourcetree': {'source.js': form['source']},
             'commands': [('run', 'nodejs source.js', TIMEOUT)]
         },
         'go': {
-            'input': form['input'],
             'sourcetree': {'source.go': form['source']},
             'commands': [
                 ('build', 'go build -o a.out source.go', TIMEOUT),
@@ -154,21 +149,26 @@ def get_project_to_run(form):
             ]
         },
         'sql': {
-            'input': form['source'],
+            'input': '',
+            'sourcetree': {'source.sql': form['source']},
             'commands': [
-                ('run', 'sqlite3 -bail database.db', TIMEOUT)
+                ('run', 'sqlite3 -bail -init source.sql', TIMEOUT)
             ]
         },
         'bash': {
-            'input': form['input'],
             'sourcetree': {'source.sh': form['source']},
             'commands': [('run', 'bash source.sh', TIMEOUT)]
         }
     }
+    lang2project['c++'] = lang2project['cpp']
+    lang2project['sqlite'] = lang2project['sql']
     project = lang2project[form['language']]
+    project.setdefault('language', form['language'])
+    project.setdefault('source', form['source'])
+    project.setdefault('input', form.get('input', ''))
     project['title'] = form['title']
-    project['description'] = form['description']
-    set_project_id(project)
+    project['description'] = form.get('description', '')
+    get_project_id(project)
     return project
 
 snippets = [
@@ -389,7 +389,7 @@ for (var i = 1; i <= 100; i++) {
 ''', },
 
     {'title': 'Faculdade',
-     'language': 'sqlite',
+     'language': 'sql',
      'source': _read_snippet('sqlite.sql'),
      },
 
@@ -408,8 +408,16 @@ keep a faithful record of the history of a branch.',
 ]
 
 
-def cache_snippets(cache):
+def get_samples(cache, languages):
+    result = []
     for project in snippets:
-        project = get_project_to_run(project)
-        cache_project(cache, project)
-    return
+        if project['language'] not in languages:
+            continue
+        if 'id' not in project:
+            get_project_id(project)
+        cached = get_project(cache, project['id'])
+        if not cached:
+            project.update(get_project_to_run(project))
+            cache_project(cache, project)
+        result.append(project)
+    return result

@@ -91,19 +91,19 @@ def project_page(id):
     if not project:
         abort(404)
     output_data = ''
-    if project.get('compilation'):
-        output_data += '%s%s' % (project['compilation'].get('stdout', ''),
-                                 project['compilation'].get('stderr', ''))
-    if project.get('execution'):
-        output_data += '%s%s' % (project['execution'].get('stdout', ''),
-                                 project['execution'].get('stderr', ''))
+    for key in ('compilation', 'build', 'execution', 'run'):
+        if key not in project:
+            continue
+        output_data += '%s%s' % (project[key].get('stdout', ''),
+                                 project[key].get('stderr', ''))
+    lint_data = list(project['lint'].values())[0] if project.get('lint') else []
     return render_template('dojo.html',
                            title=project.get('title'),
                            description=project.get('description', ''),
                            input_data=project.get('input', ''),
                            source=project['source'],
                            language=app.config['LANGUAGES'][project['language']]['label'],
-                           lint_data=project.get('lint', []),
+                           lint_data=lint_data,
                            output_data=output_data)
 
 
@@ -122,9 +122,8 @@ def do_the_thing():
 @app.route('/')
 @cache_for(hours=1)
 def landing():
-    from .projects import snippets, get_project, project_id
-    samples = [get_project(cache, project_id(**snippet)) for snippet in snippets
-               if snippet['language'] in app.config['LANGUAGES'].keys()]
+    from .projects import get_samples
+    samples = get_samples(cache, app.config['LANGUAGES'].keys())
     return render_template('landing_page.html', projects=samples)
 
 
@@ -153,10 +152,9 @@ def help(topic):
 @app.route('/samples')
 @cache_for(days=60)
 def examples():
-    from .projects import snippets, get_project, project_id
+    from .projects import get_samples
     languages = app.config['LANGUAGES'].keys()
-    samples = [get_project(cache, project_id(**snippet)) for snippet in snippets
-               if snippet['language'] in languages]
+    samples = get_samples(cache, app.config['LANGUAGES'].keys())
     return render_template('snippets.html',
                            languages=languages,
                            projects=samples)

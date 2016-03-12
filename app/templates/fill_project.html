@@ -17,7 +17,7 @@
                     <span class="tag">{{ project['language'] }}</span>
                 </div>
                 <div class="detail">
-                    {{ pygmentize(project['source'], config['LANGUAGES'][project['language']]['pygments']) | safe }}
+                    {{ pygmentize(project['source'], project['language']) | safe }}
                 </div>
             </div>
             <div class="visited_time">

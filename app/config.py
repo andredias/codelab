@@ -36,8 +36,8 @@ LANGUAGES = OrderedDict([
                     'label': 'Javascript (Node.js)', 'pygments': 'javascript'}),
     ('ruby', {'ace-mode': 'ruby', 'logo': 'images/ruby.svg', 'label': 'Ruby',
               'pygments': 'ruby'}),
-    ('sqlite', {'ace-mode': 'sql', 'logo': 'images/sqlite.svg', 'label': 'SQL (SQLite)',
-                'pygments': 'sql'}),
+    ('sql', {'ace-mode': 'sql', 'logo': 'images/sqlite.svg', 'label': 'SQL (SQLite)',
+             'pygments': 'sql'}),
     ('bash', {'ace-mode': 'sh', 'logo': 'images/terminal.svg', 'label': 'Bash',
               'pygments': 'bash'}),
 ])
@@ -46,9 +46,11 @@ ACE_THEME = 'ace/theme/cobalt'
 
 
 def get_redis_host():
-    import sh
-    redis_image = 'redis-server'
-    host = sh.awk(sh.grep(sh.docker('inspect', redis_image), 'IPAddress'), '-F', '"', '{print $4}')
-    return str(host).strip()
+    import socket
+    try:
+        socket.gethostbyname('redis')
+        return 'redis'
+    except socket.gaierror:
+        return 'localhost'
 
 CACHE_REDIS_HOST = get_redis_host()
