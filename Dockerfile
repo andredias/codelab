@@ -9,7 +9,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     uwsgi uwsgi-plugin-python3 python3 python3-pip \
     docker-engine
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y vim
+# codelab roda com user www-data mas precisa acessar o docker
+RUN usermod -aG docker www-data
 
 WORKDIR /opt/codelab
 ADD requirements.txt .

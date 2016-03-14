@@ -1,6 +1,6 @@
-import sh
 import json
 import logging
+from subprocess import check_output
 
 CONTAINER = 'codebox'
 
@@ -14,7 +14,6 @@ logger.addHandler(sl)
 def run(project):
     params = json.dumps(project)
     logger.info(params)
-    output = sh.docker.run('-i', '--rm', CONTAINER, _ok_code=range(3),
-                           _in=params)
+    output = check_output(['docker', 'run', '-i', '--rm', CONTAINER], input=params, universal_newlines=True)
     logger.info(output)
     return json.loads(str(output)) if output else {}
