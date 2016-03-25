@@ -21,4 +21,5 @@ services:
         depends_on:
             - redis
         ports:
-            - '8000:8000'
+            - '5000:5000'
+            - '5001:5001'
