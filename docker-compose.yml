@@ -1,10 +1,10 @@
-version: "2"
+version: "3.5"
 
 services:
 
     redis:
         # configuration at /etc/redis/redis.conf  see https://github.com/dockerfile/redis/blob/master/Dockerfile
-        image: redis
+        image: 'redis:latest'
         volumes:
             - /tmp/data:/data
             - ./etc/redis:/etc/redis
