@@ -8,3 +8,5 @@ node_modules
 *.css
 non_versioned_config.py
 venv
+.venv
+.vscode

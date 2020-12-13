@@ -2,7 +2,7 @@ from flask_wtf import Form
 from wtforms import TextField, RadioField, TextAreaField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Email, Length
-from flask.ext.babel import lazy_gettext as _
+from flask_babel import lazy_gettext as _
 
 
 class ContactForm(Form):

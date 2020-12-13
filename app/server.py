@@ -8,12 +8,10 @@ from flask.ext.script import Manager
 from flask.ext.mail import Mail, Message
 from flask.ext.moment import Moment
 from flask.ext.babel import Babel
-from flask.ext.webcache import easy_setup
-from flask.ext.webcache.modifiers import cache_for
 from werkzeug.contrib.cache import RedisCache
 from .mail_handler import MailHandler
 from .forms import ContactForm
-from .decorators import async
+from .decorators import asynchronous
 from .projects import (
     pygmentize, last_visited, most_visited, count_visit, cache_project,
     get_project_to_run
@@ -30,10 +28,9 @@ mail = Mail(app)
 moment = Moment(app)
 
 cache = RedisCache(app.config['CACHE_REDIS_HOST'])
-easy_setup(app, cache)
 
 
-@async
+@asynchronous
 def send_async_mail(msg):
     with app.app_context():
         mail.send(msg)
@@ -85,7 +82,6 @@ def dojo(language):
 
 @app.route('/project/<id>')
 @count_visit(cache=cache)
-@cache_for(days=1)
 def project_page(id):
     project = cache.get(id)
     if not project:
@@ -120,7 +116,6 @@ def do_the_thing():
 
 
 @app.route('/')
-@cache_for(hours=1)
 def landing():
     from .projects import get_samples
     samples = get_samples(cache, app.config['LANGUAGES'].keys())
@@ -144,13 +139,11 @@ def contact():
 
 
 @app.route('/help/<topic>')
-@cache_for(days=7)
 def help(topic):
     return render_template(topic + '.html')
 
 
 @app.route('/samples')
-@cache_for(days=60)
 def examples():
     from .projects import get_samples
     languages = app.config['LANGUAGES'].keys()

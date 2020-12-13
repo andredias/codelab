@@ -1,0 +1,359 @@
+[[package]]
+name = "babel"
+version = "2.2.0"
+description = "Internationalization utilities"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pytz = ">=0a"
+
+[[package]]
+name = "blinker"
+version = "1.4"
+description = "Fast, simple object-to-object and broadcast signaling"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "chardet"
+version = "2.2.1"
+description = "Universal encoding detector for Python 2 and 3"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "colorama"
+version = "0.2.5"
+description = "Cross-platform colored terminal text."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "flask"
+version = "0.10.1"
+description = "A microframework based on Werkzeug, Jinja2 and good intentions"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+itsdangerous = ">=0.21"
+Jinja2 = ">=2.4"
+Werkzeug = ">=0.7"
+
+[[package]]
+name = "flask-babel"
+version = "0.9"
+description = "Adds i18n/l10n support to Flask applications"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+Babel = ">=1.0"
+Flask = "*"
+Jinja2 = ">=2.5"
+speaklater = ">=1.2"
+
+[[package]]
+name = "flask-mail"
+version = "0.9.1"
+description = "Flask extension for sending email"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+blinker = "*"
+Flask = "*"
+
+[[package]]
+name = "flask-moment"
+version = "0.5.1"
+description = "Formatting of dates and times in Flask templates using moment.js."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+Flask = "*"
+
+[[package]]
+name = "flask-script"
+version = "2.0.5"
+description = "Scripting support for Flask"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+Flask = "*"
+
+[[package]]
+name = "flask-webcache"
+version = "0.9.1"
+description = "A Flask extension that adds HTTP based caching to Flask apps"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+Flask = "*"
+
+[[package]]
+name = "flask-wtf"
+version = "0.12"
+description = "Simple integration of Flask and WTForms"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+Flask = "*"
+Werkzeug = "*"
+WTForms = "*"
+
+[[package]]
+name = "hiredis"
+version = "0.2.0"
+description = "Python wrapper for hiredis"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "html5lib"
+version = "0.999"
+description = "HTML parser based on the WHATWG HTML specifcation"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+six = "*"
+
+[[package]]
+name = "itsdangerous"
+version = "0.24"
+description = "Various helpers to pass trusted data to untrusted environments and back."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "jinja2"
+version = "2.8"
+description = "A small but fast and easy to use stand-alone template engine written in pure python."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+MarkupSafe = "*"
+
+[package.extras]
+i18n = ["Babel (>=0.8)"]
+
+[[package]]
+name = "markupsafe"
+version = "0.23"
+description = "Implements a XML/HTML/XHTML Markup safe string for Python"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "pygments"
+version = "2.1.3"
+description = "Pygments is a syntax highlighting package written in Python."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "pytz"
+version = "2016.2"
+description = "World timezone definitions, modern and historical"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "redis"
+version = "2.10.5"
+description = "Python client for Redis key-value store"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "requests"
+version = "2.2.1"
+description = "Python HTTP for Humans."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "six"
+version = "1.5.2"
+description = "Python 2 and 3 compatibility utilities"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "speaklater"
+version = "1.3"
+description = "implements a lazy string for python useful for use with gettext"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "urllib3"
+version = "1.7.1"
+description = "HTTP library with thread-safe connection pooling, file post, and more."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "werkzeug"
+version = "0.11.5"
+description = "The Swiss Army knife of Python web development"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "wtforms"
+version = "2.1"
+description = "A flexible forms validation and rendering library for python web development."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+Locale = ["Babel (>=1.3)"]
+
+[metadata]
+lock-version = "1.1"
+python-versions = "*"
+content-hash = "339f519bbf4d6f2e57f6237f1e452f52da29ac2278074a62249667e625d46c70"
+
+[metadata.files]
+babel = [
+    {file = "Babel-2.2.0-py2.py3-none-any.whl", hash = "sha256:fed07cbcdcb3de79b53a8220eebed21c93f8dbb3dbce1d9c6b1c4b09e8aecf2b"},
+    {file = "Babel-2.2.0.tar.gz", hash = "sha256:d8cb4c0e78148aee89560f9fe21587aa57739c975bb89ff66b1e842cc697428f"},
+]
+blinker = [
+    {file = "blinker-1.4.tar.gz", hash = "sha256:471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d606f8b6"},
+]
+chardet = [
+    {file = "chardet-2.2.1-py2.py3-none-any.whl", hash = "sha256:c72cce700513dbf2269f9695fa79402ef4b0860d2925a5cc4666b21647debb6a"},
+    {file = "chardet-2.2.1.tar.gz", hash = "sha256:f1964f73f5ee9b7e0309098b9512d587fbba6dd5d1f3797b1c95529e5241bf09"},
+]
+colorama = [
+    {file = "colorama-0.2.5.tar.gz", hash = "sha256:06257ff3be96a91cbc6e7121db35935297c1ec444536b361bc9fa4f2ca28a396"},
+    {file = "colorama-0.2.5.zip", hash = "sha256:521921faa4f979ba6597e1b10383427403339f8c00a619ce0c563d870b9d8cba"},
+]
+flask = [
+    {file = "Flask-0.10.1.tar.gz", hash = "sha256:4c83829ff83d408b5e1d4995472265411d2c414112298f2eb4b359d9e4563373"},
+]
+flask-babel = [
+    {file = "Flask-Babel-0.9.tar.gz", hash = "sha256:4afd150f360434b00684ba7848358f7961072fd0658a6e81aaa578522699fb4c"},
+]
+flask-mail = [
+    {file = "Flask-Mail-0.9.1.tar.gz", hash = "sha256:22e5eb9a940bf407bcf30410ecc3708f3c56cc44b29c34e1726fe85006935f41"},
+]
+flask-moment = [
+    {file = "Flask-Moment-0.5.1.tar.gz", hash = "sha256:4e36dbf5f496522f497a8f1572a33ad9101e34ecfb063e481a5fac29716af48c"},
+]
+flask-script = [
+    {file = "Flask-Script-2.0.5.tar.gz", hash = "sha256:cef76eac751396355429a14c38967bb14d4973c53e07dec94af5cc8fb017107f"},
+]
+flask-webcache = [
+    {file = "Flask-WebCache-0.9.1.tar.gz", hash = "sha256:f64bb2a53e8e762d1b83b5d4f89dbb3a57ea2291ed91de9e06fed9bafbfe03ce"},
+]
+flask-wtf = [
+    {file = "Flask-WTF-0.12.tar.gz", hash = "sha256:bd99316c97ed1d1cb90b8f0c242c86420a891a6a2058f20717e424bf5b0bb80e"},
+    {file = "Flask_WTF-0.12-py2-none-any.whl", hash = "sha256:99c5d75663d6bfcbf4dd0d71ffcb7313f64ae90e6f89e09ad99080107033e8b6"},
+]
+hiredis = [
+    {file = "hiredis-0.2.0-cp27-cp27m-manylinux1_i686.whl", hash = "sha256:71303245ea72cd85e72705ad237eb9d3847cdeff45f4ec81b0fa08ef4941610f"},
+    {file = "hiredis-0.2.0-cp27-cp27m-manylinux1_x86_64.whl", hash = "sha256:587f56d987cfa9397362d2f772b34ea69e61637fc0093807525e94cb919aa027"},
+    {file = "hiredis-0.2.0-cp27-cp27mu-manylinux1_i686.whl", hash = "sha256:0805bd9e98551bc904e487388c871c039878e5bf8fefed26b504dfe505ac91b4"},
+    {file = "hiredis-0.2.0-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:45887ded08a2e819123124b5cec4ec1c7e272a8c453d35fecb6d36e5b8c54717"},
+    {file = "hiredis-0.2.0-cp34-cp34m-manylinux1_i686.whl", hash = "sha256:824e223a0e5a3a7b81025aa35075b4be5eec7251cebb3d305b092bc6f0beacaa"},
+    {file = "hiredis-0.2.0-cp34-cp34m-manylinux1_x86_64.whl", hash = "sha256:bb2744c6026fa4dc4fb6b58d7b36d62ce3f669bb785956d1e3705b7bdbc23e3c"},
+    {file = "hiredis-0.2.0-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:7fd22790038ea983a5ecf8e77697906f59e9f781873cc8c9d6618bebeed7fb0c"},
+    {file = "hiredis-0.2.0-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:c8a2d8d874b1cf6fb104a777846cfa22224f44ce3bef451ec4ae5160082825f7"},
+    {file = "hiredis-0.2.0-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:013c4e31be95bd5d9e45a0f830743458249012dc1691b45b1710976c280074a0"},
+    {file = "hiredis-0.2.0-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:3f8b334c59c474e2b92580d7f4fb6503a08c013ae8a877ffc5c252f899d90ac6"},
+    {file = "hiredis-0.2.0-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:09025bdda2a17294be015bccab7c1039ed41c95cdbef8915f27006c5204e656c"},
+    {file = "hiredis-0.2.0-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:f69bffe7c1ad38be95bbb2c3e5c3f6f4eecb28b2f431a3c3e1532509eea89c92"},
+    {file = "hiredis-0.2.0.tar.gz", hash = "sha256:ca958e13128e49674aa4a96f02746f5de5973f39b57297b84d59fd44d314d5b5"},
+]
+html5lib = [
+    {file = "html5lib-0.999.tar.gz", hash = "sha256:c3887f7e2875d7666107fa8bee761ff95b9391acdcc7cd1b5fd57a23b5fbc49e"},
+]
+itsdangerous = [
+    {file = "itsdangerous-0.24.tar.gz", hash = "sha256:cbb3fcf8d3e33df861709ecaf89d9e6629cff0a217bc2848f1b41cd30d360519"},
+]
+jinja2 = [
+    {file = "Jinja2-2.8-py2.py3-none-any.whl", hash = "sha256:1cc03ef32b64be19e0a5b54578dd790906a34943fe9102cfdae0d4495bd536b4"},
+    {file = "Jinja2-2.8.tar.gz", hash = "sha256:bc1ff2ff88dbfacefde4ddde471d1417d3b304e8df103a7a9437d47269201bf4"},
+]
+markupsafe = [
+    {file = "MarkupSafe-0.23.tar.gz", hash = "sha256:a4ec1aff59b95a14b45eb2e23761a0179e98319da5a7eb76b56ea8cdc7b871c3"},
+]
+pygments = [
+    {file = "Pygments-2.1.3-py2.py3-none-any.whl", hash = "sha256:485602129949b14247e8b124d28af4654dffbd076537c4a9c44a538a2c1755b7"},
+    {file = "Pygments-2.1.3.tar.gz", hash = "sha256:88e4c8a91b2af5962bfa5ea2447ec6dd357018e86e94c7d14bd8cacbc5b55d81"},
+]
+pytz = [
+    {file = "pytz-2016.2-py2.4.egg", hash = "sha256:a1868b6ac5670a61e7d679180aad49129d201d38552bbf1d99594adfd93d55a3"},
+    {file = "pytz-2016.2-py2.5.egg", hash = "sha256:4a343d32eaf33adf733c555c32d42e2d0a6e44a6fc6b8e2ddf0f9d93ebeb6f7a"},
+    {file = "pytz-2016.2-py2.6.egg", hash = "sha256:da76862a6392d14a82b136f356722190dac376dfd2eb48c04eaf4f52d381b1a7"},
+    {file = "pytz-2016.2-py2.7.egg", hash = "sha256:f388026e93ed80fabe169a2505b0b604c508a364496f1d872d72fe6a8992a630"},
+    {file = "pytz-2016.2-py2.py3-none-any.whl", hash = "sha256:29905081545659ab2510562d76c77f6b5c056118646dece3ea956a5671efa21a"},
+    {file = "pytz-2016.2-py3.1.egg", hash = "sha256:a165e06bfaf78fd7b551b80f8633291ad6e18daa888ebb85e3c8c456d713fe39"},
+    {file = "pytz-2016.2-py3.2.egg", hash = "sha256:991243236e44275f51d291093977fdf8af7a022178df412d448d22b396b5fe0e"},
+    {file = "pytz-2016.2-py3.3.egg", hash = "sha256:017a68821c06a9d452e1e1d9496d82d8506d01ce4df4505241368ff87ef79e2e"},
+    {file = "pytz-2016.2-py3.4.egg", hash = "sha256:d42c7871ed94aa41fd9642cfce219c8fd5dff06c60d98a47e46e01ef658624f0"},
+    {file = "pytz-2016.2-py3.5.egg", hash = "sha256:fdda7ea39fdb7f4909e7272eaf26f5cd44e402af5428f1ed870f3514b94456f6"},
+    {file = "pytz-2016.2.tar.bz2", hash = "sha256:675ec20d1b956a5817dcd32b0290933e953c752e324ef2365f032a3a70c6b2a7"},
+    {file = "pytz-2016.2.tar.gz", hash = "sha256:cdcd7dc6abd6aad46055ef8e3769a6b99425af86cbb7214d27845f0316550473"},
+    {file = "pytz-2016.2.zip", hash = "sha256:4322d42d68f19df6e2a1fd59d11c8499dc8ddb765440db9643a29b9b329aab63"},
+]
+redis = [
+    {file = "redis-2.10.5-py2.py3-none-any.whl", hash = "sha256:97156b37d7cda4e7d8658be1148c983984e1a975090ba458cc7e244025191dbd"},
+    {file = "redis-2.10.5.tar.gz", hash = "sha256:5dfbae6acfc54edf0a7a415b99e0b21c0a3c27a7f787b292eea727b1facc5533"},
+]
+requests = [
+    {file = "requests-2.2.1-py2.py3-none-any.whl", hash = "sha256:b5bd2e1b78d28051108ebaa6248750221f9ccef52b4f054cb727de61b0406de0"},
+    {file = "requests-2.2.1.tar.gz", hash = "sha256:1266921f1bed5fbf364cd83cf239b6d7b3ea5c32ccccbc93980d9ba12cdcfd02"},
+]
+six = [
+    {file = "six-1.5.2-py2.py3-none-any.whl", hash = "sha256:01f1bfe26d8b2c2c19b6c6bd1974746667038c7b45601ee510b7b3867fd14b7e"},
+    {file = "six-1.5.2.tar.gz", hash = "sha256:fc6beeffdd8fc76b783287eb77d093425d0710920aae2c70acd693c52d7e8cf8"},
+]
+speaklater = [
+    {file = "speaklater-1.3.tar.gz", hash = "sha256:59fea336d0eed38c1f0bf3181ee1222d0ef45f3a9dd34ebe65e6bfffdd6a65a9"},
+]
+urllib3 = [
+    {file = "urllib3-1.7.1.tar.gz", hash = "sha256:20fb9e6c7127a6f7a758919f6de7ef352bb955084006f29e838045caca00cb1b"},
+]
+werkzeug = [
+    {file = "Werkzeug-0.11.5-py2.py3-none-any.whl", hash = "sha256:22218d2f8572575531e876dbeb26c8691d5e1a4f5d923324f045a6231ba03609"},
+    {file = "Werkzeug-0.11.5.tar.gz", hash = "sha256:afdb04f183eef3b20827eb4520dcb75c1cd1f0ba7a7de3f463ff7a462eee8164"},
+]
+wtforms = [
+    {file = "WTForms-2.1.zip", hash = "sha256:ffdf10bd1fa565b8233380cb77a304cd36fd55c73023e91d4b803c96bc11d46f"},
+]

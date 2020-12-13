@@ -1,7 +1,7 @@
 # see: http://flask.pocoo.org/docs/0.10/config/
 
 from collections import OrderedDict
-from flask.ext.babel import gettext as _
+from flask_babel import gettext as _
 
 # SERVER_NAME = 'codelab.pronus.io'
 APP_NAME = 'Code Lab'
