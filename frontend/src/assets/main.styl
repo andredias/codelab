@@ -4,15 +4,15 @@ html
     text-rendering optimizeLegibility
     font-family "Open Sans", Helvetica, sans-serif
 
-background_escuro()
+common_header_footer()
     background linear-gradient(#222, #121212)
-
-apagado = darken(white, 20%)
-
-header
-    background_escuro()
     padding 1rem 0
     color apagado
+
+apagado = darken(white, 30%)
+
+header
+    common_header_footer()
 
     section
         display flex
@@ -27,3 +27,14 @@ header
 
         a + a
             margin-left 2rem
+
+footer
+    common_header_footer()
+
+    section
+        display flex
+        justify-content space-between
+        align-items center
+
+        nav
+            display grid
