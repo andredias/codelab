@@ -5,6 +5,7 @@ syntax: glob
 .tox
 *.egg-info
 node_modules
+dist
 *.css
 non_versioned_config.py
 venv

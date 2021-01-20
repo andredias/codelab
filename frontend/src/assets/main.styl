@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Patua+One&display=swap')
+
+html
+    text-rendering optimizeLegibility
+    font-family "Open Sans", Helvetica, sans-serif
+
+background_escuro()
+    background linear-gradient(#222, #121212)
+
+apagado = darken(white, 20%)
+
+header
+    background_escuro()
+    padding 1rem 0
+    color apagado
+
+    section
+        display flex
+        justify-content space-between
+
+        nav a.router-link-active
+            border-bottom 1px solid white
+            color white
+
+        nav a:hover
+            color white
+
+        a + a
+            margin-left 2rem
