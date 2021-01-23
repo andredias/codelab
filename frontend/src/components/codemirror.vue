@@ -30,7 +30,7 @@ export default {
         onMounted(() => {
             const defaultOptions = {
                 lineNumbers: true,
-                mode: 'javascript',
+                mode: 'python',
                 theme: 'blackboard',
             }
             codemirror.value = markRaw(CodeMirror.fromTextArea(textarea.value, {...defaultOptions, ...props.options}))

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Patua+One&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Fira+Codedisplay=swap')
 
 html
     text-rendering optimizeLegibility
@@ -121,9 +121,20 @@ footer.main
 
         .editor
             grid-area editor
+            padding 0
 
         .input-output
             grid-area input-output
 
         .stats
             grid-area stats
+
+
+.CodeMirror
+    height auto
+    min-height 40ch
+    font-family 'Fira Code', monospace
+
+.CodeMirror-scroll
+    min-height 40ch
+    max-height 80ch
