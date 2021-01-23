@@ -1,5 +1,5 @@
 <template lang="pug">
-footer
+footer.main
     section
         nav
             router-link(to="/") Home

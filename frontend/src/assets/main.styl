@@ -6,12 +6,20 @@ html
 
 common_header_footer()
     background linear-gradient(#222, #121212)
-    padding 1rem 0
+    padding 1rem 30px
     color apagado
 
 apagado = darken(white, 30%)
+title_color = black
+secondary_title_color = lighten(title_color, 30%)
+destaque_color = #1ba94c
+texto_destaque = darken(destaque_color, 20%)
 
-header
+p
+    color secondary_title_color
+    font-size 0.9rem
+
+header.main
     common_header_footer()
 
     section
@@ -19,7 +27,7 @@ header
         justify-content space-between
 
         nav a.router-link-active
-            border-bottom 1px solid white
+            border-bottom 1px solid destaque_color
             color white
 
         nav a:hover
@@ -28,7 +36,7 @@ header
         a + a
             margin-left 2rem
 
-footer
+footer.main
     common_header_footer()
 
     section
@@ -38,3 +46,84 @@ footer
 
         nav
             display grid
+
+.dojo
+    background-color #f3f7f7
+
+    .header-container
+        background-color white
+        box-shadow 0px 1px 2px rgba(0, 0, 0, 0.1)
+
+        header
+            max-width 1024px
+            padding 1rem 30px
+            display flex
+            justify-content space-between
+            align-items center
+
+            h3
+                font-size 0.8rem
+                color secondary_title_color
+
+                a:hover
+                    color destaque_color
+
+                * + *
+                    &::before
+                        content '>'
+                        color secondary_title_color
+                        padding 0 0.5rem
+
+
+    main
+        padding 1rem 30px
+        display grid
+        grid-template-columns 2fr 1fr
+        grid-gap 1rem
+        grid-template-areas "descricao stats" \
+                            "editor    input-output"
+
+        h1
+            color texto_destaque
+            font-size 1.2rem
+            font-weight 700
+            margin-bottom 1rem
+
+        h2
+            color title_color
+            font-size 1rem
+            font-weight 600
+            padding-bottom 0.25rem
+
+        .descricao
+        .editor
+        .input-output
+            background white
+            box-shadow 0px 1px 3px 1px rgba(0, 0, 0, 0.1)
+            padding 1.5rem
+
+        .descricao
+            position relative
+            grid-area descricao
+
+            .edit
+                position absolute
+                top 1rem
+                right 1rem
+
+            svg
+                width 20px
+                stroke secondary_title_color
+
+                &:hover
+                    stroke destaque_color
+                    cursor pointer
+
+        .editor
+            grid-area editor
+
+        .input-output
+            grid-area input-output
+
+        .stats
+            grid-area stats
