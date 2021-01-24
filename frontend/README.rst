@@ -33,3 +33,10 @@ Customize configuration
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 See `Configuration Reference <https://cli.vuejs.org/config/>`__.
+
+
+
+Todo:
+
+* Ver esse componente: https://vuejs-tips.github.io/vue-the-mask/
+* https://freefrontend.com/vue-code-examples/
