@@ -9,18 +9,33 @@ common_header_footer()
     padding 1rem 30px
     color apagado
 
+shadow()
+    box-shadow 0 1px 3px 1px rgba(0, 0, 0, 0.2)
+
+monospace()
+    font-family 'Fira Code', monospace
+
 apagado = darken(white, 30%)
 title_color = black
 cor_texto = #738f93
 destaque_color = #1ba94c
 cor_titulo = darken(cor_texto, 50%)
+background_color = #dde3e3
 
 p
 a
+span
+label
     color cor_texto
 
 p
+span
+label
     font-size 0.9rem
+
+textarea
+    shadow()
+    border none
 
 header.main
     common_header_footer()
@@ -51,7 +66,7 @@ footer.main
             display grid
 
 .dojo
-    background-color #f3f7f7
+    background-color background_color
 
     .header-container
         background-color white
@@ -91,14 +106,9 @@ footer.main
         h1
             color cor_titulo
             font-size 1.2rem
-            font-weight 700
-            margin 1rem 0 0.25rem
-
-        h2
-            color title_color
-            font-size 1rem
             font-weight 600
-            padding-bottom 0.25rem
+            margin 1rem 0 0.5rem
+
 
         .projeto
             grid-area projeto
@@ -129,12 +139,15 @@ footer.main
 
             .cursor
                 background white
-                font-family 'Fira Code', monospace
+                monospace()
                 font-size 0.9rem
                 color cor_texto
                 display flex
                 justify-content space-between
                 padding 0.25rem 1rem
+
+                &.light
+                    background #efefef
 
                 a.selected
                     border-bottom 1px solid
@@ -148,20 +161,24 @@ footer.main
 
             label
                 padding-left 0.5rem
-                color cor_texto
 
-            textarea
+            textarea.code
                 display block
                 margin-top 0.5rem
                 resize none
                 height 10ch
                 width 100%
-                max-width 100%
+                font-size 0.9rem
+                line-height 1.25rem
+                monospace()
 
             .upload-run
                 display flex
                 justify-content space-between
                 align-items start
+
+            .input
+                margin-top 1rem
 
         .stats
             grid-area stats
@@ -173,11 +190,11 @@ footer.main
 .CodeMirror
     height auto
     min-height 40ch
-    font-family 'Fira Code', monospace
+    monospace()
 
 .CodeMirror-scroll
     min-height 40ch
-    max-height 80ch
+    max-height 80vh
 
 .btn
     padding 1rem 1.25rem

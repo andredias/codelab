@@ -3,10 +3,11 @@ textarea(ref="textarea")
 </template>
 
 <script>
-import { ref, markRaw, onMounted } from 'vue'
+import { ref, markRaw, onMounted, watch } from 'vue'
 import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/blackboard.css'
+import '@/assets/blackboard.css'
+import '@/assets/github-theme.css'
 import 'codemirror/mode/python/python'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/rust/rust'
@@ -39,6 +40,17 @@ export default {
                 emit('update:modelValue', cm.getValue())
             })
         })
+
+        watch(
+            () => props.options,
+            (options) => {
+                console.log(options)
+                for (const key in options) {
+                    codemirror.value.setOption(key, options[key])
+                }
+            },
+            { deep: true }
+        )
         return { textarea }
     }
 
