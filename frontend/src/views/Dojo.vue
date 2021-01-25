@@ -21,7 +21,7 @@
         .editor
             h1 Editor
             .box
-                codemirror(v-model="code" :options="editor_options" @cursor_moved="update_cursor")
+                codemirror(v-model="code" :options="editor_options" @cursor_moved="update_cursor" ref="editor")
                 .cursor(:class="{ light: is_light_theme }")
                     div
                         span Tema:
@@ -73,6 +73,7 @@ export default {
             mode: 'python',
             theme: 'blackboard',
         })
+        const editor = ref(null)
 
         const change_theme = (style) => {
             theme.value = style
@@ -89,8 +90,13 @@ export default {
 
         const is_light_theme = computed(() => theme.value === 'light')
 
+        const set_cursor_position = (line, ch) => {
+            editor.value.editor.setCursor(line - 1, ch - 1)
+            editor.value.editor.focus()
+        }
 
-        return { code, lint, checked_input, input, output, cursor_pos, theme, change_theme, is_light_theme, editor_options, update_cursor }
+
+        return { code, lint, checked_input, input, output, cursor_pos, theme, change_theme, is_light_theme, editor_options, update_cursor, set_cursor_position, editor }
     }
 
 }
