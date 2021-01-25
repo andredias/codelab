@@ -1,8 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Fira+Codedisplay=swap')
 
+apagado = darken(white, 30%)
+title_color = black
+cor_texto = #738f93
+destaque_color = #1ba94c
+cor_titulo = darken(cor_texto, 50%)
+background_color = #dde3e3
+
 html
     text-rendering optimizeLegibility
     font-family "Open Sans", Helvetica, sans-serif
+    color cor_texto
+
+body
+    font-size 0.9rem
 
 common_header_footer()
     background linear-gradient(#222, #121212)
@@ -15,27 +26,21 @@ shadow()
 monospace()
     font-family 'Fira Code', monospace
 
-apagado = darken(white, 30%)
-title_color = black
-cor_texto = #738f93
-destaque_color = #1ba94c
-cor_titulo = darken(cor_texto, 50%)
-background_color = #dde3e3
-
-p
-a
-span
-label
-    color cor_texto
-
-p
-span
-label
-    font-size 0.9rem
 
 textarea
     shadow()
     border none
+
+svg
+    stroke cor_texto
+
+    &:hover
+        stroke destaque_color
+
+label
+.link
+    cursor pointer
+
 
 header.main
     common_header_footer()
@@ -83,21 +88,21 @@ footer.main
                 font-size 0.8rem
                 color cor_texto
 
-                a:hover
-                    color destaque_color
-
                 * + *
                     &::before
                         content '>'
                         color cor_texto
                         padding 0 0.5rem
 
+    a:hover
+    .link:hover
+        color destaque_color
 
     main
         padding 1rem 30px
         display grid
         grid-template-columns 2fr 1fr
-        grid-gap 1rem
+        gap 1rem
         grid-template-areas "projeto       stats" \
                             "editor        lint" \
                             "input-output  ."
@@ -119,15 +124,9 @@ footer.main
                 justify-content space-between
                 align-items center
 
-            svg
-                stroke cor_texto
-                &:hover
-                    stroke destaque_color
-                    cursor pointer
-
         .descricao
             background white
-            padding 1.5rem
+            padding 1rem
 
         .box
             box-shadow 0px 1px 3px 1px rgba(0, 0, 0, 0.1)

@@ -28,11 +28,13 @@ export default {
         const textarea = ref(null)
         const editor = ref(null)
 
+
         onMounted(() => {
             const defaultOptions = {
                 lineNumbers: true,
                 mode: 'python',
                 theme: 'blackboard',
+                lineWrapping: true,
             }
             editor.value = markRaw(CodeMirror.fromTextArea(textarea.value, {...defaultOptions, ...props.options}))
             editor.value.setValue(props.modelValue)
@@ -44,6 +46,7 @@ export default {
             })
         })
 
+
         watch(
             () => props.options,
             (options) => {
@@ -53,6 +56,16 @@ export default {
             },
             { deep: true }
         )
+
+
+        watch(
+            () => props.modelValue,
+            (code) => {
+                editor.value.setValue(code)
+            }
+        )
+
+
         return { textarea, editor }
     }
 

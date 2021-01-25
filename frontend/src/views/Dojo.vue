@@ -39,12 +39,13 @@
         .input-output
             div.upload-run
                 button.btn.btn-primary Run Code
-                a(href="#")
+                .link(@click="upload_file")
                     svg(class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor")
                         path(stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12")
                     span &nbsp; upload code from file
+                    input(type="file" name="code_uploader" style="display:none" ref="code_uploader" id="code_uploader" @change="on_file_picked")
             div.input
-                input(type="checkbox" name="custom_input" v-model="checked_input")
+                input(type="checkbox" id="custom_input" v-model="checked_input")
                 label(for="custom_input") Definir dados de entrada
                 textarea.code(v-show="checked_input" v-model="input")
 
@@ -74,6 +75,7 @@ export default {
             theme: 'blackboard',
         })
         const editor = ref(null)
+        const code_uploader = ref(null)
 
         const change_theme = (style) => {
             theme.value = style
@@ -95,8 +97,22 @@ export default {
             editor.value.editor.focus()
         }
 
+        const upload_file = () => {
+            code_uploader.value.click()
+        }
 
-        return { code, lint, checked_input, input, output, cursor_pos, theme, change_theme, is_light_theme, editor_options, update_cursor, set_cursor_position, editor }
+        const on_file_picked = (event) => {
+            const files = event.target.files
+            const fileReader = new FileReader()
+            fileReader.addEventListener('load', () => {
+                code.value = fileReader.result
+                editor.value.editor.focus()
+            })
+            fileReader.readAsText(files[0])
+        }
+
+
+        return { code, lint, checked_input, input, output, cursor_pos, theme, change_theme, is_light_theme, editor_options, update_cursor, set_cursor_position, editor, upload_file, code_uploader, on_file_picked }
     }
 
 }
