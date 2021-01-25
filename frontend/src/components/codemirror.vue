@@ -26,7 +26,7 @@ export default {
     emits: ["update:modelValue", "cursor_moved"],
     setup(props, { emit }) {
         const textarea = ref(null)
-        const codemirror = ref(null)
+        const editor = ref(null)
 
         onMounted(() => {
             const defaultOptions = {
@@ -34,12 +34,12 @@ export default {
                 mode: 'python',
                 theme: 'blackboard',
             }
-            codemirror.value = markRaw(CodeMirror.fromTextArea(textarea.value, {...defaultOptions, ...props.options}))
-            codemirror.value.setValue(props.modelValue)
-            codemirror.value.on('change', cm => {
+            editor.value = markRaw(CodeMirror.fromTextArea(textarea.value, {...defaultOptions, ...props.options}))
+            editor.value.setValue(props.modelValue)
+            editor.value.on('change', cm => {
                 emit('update:modelValue', cm.getValue())
             })
-            codemirror.value.on('cursorActivity', cm => {
+            editor.value.on('cursorActivity', cm => {
                 emit('cursor_moved', cm.getCursor())
             })
         })
@@ -48,12 +48,12 @@ export default {
             () => props.options,
             (options) => {
                 for (const key in options) {
-                    codemirror.value.setOption(key, options[key])
+                    editor.value.setOption(key, options[key])
                 }
             },
             { deep: true }
         )
-        return { textarea }
+        return { textarea, editor }
     }
 
 }
