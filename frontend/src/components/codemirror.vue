@@ -23,7 +23,7 @@ export default {
             default: () => ({})
         },
     },
-    emits: ["update:modelValue"],
+    emits: ["update:modelValue", "cursor_moved"],
     setup(props, { emit }) {
         const textarea = ref(null)
         const codemirror = ref(null)
@@ -39,12 +39,14 @@ export default {
             codemirror.value.on('change', cm => {
                 emit('update:modelValue', cm.getValue())
             })
+            codemirror.value.on('cursorActivity', cm => {
+                emit('cursor_moved', cm.getCursor())
+            })
         })
 
         watch(
             () => props.options,
             (options) => {
-                console.log(options)
                 for (const key in options) {
                     codemirror.value.setOption(key, options[key])
                 }

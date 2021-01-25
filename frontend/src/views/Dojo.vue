@@ -21,7 +21,7 @@
         .editor
             h1 Editor
             .box
-                codemirror(v-model="code" :options="editor_options")
+                codemirror(v-model="code" :options="editor_options" @cursor_moved="update_cursor")
                 .cursor(:class="{ light: is_light_theme }")
                     div
                         span Tema:
@@ -30,8 +30,10 @@
                     div
                         span Python
                     div
-                        span Linha: 4
-                        span Coluna: 10
+                        span Linha:
+                        span.cursor_pos {{ cursor_pos.line + 1 }}
+                        span Coluna:
+                        span.cursor_pos {{ cursor_pos.ch + 1 }}
         .lint
             h1 Lint
         .input-output
@@ -60,12 +62,12 @@ export default {
         codemirror,
     },
     setup() {
-        const code = ref('teste 123')
+        const code = ref('')
         const lint = ref({})
         const input = ref('')
         const checked_input = ref(false)
-        const output = ref('teste\n123')
-        const cursor_pos = ref({})
+        const output = ref('')
+        const cursor_pos = ref({line: 0, ch: 0})
         const theme = ref('dark')
         const editor_options = ref({
             mode: 'python',
@@ -81,10 +83,14 @@ export default {
             }
         }
 
+        const update_cursor = (position) => {
+            cursor_pos.value = position
+        }
+
         const is_light_theme = computed(() => theme.value === 'light')
 
 
-        return { code, lint, checked_input, input, output, cursor_pos, theme, change_theme, is_light_theme, editor_options }
+        return { code, lint, checked_input, input, output, cursor_pos, theme, change_theme, is_light_theme, editor_options, update_cursor }
     }
 
 }
