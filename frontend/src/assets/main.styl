@@ -30,6 +30,7 @@ monospace()
 textarea
     shadow()
     border none
+    resize none
 
 label
 .link
@@ -106,10 +107,14 @@ footer.main
 
 
         h1
+        h2
             color cor_titulo
             font-size 1.2rem
             font-weight 600
             margin 1rem 0 0.5rem
+
+        h2
+            font-size 1rem
 
 
         .projeto
@@ -189,6 +194,26 @@ footer.main
             grid-area lint
 
 
+.edit_project
+    display flex
+    flex-direction column
+    justify-content space-between
+
+    label
+        color cor_titulo
+        font-size 1rem
+        font-weight 600
+        margin 0.75rem 0 0.25rem
+
+    textarea
+        height 20ch
+
+    div
+        display flex
+        gap 0.5rem
+        margin-top 1rem
+
+
 .CodeMirror
     height auto
     min-height 40ch
@@ -206,7 +231,6 @@ footer.main
     box-shadow 0px 1px 3px 1px rgba(0, 0, 0, 0.3)
 
     &:hover
-        background-color desaturate(destaque_color, 40%)
         transform translateY(-2px)
 
 
@@ -214,6 +238,9 @@ footer.main
     box-shadow 0px 1px 3px 1px rgba(darken(destaque_color, 30%), 0.5)
     background-color destaque_color
     color lighten(destaque_color, 90%)
+
+.btn-secondary
+    background-color white
 
 svg.icon
     width 24px

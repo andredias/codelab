@@ -9,17 +9,26 @@
                     span Título do Projeto
     main
         .projeto
-            .titulo
-                h1 Título do Projeto
-                svg.icon.link(fill="none" viewBox="0 0 24 24" stroke="currentColor")
+            .titulo(v-if="!editing_project")
+                h1 {{ title }}
+                svg.icon.link(fill="none" viewBox="0 0 24 24" stroke="currentColor" @click="start_editing_project")
                     path(stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z")
-            .descricao.box
-                p
-                    | Deploy web apps of all kinds, from large scale enterprise APIs to static websites for individuals. Fill out the form to try a demo of our platform
+            .descricao.box(v-if="!editing_project")
+                p {{ description }}
+
+            .edit_project(v-if="editing_project")
+                label(for="project_title") Título
+                input(id="project_title" type="text" v-model="temp_title")
+                label(for="project_description") Descrição
+                textarea(id="project_description" v-model="temp_description")
+                div
+                    button.btn.btn-primary(@click="edit_project") Alterar
+                    button.btn.btn-secondary(@click="editing_project = false") Cancelar
+
         .stats
-            h1 Estatísticas
+            h2 Estatísticas
         .editor
-            h1 Editor
+            h2 Editor
             .box
                 codemirror(v-model="code" :options="editor_options" @cursor_moved="update_cursor" ref="editor")
                 .cursor(:class="{ light: is_light_theme }")
@@ -35,7 +44,7 @@
                         span Coluna:
                         span.cursor_pos {{ cursor_pos.ch + 1 }}
         .lint
-            h1 Lint
+            h2 Lint
         .input-output
             div.upload-run
                 button.btn.btn-primary Run Code
@@ -50,7 +59,7 @@
                 textarea.code(v-show="checked_input" v-model="input")
 
             div.output(v-if="output")
-                h1 Output
+                h2 Output
                 textarea.code(readonly v-model="output")
 </template>
 
@@ -112,7 +121,26 @@ export default {
         }
 
 
-        return { code, lint, checked_input, input, output, cursor_pos, theme, change_theme, is_light_theme, editor_options, update_cursor, set_cursor_position, editor, upload_file, code_uploader, on_file_picked }
+        const title = ref('Temp Title')
+        const description = ref('lorem Ipsum')
+        const temp_title = ref('')
+        const temp_description = ref('')
+        const editing_project = ref(false)
+
+        const start_editing_project = () => {
+            editing_project.value = true
+            temp_title.value = title.value
+            temp_description.value = description.value
+        }
+
+        const edit_project = () => {
+            title.value = temp_title.value
+            description.value = temp_description.value
+            editing_project.value = false
+        }
+
+
+        return { code, lint, checked_input, input, output, cursor_pos, theme, change_theme, is_light_theme, editor_options, update_cursor, set_cursor_position, editor, upload_file, code_uploader, on_file_picked, title, description, temp_title, temp_description, editing_project, start_editing_project, edit_project }
     }
 
 }
