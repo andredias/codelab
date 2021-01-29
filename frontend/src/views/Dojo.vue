@@ -115,7 +115,7 @@ export default {
             const files = event.target.files
             const fileReader = new FileReader()
             fileReader.addEventListener('load', () => {
-                code.value = fileReader.result
+                editor.value.editor.setValue(fileReader.result)
                 editor.value.editor.focus()
             })
             fileReader.readAsText(files[0])

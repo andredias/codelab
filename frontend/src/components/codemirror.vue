@@ -57,15 +57,6 @@ export default {
             { deep: true }
         )
 
-
-        watch(
-            () => props.modelValue,
-            (code) => {
-                editor.value.setValue(code)
-            }
-        )
-
-
         return { textarea, editor }
     }
 
