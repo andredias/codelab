@@ -32,6 +32,10 @@ textarea
     border none
     resize none
 
+input
+textarea
+    color black
+
 label
 .link
     cursor pointer
@@ -47,15 +51,16 @@ header.main
         display flex
         justify-content space-between
 
-        nav a.router-link-active
-            border-bottom 1px solid destaque_color
-            color white
+        nav
+            a.router-link-active
+                border-bottom 1px solid destaque_color
+                color white
 
-        nav a:hover
-            color white
+            *:hover
+                color white
 
-        a + a
-            margin-left 2rem
+            & > * + *
+                margin-left 2rem
 
 footer.main
     common_header_footer()

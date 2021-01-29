@@ -17,55 +17,56 @@
                 p {{ description }}
 
             .edit_project(v-if="editing_project")
-                label(for="project_title") Título
+                label(for="project_title") {{ i18n.$t('title') }}
                 input(id="project_title" type="text" v-model="temp_title")
-                label(for="project_description") Descrição
+                label(for="project_description") {{ i18n.$t('description') }}
                 textarea(id="project_description" v-model="temp_description")
                 div
-                    button.btn.btn-primary(@click="edit_project") Alterar
-                    button.btn.btn-secondary(@click="editing_project = false") Cancelar
+                    button.btn.btn-primary(@click="edit_project") {{ i18n.$t('change') }}
+                    button.btn.btn-secondary(@click="editing_project = false") {{ i18n.$t('cancel') }}
 
         .stats
-            h2 Estatísticas
+            h2 {{ i18n.$t('statistics') }}
         .editor
             h2 Editor
             .box
                 codemirror(v-model="code" :options="editor_options" @cursor_moved="update_cursor" ref="editor")
                 .cursor(:class="{ light: is_light_theme }")
                     div
-                        span Tema:
-                        a(href="#" :class="{ selected: is_light_theme }" @click.prevent="change_theme('light')") Light
-                        a(href="#" :class="{ selected: !is_light_theme }" @click.prevent="change_theme('dark')") Dark
+                        span {{ i18n.$t('theme') }}:
+                        a(href="#" :class="{ selected: is_light_theme }" @click.prevent="change_theme('light')") {{ i18n.$t('light') }}
+                        a(href="#" :class="{ selected: !is_light_theme }" @click.prevent="change_theme('dark')") {{ i18n.$t('dark') }}
                     div
                         span Python
                     div
-                        span Linha:
+                        span {{ i18n.$t('line') }}:
                         span.cursor_pos {{ cursor_pos.line + 1 }}
-                        span Coluna:
+                        span {{ i18n.$t('column') }}:
                         span.cursor_pos {{ cursor_pos.ch + 1 }}
         .lint
             h2 Lint
         .input-output
             div.upload-run
-                button.btn.btn-primary Run Code
+                button.btn.btn-primary {{ i18n.$t('run_code') }}
                 .link(@click="upload_file")
                     svg(class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor")
                         path(stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12")
-                    span &nbsp; upload code from file
+                    span &nbsp; {{ i18n.$t('upload_code_from_file') }}
                     input(type="file" name="code_uploader" style="display:none" ref="code_uploader" id="code_uploader" @change="on_file_picked")
             div.input
                 input(type="checkbox" id="custom_input" v-model="checked_input")
-                label(for="custom_input") Definir dados de entrada
+                label(for="custom_input") {{ i18n.$t('define_input_data') }}
                 textarea.code(v-show="checked_input" v-model="input")
 
             div.output(v-if="output")
-                h2 Output
+                h2 {{ i18n.$t('output') }}
                 textarea.code(readonly v-model="output")
 </template>
 
 <script>
 import codemirror from '@/components/codemirror'
 import { ref, computed } from 'vue'
+import { useI18n } from '@/plugins/i18n_plugin'
 
 export default {
     components: {
@@ -139,8 +140,10 @@ export default {
             editing_project.value = false
         }
 
+        const i18n = useI18n()
 
-        return { code, lint, checked_input, input, output, cursor_pos, theme, change_theme, is_light_theme, editor_options, update_cursor, set_cursor_position, editor, upload_file, code_uploader, on_file_picked, title, description, temp_title, temp_description, editing_project, start_editing_project, edit_project }
+
+        return { code, lint, checked_input, input, output, cursor_pos, theme, change_theme, is_light_theme, editor_options, update_cursor, set_cursor_position, editor, upload_file, code_uploader, on_file_picked, title, description, temp_title, temp_description, editing_project, start_editing_project, edit_project, i18n }
     }
 
 }
