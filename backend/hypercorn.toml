@@ -1,0 +1,7 @@
+worker_class = "uvloop"
+# bind = "0.0.0.0:8443"
+# certfile = "cert/server.pem"
+# keyfile = "cert/server.key"
+accesslog = "-"
+errorlog = "-"
+access_log_format = "%(t)s %(h)s %(S)s %(r)s %(s)s"
