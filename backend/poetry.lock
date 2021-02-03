@@ -426,8 +426,8 @@ h11 = ">=0.9.0,<1"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.8"
-content-hash = "2a1ab34d814e619ea20e8d403bc60d54dd8c3826eb9dcd4aa50aa65b73477a13"
+python-versions = "^3.9"
+content-hash = "779d17e7c9067b198b043644de9035b16194bb73450b293d18ec4ee99b0443e2"
 
 [metadata.files]
 aioredis = [
