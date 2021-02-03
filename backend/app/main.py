@@ -7,10 +7,10 @@ from fastapi import FastAPI
 from starlette.responses import JSONResponse
 
 from .resources import shutdown, startup
-# from .routers import
+from .routers import project
 
 routers = [
-
+    project.router,
 ]
 
 

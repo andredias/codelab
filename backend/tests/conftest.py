@@ -35,11 +35,11 @@ def docker() -> Generator:
 async def app(docker) -> AsyncIterable[FastAPI]:  # noqa: F811
     app = create_app()
     async with LifespanManager(app):
-        await res.redis.flushdb()  # clean redis database
         yield app
 
 
 @fixture
 async def client(app: FastAPI) -> AsyncIterable[AsyncClient]:
+    await res.redis.flushdb()  # clean redis database everytime
     async with AsyncClient(app=app, base_url='http://test') as client:
         yield client
