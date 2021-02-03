@@ -4,4 +4,4 @@ run:
 
 
 test:
-	ENV=testing pytest -x -v --cov-report term-missing --cov-report html --cov-branch --cov app/
+	ENV=testing pytest -s -x -v --cov-report term-missing --cov-report html --cov-branch --cov app/

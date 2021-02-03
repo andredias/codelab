@@ -1,12 +1,12 @@
-import os
 from pathlib import Path
 from subprocess import DEVNULL, check_call
-from typing import AsyncIterable, Generator
+from collections.abc import AsyncIterable, Generator
 
 from asgi_lifespan import LifespanManager
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from httpx import AsyncClient
+from loguru import logger
 from pytest import fixture
 
 from app import create_app  # isort:skip

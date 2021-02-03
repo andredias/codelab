@@ -1,9 +1,10 @@
 # import asyncio
+
 from hashlib import md5
 from typing import List
 
-from loguru import logger
 from fastapi import APIRouter, HTTPException
+from loguru import logger
 
 from .. import config
 from .. import resources as res
@@ -61,9 +62,10 @@ async def run_project(project: ProjectIn):
 
 
 def calc_project_id(proj: ProjectCore) -> str:
-    all_code = ''.join(f'{s.path}{s.code}' for s in proj.sources)
+    code = ''.join(f'{s.path}{s.code}' for s in proj.sources)
+    commands = ''.join(c.command for c in proj.commands)
     text = ''.join(
-        [all_code, proj.input, proj.build_command, proj.run_command])
+        [code, commands, proj.input])
     return md5(text.encode()).hexdigest()
 
 

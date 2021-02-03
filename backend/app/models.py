@@ -1,4 +1,4 @@
-from typing import List, Optional, Mapping
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -22,11 +22,16 @@ class Sourcefile(BaseModel):
     code: str
 
 
+class Command(BaseModel):
+    command: str
+    timeout: Optional[float]
+
+
 class Output(BaseModel):
     stdout: Optional[str]
     stderr: Optional[str]
-    lints: Optional[Mapping[str, List[Lint]]]
-    metrics: Optional[Mapping[str, List[Metric]]]
+    lints: Optional[list[str, list[Lint]]]
+    metrics: Optional[dict[str, list[Metric]]]
 
 
 class ProjectOut(BaseModel):
@@ -35,9 +40,8 @@ class ProjectOut(BaseModel):
 
 
 class ProjectCore(BaseModel):
-    sources: List[Sourcefile]
-    build_command: str = ''
-    run_command: str
+    sources: list[Sourcefile]
+    commands: list[Command]
     input: str = ''
 
 
