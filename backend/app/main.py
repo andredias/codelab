@@ -1,10 +1,9 @@
 from pathlib import Path
 from typing import Any, Union
 
-import orjson
 from dotenv import load_dotenv
 from fastapi import FastAPI
-from starlette.responses import JSONResponse
+from fastapi.responses import ORJSONResponse
 
 from .resources import shutdown, startup
 from .routers import project
@@ -12,12 +11,6 @@ from .routers import project
 routers = [
     project.router,
 ]
-
-
-class ORJSONResponse(JSONResponse):
-
-    def render(self, content: Any) -> bytes:
-        return orjson.dumps(content)
 
 
 def create_app(env_filename: Union[str, Path] = None) -> FastAPI:
