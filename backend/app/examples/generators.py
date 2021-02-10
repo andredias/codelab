@@ -1,0 +1,3 @@
+odds = (n for n in range(1, 20) if n % 2)
+for n in odds:
+    print(n)
