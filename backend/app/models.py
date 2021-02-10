@@ -17,32 +17,30 @@ class Metric(BaseModel):
     value: float
 
 
-class Sourcefile(BaseModel):
-    path: str
-    code: str
+Sourcefiles = dict[str, str]
 
 
-class Command(BaseModel):
+class CommandIn(BaseModel):
+    type: str
     command: str
-    timeout: Optional[float]
+    timeout: Optional[float] = None
+    input: Optional[str] = None
 
 
-class Output(BaseModel):
-    stdout: Optional[str]
-    stderr: Optional[str]
-    lints: Optional[list[str, list[Lint]]]
-    metrics: Optional[dict[str, list[Metric]]]
+class CommandOut(BaseModel):
+    type: str
+    command: str
+    stdout: Optional[str] = None
+    stderr: Optional[str] = None
 
 
 class ProjectOut(BaseModel):
     id: str
-    output: Output
 
 
 class ProjectCore(BaseModel):
-    sources: list[Sourcefile]
-    commands: list[Command]
-    input: str = ''
+    sources: Sourcefiles
+    commands: list[CommandIn]
 
 
 class ProjectIn(ProjectCore):
