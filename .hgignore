@@ -10,7 +10,6 @@ dist
 non_versioned_config.py
 venv
 .venv
-.vscode
 .pytest_cache
 .coverage
 htmlcov
