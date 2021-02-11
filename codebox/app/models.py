@@ -2,21 +2,6 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-
-class Lint(BaseModel):
-    line: int
-    column: Optional[int]
-    code: str
-    message: str
-    level: str
-    linter: str
-
-
-class Metric(BaseModel):
-    name: str
-    value: float
-
-
 Sourcefiles = dict[str, str]
 
 
@@ -38,19 +23,6 @@ class Response(BaseModel):
     exit_code: int
 
 
-class ProjectOut(BaseModel):
-    id: str
-
-
-class ProjectCore(BaseModel):
+class CodeboxInput(BaseModel):
     sources: Sourcefiles
     commands: list[Command]
-
-
-class CodeboxInput(ProjectCore):
-    title: str = ''
-    description: str = ''
-
-
-class Project(CodeboxInput, ProjectOut):
-    pass
