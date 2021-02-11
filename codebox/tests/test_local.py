@@ -1,9 +1,11 @@
+import io
+import json
 from pathlib import Path
 
 from pytest import mark
 
-from app.codebox import execute, run_project, save_sources  # isort:skip
-from app.models import Command, Response  # isort:skip
+from app.codebox import execute, main, run_project, save_sources  # isort:skip
+from app.models import CodeboxInput, Command, Response  # isort:skip
 
 TIMEOUT = 0.1
 
@@ -107,3 +109,15 @@ for line in sys.stdin.readlines():
 @mark.parametrize('sources,commands,responses', projects)
 def test_run_project(sources, commands, responses):
     assert run_project(sources, commands) == responses
+
+
+def test_main(capsys, monkeypatch):
+    sources = projects[-1][0]
+    commands = projects[-1][1][:2]
+    responses = projects[-1][2][:2]
+    project = CodeboxInput(sources=sources, commands=commands).json(ensure_ascii=False)
+    monkeypatch.setattr('sys.stdin', io.StringIO(project))
+    main()
+    stdout = json.loads(capsys.readouterr().out)
+    output = [Response(**resp) for resp in stdout]
+    assert responses == output

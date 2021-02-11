@@ -1,9 +1,20 @@
 import os
+import json
+import sys
 from pathlib import Path
 from subprocess import TimeoutExpired, run
 
-from .models import Command, Response, Sourcefiles
+from .models import CodeboxInput, Command, Response, Sourcefiles
 from .utils import SandboxDirectory
+
+
+def main():
+    project = CodeboxInput.parse_raw(sys.stdin.read())
+    responses = run_project(project.sources, project.commands)
+    responses = [resp.dict() for resp in responses]
+    output = json.dumps(responses, ensure_ascii=False)
+    print(output)
+    return
 
 
 def save_sources(dest_dir: Path, sources: Sourcefiles) -> None:
