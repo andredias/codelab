@@ -2,51 +2,40 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-
-class Lint(BaseModel):
-    line: int
-    column: Optional[int]
-    code: str
-    message: str
-    level: str
-    linter: str
-
-
-class Metric(BaseModel):
-    name: str
-    value: float
-
-
 Sourcefiles = dict[str, str]
 
 
-class CommandIn(BaseModel):
-    type: str
+class Command(BaseModel):
+    type: Optional[str]
     command: str
     timeout: Optional[float] = None
     input: Optional[str] = None
 
 
-class CommandOut(BaseModel):
-    type: str
-    command: str
-    stdout: Optional[str] = None
-    stderr: Optional[str] = None
-
-
-class ProjectOut(BaseModel):
-    id: str
-
-
-class ProjectCore(BaseModel):
+class CodeboxInput(BaseModel):
     sources: Sourcefiles
-    commands: list[CommandIn]
+    commands: list[Command]
 
 
-class ProjectIn(ProjectCore):
+class Response(BaseModel):
+    stdout: str = ''
+    stderr: str = ''
+    exit_code: int
+
+
+Responses = list[Response]
+
+
+class Description(BaseModel):
     title: str = ''
     description: str = ''
 
 
-class Project(ProjectIn, ProjectOut):
-    pass
+class Project(Description, CodeboxInput):
+    id: str
+    responses: Responses = []
+
+
+class ProjectResponses(BaseModel):
+    id: str
+    responses: Responses = []
