@@ -1,4 +1,5 @@
 class memoize(dict):
+
     def __init__(self, func):
         dict.__init__(self)
         self.func = func

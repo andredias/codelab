@@ -20,7 +20,15 @@ pytest-cov = "^2.11.1"
 httpx = "^0.16.1"
 asgi-lifespan = "^1.0.1"
 alt-pytest-asyncio = "^0.5.4"
+yapf = "^0.30.0"
+mypy = "^0.800"
+flake8 = "^3.8.4"
+isort = "^5.7.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+line_length = 120
+multi_line_output = 5

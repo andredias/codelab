@@ -8,16 +8,12 @@ from app.routers.project import calc_project_id  # isort:skip
 async def test_calc_project_id():
     message = 'Hello World!'
     proj1 = ProjectIn(
-        sources=[
-            dict(path='main.py', code=f'print("{message}")\n')
-        ],
+        sources=[dict(path='main.py', code=f'print("{message}")\n')],
         commands=[dict(command='python main.py', timeout=0.1)],
         title='Hello World',
     )
     proj2 = ProjectIn(
-        sources=[
-            dict(path='source.py', code=f'print("{message}")\n')
-        ],
+        sources=[dict(path='source.py', code=f'print("{message}")\n')],
         commands=[dict(command='python main.py', timeout=0.1)],
         title='Hello World',
     )
@@ -33,9 +29,7 @@ async def test_calc_project_id():
 async def test_run_project(client: AsyncClient) -> None:
     message = 'Hello World!'
     project = ProjectIn(
-        sources=[
-            dict(path='main.py', code=f'print("{message}")\n')
-        ],
+        sources=[dict(path='main.py', code=f'print("{message}")\n')],
         commands=[dict(command='python main.py', timeout=0.1)],
         title='Hello World',
     )

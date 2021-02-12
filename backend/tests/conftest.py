@@ -1,6 +1,6 @@
+from collections.abc import AsyncIterable, Generator
 from pathlib import Path
 from subprocess import DEVNULL, check_call
-from collections.abc import AsyncIterable, Generator
 
 from asgi_lifespan import LifespanManager
 from dotenv import load_dotenv
@@ -20,11 +20,7 @@ config.init()
 @fixture(scope='session')
 def docker() -> Generator:
     redis_port = config.REDIS_URL.split(':')[-1]
-    check_call(
-        f'docker run -d --rm -p {redis_port}:6379 --name redis-testing redis:alpine',
-        stdout=DEVNULL,
-        shell=True
-    )
+    check_call(f'docker run -d --rm -p {redis_port}:6379 --name redis-testing redis:alpine', stdout=DEVNULL, shell=True)
     try:
         yield
     finally:

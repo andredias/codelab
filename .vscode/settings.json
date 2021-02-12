@@ -11,11 +11,11 @@
   "emmet.triggerExpansionOnTab": true,
   "files.insertFinalNewline": true,
   "python.venvFolders": [
-    "${workspaceFolder}/backend/.venv",
-    "${workspaceFolder}/codebox/.venv"
+    ".venv"
   ],
   "prettier.semi": false,
   "python.linting.flake8Args": [
     "count=1"
-  ]
+  ],
+  "python.venvPath": "backend/.venv, codebox/.venv, .venv"
 }
