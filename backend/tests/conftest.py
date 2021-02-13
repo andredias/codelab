@@ -1,3 +1,4 @@
+import os
 from collections.abc import AsyncIterable, Generator
 from pathlib import Path
 from subprocess import DEVNULL, check_call
@@ -13,7 +14,8 @@ from app import create_app  # isort:skip
 from app import config  # isort:skip
 from app import resources as res  # isort:skip
 
-load_dotenv(Path(__file__).parent / 'env')
+os.environ['ENV'] = 'testing'
+os.environ['REDIS_URL'] = 'redis://localhost:6378'
 config.init()
 
 
@@ -36,6 +38,5 @@ async def app(docker) -> AsyncIterable[FastAPI]:  # noqa: F811
 
 @fixture
 async def client(app: FastAPI) -> AsyncIterable[AsyncClient]:
-    await res.redis.flushdb()  # clean redis database everytime
     async with AsyncClient(app=app, base_url='http://test') as client:
         yield client

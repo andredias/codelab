@@ -78,6 +78,8 @@ async def _init_redis():
 
 
 async def _stop_redis():
+    if config.TESTING:
+        await redis.flushdb()
     redis.close()
     await redis.wait_closed()
 
