@@ -12,6 +12,7 @@ check:
 	flake8 --config flake8.ini .
 
 test: test_in_container
+	pytest -svx tests/test_container.py
 
 test_in_container:
 	docker build -t codebox .
@@ -19,4 +20,4 @@ test_in_container:
 	docker run -it --rm  \
 	           -v $(PWD)/app:/codebox/app \
 	           -v $(PWD)/tests/:/codebox/tests \
-			   codebox-test pytest -svx
+			   codebox-test pytest -svx tests/test_codebox.py

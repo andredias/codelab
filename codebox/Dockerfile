@@ -27,9 +27,10 @@ WORKDIR /codebox
 COPY pyproject.toml poetry.lock ./
 RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-dev
 
+COPY main.py .
 COPY app/ ./app
 
 USER nobody
 
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["/usr/bin/python", "codebox.py"]
+CMD ["/venv/bin/python", "main.py"]
