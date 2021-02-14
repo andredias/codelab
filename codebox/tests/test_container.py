@@ -6,7 +6,7 @@ from app.models import CodeboxInput, Command, Response  # isort:skip
 
 TIMEOUT = 0.1
 
-core = CodeboxInput(
+project_core = CodeboxInput(
     sources={
         'main.py':
             'print("Olá mundo!")\n',
@@ -34,8 +34,11 @@ responses = [
 ]
 
 
-async def test_container():
-    project_json = core.json(ensure_ascii=False).encode()
+async def test_docker_run_codebox():
+    '''
+    test using the container directly via command line
+    '''
+    project_json = project_core.json(ensure_ascii=False).encode()
     docker_cmd = ['docker', 'run', '-i', '--rm', 'codebox']
     proc = await create_subprocess_exec(*docker_cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
     stdout, stderr = await proc.communicate(input=project_json)
