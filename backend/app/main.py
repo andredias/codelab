@@ -6,10 +6,10 @@ from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
 from .resources import shutdown, startup
-from .routers import project
+from .routers import projects
 
 routers = [
-    project.router,
+    projects.router,
 ]
 
 

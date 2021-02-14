@@ -14,5 +14,5 @@ for x in range(1, 101):
     if x % 5 == 0:
         line += 'Buzz'
     if not line:
-        line = x
+        line = str(x)
     print(line)

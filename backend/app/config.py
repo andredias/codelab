@@ -28,4 +28,4 @@ def init():
 
     default_timeout = timedelta(days=30).total_seconds()
     TIMEOUT = int(os.getenv('TIMEOUT') or default_timeout)
-    REDIS_URL = os.environ['REDIS_URL'] or 'redis://localhost:6379'
+    REDIS_URL = os.getenv('REDIS_URL') or 'redis://localhost:6379'

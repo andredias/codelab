@@ -4,14 +4,15 @@ run:
 
 check:
 	@echo
-	isort --diff -c --skip-glob '*.venv' .
+	isort --diff -c --skip-glob '.venv' .
 	@echo
 	yapf -vv --diff --recursive --style ../yapf.ini --exclude '*.venv' .
 	@echo
-	mypy fastapi_api
-	mypy quart_api
+	mypy --ignore-missing-imports .
 	@echo
-	flake8 --config flake8.ini .
+	flake8 --config flake8.ini --max-line-length 120 --exclude '.hg,.vscode,.venv,__pycache__,docs,.mypy_cache' --count .
 
-test: check
-	ENV=testing pytest -s -x -v --cov-report term-missing --cov-report html --cov-branch --cov app/
+test_:
+	ENV=testing pytest -x --default-async-timeout 100 --cov-report term-missing --cov-report html --cov-branch --cov app/
+
+test: check test_
