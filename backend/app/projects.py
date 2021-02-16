@@ -1,11 +1,12 @@
-import json
 from asyncio import create_subprocess_exec
 from asyncio.subprocess import PIPE
 from hashlib import md5
 from pathlib import Path
+from time import time
 from typing import Optional
 
 import aiofiles
+import toml
 from loguru import logger
 from pydantic import parse_raw_as
 
@@ -35,26 +36,24 @@ async def run_project_in_container(project_core: CodeboxInput) -> list[Response]
     '''
     Run the project in a sandbox container
     '''
+    start = time()
+
     project_json = project_core.json().encode()
     docker_cmd = ['docker', 'run', '-i', '--rm', 'codebox']
     proc = await create_subprocess_exec(*docker_cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
     stdout, stderr = await proc.communicate(input=project_json)
     assert stderr == b''
-    return parse_raw_as(list[Response], stdout)
+    result = parse_raw_as(list[Response], stdout)
+
+    elapsed = time() - start
+    logger.debug(f'elapsed time: {elapsed}')
+    return result
 
 
-async def run_examples() -> list[Project]:
-    examples_dir = Path(__file__).parent / 'examples'
-    python_examples = examples_dir.glob('*.py')  # only Python so far
-    examples = []
-    for program in python_examples:
-        command = Command(command=f'python {program.name}', timeout=0.1)
-        async with aiofiles.open(program) as f:
-            source_code = await f.read()
-        core = CodeboxInput(sources={program.name: source_code}, commands=[command])
-        id = calc_id(core)
-        responses = await run_project_in_container(core)
-        project = Project(id=id, responses=responses, **core.dict())
-        examples.append(project)
-        logger.debug(json.dumps(project.dict(), ensure_ascii=False, indent=4))
-    return examples
+async def load_examples() -> None:
+    '''
+    Load examples into Redis
+    '''
+    for example in (Path(__file__).parent / 'examples').glob('*.toml'):
+        project = Project.parse_obj(toml.loads(example.read_text()))
+        await save_project(project)

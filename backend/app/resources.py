@@ -8,6 +8,7 @@ from aioredis.commands import Redis
 from loguru import logger
 
 from . import config
+from .projects import load_examples
 
 redis: Redis = None
 
@@ -19,6 +20,8 @@ async def startup() -> None:
     config.init()
     setup_logger()
     await _init_redis()
+    if config.DEBUG:
+        await load_examples()
     logger.info('started...')
 
 
