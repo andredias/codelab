@@ -1,0 +1,14 @@
+title = "Chaining Operators"
+description = ""
+id = "f992651f047b5a1b2442846e8df145cd"
+[[commands]]
+command = "python chaining_operators.py"
+timeout = 0.1
+
+[[responses]]
+stdout = "True\nFalse\nTrue\nTrue\nTrue\n"
+stderr = ""
+exit_code = 0
+
+[sources]
+"chaining_operators.py" = "x = 5\nprint(1 < x < 10)\nprint(10 < x < 20)\nprint(x < 10 < (x * 10) < 100)\nprint(10 > x <= 9)\nprint(5 == x > 4)\n"

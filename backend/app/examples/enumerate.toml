@@ -1,0 +1,19 @@
+title = "Enumerate"
+description = ""
+id = "e12fc4c0340a9633e1da02af64e97e43"
+[[commands]]
+type = "python"
+command = "python enumerate.py"
+timeout = 0.1
+
+[[responses]]
+stdout = "0 a\n1 b\n2 c\n3 d\n4 e\n"
+stderr = ""
+exit_code = 0
+
+[sources]
+"enumerate.py" = """\
+a = ['a', 'b', 'c', 'd', 'e']
+for index, item in enumerate(a):
+    print(index, item)
+"""
