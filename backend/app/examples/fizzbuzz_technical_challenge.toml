@@ -2,7 +2,7 @@ title = "FizzBuzz Technical Challenge"
 description = "Write a program that prints the numbers from 1 to 100. But for multiples of three print \"Fizz\" instead of the number and for the multiples of five print \"Buzz\". For numbers which are multiples of both three and five print \"FizzBuzz\".\n\nsee: http://blog.codinghorror.com/why-cant-programmers-program/"
 id = "d66a1526883524de5266e9301dac3ce4"
 [[commands]]
-command = "python fizzbuzz.py"
+command = "python main.py"
 timeout = 0.1
 
 [[responses]]
@@ -11,7 +11,7 @@ stderr = ""
 exit_code = 0
 
 [sources]
-"fizzbuzz.py" = """\
+"main.py" = """\
 for x in range(1, 101):
     line = ''
     if x % 3 == 0:

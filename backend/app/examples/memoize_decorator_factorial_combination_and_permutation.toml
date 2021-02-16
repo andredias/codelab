@@ -2,7 +2,7 @@ title = "Memoize Decorator, Factorial, Combination and Permutation"
 description = ""
 id = "b5021628594ef48436a9ec651e734a78"
 [[commands]]
-command = "python memoize_factorial_combination_permutation.py"
+command = "python main.py"
 timeout = 0.1
 
 [[responses]]
@@ -11,4 +11,4 @@ stderr = ""
 exit_code = 0
 
 [sources]
-"memoize_factorial_combination_permutation.py" = "class memoize(dict):\n\n    def __init__(self, func):\n        dict.__init__(self)\n        self.func = func\n\n    def __call__(self, *args):\n        return self[args]\n\n    def __missing__(self, key):\n        result = self[key] = self.func(*key)\n        return result\n\n\n@memoize\ndef factorial(n):\n    if n < 2:\n        return n\n    else:\n        return n * factorial(n - 1)\n\n\ndef combination(n, k):\n    return factorial(n) // factorial(n - k)\n\n\ndef permutation(n, k):\n    return combination(n, k) // factorial(k)\n\n\nprint(factorial(5), combination(33, 6), permutation(33, 6))\n"
+"main.py" = "class memoize(dict):\n\n    def __init__(self, func):\n        dict.__init__(self)\n        self.func = func\n\n    def __call__(self, *args):\n        return self[args]\n\n    def __missing__(self, key):\n        result = self[key] = self.func(*key)\n        return result\n\n\n@memoize\ndef factorial(n):\n    if n < 2:\n        return n\n    else:\n        return n * factorial(n - 1)\n\n\ndef combination(n, k):\n    return factorial(n) // factorial(n - k)\n\n\ndef permutation(n, k):\n    return combination(n, k) // factorial(k)\n\n\nprint(factorial(5), combination(33, 6), permutation(33, 6))\n"

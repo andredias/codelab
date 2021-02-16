@@ -2,7 +2,7 @@ title = "Decorators"
 description = ""
 id = "ecd62ca7e2ff4d24172c1226440e6bb8"
 [[commands]]
-command = "python decorators.py"
+command = "python main.py"
 timeout = 0.1
 
 [[responses]]
@@ -11,4 +11,4 @@ stderr = ""
 exit_code = 0
 
 [sources]
-"decorators.py" = "def print_args(function):\n\n    def wrapper(*args, **kwargs):\n        print('Arguments:', args, kwargs)\n        return function(*args, **kwargs)\n\n    return wrapper\n\n\n@print_args\ndef write(text):\n    print(text)\n\n\nwrite('foo')\n"
+"main.py" = "def print_args(function):\n\n    def wrapper(*args, **kwargs):\n        print('Arguments:', args, kwargs)\n        return function(*args, **kwargs)\n\n    return wrapper\n\n\n@print_args\ndef write(text):\n    print(text)\n\n\nwrite('foo')\n"

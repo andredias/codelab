@@ -2,7 +2,7 @@ title = "Array Indexes"
 description = ""
 id = "272bbc50a7bf8be588e12926541c05d1"
 [[commands]]
-command = "python array_indexes.py"
+command = "python main.py"
 timeout = 0.1
 
 [[responses]]
@@ -11,4 +11,4 @@ stderr = ""
 exit_code = 0
 
 [sources]
-"array_indexes.py" = "a = [1, 2, 3, 4, 5]\nprint(a[::2])  # iterate over the whole list in 2-increments\nprint(a[::-1])  # a useful idiom for 'x reversed'\n"
+"main.py" = "a = [1, 2, 3, 4, 5]\nprint(a[::2])  # iterate over the whole list in 2-increments\nprint(a[::-1])  # a useful idiom for 'x reversed'\n"

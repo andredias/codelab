@@ -2,7 +2,7 @@ title = "Hello World"
 description = ""
 id = "2a1e6e1aab91134494499768d8fcf136"
 [[commands]]
-command = "python hello_world.py"
+command = "python main.py"
 timeout = 0.1
 
 [[responses]]
@@ -11,4 +11,4 @@ stderr = ""
 exit_code = 0
 
 [sources]
-"hello_world.py" = "print(\"Hello, world!\")\n"
+"main.py" = "print(\"Hello, world!\")\n"

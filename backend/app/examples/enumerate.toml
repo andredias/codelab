@@ -3,7 +3,7 @@ description = ""
 id = "e12fc4c0340a9633e1da02af64e97e43"
 [[commands]]
 type = "python"
-command = "python enumerate.py"
+command = "python main.py"
 timeout = 0.1
 
 [[responses]]
@@ -12,7 +12,7 @@ stderr = ""
 exit_code = 0
 
 [sources]
-"enumerate.py" = """\
+"main.py" = """\
 a = ['a', 'b', 'c', 'd', 'e']
 for index, item in enumerate(a):
     print(index, item)
