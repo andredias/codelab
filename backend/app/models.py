@@ -28,7 +28,7 @@ class Command(BaseModel):
     input: Optional[str] = None
 
 
-class CodeboxInput(BaseModel):
+class ProjectCore(BaseModel):
     sources: Sourcefiles
     commands: list[Command]
 
@@ -39,12 +39,12 @@ class Response(BaseModel):
     exit_code: int = 0
 
 
-class Description(BaseModel):
+class ProjectDescriptionCore(ProjectCore):
     title: str = ''
     description: str = ''
 
 
-class Project(Description, CodeboxInput):
+class Project(ProjectDescriptionCore):
     id: str
     responses: list[Response] = []
 

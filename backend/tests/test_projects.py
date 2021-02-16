@@ -1,15 +1,15 @@
-from app.models import CodeboxInput, Command, Response
-from app.projects import calc_id, run_examples, run_project_in_container
+from app.models import Command, ProjectDescriptionCore, Response
+from app.projects import calc_id, run_project_in_container
 
 
 async def test_calc_id():
     message = 'Hello World!'
     timeout = 0.1
-    proj1 = CodeboxInput(
+    proj1 = ProjectDescriptionCore(
         sources={'main.py': f'print("{message}")\n'},
         commands=[Command(command='python main.py', timeout=timeout)],
     )
-    proj2 = CodeboxInput(
+    proj2 = ProjectDescriptionCore(
         sources={'source.py': f'print("{message}")\n'},
         commands=[Command(command='python source.py', timeout=timeout)],
     )
@@ -23,7 +23,7 @@ async def test_calc_id():
 
 
 async def test_run_project_in_container():
-    project_core = CodeboxInput(
+    project_core = ProjectDescriptionCore(
         sources={'main.py': 'print("Olá mundo!")\n'},
         commands=[Command(command='python main.py', timeout=0.1)],
     )
@@ -31,6 +31,5 @@ async def test_run_project_in_container():
     assert responses == [Response(stdout='Olá mundo!\n', stderr='', exit_code=0)]
 
 
-async def test_run_examples():
-    examples = await run_examples()
+async def test_load_examples(examples):
     assert examples

@@ -1,19 +1,16 @@
 import os
 from collections.abc import AsyncIterable, Generator
-from pathlib import Path
 from subprocess import DEVNULL, check_call
 
-import aiofiles
 from asgi_lifespan import LifespanManager
 from fastapi import FastAPI
 from httpx import AsyncClient
-from pydantic import parse_raw_as
 from pytest import fixture
 
 from app import create_app  # isort:skip
 from app import config  # isort:skip
 from app.models import Project  # isort:skip
-from app.projects import save_project  # isort:skip
+from app.projects import get_examples, load_examples  # isort:skip
 
 os.environ['ENV'] = 'testing'
 os.environ['REDIS_URL'] = 'redis://localhost:6378'
@@ -46,9 +43,5 @@ async def client(app: FastAPI) -> AsyncIterable[AsyncClient]:
 
 @fixture
 async def examples(app: AsyncIterable[FastAPI]) -> list[Project]:
-    async with aiofiles.open(Path(__file__).parent.parent / 'app/examples/projects.json') as f:
-        examples_json = await f.read()
-    projects = parse_raw_as(list[Project], examples_json)
-    for project in projects:
-        await save_project(project)
-    return projects
+    await load_examples()
+    return await get_examples()
