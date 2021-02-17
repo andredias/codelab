@@ -6,7 +6,7 @@ syntax: glob
 *.egg-info
 node_modules
 dist
-*.css
+public/*.css
 non_versioned_config.py
 venv
 .venv

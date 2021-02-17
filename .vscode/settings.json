@@ -7,15 +7,14 @@
   ],
   "editor.formatOnSave": true,
   "json.schemas": [],
-  "prettier.tabWidth": 4,
   "emmet.triggerExpansionOnTab": true,
   "files.insertFinalNewline": true,
   "python.venvFolders": [
     ".venv"
   ],
-  "prettier.semi": false,
   "python.linting.flake8Args": [
     "count=1"
   ],
-  "python.venvPath": "backend/.venv, codebox/.venv, .venv"
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single"
 }
