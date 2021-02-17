@@ -1,6 +1,6 @@
 title = "Chaining Operators"
 description = ""
-id = "f992651f047b5a1b2442846e8df145cd"
+id = "4605a6e1b09021ef3e8f4cae7a30bf4f"
 [[commands]]
 command = "python main.py"
 timeout = 0.1
@@ -11,4 +11,11 @@ stderr = ""
 exit_code = 0
 
 [sources]
-"main.py" = "x = 5\nprint(1 < x < 10)\nprint(10 < x < 20)\nprint(x < 10 < (x * 10) < 100)\nprint(10 > x <= 9)\nprint(5 == x > 4)\n"
+"main.py" = """\
+x = 5
+print(1 < x < 10)
+print(10 < x < 20)
+print(x < 10 < (x * 10) < 100)
+print(10 > x <= 9)
+print(5 == x > 4)
+"""

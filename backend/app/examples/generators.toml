@@ -1,6 +1,6 @@
-title = ""
+title = "Generators"
 description = ""
-id = "daed52a6d2aade4ddda9c536a840b595"
+id = "ab29c688243453ecd7a37bb7667e7489"
 [[commands]]
 type = "python"
 command = "python main.py"

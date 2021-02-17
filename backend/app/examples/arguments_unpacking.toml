@@ -1,6 +1,6 @@
 title = "Arguments Unpacking"
 description = ""
-id = "63a90fb000c36f867dfe96459a986318"
+id = "7bf575f90aff2954a855ca4902b71ea5"
 [[commands]]
 type = "python"
 command = "python main.py"
@@ -12,4 +12,13 @@ stderr = ""
 exit_code = 0
 
 [sources]
-"main.py" = "def draw_point(x, y):\n    print(x, y)\n\n\npoint_foo = (3, 4)\npoint_bar = {'y': 3, 'x': 2}\ndraw_point(*point_foo)\ndraw_point(**point_bar)\n"
+"main.py" = """\
+def draw_point(x, y):
+    print(x, y)
+
+
+point_foo = (3, 4)
+point_bar = {'y': 3, 'x': 2}
+draw_point(*point_foo)
+draw_point(**point_bar)
+"""

@@ -1,6 +1,6 @@
 title = "Memoize Decorator, Factorial, Combination and Permutation"
 description = ""
-id = "b5021628594ef48436a9ec651e734a78"
+id = "52524478d7241f9c70f9f4a6ec4d038d"
 [[commands]]
 command = "python main.py"
 timeout = 0.1
