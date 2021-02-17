@@ -1,5 +1,5 @@
 <template lang="pug">
-textarea(ref="textarea")
+textarea(ref='textarea')
 </template>
 
 <script>
@@ -20,14 +20,13 @@ export default {
         modelValue: String,
         options: {
             type: Object,
-            default: () => ({})
+            default: () => ({}),
         },
     },
-    emits: ["update:modelValue", "cursor_moved"],
+    emits: ['update:modelValue', 'cursor_moved'],
     setup(props, { emit }) {
         const textarea = ref(null)
         const editor = ref(null)
-
 
         onMounted(() => {
             const defaultOptions = {
@@ -35,17 +34,22 @@ export default {
                 mode: 'python',
                 theme: 'blackboard',
                 lineWrapping: true,
+                indentUnit: 4,
             }
-            editor.value = markRaw(CodeMirror.fromTextArea(textarea.value, {...defaultOptions, ...props.options}))
+            editor.value = markRaw(
+                CodeMirror.fromTextArea(textarea.value, {
+                    ...defaultOptions,
+                    ...props.options,
+                })
+            )
             editor.value.setValue(props.modelValue)
-            editor.value.on('change', cm => {
+            editor.value.on('change', (cm) => {
                 emit('update:modelValue', cm.getValue())
             })
-            editor.value.on('cursorActivity', cm => {
+            editor.value.on('cursorActivity', (cm) => {
                 emit('cursor_moved', cm.getCursor())
             })
         })
-
 
         watch(
             () => props.options,
@@ -58,7 +62,6 @@ export default {
         )
 
         return { textarea, editor }
-    }
-
+    },
 }
 </script>

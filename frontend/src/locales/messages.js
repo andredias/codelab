@@ -1,6 +1,7 @@
 export const messages = {
     en: {
         title: 'Title',
+        no_title: '<no title specified>',
         description: 'Description',
         change: 'Change',
         cancel: 'Cancel',
@@ -14,11 +15,11 @@ export const messages = {
         column: 'Column',
         upload_code_from_file: 'upload code from file',
         define_input_data: 'Define input data',
-        output: 'Output',
         statistics: 'Statistics',
     },
     'pt-BR': {
         title: 'Título',
+        no_title: '<nenhum título especificado>',
         description: 'Descrição',
         change: 'Alterar',
         cancel: 'Cancelar',
@@ -32,7 +33,6 @@ export const messages = {
         column: 'Coluna',
         upload_code_from_file: 'carregar código de um arquivo',
         define_input_data: 'Definir dados de entrada',
-        output: 'Saída',
         statistics: 'Estatísticas',
     }
 }

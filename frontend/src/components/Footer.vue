@@ -18,13 +18,13 @@ footer.main
 </template>
 
 <script>
-import { ref } from 'vue'
+import {ref} from 'vue'
 
 export default {
     setup() {
         const date = ref(new Date())
 
-        return { date }
+        return {date}
     }
 }
 </script>

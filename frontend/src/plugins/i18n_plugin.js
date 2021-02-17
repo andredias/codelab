@@ -3,7 +3,7 @@
  O plugin vue-i18n não funcionou com Vue 3
 */
 
-import { ref, provide, inject } from 'vue'
+import {ref, provide, inject} from 'vue'
 
 const createI18n = config => ({
     locale: ref(config.locale),

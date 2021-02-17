@@ -6,13 +6,13 @@ Footer
 
 <script>
 // import { onMounted } from "vue";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import { messages } from "./locales/messages";
-import { provideI18n } from "./plugins/i18n_plugin";
+import Header from './components/Header'
+import Footer from './components/Footer'
+import { messages } from './locales/messages'
+import { provideI18n } from './plugins/i18n_plugin'
 
 export default {
-    name: "Code Lab",
+    name: 'Code Lab',
     components: {
         Header,
         Footer,
@@ -27,7 +27,7 @@ export default {
         provideI18n({
             locale: 'pt-BR',
             messages: messages,
-        });
+        })
     },
-};
+}
 </script>
