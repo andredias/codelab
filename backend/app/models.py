@@ -1,7 +1,9 @@
+from datetime import datetime, timezone
 from typing import Optional
 
 import orjson
 from pydantic import BaseModel as _BaseModel
+from pydantic import validator
 
 # ref: https://pydantic-docs.helpmanual.io/usage/exporting_models/#custom-json-deserialisation
 
@@ -44,11 +46,22 @@ class ProjectDescriptionCore(ProjectCore):
     description: str = ''
 
 
-class Project(ProjectDescriptionCore):
-    id: str
-    responses: list[Response] = []
-
-
 class ProjectResponses(BaseModel):
     id: str
     responses: list[Response] = []
+    timestamp: Optional[datetime] = None
+
+    @validator('timestamp', pre=True, always=True)
+    def set_ts_now(cls, v):
+        '''
+        See: https://pydantic-docs.helpmanual.io/usage/validators/#validate-always
+
+        This validation might become unnecessary in Pydantic 2.0
+        and be replaced by something like 'timestamp: datetime = datetime.now
+        see: https://github.com/samuelcolvin/pydantic/pull/12108
+        '''
+        return v or datetime.now(timezone.utc)
+
+
+class Project(ProjectDescriptionCore, ProjectResponses):
+    ...

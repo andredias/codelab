@@ -18,7 +18,7 @@ async def test_run_project(client: AsyncClient) -> None:
     logger.info('project not in cache')
     resp = await client.post('/projects', json=project.dict())
     assert resp.status_code == 200
-    data = resp.json()
+    data = {k: v for k, v in resp.json().items() if k != 'timestamp'}
     assert data == {
         'id': 'b5cd234f6bda2e78b149966dc528dde9',
         'responses': [{
