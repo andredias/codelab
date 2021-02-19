@@ -1,5 +1,5 @@
 title = "FizzBuzz Technical Challenge"
-description = "Write a program that prints the numbers from 1 to 100. But for multiples of three print \"Fizz\" instead of the number and for the multiples of five print \"Buzz\". For numbers which are multiples of both three and five print \"FizzBuzz\".\n\nsee: http://blog.codinghorror.com/why-cant-programmers-program/"
+description = "Write a program that prints the numbers from 1 to 100. But for multiples of three print \"Fizz\" instead of the number and for the multiples of five print \"Buzz\". For numbers that are multiples of both three and five print \"FizzBuzz\".\n\nsee: http://blog.codinghorror.com/why-cant-programmers-program/"
 id = "f5d98ed7c697d7a6b31942c61c38481e"
 [[commands]]
 command = "python main.py"
@@ -15,7 +15,7 @@ exit_code = 0
 for x in range(1, 101):
     line = ''
     if x % 3 == 0:
-        line += 'Fizz'
+        line = 'Fizz'
     if x % 5 == 0:
         line += 'Buzz'
     if not line:
