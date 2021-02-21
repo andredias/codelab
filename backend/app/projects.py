@@ -31,7 +31,7 @@ def calc_id(proj: ProjectDescriptionCore) -> str:
     The order matters.
     '''
     code = ''.join(f'{path}{code}' for path, code in sorted(proj.sources.items()))
-    commands = ''.join(f'{c.command}{c.input}{c.timeout}' for c in proj.commands)
+    commands = ''.join(f'{c.command}{c.stdin}{c.timeout}' for c in proj.commands)
     text = ''.join([proj.title, proj.description, code, commands])
     return md5(text.encode()).hexdigest()
 

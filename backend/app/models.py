@@ -27,7 +27,7 @@ class Command(BaseModel):
     type: Optional[str] = None
     command: str
     timeout: Optional[float] = None
-    input: Optional[str] = None
+    stdin: Optional[str] = None
 
 
 class ProjectCore(BaseModel):
