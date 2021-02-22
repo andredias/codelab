@@ -5,7 +5,6 @@ Footer
 </template>
 
 <script>
-// import { onMounted } from "vue";
 import Header from './components/Header'
 import Footer from './components/Footer'
 import { messages } from './locales/messages'
@@ -18,14 +17,8 @@ export default {
         Footer,
     },
     setup() {
-        // onMounted( () => {
-        //     provideI18n({
-        //         locale: navigator.language,
-        //         messages: messages,
-        //     })
-        // })
         provideI18n({
-            locale: 'pt-BR',
+            locale: Object.keys(messages).includes(navigator.language) ? navigator.language : 'en',
             messages: messages,
         })
     },
