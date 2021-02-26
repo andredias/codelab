@@ -4,17 +4,9 @@ from loguru import logger
 from .. import config
 from .. import resources as res
 from ..models import Project, ProjectCore, ProjectDescriptionCore, ProjectResponses
-from ..projects import calc_id, get_examples, run_project_in_container, save_project
+from ..projects import calc_id, run_project_in_container, save_project
 
 router = APIRouter()
-
-
-@router.get('/examples', response_model=list[Project])
-async def get_default_examples():
-    '''
-    Get only the default examples
-    '''
-    return await get_examples()
 
 
 @router.get('/projects/{id}', response_model=Project)
@@ -32,6 +24,8 @@ async def get_all_projects():
     '''
     # TODO: get only most recent projects
     keys = await res.redis.keys('project:*')
+    if len(keys) == 0:
+        return []
     projects_json = await res.redis.mget(*keys)
     projects = [Project.parse_raw(proj) for proj in projects_json]
     return projects
@@ -42,6 +36,10 @@ async def run_project(description_core: ProjectDescriptionCore):
     '''
     Run project if it is not already cached.
     '''
+    # ensures that timeout is 0.1 max for non-authenticated projects
+    # This prevents direct access via API to run long processes
+    for command in description_core.commands:
+        command.timeout = config.TIMEOUT
     # first, check if the configuration is cached
     id = calc_id(description_core)
     project_json = await res.redis.get(f'project:{id}')
@@ -56,7 +54,7 @@ async def run_project(description_core: ProjectDescriptionCore):
 
     # cache result
     project = Project(**description_core.dict(), id=id, responses=responses)
-    await save_project(project, config.TIMEOUT)
+    await save_project(project, config.TTL)
 
     # report the result
     prj_responses = ProjectResponses(id=id, responses=responses)

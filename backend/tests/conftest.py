@@ -10,7 +10,7 @@ from pytest import fixture
 from app import create_app  # isort:skip
 from app import config  # isort:skip
 from app.models import Project  # isort:skip
-from app.projects import get_examples, load_examples  # isort:skip
+from app.projects import load_examples  # isort:skip
 
 os.environ['ENV'] = 'testing'
 os.environ['REDIS_URL'] = 'redis://localhost:6378'
@@ -43,5 +43,4 @@ async def client(app: FastAPI) -> AsyncIterable[AsyncClient]:
 
 @fixture
 async def examples(app: AsyncIterable[FastAPI]) -> list[Project]:
-    await load_examples()
-    return await get_examples()
+    return await load_examples()

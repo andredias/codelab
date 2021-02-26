@@ -12,16 +12,13 @@ from . import resources as res
 from .models import Project, ProjectCore, ProjectDescriptionCore, Response
 
 
-async def save_project(project: Project, timeout: int = 0, key: str = 'project:{}') -> None:
+async def save_project(project: Project, ttl: int = 0, key: str = 'project:{}') -> None:
     '''
     Save project into Redis
-
-    Different keys might be used. Examples might use 'example:{}' as their key pattern, for example.
-    Even if projects have the same ID, they might be in different keys.
     '''
     key = key.format(project.id)
-    await res.redis.set(key, project.json(), expire=timeout)
-    logger.debug(f'{key}, {project}')
+    await res.redis.set(key, project.json(), expire=ttl)
+    logger.debug(f'Key: {key}, TTL: {ttl}s, {project}')
     return
 
 
@@ -54,33 +51,14 @@ async def run_project_in_container(project_core: ProjectCore) -> list[Response]:
     return result
 
 
-async def load_examples() -> None:
+async def load_examples() -> list[Project]:
     '''
     Load examples into Redis.
     Examples/Samples are the toml files located at 'app/examples'.
-
-    Examples are saved twice in Redis. Under 'example:{id}' and 'project:{id}' keys.
-    The 'example:{}' key is used to differentiate examples from ordinary projects.
-    Thus, we can select only examples instead of all projects.
-    The 'project:{}' key is used to retrieve an example as any ordinary project
-    by the /projects/{id} route.
     '''
+    examples = []
     for example in (Path(__file__).parent / 'examples').glob('*.toml'):
         project = Project.parse_obj(toml.loads(example.read_text()))
-        await save_project(project, key='example:{}')
-        await save_project(project)  # saved also under 'project:{id}' key
-
-
-async def get_examples() -> list[Project]:
-    '''
-    Retrieve all projects that are proposed as examples by default.
-    The examples are registered in TOML files at app/examples.
-    '''
-    keys = await res.redis.keys('example:*')
-    if len(keys) == 0:  # examples weren't loaded
-        await load_examples()
-        keys = await res.redis.keys('example:*')
-        assert keys
-    examples = await res.redis.mget(*keys)
-    projects = [Project.parse_raw(proj) for proj in examples]
-    return projects
+        await save_project(project)
+        examples.append(project)
+    return examples

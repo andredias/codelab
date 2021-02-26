@@ -18,9 +18,9 @@ async def test_run_project(client: AsyncClient) -> None:
     logger.info('project not in cache')
     resp = await client.post('/projects', json=project.dict())
     assert resp.status_code == 200
-    data = {k: v for k, v in resp.json().items() if k != 'timestamp'}
+    data = resp.json()
     assert data == {
-        'id': 'b5cd234f6bda2e78b149966dc528dde9',
+        'id': 'f5b66ab80dc7414a649372f47e549f4b',
         'responses': [{
             'stdout': 'Hello World!\n',
             'stderr': '',
@@ -39,7 +39,7 @@ async def test_run_project(client: AsyncClient) -> None:
 
         # third call: not in cache anymore, must call run_project_in_container
         logger.debug('sleeping...')
-        sleep(config.TIMEOUT + 1)
+        sleep(config.TIMEOUT + config.TTL)
         logger.info('project must not be in cache anymore')
         resp = await client.post('/projects', json=project.dict())
         assert resp.status_code == 200
@@ -49,6 +49,11 @@ async def test_run_project(client: AsyncClient) -> None:
 async def test_get_all_projects(examples: list[Project], client: AsyncClient) -> None:
     resp = await client.get('/projects')
     assert len(resp.json()) == len(examples)
+
+
+async def test_get_all_projects_from_empty(client: AsyncClient) -> None:
+    resp = await client.get('/projects')
+    assert len(resp.json()) == 0
 
 
 async def test_get_project(examples: list[Project], client: AsyncClient) -> None:
