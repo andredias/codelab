@@ -49,6 +49,9 @@ class ProjectDescriptionCore(ProjectCore):
 class ProjectResponses(BaseModel):
     id: str
     responses: list[Response] = []
+
+
+class Project(ProjectDescriptionCore, ProjectResponses):
     timestamp: Optional[datetime] = None
 
     @validator('timestamp', pre=True, always=True)
@@ -61,7 +64,3 @@ class ProjectResponses(BaseModel):
         see: https://github.com/samuelcolvin/pydantic/pull/12108
         '''
         return v or datetime.now(timezone.utc)
-
-
-class Project(ProjectDescriptionCore, ProjectResponses):
-    ...
