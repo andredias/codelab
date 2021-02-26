@@ -71,9 +71,12 @@ def _intercept_standard_logging_messages():
 
 
 async def _init_redis():
+    from .projects import load_examples
+
     global redis
     function = create_redis_pool(config.REDIS_URL)
     redis = await wait_until_responsive(function)
+    await load_examples()
     return
 
 

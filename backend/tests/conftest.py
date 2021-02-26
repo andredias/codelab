@@ -9,8 +9,6 @@ from pytest import fixture
 
 from app import create_app  # isort:skip
 from app import config  # isort:skip
-from app.models import Project  # isort:skip
-from app.projects import load_examples  # isort:skip
 
 os.environ['ENV'] = 'testing'
 os.environ['REDIS_URL'] = 'redis://localhost:6378'
@@ -39,8 +37,3 @@ async def app(docker) -> AsyncIterable[FastAPI]:  # noqa: F811
 async def client(app: FastAPI) -> AsyncIterable[AsyncClient]:
     async with AsyncClient(app=app, base_url='http://test') as client:
         yield client
-
-
-@fixture
-async def examples(app: AsyncIterable[FastAPI]) -> list[Project]:
-    return await load_examples()

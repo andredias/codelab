@@ -46,21 +46,21 @@ async def test_run_project(client: AsyncClient) -> None:
         run_project_in_container.assert_awaited()
 
 
-async def test_get_all_projects(examples: list[Project], client: AsyncClient) -> None:
+async def test_get_all_projects(client: AsyncClient) -> None:
+    '''
+    Examples must have been loaded automatically
+    '''
     resp = await client.get('/projects')
-    assert len(resp.json()) == len(examples)
+    assert len(resp.json()) > 0
 
 
-async def test_get_all_projects_from_empty(client: AsyncClient) -> None:
-    resp = await client.get('/projects')
-    assert len(resp.json()) == 0
+async def test_get_project(client: AsyncClient) -> None:
+    example = (await client.get('/projects')).json()[0]
 
-
-async def test_get_project(examples: list[Project], client: AsyncClient) -> None:
-    resp = await client.get(f'/projects/{examples[0].id}')
+    resp = await client.get(f'/projects/{example["id"]}')
     assert resp.status_code == 200
     project = Project.parse_obj(resp.json())
-    assert project.title == examples[0].title
+    assert project.title == example["title"]
 
     resp = await client.get('/projects/00000000000000000000000000000001')
     assert resp.status_code == 404

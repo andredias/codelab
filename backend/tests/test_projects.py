@@ -29,7 +29,3 @@ async def test_run_project_in_container():
     )
     responses = await run_project_in_container(project_core)
     assert responses == [Response(stdout='Olá mundo!\n', stderr='', exit_code=0)]
-
-
-async def test_load_examples(examples):
-    assert examples
