@@ -8,6 +8,7 @@ export const messages = {
         run_code: 'Run Code',
         home: 'Home',
         how_it_works: 'How it works?',
+        contact: 'Contact',
         theme: 'Theme',
         light: 'Light',
         dark: 'Dark',
@@ -16,6 +17,11 @@ export const messages = {
         upload_code_from_file: 'upload code from file',
         define_input_data: 'Define input data',
         statistics: 'Statistics',
+        examples: 'Examples',
+        hero_msg: 'Program in the browser!',
+        new_project: 'new project',
+        all_languages: 'all',
+        edit: 'edit',
     },
     'pt-BR': {
         title: 'Título',
@@ -26,6 +32,7 @@ export const messages = {
         run_code: 'Executar',
         home: 'Início',
         how_it_works: 'Como funciona?',
+        contact: 'Contato',
         theme: 'Tema',
         light: 'Claro',
         dark: 'Escuro',
@@ -34,5 +41,10 @@ export const messages = {
         upload_code_from_file: 'carregar código de um arquivo',
         define_input_data: 'Definir dados de entrada',
         statistics: 'Estatísticas',
+        examples: 'Exemplos',
+        hero_msg: 'Programe no navegador!',
+        new_project: 'novo projeto',
+        all_languages: 'todas',
+        edit: 'editar',
     }
 }

@@ -17,7 +17,10 @@ import 'codemirror/mode/sql/sql'
 export default {
     name: 'codemirror',
     props: {
-        modelValue: String,
+        modelValue: {
+            type: String,
+            default: '',
+        },
         options: {
             type: Object,
             default: () => ({}),

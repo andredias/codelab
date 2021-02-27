@@ -1,0 +1,141 @@
+@require base
+@import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');
+
+.home
+    background background_color
+    .hero
+        flex-center()
+        gap 2rem
+        flex-flow column
+        height 50vh
+        background url('./images/codelab-fizzbuzz-trimmed-2.png'),  rgba(0, 0, 0, 0.75)
+        background-size contain
+        background-repeat no-repeat
+        background-blend-mode multiply
+        background-position center
+
+        h1
+            font-size 7rem
+        h2
+            font-size 3rem
+            color destaque_color
+
+        .botoes
+            flex-center()
+            gap 2rem
+            button
+                text-transform uppercase
+
+    .languages
+        padding 1rem 30px
+        background-color white
+
+        header
+            display flex
+            justify-content space-between
+            align-items stretch
+
+        .content
+            background-color darken(background_color, 3%)
+            border 1px solid cor_texto
+
+        header nav.tab button.active
+            background-color darken(background_color, 3%)
+
+
+
+nav.tab
+    margin-bottom -1px
+
+    button
+        padding 0.5rem 2rem
+        text-transform capitalize
+
+        &.active
+            color destaque_color
+            font-weight 600
+            border-radius 0.15rem 0.15rem 0 0
+            border 1px solid cor_texto
+            border-bottom 0
+            outline none
+
+
+section.project
+    padding 1rem
+    border-top 1px solid white
+    border-bottom 1px solid #d5d5d5
+    display flex
+    align-items flex-start
+    gap 0.25rem
+
+    button.expand
+        padding-top 3px
+        outline none
+        svg
+            fill destaque_color
+
+            &.rotated
+                transform rotate(180deg)
+                fill complement(destaque_color)
+
+    &:first-child
+        border-top none
+
+    .core
+        width 100%
+
+    .details
+        display grid
+        grid-template-columns 3fr 2fr
+        align-items end
+
+        .tab_content
+            border 1px solid cor_texto
+            background white
+
+        textarea
+            width 100%
+            border none
+            box-shadow none
+
+    h1
+        color cor_titulo
+        font-size 1.2rem
+        font-weight 600
+        margin 0
+
+    .info
+        display flex
+        gap 2rem
+        color destaque_color
+
+    nav.tab
+        button
+            text-transform none
+
+            &.active
+                background-color white
+
+
+
+
+.logo
+    display block
+    text-align center
+    font normal 76px/1 "Patua One", cursive
+    color white
+    text-shadow 0 1px 0 #ccc,
+                0 2px 0 #c9c9c9,
+                0 3px 0 #bbb,
+                0 4px 0 #b9b9b9,
+                0 5px 0 #aaa,
+                0 6px 1px rgba(0,0,0,.1),
+                0 0 5px rgba(0,0,0,.1),
+                0 1px 3px rgba(0,0,0,.3),
+                0 3px 5px rgba(0,0,0,.2),
+                0 5px 10px rgba(0,0,0,.25),
+                0 10px 10px rgba(0,0,0,.2),
+                0 20px 20px rgba(0,0,0,.15)
+
+.logo_fundo_escuro
+    text-shadow 4px 4px 6px rgba(0,0,0,0.5)

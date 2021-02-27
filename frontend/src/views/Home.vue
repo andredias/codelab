@@ -1,30 +1,55 @@
 <template lang="pug">
-.main
-    div
-        .languages
-            h1 Languages
-        .editor
-            h1 Editor
+.home
+    section.hero
+        h1.logo Code Lab
+        h2 {{ i18n.$t("hero_msg") }}
+
+    section.languages
+        header
+            nav.tab
+                button(
+                    :class='selected_lang === "all" ? "active" : ""'
+                    @click='selected_lang = "all"'
+                ) {{ i18n.$t("all_languages") }}
+                button(
+                    :class='selected_lang === lang ? "active" : ""'
+                    :key='lang'
+                    @click='selected_lang = lang'
+                    v-for='lang in languages'
+                ) {{ lang }}
+            .toolbar
+                button(:enabled='selected_lang !== "all"') New
+        .content
+            project(:key='index' v-bind='project' v-for='(project, index) in projects')
 </template>
 
-<script></script>
+<script>
+import { ref, onMounted } from 'vue'
+import { useI18n } from '@/plugins/i18n_plugin'
+import project from '@/components/project'
+import axios from 'axios'
 
-<style lang="stylus" scoped>
-.main {
-    height: 100%;
+export default {
+    components: {
+        project,
+    },
+    setup() {
+        const i18n = useI18n()
+        const languages = ['Python', 'Go', 'Rust']
+        const selected_lang = ref('all')
+        const projects = ref([])
 
-    div {
-        display: grid;
-        grid-template-columns: 1fr 3fr;
-        grid-gap: 1rem;
-    }
+        onMounted(
+            async () =>
+                (projects.value = (await axios.get(`${process.env.VUE_APP_API_URL}/projects`)).data)
+        )
 
-    .languages {
-        background-color: blue;
-    }
-
-    .editor {
-        background-color: #222;
-    }
+        return {
+            i18n,
+            languages,
+            projects,
+            selected_lang,
+        }
+    },
 }
-</style>
+</script>

@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Fira+Codedisplay=swap')
+
+apagado = darken(white, 30%)
+title_color = black
+cor_texto = #738f93
+destaque_color = #1ba94c
+cor_titulo = darken(cor_texto, 50%)
+background_color = #f9f8f6
+
+html
+    text-rendering optimizeLegibility
+    font-family "Open Sans", Helvetica, sans-serif
+    color cor_texto
+
+body
+    font-size 0.9rem
+
+common_header_footer()
+    background linear-gradient(#222, #121212)
+    padding 1rem 30px
+    color apagado
+
+shadow()
+    box-shadow 0 1px 3px 1px rgba(0, 0, 0, 0.2)
+
+monospace()
+    font-family 'Fira Code', monospace
+
+flex-center()
+    display flex
+    justify-content center
+    align-items center
+    gap 1rem
+
+
+textarea
+    shadow()
+    border none
+    resize none
+
+input
+textarea
+    color black
+
+label
+.link
+    cursor pointer
+
+    &:hover
+        strike destaque_color
+
+
+
+.btn
+    padding 1rem 1.25rem
+    font-weight 600
+    border-radius 0.5rem
+    transition all 0.1s ease-in
+    box-shadow 0px 1px 3px 1px rgba(0, 0, 0, 0.3)
+    text-transform capitalize
+
+    &:hover
+        transform translateY(-2px)
+
+.btn-slim
+    padding 0.5rem 0.75rem
+
+
+.btn-primary
+    box-shadow 0px 1px 3px 1px rgba(darken(destaque_color, 30%), 0.5)
+    background-color destaque_color
+    color lighten(destaque_color, 90%)
+
+.btn-secondary
+    background-color white
+
+twitter_blue = rgb(59, 130, 246)
+
+a.twitter
+    color twitter_blue
+
+
+.CodeMirror
+    height auto
+    min-height 40ch
+    monospace()
+
+.CodeMirror-scroll
+    min-height 40ch
+    max-height 80vh

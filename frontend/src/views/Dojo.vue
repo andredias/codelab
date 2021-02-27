@@ -4,7 +4,7 @@
         header
             div
                 h3.bread-crumbs
-                    router-link(to='/') Home
+                    router-link(to='/') {{ i18n.$t("home") }}
                     router-link(to='/languages/python') Python
                     span {{ title }}
     main
@@ -39,7 +39,6 @@
         //-     h2 {{ i18n.$t("statistics") }}
 
         .editor
-            h2 Editor
             .box
                 codemirror(
                     v-model='code',
