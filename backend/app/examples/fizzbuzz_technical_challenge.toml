@@ -11,14 +11,4 @@ stderr = ""
 exit_code = 0
 
 [sources]
-"main.py" = """\
-for x in range(1, 101):
-    line = ''
-    if x % 3 == 0:
-        line = 'Fizz'
-    if x % 5 == 0:
-        line += 'Buzz'
-    if not line:
-        line = str(x)
-    print(line)
-"""
+"main.py" = "for x in range(1, 101):\n    line = ''\n    if x % 3 == 0:\n        line = 'Fizz'\n    if x % 5 == 0:\n        line += 'Buzz'\n    if not line:\n        line = str(x)\n    print(line)\n"
