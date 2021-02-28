@@ -40,8 +40,11 @@ export default {
         const projects = ref([])
 
         onMounted(
-            async () =>
-                (projects.value = (await axios.get(`${process.env.VUE_APP_API_URL}/projects`)).data)
+            async () => {
+                let data = (await axios.get(`${process.env.VUE_APP_API_URL}/projects`)).data
+                data.map(project => project.timestamp = new Date(project.timestamp))
+                projects.value = data
+            }
         )
 
         return {

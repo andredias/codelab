@@ -12,23 +12,23 @@
             .titulo(v-if='!editing_description')
                 h1 {{ title || i18n.$t("no_title") }}
                 svg.icon.link(
-                    fill='none',
-                    viewBox='0 0 24 24',
-                    stroke='currentColor',
                     @click='start_editing_title'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
                 )
                     path(
-                        stroke-linecap='round',
-                        stroke-linejoin='round',
-                        stroke-width='2',
                         d='M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z'
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                        stroke-width='2'
                     )
             .descricao.box(v-if='!editing_description && description')
                 p {{ description }}
 
             .edit_project_description(v-if='editing_description')
                 label(for='project_title') {{ i18n.$t("title") }}
-                input#project_title(type='text', v-model='temp_title')
+                input#project_title(type='text' v-model='temp_title')
                 label(for='project_description') {{ i18n.$t("description") }}
                 textarea#project_description(v-model='temp_description')
                 div
@@ -41,23 +41,23 @@
         .editor
             .box
                 codemirror(
-                    v-model='code',
-                    :options='editor_options',
-                    @cursor_moved='update_cursor',
+                    :options='editor_options'
+                    @cursor_moved='update_cursor'
                     ref='editor'
+                    v-model='code'
                 )
                 .cursor(:class='{ light: is_light_theme }')
                     div
                         span {{ i18n.$t("theme") }}:
                         a(
-                            href='#',
-                            :class='{ selected: is_light_theme }',
+                            :class='{ selected: is_light_theme }'
                             @click.prevent='change_theme("light")'
+                            href='#'
                         ) {{ i18n.$t("light") }}
                         a(
-                            href='#',
-                            :class='{ selected: !is_light_theme }',
+                            :class='{ selected: !is_light_theme }'
                             @click.prevent='change_theme("dark")'
+                            href='#'
                         ) {{ i18n.$t("dark") }}
                     div
                         span Python
@@ -72,40 +72,41 @@
             .upload-run
                 button.btn.btn-primary(@click='run_code') {{ i18n.$t("run_code") }}
                 .link(@click='upload_file')
-                    svg.icon(fill='none', viewBox='0 0 24 24', stroke='currentColor')
+                    svg.icon(fill='none' stroke='currentColor' viewBox='0 0 24 24')
                         path(
-                            stroke-linecap='round',
-                            stroke-linejoin='round',
-                            stroke-width='2',
                             d='M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12'
+                            stroke-linecap='round'
+                            stroke-linejoin='round'
+                            stroke-width='2'
                         )
                     span &nbsp; {{ i18n.$t("upload_code_from_file") }}
                     input#code_uploader(
-                        type='file',
-                        name='code_uploader',
-                        style='display: none',
-                        ref='code_uploader',
                         @change='on_file_picked'
+                        name='code_uploader'
+                        ref='code_uploader'
+                        style='display: none'
+                        type='file'
                     )
             .input
-                input#custom_input(type='checkbox', v-model='checked_input')
+                input#custom_input(type='checkbox' v-model='checked_input')
                 label(for='custom_input') {{ i18n.$t("define_input_data") }}
                 div(v-show='checked_input')
                     h2 stdin
-                    textarea.code(v-model='input')
+                    textarea.code(v-model='stdin')
 
             .output(v-show='stdout')
                 h2 stdout
-                textarea.code(readonly, v-model='stdout')
+                textarea.code(readonly v-model='stdout')
             .output(v-show='stderr')
                 h2 stderr
-                textarea.code(readonly, v-model='stderr')
+                textarea.code(readonly v-model='stderr')
 </template>
 
 <script>
 import codemirror from '@/components/codemirror'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useI18n } from '@/plugins/i18n_plugin'
+import { useRoute } from 'vue-router'
 import axios from 'axios'
 
 export default {
@@ -115,7 +116,7 @@ export default {
     setup() {
         const code = ref('')
         const lint = ref({})
-        const input = ref('')
+        const stdin = ref('')
         const checked_input = ref(false)
         const stdout = ref('')
         const stderr = ref('')
@@ -183,6 +184,30 @@ export default {
             editing_description.value = false
         }
 
+        const route = useRoute()
+
+        onMounted(async () => {
+            let params = route.params
+            console.log(params)
+            if (params.id) {
+                let resp = await axios.get(`${process.env.VUE_APP_API_URL}/projects/${params.id}`)
+                let data = resp.data
+                title.value = data.title
+                description.value = data.description
+                editor.value.editor.setValue(Object.values(data.sources)[0])
+                stdout.value = data.responses[0].stdout
+                stderr.value = data.responses[0].stderr
+                stdin.value = data.responses[0].stdin
+            } else if (params.language) {
+                stdout.value = ''
+                stdin.value = ''
+                stderr.value = ''
+                title.value = ''
+                description.value = ''
+            }
+        })
+
+
         async function run_code() {
             stdout.value = ''
             stderr.value = ''
@@ -201,15 +226,17 @@ export default {
                 stderr.value = responses[0]['stderr']
                 exit_code.value = responses[0]['exit_code']
             }
+            history.pushState({}, null, `/dojo/${project_id.value}`)
             console.log(resp)
         }
+
 
         return {
             run_code,
             code,
             lint,
             checked_input,
-            input,
+            stdin,
             stdout,
             stderr,
             exit_code,

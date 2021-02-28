@@ -18,10 +18,15 @@ const routes = [
             import(/* webpackChunkName: "about" */ '../views/About')
     },
     {
-        path: '/dojo',
+        path: '/dojo/:id',
         name: 'Dojo',
-        component: Dojo
-    }
+        component: Dojo,
+    },
+    {
+        path: '/dojo/new/:language',
+        name: 'NewDojo',
+        component: Dojo,
+    },
 ]
 
 const router = createRouter({
