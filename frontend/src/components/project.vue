@@ -93,7 +93,7 @@ export default {
                 stdout: stdout.value,
                 stderr: stderr.value,
             }
-            Object.keys(result).forEach((k) => result[k] == '' && delete result[k])
+            Object.keys(result).forEach((k) => !result[k] && delete result[k])
             return result
         })
 
