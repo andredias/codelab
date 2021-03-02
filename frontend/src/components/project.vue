@@ -12,7 +12,7 @@ section.project
             router-link(:to='`/dojo/${id}`') {{ title || i18n.$t("no_title") }}
         .info
             span(:key='language' v-for='language in languages') {{ language }}
-            span created 2 min ago
+            span {{ i18n.relative_time(timestamp) }}
         p(v-show='expanded && description') {{ description }}
         .details(v-show='expanded')
             .code
@@ -110,6 +110,7 @@ export default {
                 setTimeout(() => editor.value.editor.refresh(), 1)
             }
         })
+
 
         return {
             code,
