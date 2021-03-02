@@ -9,7 +9,7 @@ section.project
             )
     .core
         h1
-            router-link(:to='`/dojo/${id}`') {{ title }}
+            router-link(:to='`/dojo/${id}`') {{ title || i18n.$t("no_title") }}
         .info
             span(:key='language' v-for='language in languages') {{ language }}
             span created 2 min ago
