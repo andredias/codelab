@@ -39,13 +39,15 @@ export default {
         const selected_lang = ref('all')
         const projects = ref([])
 
-        onMounted(
-            async () => {
-                let data = (await axios.get(`${process.env.VUE_APP_API_URL}/projects`)).data
-                data.map(project => project.timestamp = new Date(project.timestamp))
-                projects.value = data
-            }
-        )
+        onMounted(async () => {
+            let data = (await axios.get(`${process.env.VUE_APP_API_URL}/projects`)).data
+            data.map((project) => (project.timestamp = new Date(project.timestamp)))
+            projects.value = data.sort(
+                (a, b) =>
+                    Math.floor(b.timestamp / 1000) - Math.floor(a.timestamp / 1000) || // ignores miliseconds
+                    a.title.localeCompare(b.title)
+            )
+        })
 
         return {
             i18n,
