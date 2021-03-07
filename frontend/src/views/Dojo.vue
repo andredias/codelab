@@ -23,14 +23,17 @@
                         stroke-linejoin='round'
                         stroke-width='2'
                     )
-            .descricao.box(v-if='!editing_description && description')
-                p {{ description }}
+            auto-textarea.description(
+                v-model='description'
+                :read-only='true'
+                v-if='!editing_description && description'
+            )
 
             .edit_project_description(v-if='editing_description')
                 label(for='project_title') {{ i18n.$t("title") }}
                 input#project_title(type='text' v-model='temp_title')
                 label(for='project_description') {{ i18n.$t("description") }}
-                textarea#project_description(v-model='temp_description')
+                auto-textarea#project_description(v-model='temp_description' max-height='90vh')
                 div
                     button.btn.btn-primary(@click='confirm_title_alteration') {{ i18n.$t("change") }}
                     button.btn.btn-secondary(@click='editing_description = false') {{ i18n.$t("cancel") }}
@@ -92,14 +95,14 @@
                 label(for='custom_input') {{ i18n.$t("define_input_data") }}
                 div(v-show='checked_input')
                     h2 stdin
-                    textarea.code(v-model='stdin')
+                    auto-textarea.code(v-model='stdin' max-height='90vh')
 
             .output(v-show='stdout')
                 h2 stdout
-                textarea.code(readonly v-model='stdout')
+                auto-textarea.code(v-model='stdout' :read-only='true' max-height='90vh')
             .output(v-show='stderr')
                 h2 stderr
-                textarea.code(readonly v-model='stderr')
+                auto-textarea.code(v-model='stderr' :read-only='true' max-height='90vh')
 </template>
 
 <script>
@@ -108,10 +111,12 @@ import { ref, computed, onMounted } from 'vue'
 import { useI18n } from '@/plugins/i18n_plugin'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
+import AutoTextarea from '@/components/AutoTextarea'
 
 export default {
     components: {
         codemirror,
+        AutoTextarea,
     },
     setup() {
         const code = ref('')
@@ -207,7 +212,6 @@ export default {
             }
         })
 
-
         async function run_code() {
             stdout.value = ''
             stderr.value = ''
@@ -229,7 +233,6 @@ export default {
             history.pushState({}, null, `/dojo/${project_id.value}`)
             console.log(resp)
         }
-
 
         return {
             run_code,
