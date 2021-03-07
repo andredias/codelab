@@ -29,9 +29,9 @@
                 v-if='!editing_description && description'
             )
 
-            .edit_project_description(v-if='editing_description')
+            .edit_project_description(v-show='editing_description')
                 label(for='project_title') {{ i18n.$t("title") }}
-                input#project_title(type='text' v-model='temp_title')
+                input#project_title(type='text' v-model='temp_title' ref='title_input' autofocus)
                 label(for='project_description') {{ i18n.$t("description") }}
                 auto-textarea#project_description(v-model='temp_description' max-height='90vh')
                 div
@@ -107,7 +107,7 @@
 
 <script>
 import codemirror from '@/components/codemirror'
-import { ref, computed, onMounted } from 'vue'
+import { nextTick, ref, computed, onMounted } from 'vue'
 import { useI18n } from '@/plugins/i18n_plugin'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
@@ -135,6 +135,7 @@ export default {
         const editor = ref(null)
         const code_uploader = ref(null)
         const project_id = ref(null)
+        const title_input = ref(null)
 
         const title = ref('')
         const description = ref('')
@@ -177,10 +178,12 @@ export default {
             fileReader.readAsText(files[0])
         }
 
+
         function start_editing_title() {
             editing_description.value = true
             temp_title.value = title.value
             temp_description.value = description.value
+            nextTick(() =>title_input.value.focus())
         }
 
         async function confirm_title_alteration() {
@@ -262,6 +265,7 @@ export default {
             start_editing_title,
             confirm_title_alteration,
             i18n,
+            title_input,
         }
     },
 }
