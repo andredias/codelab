@@ -12,8 +12,8 @@ section.project
             router-link(:to='`/dojo/${id}`') {{ title || i18n.$t("no_title") }}
         .info
             span(:key='language' v-for='language in languages') {{ language }}
-            span {{ i18n.relative_time(timestamp) }}
-        p(v-show='expanded && description') {{ description }}
+            span.tooltip(:data-text='timestamp') {{ i18n.relative_time(timestamp) }}
+        auto-textarea.description(:modelValue='description' :read-only='true' v-if='expanded && description')
         .details(v-show='expanded')
             .code
                 nav.tab
@@ -29,9 +29,24 @@ section.project
                         v-for='(tab, index) in Object.keys(tabs)'
                     ) {{ tab }}
                 .tab_content
-                    textarea(:value='stdin' v-show='current_tab === "stdin"')
-                    textarea(:value='stdout' v-show='current_tab === "stdout"')
-                    textarea(:value='stderr' v-show='current_tab === "stderr"')
+                    auto-textarea(
+                        :modelValue='stdin'
+                        :read-only='true'
+                        max-height='400px'
+                        v-if='current_tab === "stdin"'
+                    )
+                    auto-textarea(
+                        :modelValue='stdout'
+                        :read-only='true'
+                        max-height='400px'
+                        v-if='current_tab === "stdout"'
+                    )
+                    auto-textarea(
+                        :modelValue='stderr'
+                        :read-only='true'
+                        max-height='400px'
+                        v-if='current_tab === "stderr"'
+                    )
 </template>
 
 <script>
@@ -39,11 +54,13 @@ import { computed, ref, watch } from 'vue'
 import { filepath_to_language } from '@/utils'
 import { useI18n } from '@/plugins/i18n_plugin'
 import codemirror from '@/components/codemirror'
+import AutoTextarea from '@/components/AutoTextarea'
 
 export default {
     name: 'project',
     components: {
         codemirror,
+        AutoTextarea,
     },
     props: {
         id: String,
@@ -110,7 +127,6 @@ export default {
                 setTimeout(() => editor.value.editor.refresh(), 1)
             }
         })
-
 
         return {
             code,

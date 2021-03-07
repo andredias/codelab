@@ -1,5 +1,7 @@
 @require base
-@import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap')
+
+blackboard_background = #0C1021
 
 .home
     background background_color
@@ -46,6 +48,7 @@
 
 nav.tab
     margin-bottom -1px
+    z-index 1
 
     button
         padding 0.5rem 2rem
@@ -84,19 +87,34 @@ section.project
     .core
         width 100%
 
+    textarea.description
+        width 100%
+        margin-top 1rem
+
     .details
+        margin-top 1rem
         display grid
         grid-template-columns 3fr 2fr
-        align-items end
 
         .tab_content
             border 1px solid cor_texto
-            background white
+            background-color white
 
         textarea
             width 100%
             border none
             box-shadow none
+
+    .response
+    .code
+        display grid
+        grid-template-rows auto 1fr
+
+    .code
+        nav.tab button.active
+        .tab_content
+            background-color blackboard_background
+
 
     h1
         color cor_titulo
