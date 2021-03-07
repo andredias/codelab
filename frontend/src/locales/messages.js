@@ -22,6 +22,7 @@ export const messages = {
         new_project: 'new project',
         all_languages: 'all',
         edit: 'edit',
+        sourcecode: 'Source Code',
     },
     'pt-BR': {
         title: 'Título',
@@ -46,5 +47,6 @@ export const messages = {
         new_project: 'novo projeto',
         all_languages: 'todas',
         edit: 'editar',
+        sourcecode: 'Código Fonte',
     }
 }

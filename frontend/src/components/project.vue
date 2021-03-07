@@ -13,11 +13,15 @@ section.project
         .info
             span(:key='language' v-for='language in languages') {{ language }}
             span.tooltip(:data-text='timestamp') {{ i18n.relative_time(timestamp) }}
-        auto-textarea.description(:modelValue='description' :read-only='true' v-if='expanded && description')
+        auto-textarea.description(
+            :modelValue='description'
+            :read-only='true'
+            v-if='expanded && description'
+        )
         .details(v-show='expanded')
             .code
                 nav.tab
-                    button.active Code
+                    button.active {{ i18n.$t("sourcecode") }}
                 .tab_content
                     codemirror(:modelValue='code' :options='editor_options' ref='editor')
             .response
