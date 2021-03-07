@@ -1,14 +1,14 @@
 title = "Unpacking Arguments"
 description = ""
-id = "8c2fa37517c058d8baf4e8c5c8a6d9f7"
+id = "c886b3bd65eacbdc5e4141dd7cc9894e"
 [[commands]]
 command = "python main.py"
 timeout = 0.1
 
 [[responses]]
-stdout = "3 4\n2 3\n"
+stdout = "3 4\n3 4\n"
 stderr = ""
 exit_code = 0
 
 [sources]
-"main.py" = "def draw_point(x, y):\n    print(x, y)\n\n\npoint_foo = (3, 4)\npoint_bar = {'y': 3, 'x': 2}\ndraw_point(*point_foo)\ndraw_point(**point_bar)\n"
+"main.py" = "def draw_point(x, y):\n    print(x, y)\n\n\npoint_foo = (3, 4)\npoint_bar = {'y': 4, 'x': 3}\ndraw_point(*point_foo)\ndraw_point(**point_bar)\n"
