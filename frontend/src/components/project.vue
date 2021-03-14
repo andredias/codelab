@@ -1,5 +1,5 @@
 <template lang="pug">
-section.project
+section.project(:class='{expanded: expanded}')
     button.expand(@click='expanded = !expanded')
         svg.icon(:class='{ rotated: expanded }' fill='currentColor' viewBox='0 0 20 20')
             path(
@@ -8,8 +8,9 @@ section.project
                 fill-rule='evenodd'
             )
     .core
-        h1
-            router-link(:to='`/dojo/${id}`') {{ title || i18n.$t("no_title") }}
+        .flex-justify
+            h1.clickable(@click='expanded = !expanded') {{ title || i18n.$t("no_title") }}
+            button.btn.btn-slim.btn-primary(v-if='expanded' @click='router.push(`/dojo/${id}`)') {{ i18n.$t("edit") }}
         .info
             span(:key='language' v-for='language in languages') {{ language }}
             span.tooltip(:data-text='timestamp') {{ i18n.relative_time(timestamp) }}
@@ -55,7 +56,9 @@ section.project
 
 <script>
 import { computed, ref, watch } from 'vue'
+
 import { filepath_to_language } from '@/utils'
+import { useRouter } from 'vue-router'
 import { useI18n } from '@/plugins/i18n_plugin'
 import codemirror from '@/components/codemirror'
 import AutoTextarea from '@/components/AutoTextarea'
@@ -132,6 +135,8 @@ export default {
             }
         })
 
+        const router = useRouter()
+
         return {
             code,
             current_tab,
@@ -140,6 +145,7 @@ export default {
             expanded,
             i18n,
             languages,
+            router,
             stdin,
             stdout,
             stderr,
