@@ -4,6 +4,7 @@ apagado = darken(white, 30%)
 title_color = black
 cor_texto = #4b5563
 destaque_color = #1ba94c
+secondary_color = #5336ee
 cor_titulo = darken(cor_texto, 50%)
 background_color = #f9f8f6
 
@@ -72,7 +73,17 @@ label
     color lighten(destaque_color, 90%)
 
 .btn-secondary
+    box-shadow 0px 1px 3px 1px rgba(darken(secondary_color, 30%), 0.5)
+    background-color secondary_color
+    color lighten(secondary_color, 90%)
+
+.btn-tertiary
     background-color white
+
+.btn-disabled
+    background-color transparent
+    color lighten(cor_texto, 70%)
+
 
 twitter_blue = rgb(59, 130, 246)
 

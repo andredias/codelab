@@ -1,5 +1,5 @@
 const languages = {
-    py: 'Python',
+    py: 'python',
 }
 
 

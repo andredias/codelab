@@ -14,11 +14,15 @@
                 button(
                     :class='selected_lang === lang ? "active" : ""'
                     :key='lang'
-                    @click='selected_lang = lang'
+                    @click='select_language(lang)'
                     v-for='lang in languages'
                 ) {{ lang }}
-            .toolbar
-                button(:enabled='selected_lang !== "all"') New
+            .toolbar.flex-justify
+                select(v-model="new_project_language")
+                    option(v-for='lang in languages') {{ lang }}
+                button.btn.btn-secondary.btn-slim(
+                    @click='router.push(`/dojo/new/${new_project_language}`)'
+                ) {{ i18n.$t("new_project") }}
         .content
             project(:key='index' v-bind='project' v-for='(project, index) in projects')
 </template>
@@ -28,6 +32,7 @@ import { ref, onMounted } from 'vue'
 import { useI18n } from '@/plugins/i18n_plugin'
 import project from '@/components/project'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
 
 export default {
     components: {
@@ -38,6 +43,8 @@ export default {
         const languages = ['Python', 'Go', 'Rust']
         const selected_lang = ref('all')
         const projects = ref([])
+        const router = useRouter()
+        const new_project_language = ref('Python')
 
         onMounted(async () => {
             let data = (await axios.get(`${process.env.VUE_APP_API_URL}/projects`)).data
@@ -49,11 +56,19 @@ export default {
             )
         })
 
+        function select_language(lang) {
+            selected_lang.value = lang
+            new_project_language.value = lang
+        }
+
         return {
             i18n,
             languages,
+            new_project_language,
             projects,
+            router,
             selected_lang,
+            select_language,
         }
     },
 }

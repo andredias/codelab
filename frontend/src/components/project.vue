@@ -56,7 +56,6 @@ section.project(:class='{expanded: expanded}')
 
 <script>
 import { computed, ref, watch } from 'vue'
-
 import { filepath_to_language } from '@/utils'
 import { useRouter } from 'vue-router'
 import { useI18n } from '@/plugins/i18n_plugin'

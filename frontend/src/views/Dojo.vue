@@ -36,7 +36,7 @@
                 auto-textarea#project_description(v-model='temp_description' max-height='90vh')
                 div
                     button.btn.btn-primary(@click='confirm_title_alteration') {{ i18n.$t("change") }}
-                    button.btn.btn-secondary(@click='editing_description = false') {{ i18n.$t("cancel") }}
+                    button.btn.btn-tertiary(@click='editing_description = false') {{ i18n.$t("cancel") }}
 
         //- .stats
         //-     h2 {{ i18n.$t("statistics") }}
@@ -63,7 +63,7 @@
                             href='#'
                         ) {{ i18n.$t("dark") }}
                     div
-                        span Python
+                        span.programming_language {{ editor_options.mode }}
                     div
                         span {{ i18n.$t("line") }}:
                         span.cursor_pos {{ cursor_pos.line + 1 }}
@@ -112,6 +112,7 @@ import { useI18n } from '@/plugins/i18n_plugin'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 import AutoTextarea from '@/components/AutoTextarea'
+import { filepath_to_language } from '@/utils'
 
 export default {
     components: {
@@ -183,7 +184,7 @@ export default {
             editing_description.value = true
             temp_title.value = title.value
             temp_description.value = description.value
-            nextTick(() =>title_input.value.focus())
+            nextTick(() => title_input.value.focus())
         }
 
         async function confirm_title_alteration() {
@@ -206,12 +207,15 @@ export default {
                 stdout.value = data.responses[0].stdout
                 stderr.value = data.responses[0].stderr
                 stdin.value = data.responses[0].stdin
+                editor_options.value.mode = filepath_to_language(Object.keys(data.sources)[0])
             } else if (params.language) {
                 stdout.value = ''
                 stdin.value = ''
                 stderr.value = ''
                 title.value = ''
                 description.value = ''
+                editor_options.value.mode = params.language.toLowerCase()
+                start_editing_title()
             }
         })
 
