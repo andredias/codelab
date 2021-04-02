@@ -15,3 +15,5 @@ venv
 htmlcov
 .env
 .mypy_cache
+server/redis
+server/data

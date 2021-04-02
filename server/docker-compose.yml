@@ -1,0 +1,51 @@
+version: "3.5"
+
+networks:
+    web:
+        driver: bridge
+    backend:
+        driver: bridge
+        internal: true
+
+services:
+    caddy: # see https://hub.docker.com/_/caddy
+        container_name: caddy
+        image: "caddy:latest"
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile
+            - ./data:/server/caddy
+            - ../frontend/dist:/dist
+        networks:
+            - web
+            - backend
+        depends_on:
+            - api
+
+    redis:
+        container_name: redis
+        image: "redis:latest"
+        ports:
+            - "6379:6379"
+        networks:
+            - backend
+        volumes:
+            - ./redis:/data
+
+    api:
+        container_name: codelab
+        build:
+            context: ../backend
+            dockerfile: Dockerfile
+        image: codelab:latest
+        networks:
+            - backend
+        depends_on:
+            - redis
+        environment:
+            - ENV=production
+            - REDIS_URL=redis://redis:6379
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock  # create a docker container in docker

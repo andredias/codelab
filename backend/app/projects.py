@@ -18,7 +18,7 @@ async def save_project(project: Project, ttl: int = 0, key: str = 'project:{}') 
     '''
     key = key.format(project.id)
     await res.redis.set(key, project.json(), expire=ttl)
-    logger.debug(f'Key: {key}, TTL: {ttl}s, {project}')
+    logger.info(f'Key: {key}, TTL: {ttl}s, {project}')
     return
 
 
