@@ -5,7 +5,6 @@ header.main
             router-link(to='/') Code Lab
         nav
             router-link(to='/') {{ i18n.$t("home") }}
-            router-link(to='/dojo') Dojo
             router-link(to='/how') {{ i18n.$t("how_it_works") }}
             span(@click='toogle_lang' style='cursor: pointer')
                 svg.icon(fill='none' stroke='currentColor' viewBox='0 0 24 24')
