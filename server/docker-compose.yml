@@ -11,6 +11,7 @@ services:
     caddy: # see https://hub.docker.com/_/caddy
         container_name: caddy
         image: "caddy:latest"
+        init: true
         ports:
             - "80:80"
             - "443:443"
@@ -27,6 +28,7 @@ services:
     redis:
         container_name: redis
         image: "redis:latest"
+        init: true
         ports:
             - "6379:6379"
         networks:
@@ -40,6 +42,7 @@ services:
             context: ../backend
             dockerfile: Dockerfile
         image: codelab:latest
+        init: true
         networks:
             - backend
         depends_on:

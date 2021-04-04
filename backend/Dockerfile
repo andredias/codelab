@@ -14,7 +14,6 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 
 RUN python -m venv /venv
 ENV PATH=/venv/bin:/root/.poetry/bin:${PATH}
-RUN pip install --upgrade pip && pip install dumb-init
 
 WORKDIR /codelab
 COPY pyproject.toml poetry.lock ./
@@ -41,5 +40,4 @@ COPY --chown=nobody:nogroup hypercorn.toml .
 # USER nobody
 
 EXPOSE 5000
-ENTRYPOINT ["dumb-init", "--"]
 CMD ["hypercorn", "--config=hypercorn.toml", "app:create_app()"]
