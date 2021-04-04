@@ -4,7 +4,7 @@ footer.main
         nav
             router-link(to='/') {{ i18n.$t("home") }}
             router-link(to='/how') {{ i18n.$t("how_it_works") }}
-            router-link(to='/contact') {{ i18n.$t("contact") }}
+            router-link(to='/terms_of_use') {{ i18n.$t("terms_of_use") }}
         div
             h1 Code Lab
             p

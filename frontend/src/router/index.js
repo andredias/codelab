@@ -18,6 +18,12 @@ const routes = [
             import(/* webpackChunkName: "about" */ '../views/About')
     },
     {
+        path: '/terms_of_use',
+        name: 'TermsOfUse',
+        component: () =>
+            import('../views/terms_of_use')
+    },
+    {
         path: '/dojo/:id',
         name: 'Dojo',
         component: Dojo,

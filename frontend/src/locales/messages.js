@@ -23,6 +23,7 @@ export const messages = {
         all_languages: 'all',
         edit: 'edit',
         sourcecode: 'Source Code',
+        terms_of_use: 'Terms of Use',
     },
     'pt-BR': {
         title: 'Título',
@@ -48,5 +49,6 @@ export const messages = {
         all_languages: 'todas',
         edit: 'editar',
         sourcecode: 'Código Fonte',
+        terms_of_use: 'Termos de Uso',
     }
 }
