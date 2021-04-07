@@ -1,0 +1,5 @@
+services:
+    caddy:
+        volumes:
+            - ./Caddyfile.dev:/etc/caddy/Caddyfile
+            - /tmp/caddy_data:/data

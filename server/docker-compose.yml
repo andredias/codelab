@@ -10,20 +10,25 @@ networks:
 services:
     caddy: # see https://hub.docker.com/_/caddy
         container_name: caddy
-        image: "caddy:latest"
+        build:
+            context: .
+            dockerfile: Dockerfile.caddy
+        image: "custom-caddy:2.3.0"
         init: true
         ports:
             - "80:80"
             - "443:443"
         volumes:
             - ./Caddyfile:/etc/caddy/Caddyfile
-            - ./data:/server/caddy
+            - ./data:/data
             - ../frontend/dist:/dist
         networks:
             - web
             - backend
         depends_on:
             - api
+        environment:
+            - DIGITAL_OCEAN_TOKEN=${DIGITAL_OCEAN_TOKEN}
 
     redis:
         container_name: redis
