@@ -21,6 +21,7 @@ export default {
             locale: Object.keys(messages).includes(navigator.language) ? navigator.language : 'en',
             messages: messages,
         })
+        document.title = 'Code Lab'
     },
 }
 </script>
