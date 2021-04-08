@@ -1,6 +1,6 @@
 run: frontend
 	cd server; \
-	docker-compose up --build
+	docker-compose up --build -d
 
 dev: frontend
 	cd server; \
