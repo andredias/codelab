@@ -40,7 +40,7 @@ export default {
     },
     setup() {
         const i18n = useI18n()
-        const languages = ['Python', 'Go', 'Rust']
+        const languages = ['Python']
         const selected_lang = ref('all')
         const projects = ref([])
         const router = useRouter()
