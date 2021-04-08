@@ -1,12 +1,12 @@
 <template lang="pug">
 .dojo
-    .header-container
-        header
-            div
-                h3.bread-crumbs
-                    router-link(to='/') {{ i18n.$t("home") }}
-                    router-link(to='/languages/python') Python
-                    span {{ title }}
+    //- .header-container
+    //-     header
+    //-         div
+    //-             h3.bread-crumbs
+    //-                 router-link(to='/') {{ i18n.$t("home") }}
+    //-                 router-link(to='/languages/python') Python
+    //-                 span {{ title }}
     main
         .projeto
             .titulo(v-if='!editing_description')
