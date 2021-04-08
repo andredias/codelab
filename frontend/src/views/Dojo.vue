@@ -197,7 +197,6 @@ export default {
 
         onMounted(async () => {
             let params = route.params
-            console.log(params)
             if (params.id) {
                 let resp = await axios.get(`${process.env.VUE_APP_API_URL}/projects/${params.id}`)
                 let data = resp.data
@@ -238,7 +237,6 @@ export default {
                 exit_code.value = responses[0]['exit_code']
             }
             history.pushState({}, null, `/dojo/${project_id.value}`)
-            console.log(resp)
         }
 
         return {

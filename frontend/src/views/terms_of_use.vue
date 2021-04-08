@@ -100,8 +100,6 @@ import { useI18n } from '@/plugins/i18n_plugin'
 export default {
     setup() {
         const i18n = useI18n()
-        console.log(i18n.locale.value === 'en')
-
         return { i18n }
     },
 }
