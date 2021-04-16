@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg2"
+   height="162.7381"
+   width="663.11194">
+  <defs
+     id="defs4">
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend"
+       style="overflow:visible">
+      <path
+         id="path4099"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.719,4.034 -2.207,0.016 8.719,-4.002 c -1.746,2.372 -1.736,5.618 0,8.036 z"
+         transform="scale(-0.6)" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend"
+       style="overflow:visible">
+      <path
+         id="path4081"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend"
+       style="overflow:visible">
+      <path
+         id="path4093"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.719,4.034 -2.207,0.016 8.719,-4.002 c -1.746,2.372 -1.736,5.618 0,8.036 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2MendA"
+       style="overflow:visible">
+      <path
+         id="path4895"
+         style="fill:#aa4400;fill-rule:evenodd;stroke:#aa4400;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.719,4.034 -2.207,0.016 8.719,-4.002 c -1.746,2.372 -1.736,5.618 0,8.036 z"
+         transform="scale(-0.6)" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2MendY"
+       style="overflow:visible">
+      <path
+         id="path4898"
+         style="fill:#aa4400;fill-rule:evenodd;stroke:#aa4400;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.719,4.034 -2.207,0.016 8.719,-4.002 c -1.746,2.372 -1.736,5.618 0,8.036 z"
+         transform="scale(-0.6)" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2MendM"
+       style="overflow:visible">
+      <path
+         id="path4901"
+         style="fill:#aa4400;fill-rule:evenodd;stroke:#aa4400;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.719,4.034 -2.207,0.016 8.719,-4.002 c -1.746,2.372 -1.736,5.618 0,8.036 z"
+         transform="scale(-0.6)" />
+    </marker>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-57.593076,-66.550948)"
+     id="layer1">
+    <rect
+       style="fill:#f2f2f2;fill-opacity:1;stroke:#808080;stroke-width:1.7134223;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:3;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect3075"
+       width="129.03238"
+       height="92.865494"
+       x="58.449787"
+       y="113.75172"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#333333;fill-opacity:1;stroke:none"
+       x="123.12857"
+       y="144.39491"
+       id="text2985"><tspan
+         id="tspan2987"
+         x="123.12857"
+         y="144.39491"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle">code,</tspan><tspan
+         x="123.12857"
+         y="164.39491"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle"
+         id="tspan953">input data,</tspan><tspan
+         x="123.12857"
+         y="184.39491"
+         id="tspan2989"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle">commands</tspan></text>
+    <rect
+       ry="0"
+       y="125.73139"
+       x="603.66565"
+       height="77.008698"
+       width="116.29869"
+       id="rect3035"
+       style="fill:#f2f2f2;fill-opacity:1;stroke:#808080;stroke-width:1.48130739;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:3;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <g
+       id="g3085"
+       transform="translate(13.17144,-20.586069)">
+      <text
+         id="text3003"
+         y="178.53763"
+         x="649.0127"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#333333;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           id="tspan3031"
+           y="178.53763"
+           x="649.0127"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle">command</tspan><tspan
+           y="198.53763"
+           x="649.0127"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle"
+           id="tspan957">outputs</tspan></text>
+    </g>
+    <g
+       id="g3090">
+      <rect
+         ry="11.77"
+         y="67.169998"
+         x="281.29999"
+         height="161.5"
+         width="219.39999"
+         id="rect3037"
+         style="fill:#fff6d5;stroke:#808080;stroke-width:1.23810005;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:3;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text3007"
+         y="97.508575"
+         x="390.98846"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           style="font-size:18px;line-height:1.25;fill:#333333"
+           y="97.508575"
+           x="390.98846"
+           id="tspan3009">codebox</tspan><tspan
+           style="font-size:18px;line-height:1.25;fill:#999999"
+           id="tspan3073"
+           y="120.00858"
+           x="390.98846">(sandbox)</tspan></text>
+      <g
+         transform="translate(2,-4.02)"
+         id="g3059">
+        <rect
+           ry="14"
+           y="150.8"
+           x="246.10001"
+           height="27.98"
+           width="67.269997"
+           id="rect3021"
+           style="fill:#e6e6e6;fill-opacity:1;stroke:#808080;stroke-width:1.21930003;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:3;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+           x="279.25714"
+           y="171.54045"
+           id="text2991"><tspan
+             style="font-size:18px;line-height:1.25"
+             id="tspan2993"
+             x="279.25714"
+             y="171.54045">stdin</tspan></text>
+      </g>
+      <g
+         id="g3064">
+        <rect
+           style="fill:none;stroke:#808080;stroke-width:1.35000002;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:3;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect3011"
+           width="82.860001"
+           height="27.860001"
+           x="455.70001"
+           y="123"
+           ry="13.93" />
+        <rect
+           ry="13.93"
+           y="123"
+           x="455.70001"
+           height="27.860001"
+           width="82.860001"
+           id="rect3017"
+           style="fill:#e6e6e6;fill-opacity:1;stroke:#808080;stroke-width:1.35000002;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:3;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <rect
+           style="fill:#e6e6e6;fill-opacity:1;stroke:#808080;stroke-width:1.35000002;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:3;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect3019"
+           width="82.860001"
+           height="27.860001"
+           x="455.70001"
+           y="178.8"
+           ry="13.93" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+           x="496.86194"
+           y="143.10001"
+           id="text2995"><tspan
+             style="font-size:18px;line-height:1.25"
+             id="tspan2997"
+             x="496.86194"
+             y="143.10001">stdout</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+           x="496.651"
+           y="198.82857"
+           id="text2999"><tspan
+             style="font-size:18px;line-height:1.25"
+             id="tspan3001"
+             x="496.651"
+             y="198.82857">stderr</tspan></text>
+      </g>
+    </g>
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#aa4400;stroke-width:1.71430004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.4285, 3.4285;stroke-dashoffset:0;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2MendA)"
+       d="M 538.4,137.2 596.8,152"
+       id="path3112" />
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#aa4400;stroke-width:1.86170006;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.7233, 3.7233;stroke-dashoffset:0;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2MendM)"
+       d="m 537.9,192.4 58.9,-17.3"
+       id="path3114" />
+    <path
+       style="fill:#550000;stroke:#aa4400;stroke-width:1.61880004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.2376, 3.2376;stroke-dashoffset:0;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2MendY)"
+       d="m 192.7,160.2 h 51.8"
+       id="path3118" />
+  </g>
+</svg>
