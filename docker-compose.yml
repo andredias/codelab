@@ -19,9 +19,8 @@ services:
             - "80:80"
             - "443:443"
         volumes:
-            - ../frontend/dist:/dist
+            - ./frontend/dist:/dist
             - ./Caddyfile:/etc/caddy/Caddyfile
-            - /tmp/caddy_data:/data
         networks:
             - web
             - backend
@@ -36,13 +35,11 @@ services:
             - "6379:6379"
         networks:
             - backend
-        volumes:
-            - ./redis:/data
 
     api:
         container_name: codelab
         build:
-            context: ../backend
+            context: ./backend
             dockerfile: Dockerfile
         image: codelab:latest
         init: true
