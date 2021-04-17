@@ -28,7 +28,7 @@ Dependencies:
     :code:`GNU Make`, 4.2.1
 
 
-To run the project in :code:`development` mode, execute::
+To run the project, execute::
 
     $ make run
 

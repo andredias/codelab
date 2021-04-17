@@ -88,4 +88,4 @@ Para testá-lo, execute::
 
 .. tip::
 
-    Veja o arquivo `Makefile <backend/Makefile>`_ .
+    Veja o arquivo `Makefile <codebox/Makefile>`_ .

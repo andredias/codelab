@@ -27,7 +27,7 @@ Dependências:
     :code:`docker-compose`, 1.27.4
     :code:`GNU Make`, 4.2.1
 
-Para executar o projeto no modo :code:`dev`, execute::
+Para executar o projeto, execute::
 
     $ make run
 

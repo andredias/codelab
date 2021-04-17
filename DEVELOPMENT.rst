@@ -83,3 +83,7 @@ Then, activate the virtual environment::
 To test it, execute::
 
     $ make test_in_container
+
+.. tip::
+
+    See the `Makefile <codebox/Makefile>`_ for other tasks.
