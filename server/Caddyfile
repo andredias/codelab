@@ -1,4 +1,4 @@
-codelab.pronus.io {
+localhost {
 
     route /api* {
         uri strip_prefix /api
@@ -14,13 +14,4 @@ codelab.pronus.io {
     file_server {
         root /dist
     }
-
-    tls {
-        dns digitalocean {env.DIGITAL_OCEAN_TOKEN}
-    }
-}
-
-pronus.io,
-www.pronus.io {
-    redir https://codelab.pronus.io{uri}
 }

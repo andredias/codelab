@@ -19,16 +19,14 @@ services:
             - "80:80"
             - "443:443"
         volumes:
-            - ./Caddyfile:/etc/caddy/Caddyfile
-            - ./data:/data
             - ../frontend/dist:/dist
+            - ./Caddyfile:/etc/caddy/Caddyfile
+            - /tmp/caddy_data:/data
         networks:
             - web
             - backend
         depends_on:
             - api
-        environment:
-            - DIGITAL_OCEAN_TOKEN=${DIGITAL_OCEAN_TOKEN}
 
     redis:
         container_name: redis

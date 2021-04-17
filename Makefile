@@ -1,10 +1,7 @@
 run: frontend/dist
+	cd codebox; docker build -t codebox .
 	cd server; \
-	docker-compose up --build -d
-
-dev: frontend/dist
-	cd server; \
-	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+	docker-compose up --build
 
 frontend/node_modules: frontend/package.json
 	cd frontend; npm install
