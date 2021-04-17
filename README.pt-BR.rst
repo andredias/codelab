@@ -11,6 +11,36 @@ e também ajudar meus alunos a usarem diferentes linguagens de programação
 sem a necessidade de instalar nada na máquina deles.
 
 
+Executando o Code Lab
+=====================
+
+Dependências:
+
+.. csv-table::
+    :header-rows: 1
+
+    Dependência, Versão
+    :code:`Node.js`, 14
+    :code:`npm`, 7.9
+    :code:`Python`, 3.9
+    :code:`Docker`, 20.10.6
+    :code:`docker-compose`, 1.27.4
+    :code:`GNU Make`, 4.2.1
+
+Para executar o projeto no modo :code:`dev`, execute::
+
+    $ make run
+
+Em seguida, abra o navegador e acesse o endereço :code:`https://127.0.0.1`.
+
+
+Desenvolvimento
+===============
+
+Para usar o projeto diretamente pelo ambiente de desenvolvimento,
+veja `DEVELOPMENT.rst <DEVELOPMENT.rst>`_.
+
+
 Funcionamento
 =============
 
@@ -33,8 +63,6 @@ Os arquivos do projeto, dados de entrada e os comandos a serem executados são e
 A saída (:code:`stdout`) e os erros (:code:`stderr`) dos comandos
 são agrupados e devolvidos pelo :code:`stdout` do :code:`Codebox`.
 
-.. referência para o arquivo no GitHub com os modelos
-   ou por o arquivo Python aqui?
 
 .. image:: frontend/src/assets/images/codebox-operation.png
 
@@ -60,54 +88,6 @@ e só se não estiver lá é que o projeto é executado no :code:`Codebox`.
 
 
 .. image:: frontend/src/assets/images/codelab_codebox_v2.png
-
-
-Versão Anterior
-===============
-
-A primeira versão deste projeto foi lançada em 2015.
-Era uma aplicação :code:`MPA` (*Multiple-Page Application*)
-baseada em :code:`Javascript` e :code:`JQuery` no *frontend*.
-No *backend*, usava :code:`NGinX` de servidor web,
-:code:`GUnicorn` como servidor :code:`WSGI`,
-:code:`Flask` de *framework web*, :code:`Redis` para *cache*
-e :code:`Docker` como *sandbox*.
-
-Desde então, muita coisa mudou:
-
-* Agora é mais fácil separar o *frontend* do *backend* com *frameworks*
-  para construção de aplicações SPA_ (*Single Page Application*) tais como Vue.js_ e React_.
-  Estes *frameworks* tornaram o *frontend* mais robusto e o *backend* bem mais enxuto,
-  composto basicamente de uma :code:`REST API` para troca de informações.
-* No *backend*,
-  os *frameworks web* para :code:`Python` mais modernos tal como o FastAPI_ usam programação assíncrona,
-  aumentando a capacidade de processamento e a eficiência do uso do servidor.
-* E o :code:`CSS3` também evoluiu com novas estruturas tais como o modelo Flexbox_ e `Grid Layout`_.
-
-
-A atualização do projeto levou a grandes mudanças.
-Praticamente, apenas a ideia permaneceu a mesma pois todo o resto foi alterado,
-inclusive a funcionalidade do :code:`Codebox`,
-que foi bastante simplificada para permitir executar
-projetos com diferentes estruturas e comandos.
-
-.. note::
-
-    Devido a essas mudanças no :code:`Codebox`,
-    o número de linguagens disponíveis ainda é reduzido (apenas :code:`Python` por enquanto)
-    mas será ampliado nas próximas versões em breve.
-
-
-Código *Open Source*
-====================
-
-O código-fonte dos projetos do `Code Lab`_ e :code:`Codebox`
-estão disponíveis no :code:`GitHub` em [2]_ e [3]_.
-Começaram como dois projetos distintos,
-depois eu juntei o projeto do :code:`Codebox` no repositório do :code:`Code Lab`,
-mas serão separados novamente, em breve, porque terão caminhos diferentes:
-o :code:`Codebox` vai ser desenvolvimento como um microsserviço
-para ser usado independentemente do :code:`Code Lab`.
 
 
 .. note::

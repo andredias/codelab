@@ -1,5 +1,5 @@
-Description
-===========
+Overview
+========
 
 The `Code Lab`_ project allows you to program directly from the browser,
 without any other external dependency.
@@ -11,8 +11,39 @@ and also to help my students to use different programming languages
 without needing to install anything on their machines.
 
 
-Operation
-=========
+Running Code Lab
+================
+
+Dependencies:
+
+.. csv-table::
+    :header-rows: 1
+
+    Dependency, Version
+    :code:`Node.js`, 14
+    :code:`npm`, 7.9
+    :code:`Python`, 3.9
+    :code:`Docker`, 20.10.6
+    :code:`docker-compose`, 1.27.4
+    :code:`GNU Make`, 4.2.1
+
+
+To run the project in :code:`development` mode, execute::
+
+    $ make run
+
+Then, you should access you browser at :code:`https://127.0.0.1`.
+
+
+Development
+===========
+
+To use the project directly from the its development environment,
+see `DEVELOPMENT.rst <DEVELOPMENT.rst>`_.
+
+
+How It Works?
+=============
 
 Running code from an unknown source poses security risks
 because malicious code can try to take control of the system,
@@ -40,7 +71,6 @@ are grouped and returned from :code:`Codebox`'s :code:`stdout`.
 The models used to exchange information are specified in the file :code:`backend/app/models.py`.
 
 
-
 Architecture
 ============
 
@@ -60,53 +90,6 @@ and only if it is not there, the project is executed in :code:`Codebox`.
 .. image:: frontend/src/assets/images/codelab_codebox_v2.png
 
 
-Previous version
-================
-
-The first version of this project was launched in 2015.
-It was an application :code:`MPA` (Multiple-Page Application)
-based on :code:`Javascript` and :code:`JQuery` in frontend.
-In the backend, used :code:`NGinX` from web server,
-:code:`GUnicorn` as a server :code:`WSGI`,
-:code:`Flask` ​​from web framework, :code:`Redis` to cache
-and :code:`Docker` as sandbox.
-
-Since then, a lot has changed:
-
-* It is now easier to separate the frontend from the backend with SPA_ frameworks such as Vue.js_ and React_.
-  These frameworks made the frontend more robust and the backend much leaner,
-  basically composed of :code:`REST API` to exchange information.
-* In the backend,
-  the most modern :code:`Python` web frameworks such as FastAPI_ use asynchronous programming,
-  increasing the processing power and efficiency of using the server.
-* And :code:`CSS3` has also evolved with new structures such as the Flexbox_ model and `Grid Layout`_.
-
-
-The update of the project led to major changes.
-Practically, only the idea remained the same because everything else was changed,
-including :code:`Codebox` functionality,
-which has been greatly simplified to allow running
-projects with different structures and commands.
-
-.. note::
-
-    Due to these changes in :code:`Codebox`,
-    the number of available languages ​​is still reduced (only :code:`Python` for now)
-    but it will be expanded in the next versions soon.
-
-
-Open Source Code
-================
-
-The source code of the `Code Lab`_ projects :code:`Codebox`
-are available at :code:`GitHub` in [2] _ and [3] _.
-They started out as two separate projects,
-then I joined the :code:`Codebox` project in the :code:`Code Lab` repository,
-but they will be separated again, soon, because they will have different paths:
-o :code:`Codebox` will be developed as a microservice
-to be used independently of :code:`Code Lab`.
-
-
 .. note ::
 
     If you notice, you will see files like :code:`.hgignore` and :code:`.hgtags` in the repository.
@@ -114,15 +97,10 @@ to be used independently of :code:`Code Lab`.
     despite hosting them on :code:`GitHub`.
 
 
-
-
 References
 ===========
 
 .. [1] Sandbox (computer security): https://en.wikipedia.org/wiki/Sandbox_(computer_security)
-.. [2] Code Lab repository: https://github.com/andredias/codelab
-.. [3] Codebox repository: https://github.com/andredias/Codebox
-
 
 
 .. _ASGI (Asynchronous Server Gateway Interface): https://asgi.readthedocs.io/en/latest/introduction.html
