@@ -39,11 +39,7 @@ são agrupados e devolvidos pelo :code:`stdout` do :code:`Codebox`.
 .. image:: frontend/src/assets/images/codebox-operation.png
 
 
-Os modelos usados para troca de informações estão especificados no arquivo :code:`models.py`:
-
-.. include:: backend/app/models.py
-    :code: python
-    :number-lines:
+Os modelos usados para troca de informações estão especificados no arquivo :code:`backend/app/models.py`.
 
 
 
@@ -63,7 +59,7 @@ Primeiro é feita uma verificação no *cache* (Redis_)
 e só se não estiver lá é que o projeto é executado no :code:`Codebox`.
 
 
-.. image:: /images/codelab_Codebox/codelab_Codebox_v2.png
+.. image:: frontend/src/assets/images/codelab_codebox_v2.png
 
 
 Versão Anterior
