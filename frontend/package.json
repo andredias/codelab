@@ -12,7 +12,7 @@
     "axios": "^0.21.1",
     "chokidar": "^3.5.1",
     "codemirror": "^5.59.4",
-    "core-js": "^3.9.0",
+    "core-js": "^3.9.1",
     "vue": "^3.0.6",
     "vue-router": "^4.0.4",
     "vuex": "^4.0.0"
