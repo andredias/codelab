@@ -1,6 +1,7 @@
 import os
 from datetime import timedelta
 
+CODEBOX_URL: str
 DEBUG: bool
 ENV: str
 LOG_LEVEL: str
@@ -12,6 +13,7 @@ TTL: int
 
 def init():
 
+    global CODEBOX_URL
     global DEBUG
     global ENV
     global LOG_LEVEL
@@ -30,4 +32,5 @@ def init():
 
     TTL = int(os.getenv('TTL', timedelta(days=3).total_seconds())) if not TESTING else 1
     TIMEOUT = float(os.getenv('TIMEOUT', 0.1))
-    REDIS_URL = os.getenv('REDIS_URL') or 'redis://localhost:6379'
+    REDIS_URL = 'redis://localhost:6379' if TESTING else 'redis://redis:6379'
+    CODEBOX_URL = 'http://localhost:8001' if TESTING else 'http://codebox:8000'

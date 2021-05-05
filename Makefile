@@ -1,5 +1,4 @@
 run: frontend/dist
-	cd codebox; docker build -t codebox .
 	docker-compose up --build
 
 frontend/node_modules: frontend/package.json

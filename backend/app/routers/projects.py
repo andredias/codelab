@@ -4,7 +4,7 @@ from loguru import logger
 from .. import config
 from .. import resources as res
 from ..models import Project, ProjectCore, ProjectDescriptionCore, ProjectResponses
-from ..projects import calc_id, run_project_in_container, save_project
+from ..projects import calc_id, run_project_in_codebox, save_project
 
 router = APIRouter()
 
@@ -50,7 +50,7 @@ async def run_project(description_core: ProjectDescriptionCore):
 
     # not cached, so run it
     logger.debug(f'Project {id} not cached')
-    responses = await run_project_in_container(ProjectCore(**description_core.dict()))
+    responses = await run_project_in_codebox(ProjectCore(**description_core.dict()))
 
     # cache result
     project = Project(**description_core.dict(), id=id, responses=responses)

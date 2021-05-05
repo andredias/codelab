@@ -24,16 +24,16 @@
                         stroke-width='2'
                     )
             auto-textarea.description(
-                v-model='description'
                 :read-only='true'
                 v-if='!editing_description && description'
+                v-model='description'
             )
 
             .edit_project_description(v-show='editing_description')
                 label(for='project_title') {{ i18n.$t("title") }}
-                input#project_title(type='text' v-model='temp_title' ref='title_input' autofocus)
+                input#project_title(autofocus ref='title_input' type='text' v-model='temp_title')
                 label(for='project_description') {{ i18n.$t("description") }}
-                auto-textarea#project_description(v-model='temp_description' max-height='90vh')
+                auto-textarea#project_description(max-height='90vh' v-model='temp_description')
                 div
                     button.btn.btn-primary(@click='confirm_title_alteration') {{ i18n.$t("change") }}
                     button.btn.btn-tertiary(@click='editing_description = false') {{ i18n.$t("cancel") }}
@@ -95,14 +95,14 @@
                 label(for='custom_input') {{ i18n.$t("define_input_data") }}
                 div(v-show='checked_input')
                     h2 stdin
-                    auto-textarea.code(v-model='stdin' max-height='90vh')
+                    auto-textarea.code(max-height='90vh' v-model='stdin')
 
             .output(v-show='stdout')
                 h2 stdout
-                auto-textarea.code(v-model='stdout' :read-only='true' max-height='90vh')
+                auto-textarea.code(:read-only='true' max-height='90vh' v-model='stdout')
             .output(v-show='stderr')
                 h2 stderr
-                auto-textarea.code(v-model='stderr' :read-only='true' max-height='90vh')
+                auto-textarea.code(:read-only='true' max-height='90vh' v-model='stderr')
 </template>
 
 <script>
@@ -179,7 +179,6 @@ export default {
             fileReader.readAsText(files[0])
         }
 
-
         function start_editing_title() {
             editing_description.value = true
             temp_title.value = title.value
@@ -224,7 +223,9 @@ export default {
             exit_code.value = 0
             let resp = await axios.post(`${process.env.VUE_APP_API_URL}/projects`, {
                 sources: { 'main.py': code.value },
-                commands: [{ type: 'python', command: 'python main.py', timeout: 0.1 }],
+                commands: [
+                    { type: 'python', command: '/usr/local/bin/python main.py', timeout: 0.1 },
+                ],
                 title: title.value,
                 description: description.value,
             })

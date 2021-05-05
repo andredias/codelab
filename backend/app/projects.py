@@ -1,13 +1,13 @@
-from asyncio import create_subprocess_exec
-from asyncio.subprocess import PIPE
 from hashlib import md5
 from pathlib import Path
 from time import time
 
 import toml
+from httpx import AsyncClient
 from loguru import logger
-from pydantic import parse_raw_as
+from pydantic import parse_obj_as
 
+from . import config
 from . import resources as res
 from .models import Project, ProjectCore, ProjectDescriptionCore, Response
 
@@ -33,22 +33,19 @@ def calc_id(proj: ProjectDescriptionCore) -> str:
     return md5(text.encode()).hexdigest()
 
 
-async def run_project_in_container(project_core: ProjectCore) -> list[Response]:
+async def run_project_in_codebox(project_core: ProjectCore) -> list[Response]:
     '''
-    Run the project in a sandbox container
+    Call Codebox to run the project
     '''
     start = time()
 
-    project_json = project_core.json().encode()
-    docker_cmd = ['docker', 'run', '-i', '--rm', 'codebox']
-    proc = await create_subprocess_exec(*docker_cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    stdout, stderr = await proc.communicate(input=project_json)
-    assert stderr == b''
-    result = parse_raw_as(list[Response], stdout)
+    async with AsyncClient() as client:
+        result = await client.post(f'{config.CODEBOX_URL}/execute', json=project_core.dict())
 
+    assert result.status_code == 200
     elapsed = time() - start
     logger.debug(f'Elapsed Time: {elapsed}s')
-    return result
+    return parse_obj_as(list[Response], result.json())
 
 
 async def load_examples() -> list[Project]:

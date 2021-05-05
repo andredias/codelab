@@ -47,8 +47,20 @@ services:
             - backend
         depends_on:
             - redis
+            - codebox
         environment:
-            - ENV=production
+            - ENV=development
             - REDIS_URL=redis://redis:6379
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock  # create a docker container in docker
+
+    codebox:
+        container_name: codebox
+        build: https://github.com/andredias/codebox.git#main
+        ports:
+            - "8000:8000"
+        networks:
+            - backend
+        privileged: true
+        environment:
+            - ENV=development
