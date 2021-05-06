@@ -10,7 +10,8 @@
   "emmet.triggerExpansionOnTab": true,
   "files.insertFinalNewline": true,
   "python.venvFolders": [
-    ".venv"
+    ".venv",
+    "backend/.venv"
   ],
   "python.linting.flake8Args": [
     "count=1"
@@ -21,4 +22,5 @@
   "stylusSupremacy.insertColons": false,
   "stylusSupremacy.insertSemicolons": false,
   "stylusSupremacy.insertBraces": false,
+  "editor.fontFamily": "'Droid Sans Mono', 'Fira Code', 'monospace', monospace, 'Droid Sans Fallback'",
 }
