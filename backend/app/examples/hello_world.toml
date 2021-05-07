@@ -1,14 +1,8 @@
-title = "Hello World"
-description = ""
-id = "2e57ff46ed463f6b118c1971bb17073b"
-[[commands]]
-command = "python main.py"
-timeout = 0.1
-
-[[responses]]
 stdout = "Hello, world!\n"
 stderr = ""
 exit_code = 0
-
-[sources]
-"main.py" = "print(\"Hello, world!\")\n"
+id = "196547c6987b3bc91190425454d79f9c"
+title = "Hello World"
+description = ""
+language = "python"
+sourcecode = "print(\"Hello, world!\")\n"

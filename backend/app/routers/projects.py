@@ -3,21 +3,21 @@ from loguru import logger
 
 from .. import config
 from .. import resources as res
-from ..models import Project, ProjectCore, ProjectDescriptionCore, ProjectResponses
+from ..models import CodelabProject, ProjectResponse, ProjectToRun
 from ..projects import calc_id, run_project_in_codebox, save_project
 
 router = APIRouter()
 
 
-@router.get('/projects/{id}', response_model=Project)
-async def get_project(id: str) -> Project:
+@router.get('/projects/{id}', response_model=CodelabProject)
+async def get_project(id: str) -> CodelabProject:
     project_json = await res.redis.get(f'project:{id}')
     if not project_json:
         raise HTTPException(status_code=404)
-    return Project.parse_raw(project_json)
+    return CodelabProject.parse_raw(project_json)
 
 
-@router.get('/projects', response_model=list[Project])
+@router.get('/projects', response_model=list[CodelabProject])
 async def get_all_projects():
     '''
     Get all projects on Redis
@@ -27,35 +27,30 @@ async def get_all_projects():
     if len(keys) == 0:
         return []
     projects_json = await res.redis.mget(*keys)
-    projects = [Project.parse_raw(proj) for proj in projects_json]
+    projects = [CodelabProject.parse_raw(proj) for proj in projects_json]
     return projects
 
 
-@router.post('/projects', response_model=ProjectResponses)
-async def run_project(description_core: ProjectDescriptionCore):
+@router.post('/projects', response_model=ProjectResponse)
+async def run_project(project: ProjectToRun):
     '''
     Run project if it is not already cached.
     '''
-    # ensures that timeout is 0.1 max for non-authenticated projects
-    # This prevents direct access via API to run long processes
-    for command in description_core.commands:
-        command.timeout = config.TIMEOUT
+
     # first, check if the configuration is cached
-    id = calc_id(description_core)
+    id = calc_id(project)
     project_json = await res.redis.get(f'project:{id}')
     if project_json:
-        logger.debug(f'Project cached: {id}')
-        project = Project.parse_raw(project_json)
-        return ProjectResponses(id=project.id, responses=project.responses)
+        logger.info(f'Project cached: {id}')
+        return ProjectResponse.parse_raw(project_json)
 
     # not cached, so run it
     logger.debug(f'Project {id} not cached')
-    responses = await run_project_in_codebox(ProjectCore(**description_core.dict()))
+    response = await run_project_in_codebox(project)
 
     # cache result
-    project = Project(**description_core.dict(), id=id, responses=responses)
-    await save_project(project, config.TTL)
+    codelab_project = CodelabProject(**project.dict(), id=id, **response.dict())
+    await save_project(codelab_project, config.TTL)
 
     # report the result
-    prj_responses = ProjectResponses(id=id, responses=responses)
-    return prj_responses
+    return ProjectResponse(id=id, **response.dict())

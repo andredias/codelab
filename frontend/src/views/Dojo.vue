@@ -112,7 +112,6 @@ import { useI18n } from '@/plugins/i18n_plugin'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 import AutoTextarea from '@/components/AutoTextarea'
-import { filepath_to_language } from '@/utils'
 
 export default {
     components: {
@@ -201,11 +200,11 @@ export default {
                 let data = resp.data
                 title.value = data.title
                 description.value = data.description
-                editor.value.editor.setValue(Object.values(data.sources)[0])
-                stdout.value = data.responses[0].stdout
-                stderr.value = data.responses[0].stderr
-                stdin.value = data.responses[0].stdin
-                editor_options.value.mode = filepath_to_language(Object.keys(data.sources)[0])
+                editor.value.editor.setValue(data.sourcecode)
+                stdout.value = data.stdout || ''
+                stderr.value = data.stderr || ''
+                stdin.value = data.stdin || ''
+                editor_options.value.mode = data.language.toLowerCase()
             } else if (params.language) {
                 stdout.value = ''
                 stdin.value = ''
@@ -222,53 +221,49 @@ export default {
             stderr.value = ''
             exit_code.value = 0
             let resp = await axios.post(`${process.env.VUE_APP_API_URL}/projects`, {
-                sources: { 'main.py': code.value },
-                commands: [
-                    { type: 'python', command: '/usr/local/bin/python main.py', timeout: 0.1 },
-                ],
+                language: 'python',
+                sourcecode: code.value,
+                stdin: stdin.value,
                 title: title.value,
                 description: description.value,
             })
             let data = resp.data
-            project_id.value = data['id']
-            let responses = data['responses']
-            if (responses.length > 0) {
-                stdout.value = responses[0]['stdout']
-                stderr.value = responses[0]['stderr']
-                exit_code.value = responses[0]['exit_code']
-            }
+            project_id.value = data.id
+            stdout.value = data.stdout
+            stderr.value = data.stderr
+            exit_code.value = data.exit_code
             history.pushState({}, null, `/dojo/${project_id.value}`)
         }
 
         return {
-            run_code,
-            code,
-            lint,
+            change_theme,
             checked_input,
+            code,
+            code_uploader,
+            confirm_title_alteration,
+            cursor_pos,
+            description,
+            editor,
+            editor_options,
+            editing_description,
+            exit_code,
+            i18n,
+            is_light_theme,
+            lint,
+            on_file_picked,
+            run_code,
+            set_cursor_position,
+            start_editing_title,
             stdin,
             stdout,
             stderr,
-            exit_code,
-            cursor_pos,
-            theme,
-            change_theme,
-            is_light_theme,
-            editor_options,
-            update_cursor,
-            set_cursor_position,
-            editor,
-            upload_file,
-            code_uploader,
-            on_file_picked,
-            title,
-            description,
-            temp_title,
             temp_description,
-            editing_description,
-            start_editing_title,
-            confirm_title_alteration,
-            i18n,
+            temp_title,
+            theme,
+            title,
             title_input,
+            update_cursor,
+            upload_file,
         }
     },
 }

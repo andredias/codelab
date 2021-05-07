@@ -20,17 +20,18 @@ class BaseModel(_BaseModel):
         json_dumps = orjson_dumps
 
 
+# Codebox Related
+
 Sourcefiles = dict[str, str]
 
 
 class Command(BaseModel):
-    type: Optional[str] = None
     command: str
     timeout: Optional[float] = None
     stdin: Optional[str] = None
 
 
-class ProjectCore(BaseModel):
+class CodeboxProject(BaseModel):
     sources: Sourcefiles
     commands: list[Command]
 
@@ -41,17 +42,26 @@ class Response(BaseModel):
     exit_code: int = 0
 
 
-class ProjectDescriptionCore(ProjectCore):
+# Code Lab related
+
+
+class ProjectDescription(BaseModel):
     title: str = ''
     description: str = ''
 
 
-class ProjectResponses(BaseModel):
+class ProjectToRun(ProjectDescription):
+    language: str
+    sourcecode: str
+    stdin: Optional[str]
+
+
+class ProjectResponse(Response):
     id: str
-    responses: list[Response] = []
 
 
-class Project(ProjectDescriptionCore, ProjectResponses):
+class CodelabProject(ProjectToRun, ProjectResponse):
+
     timestamp: Optional[datetime] = None
 
     @validator('timestamp', pre=True, always=True)

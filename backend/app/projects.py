@@ -9,10 +9,10 @@ from pydantic import parse_obj_as
 
 from . import config
 from . import resources as res
-from .models import Project, ProjectCore, ProjectDescriptionCore, Response
+from .models import CodeboxProject, CodelabProject, Command, ProjectToRun, Response
 
 
-async def save_project(project: Project, ttl: int = 0, key: str = 'project:{}') -> None:
+async def save_project(project: CodelabProject, ttl: int = 0, key: str = 'project:{}') -> None:
     '''
     Save project into Redis
     '''
@@ -22,40 +22,54 @@ async def save_project(project: Project, ttl: int = 0, key: str = 'project:{}') 
     return
 
 
-def calc_id(proj: ProjectDescriptionCore) -> str:
+def calc_id(proj: ProjectToRun) -> str:
     '''
-    Calculates the project id based on the MD5 of its title, description, source files, commands and inputs.
-    The order matters.
+    Calculates the project id based on the MD5 of its title, description, source code,
+    language and inputs. The order matters.
     '''
-    code = ''.join(f'{path}{code}' for path, code in sorted(proj.sources.items()))
-    commands = ''.join(f'{c.command}{c.stdin}{c.timeout}' for c in proj.commands)
-    text = ''.join([proj.title, proj.description, code, commands])
+    text = ''.join([proj.title, proj.description, proj.language, proj.sourcecode, str(proj.stdin)])
     return md5(text.encode()).hexdigest()
 
 
-async def run_project_in_codebox(project_core: ProjectCore) -> list[Response]:
+def codelab_to_codebox_project(project: ProjectToRun) -> CodeboxProject:
+    language_mappings = {
+        'python': {
+            'filename': 'main.py',
+            'command': '/usr/local/bin/python main.py'
+        },
+    }
+    mapping = language_mappings[project.language]
+    sources = {
+        mapping['filename']: project.sourcecode,
+    }
+    cmd = Command(command=mapping['command'], timeout=config.TIMEOUT, stdin=project.stdin)
+    return CodeboxProject(sources=sources, commands=[cmd])
+
+
+async def run_project_in_codebox(project: ProjectToRun) -> Response:
     '''
     Call Codebox to run the project
     '''
     start = time()
-
+    codebox_project = codelab_to_codebox_project(project)
     async with AsyncClient() as client:
-        result = await client.post(f'{config.CODEBOX_URL}/execute', json=project_core.dict())
+        result = await client.post(f'{config.CODEBOX_URL}/execute', json=codebox_project.dict())
 
     assert result.status_code == 200
     elapsed = time() - start
     logger.debug(f'Elapsed Time: {elapsed}s')
-    return parse_obj_as(list[Response], result.json())
+    responses = parse_obj_as(list[Response], result.json())
+    return responses[0]
 
 
-async def load_examples() -> list[Project]:
+async def load_examples() -> list[CodelabProject]:
     '''
     Load examples into Redis.
     Examples/Samples are the toml files located at 'app/examples'.
     '''
     examples = []
     for example in (Path(__file__).parent / 'examples').glob('*.toml'):
-        project = Project.parse_obj(toml.loads(example.read_text()))
+        project = CodelabProject.parse_obj(toml.loads(example.read_text()))
         await save_project(project)
         examples.append(project)
     return examples

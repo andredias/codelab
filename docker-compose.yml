@@ -49,7 +49,7 @@ services:
             - redis
             - codebox
         environment:
-            - ENV=development
+            - ENV=production
             - REDIS_URL=redis://redis:6379
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock  # create a docker container in docker

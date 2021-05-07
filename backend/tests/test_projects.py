@@ -1,17 +1,17 @@
-from app.models import Command, ProjectDescriptionCore, Response
+from app.models import ProjectToRun, Response
 from app.projects import calc_id, run_project_in_codebox
 
 
 async def test_calc_id():
     message = 'Hello World!'
-    timeout = 0.1
-    proj1 = ProjectDescriptionCore(
-        sources={'main.py': f'print("{message}")\n'},
-        commands=[Command(command='/usr/local/bin/python main.py', timeout=timeout)],
+    proj1 = ProjectToRun(
+        sourcecode=f'print("{message}")\n',
+        language='python',
     )
-    proj2 = ProjectDescriptionCore(
-        sources={'source.py': f'print("{message}")\n'},
-        commands=[Command(command='/usr/local/bin/python source.py', timeout=timeout)],
+    proj2 = ProjectToRun(
+        title='Hello World',
+        sourcecode=f'print("{message}")\n',
+        language='python',
     )
 
     id_proj1 = calc_id(proj1)
@@ -23,9 +23,9 @@ async def test_calc_id():
 
 
 async def test_run_project_in_codebox(docker):
-    project_core = ProjectDescriptionCore(
-        sources={'main.py': 'print("Olá mundo!")\n'},
-        commands=[Command(command='/usr/local/bin/python main.py', timeout=0.1)],
+    project_core = ProjectToRun(
+        sourcecode='print("Olá mundo!")\n',
+        language='python',
     )
     responses = await run_project_in_codebox(project_core)
-    assert responses == [Response(stdout='Olá mundo!\n', stderr='', exit_code=0)]
+    assert responses == Response(stdout='Olá mundo!\n', stderr='', exit_code=0)

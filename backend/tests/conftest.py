@@ -21,7 +21,11 @@ config.init()
 def docker() -> Generator:
     codebox_port = config.CODEBOX_URL.split(':')[-1]
     redis_port = config.REDIS_URL.split(':')[-1]
-    check_call(f'docker run -d --privileged --rm -p {codebox_port}:8000 --name codebox-testing codebox', stdout=DEVNULL, shell=True)
+    check_call(
+        f'docker run -d --privileged --rm -p {codebox_port}:8000 --name codebox-testing codebox',
+        stdout=DEVNULL,
+        shell=True
+    )
     check_call(f'docker run -d --rm -p {redis_port}:6379 --name redis-testing redis:alpine', stdout=DEVNULL, shell=True)
     sleep(1)
     try:

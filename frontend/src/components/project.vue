@@ -1,5 +1,5 @@
 <template lang="pug">
-section.project(:class='{expanded: expanded}')
+section.project(:class='{ expanded: expanded }')
     button.expand(@click='expanded = !expanded')
         svg.icon(:class='{ rotated: expanded }' fill='currentColor' viewBox='0 0 20 20')
             path(
@@ -10,9 +10,9 @@ section.project(:class='{expanded: expanded}')
     .core
         .flex-justify
             h1.clickable(@click='expanded = !expanded') {{ title || i18n.$t("no_title") }}
-            button.btn.btn-slim.btn-primary(v-if='expanded' @click='router.push(`/dojo/${id}`)') {{ i18n.$t("edit") }}
+            button.btn.btn-slim.btn-primary(@click='router.push(`/dojo/${id}`)' v-if='expanded') {{ i18n.$t("edit") }}
         .info
-            span(:key='language' v-for='language in languages') {{ language }}
+            span {{ language }}
             span.tooltip(:data-text='timestamp') {{ i18n.relative_time(timestamp) }}
         auto-textarea.description(
             :modelValue='description'
@@ -24,7 +24,7 @@ section.project(:class='{expanded: expanded}')
                 nav.tab
                     button.active {{ i18n.$t("sourcecode") }}
                 .tab_content
-                    codemirror(:modelValue='code' :options='editor_options' ref='editor')
+                    codemirror(:modelValue='sourcecode' :options='editor_options' ref='editor')
             .response
                 nav.tab
                     button(
@@ -56,7 +56,6 @@ section.project(:class='{expanded: expanded}')
 
 <script>
 import { computed, ref, watch } from 'vue'
-import { filepath_to_language } from '@/utils'
 import { useRouter } from 'vue-router'
 import { useI18n } from '@/plugins/i18n_plugin'
 import codemirror from '@/components/codemirror'
@@ -82,48 +81,48 @@ export default {
             type: Date,
             required: true,
         },
-        sources: {
-            type: Object,
+        sourcecode: {
+            type: String,
             required: true,
         },
-        commands: {
-            type: Array,
+        language: {
+            type: String,
             required: true,
         },
-        responses: {
-            type: Array,
-            required: true,
+        stdin: {
+            type: String,
+            default: '',
+        },
+        stdout: {
+            type: String,
+            default: '',
+        },
+        stderr: {
+            type: String,
+            default: '',
+        },
+        exit_code: {
+            type: Number,
+            default: 0,
         },
     },
     setup(props) {
-        const code = computed(() => Object.values(props.sources)[0])
-        const stdin = computed(() => props.commands[0].stdin)
-        const stdout = computed(() => props.responses[0].stdout)
-        const stderr = computed(() => props.responses[0].stderr)
-        const languages = computed(() => {
-            let result = []
-            for (const filepath in props.sources) {
-                result.push(filepath_to_language(filepath))
-            }
-            return result
-        })
-
         const expanded = ref(false)
         const i18n = useI18n()
         const tabs = computed(() => {
             let result = {
-                stdin: stdin.value,
-                stdout: stdout.value,
-                stderr: stderr.value,
+                stdin: props.stdin,
+                stdout: props.stdout,
+                stderr: props.stderr,
             }
             Object.keys(result).forEach((k) => !result[k] && delete result[k])
             return result
         })
 
-        const current_tab = ref(stderr.value ? 'stderr' : 'stdout')
+        const current_tab = ref(props.stderr ? 'stderr' : 'stdout')
         const editor = ref(null)
         const editor_options = {
-            mode: languages.value[0].toLowerCase(),
+            mode: props.language.toLowerCase(),
             readOnly: true,
         }
 
@@ -137,17 +136,12 @@ export default {
         const router = useRouter()
 
         return {
-            code,
             current_tab,
             editor,
             editor_options,
             expanded,
             i18n,
-            languages,
             router,
-            stdin,
-            stdout,
-            stderr,
             tabs,
         }
     },

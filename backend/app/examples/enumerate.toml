@@ -1,19 +1,8 @@
-title = "Enumerate"
-description = ""
-id = "7738d7109dc272a05a241c8e8632b05e"
-[[commands]]
-type = "python"
-command = "python main.py"
-timeout = 0.1
-
-[[responses]]
 stdout = "0 a\n1 b\n2 c\n3 d\n4 e\n"
 stderr = ""
 exit_code = 0
-
-[sources]
-"main.py" = """\
-a = ['a', 'b', 'c', 'd', 'e']
-for index, item in enumerate(a):
-    print(index, item)
-"""
+id = "6d6e0b92c5be6a77fde9cccbc2d2fa55"
+title = "Enumerate"
+description = ""
+language = "python"
+sourcecode = "a = ['a', 'b', 'c', 'd', 'e']\nfor index, item in enumerate(a):\n    print(index, item)\n"
