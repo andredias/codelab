@@ -14,7 +14,6 @@ from app import config  # isort:skip
 os.environ['ENV'] = 'testing'
 os.environ['REDIS_URL'] = 'redis://localhost:6378'
 os.environ['TIMEOUT'] = '1'
-config.init()
 
 
 @fixture(scope='session')
@@ -43,5 +42,9 @@ async def app(docker) -> AsyncIterable[FastAPI]:  # noqa: F811
 
 @fixture
 async def client(app: FastAPI) -> AsyncIterable[AsyncClient]:
-    async with AsyncClient(app=app, base_url='http://test') as client:
+    async with AsyncClient(
+        app=app,
+        base_url='http://testserver',
+        headers={'Content-Type': 'application/json'},
+    ) as client:
         yield client

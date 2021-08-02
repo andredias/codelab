@@ -15,6 +15,7 @@ aioredis = "*"
 orjson = "*"
 aiofiles = "*"
 httpx = "*"
+tenacity = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"

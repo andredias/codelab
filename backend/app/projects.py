@@ -1,6 +1,7 @@
 from hashlib import md5
 from pathlib import Path
 from time import time
+from typing import Optional
 
 import toml
 from httpx import AsyncClient
@@ -8,16 +9,16 @@ from loguru import logger
 from pydantic import parse_obj_as
 
 from . import config
-from . import resources as res
 from .models import CodeboxProject, CodelabProject, Command, ProjectToRun, Response
+from .resources import redis
 
 
-async def save_project(project: CodelabProject, ttl: int = 0, key: str = 'project:{}') -> None:
+async def save_project(project: CodelabProject, ttl: Optional[int] = None, key: str = 'project:{}') -> None:
     '''
     Save project into Redis
     '''
     key = key.format(project.id)
-    await res.redis.set(key, project.json(), expire=ttl)
+    await redis.set(key, project.json(), ex=ttl)
     logger.info(f'Key: {key}, TTL: {ttl}s, {project}')
     return
 

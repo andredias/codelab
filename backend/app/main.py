@@ -1,7 +1,3 @@
-from pathlib import Path
-from typing import Union
-
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import ORJSONResponse
@@ -18,10 +14,7 @@ origins = [
 ]
 
 
-def create_app(env_filename: Union[str, Path] = None) -> FastAPI:
-    # a .env file is not mandatory. You can specify envvar parameters by other means
-    if env_filename:
-        load_dotenv(env_filename)
+def create_app() -> FastAPI:
 
     app = FastAPI(default_response_class=ORJSONResponse)
     for router in routers:

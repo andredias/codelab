@@ -1,23 +1,22 @@
-import asyncio
 import sys
-from time import sleep, time
-from typing import Any, Awaitable, Callable, Union
+from string import ascii_uppercase
 
-from aioredis import create_redis_pool
-from aioredis.commands import Redis
+from aioredis import Redis
 from loguru import logger
+from tenacity import retry, stop_after_delay, wait_exponential
 
 from . import config
 
-redis: Redis = None
+redis = Redis.from_url(config.REDIS_URL)
 
 
 async def startup() -> None:
     '''
     Initialize resources such as Redis and Database connections
     '''
-    config.init()
     setup_logger()
+    if config.DEBUG:
+        show_config()
     await _init_redis()
     logger.info('started...')
 
@@ -40,7 +39,6 @@ def setup_logger():
     logger.add(
         sys.stderr, level=config.LOG_LEVEL, colorize=True, backtrace=config.DEBUG, enqueue=True
     )  # reinsert it to make it run in a different thread
-    logger.debug({key: getattr(config, key) for key in dir(config) if key == key.upper()})
 
 
 def _intercept_standard_logging_messages():
@@ -70,12 +68,23 @@ def _intercept_standard_logging_messages():
     logging.basicConfig(handlers=[InterceptHandler()], level=0)
 
 
+def show_config() -> None:
+    values = {v: getattr(config, v) for v in sorted(dir(config)) if v[0] in ascii_uppercase}
+    logger.debug(values)
+    return
+
+
 async def _init_redis():
     from .projects import load_examples
 
-    global redis
-    function = create_redis_pool(config.REDIS_URL)
-    redis = await wait_until_responsive(function)
+    # test redis connection
+    @retry(stop=stop_after_delay(3), wait=wait_exponential(multiplier=0.2))
+    async def _connect_to_redis() -> None:
+        logger.debug('Connecting to Redis...')
+        await redis.set('test_connection', '1234')
+        await redis.delete('test_connection')
+
+    await _connect_to_redis()
     await load_examples()
     return
 
@@ -83,22 +92,3 @@ async def _init_redis():
 async def _stop_redis():
     if config.TESTING:
         await redis.flushdb()
-    redis.close()
-    await redis.wait_closed()
-
-
-async def wait_until_responsive(
-    function: Union[Awaitable, Callable], timeout: float = 3.0, interval: float = 0.1
-) -> Any:
-    ref = time()
-    while (time() - ref) < timeout:
-        try:
-            if asyncio.iscoroutine(function):
-                result = await function  # type:ignore
-            else:
-                result = function()  # type:ignore
-            return result
-        except:  # noqa: E722
-            pass
-        sleep(interval)
-    raise TimeoutError()

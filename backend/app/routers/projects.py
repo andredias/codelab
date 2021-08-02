@@ -2,16 +2,16 @@ from fastapi import APIRouter, HTTPException
 from loguru import logger
 
 from .. import config
-from .. import resources as res
 from ..models import CodelabProject, ProjectResponse, ProjectToRun
 from ..projects import calc_id, run_project_in_codebox, save_project
+from ..resources import redis
 
 router = APIRouter()
 
 
 @router.get('/projects/{id}', response_model=CodelabProject)
 async def get_project(id: str) -> CodelabProject:
-    project_json = await res.redis.get(f'project:{id}')
+    project_json = await redis.get(f'project:{id}')
     if not project_json:
         raise HTTPException(status_code=404)
     return CodelabProject.parse_raw(project_json)
@@ -23,10 +23,10 @@ async def get_all_projects():
     Get all projects on Redis
     '''
     # TODO: get only most recent projects
-    keys = await res.redis.keys('project:*')
+    keys = await redis.keys('project:*')
     if len(keys) == 0:
         return []
-    projects_json = await res.redis.mget(*keys)
+    projects_json = await redis.mget(*keys)
     projects = [CodelabProject.parse_raw(proj) for proj in projects_json]
     return projects
 
@@ -39,7 +39,7 @@ async def run_project(project: ProjectToRun):
 
     # first, check if the configuration is cached
     id = calc_id(project)
-    project_json = await res.redis.get(f'project:{id}')
+    project_json = await redis.get(f'project:{id}')
     if project_json:
         logger.info(f'Project cached: {id}')
         return ProjectResponse.parse_raw(project_json)
