@@ -28,6 +28,7 @@ flake8 = "*"
 isort = "*"
 ipython = "*"
 pdbpp = "*"
+types-toml = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -32,7 +32,7 @@ To run the project, execute::
 
     $ make run
 
-Then, you should access you browser at :code:`https://127.0.0.1`.
+Then, you should access you browser at :code:`https://localhost`.
 
 
 Development

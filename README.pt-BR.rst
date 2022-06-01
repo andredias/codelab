@@ -31,7 +31,7 @@ Para executar o projeto, execute::
 
     $ make run
 
-Em seguida, abra o navegador e acesse o endereço :code:`https://127.0.0.1`.
+Em seguida, abra o navegador e acesse o endereço :code:`https://localhost`.
 
 
 Desenvolvimento
