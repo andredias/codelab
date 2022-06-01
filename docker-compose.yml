@@ -8,12 +8,10 @@ networks:
         internal: true
 
 services:
-    caddy: # see https://hub.docker.com/_/caddy
+    caddy:
+        # see https://hub.docker.com/_/caddy
         container_name: caddy
-        build:
-            context: .
-            dockerfile: Dockerfile.caddy
-        image: "custom-caddy:2.3.0"
+        image: "caddy:alpine"
         init: true
         ports:
             - "80:80"
@@ -52,10 +50,11 @@ services:
             - ENV=production
             - REDIS_URL=redis://redis:6379
         volumes:
-            - /var/run/docker.sock:/var/run/docker.sock  # create a docker container in docker
+            - /var/run/docker.sock:/var/run/docker.sock # create a docker container in docker
             - ./backend/app:/codelab/app
 
     codebox:
+        image: codebox
         container_name: codebox
         build: https://github.com/andredias/codebox.git#main
         ports:
