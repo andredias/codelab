@@ -40,6 +40,7 @@ class Response(BaseModel):
     stdout: str = ''
     stderr: str = ''
     exit_code: int = 0
+    elapsed_time: float = 0
 
 
 # Code Lab related

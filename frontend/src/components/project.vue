@@ -105,6 +105,10 @@ export default {
             type: Number,
             default: 0,
         },
+        elapsed_time: {
+            type: Number,
+            default: 0,
+        },
     },
     setup(props) {
         const expanded = ref(false)
