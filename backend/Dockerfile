@@ -1,4 +1,4 @@
-FROM python:3.9-slim as builder
+FROM python:3.10-slim as builder
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -20,7 +20,7 @@ COPY pyproject.toml poetry.lock ./
 RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-dev
 
 
-FROM python:3.9-slim as final
+FROM python:3.10-slim as final
 
 # install docker engine. It won't be needed after Codelab v.1.0
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
