@@ -9,3 +9,13 @@ frontend/node_modules: frontend/package.json
 
 frontend/dist: frontend/node_modules frontend/src/** frontend/src/**/* frontend/public/**
 	cd frontend; npm run build
+
+lint:
+	cd backend; poetry run make lint
+
+test:
+	# cd backend; poetry run make test
+
+
+install_hooks:
+	@ scripts/install_hooks.sh

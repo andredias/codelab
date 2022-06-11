@@ -18,10 +18,10 @@ async def get_project(id: str) -> CodelabProject:
 
 
 @router.get('/projects', response_model=list[CodelabProject])
-async def get_all_projects():
-    '''
+async def get_all_projects() -> list[CodelabProject]:
+    """
     Get all projects on Redis
-    '''
+    """
     # TODO: get only most recent projects
     keys = await redis.keys('project:*')
     if len(keys) == 0:
@@ -32,10 +32,10 @@ async def get_all_projects():
 
 
 @router.post('/projects', response_model=ProjectResponse)
-async def run_project(project: ProjectToRun):
-    '''
+async def run_project(project: ProjectToRun) -> ProjectResponse:
+    """
     Run project if it is not already cached.
-    '''
+    """
 
     # first, check if the configuration is cached
     id = calc_id(project)

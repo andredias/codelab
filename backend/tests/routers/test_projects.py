@@ -19,10 +19,17 @@ async def test_run_project(client: AsyncClient) -> None:
     resp = await client.post('/projects', json=project.dict())
     assert resp.status_code == 200
     data = resp.json()
-    assert data == {'id': '7ded54706f0aefbd641bbbe452ecb174', 'stdout': 'Hello World!\n', 'stderr': '', 'exit_code': 0}
+    assert data == {
+        'id': '7ded54706f0aefbd641bbbe452ecb174',
+        'stdout': 'Hello World!\n',
+        'stderr': '',
+        'exit_code': 0,
+    }
 
     # second call, the project must be in cache
-    with patch('app.routers.projects.run_project_in_codebox', return_value=Response(**data)) as run_project_in_codebox:
+    with patch(
+        'app.routers.projects.run_project_in_codebox', return_value=Response(**data)
+    ) as run_project_in_codebox:
         logger.info('project must be in cache')
         resp = await client.post('/projects', json=project.dict())
         assert resp.status_code == 200
@@ -38,9 +45,9 @@ async def test_run_project(client: AsyncClient) -> None:
 
 
 async def test_get_all_projects(client: AsyncClient) -> None:
-    '''
+    """
     Examples must have been loaded automatically
-    '''
+    """
     resp = await client.get('/projects')
     assert len(resp.json()) > 0
 
@@ -51,7 +58,7 @@ async def test_get_project(client: AsyncClient) -> None:
     resp = await client.get(f'/projects/{example["id"]}')
     assert resp.status_code == 200
     project = CodelabProject.parse_obj(resp.json())
-    assert project.title == example["title"]
+    assert project.title == example['title']
 
     resp = await client.get('/projects/00000000000000000000000000000001')
     assert resp.status_code == 404

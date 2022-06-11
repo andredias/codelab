@@ -1,13 +1,20 @@
 import os
 from datetime import timedelta
 
-ENV = os.environ['ENV'].lower()
-if ENV not in ('development', 'testing', 'production'):
-    raise ValueError(f'ENV="{ENV}" but it should be "development", "testing" or "production"')
-TESTING = ENV == 'testing'
-DEBUG = ENV != 'production'
+from dotenv import load_dotenv
 
-LOG_LEVEL = os.getenv('LOG_LEVEL') or DEBUG and 'DEBUG' or 'INFO'
+load_dotenv()
+
+ENV = os.getenv('ENV', 'production').lower()
+if ENV not in ('production', 'development', 'testing'):
+    raise ValueError(
+        f'ENV={ENV} is not valid. ' "It should be 'production', 'development' or 'testing'"
+    )
+DEBUG = ENV != 'production'
+TESTING = ENV == 'testing'
+
+LOG_LEVEL = os.getenv('LOG_LEVEL') or (DEBUG and 'DEBUG') or 'INFO'
+os.environ['LOGURU_DEBUG_COLOR'] = '<fg #777>'
 
 TTL = int(os.getenv('TTL', timedelta(days=3).total_seconds())) if not TESTING else 1
 TIMEOUT = float(os.getenv('TIMEOUT', 0.1))

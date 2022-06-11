@@ -10,7 +10,7 @@ routers = [
 ]
 
 origins = [
-    "http://localhost:8080",
+    'http://localhost:8080',
 ]
 
 
@@ -24,16 +24,16 @@ def create_app() -> FastAPI:
         CORSMiddleware,
         allow_origins=origins,
         allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
+        allow_methods=['*'],
+        allow_headers=['*'],
     )
 
     @app.on_event('startup')
-    async def startup_event():
+    async def startup_event() -> None:
         await startup()
 
     @app.on_event('shutdown')
-    async def shutdown_event():
+    async def shutdown_event() -> None:
         await shutdown()
 
     return app

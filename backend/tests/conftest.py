@@ -23,9 +23,13 @@ def docker() -> Generator:
     check_call(
         f'docker run -d --privileged --rm -p {codebox_port}:8000 --name codebox-testing codebox',
         stdout=DEVNULL,
-        shell=True
+        shell=True,
     )
-    check_call(f'docker run -d --rm -p {redis_port}:6379 --name redis-testing redis:alpine', stdout=DEVNULL, shell=True)
+    check_call(
+        f'docker run -d --rm -p {redis_port}:6379 --name redis-testing redis:alpine',
+        stdout=DEVNULL,
+        shell=True,
+    )
     sleep(1)
     try:
         yield
@@ -34,7 +38,7 @@ def docker() -> Generator:
 
 
 @fixture
-async def app(docker) -> AsyncIterable[FastAPI]:  # noqa: F811
+async def app(docker: Generator) -> AsyncIterable[FastAPI]:
     app = create_app()
     async with LifespanManager(app):
         yield app

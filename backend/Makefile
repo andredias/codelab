@@ -1,23 +1,23 @@
-run:
-	# docker run -d -p 6379:6379 --rm --name redis redis:alpine
-	# docker run -d --rm -p 8001:8000 --privileged --name codebox codebox
-	ENV=development hypercorn --reload --config=hypercorn.toml 'app:create_app(".env")'
+test:
+	pytest --cov-report term-missing --cov-report html --cov-branch \
+	       --cov app/
 
-check:
+lint:
 	@echo
-	isort --diff -c --skip-glob '.venv' .
+	isort --diff -c .
 	@echo
-	yapf -vv --diff --recursive --style ../yapf.ini --exclude '*.venv' .
+	blue --check --diff --color .
 	@echo
-	mypy --ignore-missing-imports .
+	flake8 .
 	@echo
-	flake8 --config flake8.ini --max-line-length 120 --exclude '.hg,.vscode,.venv,__pycache__,docs,.mypy_cache' --count .
+	mypy .
+	@echo
+	bandit -qr app/
+	@echo
+	pip-audit
 
-format_code:
+
+format:
 	isort .
-	yapf -i -r --style ../yapf.ini --exclude '*.venv' .
-
-test_:
-	ENV=testing pytest -x --default-async-timeout 100 --cov-report term-missing --cov-report html --cov-branch --cov app/
-
-test: check test_
+	blue .
+	pyupgrade --py310-plus **/*.py

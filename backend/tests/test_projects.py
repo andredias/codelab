@@ -1,8 +1,10 @@
+from collections.abc import Generator
+
 from app.models import ProjectToRun, Response
 from app.projects import calc_id, run_project_in_codebox
 
 
-async def test_calc_id():
+async def test_calc_id() -> None:
     message = 'Hello World!'
     proj1 = ProjectToRun(
         sourcecode=f'print("{message}")\n',
@@ -22,7 +24,7 @@ async def test_calc_id():
     assert id_proj1 == calc_id(proj1)
 
 
-async def test_run_project_in_codebox(docker):
+async def test_run_project_in_codebox(docker: Generator) -> None:
     project_core = ProjectToRun(
         sourcecode='print("Olá mundo!")\n',
         language='python',

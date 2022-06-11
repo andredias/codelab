@@ -1,39 +1,52 @@
 [tool.poetry]
-name = "codelab"
+name = "Codelab"
 version = "0.1.0"
 description = ""
-authors = ["André Felipe Dias <andre.dias@pronus.io>"]
-
-[tool.poetry.dependencies]
-python = "^3.10"
-fastapi = "*"
-loguru = "*"
-Hypercorn = "*"
-uvloop = "*"
-python-dotenv = "*"
-aioredis = "*"
-orjson = "*"
-aiofiles = "*"
-httpx = "*"
-tenacity = "*"
-
-[tool.poetry.dev-dependencies]
-pytest = "*"
-pytest-cov = "*"
-asgi-lifespan = "*"
-alt-pytest-asyncio = "*"
-yapf = "*"
-mypy = "*"
-flake8 = "*"
-isort = "*"
-ipython = "*"
-pdbpp = "*"
-types-toml = "*"
+authors = ["André Felipe Dias <andref.dias@gmail.com>"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.poetry.dependencies]
+aiofiles = "*"
+aioredis = "*"
+fastapi = "*"
+httpx = "*"
+Hypercorn = "*"
+loguru = "*"
+orjson = "*"
+python = "^3.10"
+python-dotenv = "*"
+tenacity = "*"
+uvloop = "*"
+
+[tool.poetry.dev-dependencies]
+alt-pytest-asyncio = "*"
+asgi-lifespan = "*"
+bandit = "*"
+flake8 = "*"
+flake8-debugger = "*"
+flake8-pytest-style = "*"
+isort = "*"
+mypy = "*"
+pep8-naming = "*"
+pip-audit = "*"
+pytest = "*"
+pytest-cov = "*"
+pyupgrade = "*"
+types-toml = "*"
+
 [tool.isort]
+profile = "black"
 line_length = 100
-multi_line_output = 5
+
+[tool.blue]
+line-length = 100
+
+[tool.pytest.ini_options]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.mypy]
+ignore_missing_imports = true
+disallow_untyped_defs = true
