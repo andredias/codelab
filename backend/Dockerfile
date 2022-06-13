@@ -22,13 +22,6 @@ RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-dev
 
 FROM python:3.10-slim as final
 
-# install docker engine. It won't be needed after Codelab v.1.0
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get -y upgrade && \
-    apt install -y docker.io
-
-# --- end of docker installation
-
 COPY --chown=nobody:nogroup --from=builder /venv /venv
 ENV PATH=/venv/bin:${PATH}
 
