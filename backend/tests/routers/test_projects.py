@@ -19,12 +19,12 @@ async def test_run_project(client: AsyncClient) -> None:
     resp = await client.post('/projects', json=project.dict())
     assert resp.status_code == 200
     data = resp.json()
-    assert data == {
-        'id': '7ded54706f0aefbd641bbbe452ecb174',
-        'stdout': 'Hello World!\n',
-        'stderr': '',
-        'exit_code': 0,
-    }
+    assert data['id'] == '7ded54706f0aefbd641bbbe452ecb174'
+    assert Response(**data) == Response(
+        stdout='Hello World!\n',
+        stderr='',
+        exit_code=0,
+    )
 
     # second call, the project must be in cache
     with patch(

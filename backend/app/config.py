@@ -19,4 +19,4 @@ os.environ['LOGURU_DEBUG_COLOR'] = '<fg #777>'
 TTL = int(os.getenv('TTL', timedelta(days=3).total_seconds())) if not TESTING else 1
 TIMEOUT = float(os.getenv('TIMEOUT', 0.1))
 REDIS_URL = 'redis://localhost:6379' if DEBUG else 'redis://redis:6379'
-CODEBOX_URL = 'http://localhost:8001' if DEBUG else 'http://codebox:8000'
+CODEBOX_URL = 'http://localhost:8000' if DEBUG else 'http://codebox:8000'

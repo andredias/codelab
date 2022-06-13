@@ -1,0 +1,14 @@
+version: "3.5"
+
+networks:
+    testing:
+        driver: bridge
+
+services:
+    codebox:
+        networks:
+             - testing
+
+    redis:
+        networks:
+            - testing
