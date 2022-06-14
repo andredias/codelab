@@ -33,4 +33,4 @@ COPY --chown=nobody:nogroup hypercorn.toml .
 # USER nobody
 
 EXPOSE 5000
-CMD ["hypercorn", "--config=hypercorn.toml", "app:create_app()"]
+CMD ["hypercorn", "--config=hypercorn.toml", "app.main:create_app()"]

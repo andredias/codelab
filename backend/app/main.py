@@ -3,10 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import ORJSONResponse
 
 from .resources import shutdown, startup
-from .routers import projects
+from .routers import playground
 
 routers = [
-    projects.router,
+    playground.router,
 ]
 
 origins = [

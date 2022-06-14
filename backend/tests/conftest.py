@@ -11,7 +11,7 @@ from pytest import fixture
 
 os.environ['ENV'] = 'testing'
 
-from app import create_app  # noqa: E402
+from app.main import create_app  # noqa: E402
 
 
 @fixture(scope='session')

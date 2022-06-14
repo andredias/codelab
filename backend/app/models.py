@@ -1,12 +1,13 @@
-from datetime import datetime, timezone
+from base64 import urlsafe_b64encode
+from hashlib import md5
 from typing import Any, Callable, Optional
 
 import orjson
 from pydantic import BaseModel as _BaseModel
-from pydantic import validator
+
+from .config import TIMEOUT
 
 # ref: https://pydantic-docs.helpmanual.io/usage/exporting_models/#custom-json-deserialisation
-
 
 default_type = Optional[Callable[[Any], Any]]
 
@@ -22,6 +23,13 @@ class BaseModel(_BaseModel):
         json_dumps = orjson_dumps
 
 
+def calc_hash(obj: BaseModel) -> str:
+    """
+    Calculates the hash of any pydantic model.
+    """
+    return urlsafe_b64encode(md5(obj.json().encode()).digest()).decode()  # nosec: B324
+
+
 # Codebox Related
 
 Sourcefiles = dict[str, str]
@@ -29,11 +37,11 @@ Sourcefiles = dict[str, str]
 
 class Command(BaseModel):
     command: str
-    timeout: float | None = None
+    timeout: float = TIMEOUT
     stdin: str | None = None
 
 
-class CodeboxProject(BaseModel):
+class CodeboxInput(BaseModel):
     sources: Sourcefiles
     commands: list[Command]
 
@@ -63,32 +71,23 @@ class Response(BaseModel):
 # Code Lab related
 
 
-class ProjectDescription(BaseModel):
-    title: str = ''
-    description: str = ''
-
-
-class ProjectToRun(ProjectDescription):
+class PlaygroundInput(BaseModel):
     language: str
     sourcecode: str
     stdin: str | None
 
 
-class ProjectResponse(Response):
+class PlaygroundOutput(BaseModel):
     id: str
+    responses: list[Response]
+
+    def __eq__(self, other: object) -> bool:
+        return (
+            isinstance(other, PlaygroundOutput)
+            and self.id == other.id
+            and self.responses == other.responses
+        )
 
 
-class CodelabProject(ProjectToRun, ProjectResponse):
-
-    timestamp: datetime | None = None
-
-    @validator('timestamp', pre=True, always=True)
-    def set_ts_now(cls, v: datetime) -> datetime:  # noqa: N805
-        """
-        See: https://pydantic-docs.helpmanual.io/usage/validators/#validate-always
-
-        This validation might become unnecessary in Pydantic 2.0
-        and be replaced by something like 'timestamp: datetime = datetime.now
-        see: https://github.com/samuelcolvin/pydantic/pull/12108
-        """
-        return v or datetime.now(timezone.utc)
+class PlaygroundProject(PlaygroundInput, PlaygroundOutput):
+    ...
