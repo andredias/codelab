@@ -1,27 +1,21 @@
+<script setup>
+import { provide } from 'vue'
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
+import { messages } from './locale_messages'
+import { createI18n } from './plugins/i18n'
+
+document.title = "Code Lab"
+provide('i18n', createI18n({
+    locale: Object.keys(messages).includes(navigator.language)
+        ? navigator.language
+        : "en",
+    messages: messages,
+}))
+</script>
+
 <template lang="pug">
 Header
 router-view
 Footer
 </template>
-
-<script>
-import Header from './components/Header'
-import Footer from './components/Footer'
-import { messages } from './locales/messages'
-import { provideI18n } from './plugins/i18n_plugin'
-
-export default {
-    name: 'Code Lab',
-    components: {
-        Header,
-        Footer,
-    },
-    setup() {
-        provideI18n({
-            locale: Object.keys(messages).includes(navigator.language) ? navigator.language : 'en',
-            messages: messages,
-        })
-        document.title = 'Code Lab'
-    },
-}
-</script>

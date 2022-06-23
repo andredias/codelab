@@ -1,10 +1,8 @@
 <template lang="pug">
-
-
 </template>
 
 <script>
-import { useI18n } from '@/plugins/i18n_plugin'
+import { useI18n } from './plugins/i18n_plugin'
 
 export default {
     setup() {
