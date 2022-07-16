@@ -44,127 +44,89 @@ footer.main
 .dojo
     background-color background_color
 
-    .header-container
-        background-color white
-        box-shadow 0px 1px 2px rgba(0, 0, 0, 0.1)
-
-        header
-            max-width 1024px
-            padding 1rem 30px
-            display flex
-            justify-content space-between
-            align-items center
-
-            h3
-                font-size 0.8rem
-                color cor_texto
-
-                * + *
-                    &::before
-                        content '>'
-                        color cor_texto
-                        padding 0 0.5rem
-
     a:hover
     .link:hover
         color destaque_color
 
-    main
-        margin 0 auto
-        padding 1rem 0
-        width 70vw
-        display flex
-        flex-flow column
-        gap 1rem
-        // display grid
-        // grid-template-columns 2fr 1fr
-        // gap 1rem
-        // grid-template-areas "projeto       stats" \
-        //                     "editor        lint" \
-        //                     "input-output  ."
+    margin 0 auto
+    padding 1rem 0
+    width 70vw
+    display flex
+    flex-flow column
+    gap 1rem
 
 
-        h1
-        h2
-            color cor_titulo
-            font-size 1.2rem
-            font-weight 600
-            margin 1rem 0 0.5rem
+    h1
+    h2
+        color cor_titulo
+        font-size 1.2rem
+        font-weight 600
+        margin 1rem 0 0.5rem
 
-        h2
-            font-size 1rem
+    h2
+        font-size 1rem
 
 
-        .projeto
-            grid-area projeto
-            position relative
+    .menu
+        position relative
 
-            .titulo
-                display flex
-                justify-content space-between
-                align-items center
+        .titulo
+            display flex
+            justify-content space-between
+            align-items center
 
-        .editor
-            grid-area editor
-            padding 0
+    .editor
+        padding 0
 
-            .cursor
-                background white
-                monospace()
-                font-size 0.9rem
-                color cor_texto
-                display flex
-                justify-content space-between
-                padding 0.25rem 1rem
+        .cursor
+            background white
+            monospace()
+            font-size 0.9rem
+            color cor_texto
+            display flex
+            justify-content space-between
+            padding 0.25rem 1rem
 
-                &.light
-                    background #efefef
+            &.light
+                background #efefef
 
-                a.selected
-                    border-bottom 1px solid
+            a.selected
+                border-bottom 1px solid
 
-                div
-                    * + *
-                        margin-left 1rem
+            div
+                * + *
+                    margin-left 1rem
 
-                span.cursor_pos
-                    min-width 3ch
-                    display inline-block
-                    text-align right
-                    margin-left 0
+            span.cursor_pos
+                min-width 3ch
+                display inline-block
+                text-align right
+                margin-left 0
 
-                span.programming_language
-                    text-transform capitalize
+            span.programming_language
+                text-transform capitalize
 
-        .input-output
-            grid-area input-output
+    .input-output
 
-            label
-                padding-left 0.5rem
+        label
+            padding-left 0.5rem
 
-            textarea.code
-                display block
-                margin-top 0.5rem
-                resize none
-                height 40ch
-                width 100%
-                font-size 0.9rem
-                line-height 1.25rem
-                monospace()
+        textarea.code
+            display block
+            margin-top 0.5rem
+            resize none
+            min-height 10ch
+            width 100%
+            font-size 0.9rem
+            line-height 1.25rem
+            monospace()
 
-            .upload-run
-                display flex
-                justify-content space-between
-                align-items start
+        .upload-run
+            display flex
+            justify-content end
 
-            .input
-                margin-top 1rem
-
-        .stats
-            grid-area stats
-
-        .lint
-            grid-area lint
+        .input
+            margin-top 1rem
 
 
 .edit_project_description

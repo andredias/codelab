@@ -1,5 +1,5 @@
 <template lang="pug">
-.home
+.home.miolo
     section.hero
         h1.logo Code Lab
         h2 {{ i18n.$t('hero_msg') }}
