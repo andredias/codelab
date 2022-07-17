@@ -1,42 +1,28 @@
-frontend
-========
+Configuration
+=============
 
-Project setup
--------------
+This project version is based on `vite <https://vitejs.dev/>`_.
 
-::
+Commands:
 
-   npm install
-
-Compiles and hot-reloads for development
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-::
-
-   npm run serve
-
-Compiles and minifies for production
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-::
-
-   npm run build
-
-Lints and fixes files
-~~~~~~~~~~~~~~~~~~~~~
-
-::
-
-   npm run lint
-
-Customize configuration
-~~~~~~~~~~~~~~~~~~~~~~~
-
-See `Configuration Reference <https://cli.vuejs.org/config/>`__.
+* ``npm install``
+* ``npm run dev``
+* ``npm run build``
+* ``npm run preview``
 
 
+Environment Variables
+=====================
 
-Todo:
+``.env.development``:
 
-* Ver esse componente: https://vuejs-tips.github.io/vue-the-mask/
-* https://freefrontend.com/vue-code-examples/
+.. code:: console
+
+   VITE_API_URL=http://localhost:5000
+
+
+``.env.production``:
+
+.. code:: console
+
+   VITE_API_URL=/api

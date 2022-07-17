@@ -106,13 +106,6 @@ const editor_options = ref({
 const editor = ref(null)
 const code_uploader = ref(null)
 const project_id = ref(null)
-const title_input = ref(null)
-
-const title = ref('')
-const description = ref('')
-const temp_title = ref('')
-const temp_description = ref('')
-const editing_description = ref(false)
 
 const i18n = inject('i18n')
 const is_light_theme = computed(() => theme.value === 'light')
@@ -149,28 +142,14 @@ function on_file_picked(event) {
     fileReader.readAsText(files[0])
 }
 
-function start_editing_title() {
-    editing_description.value = true
-    temp_title.value = title.value
-    temp_description.value = description.value
-    nextTick(() => title_input.value.focus())
-}
-
-async function confirm_title_alteration() {
-    title.value = temp_title.value
-    description.value = temp_description.value
-    editing_description.value = false
-}
 
 const route = useRoute()
 
 onMounted(async () => {
     let params = route.params
     if (params.id) {
-        let resp = await axios.get(`${process.env.VUE_APP_API_URL}/projects/${params.id}`)
+        let resp = await axios.get(`${import.meta.VITE_API_URL}/playgrounds/${params.id}`)
         let data = resp.data
-        title.value = data.title
-        description.value = data.description
         editor.value.editor.setValue(data.sourcecode)
         stdout.value = data.stdout || ''
         stderr.value = data.stderr || ''
@@ -180,10 +159,7 @@ onMounted(async () => {
         stdout.value = ''
         stdin.value = ''
         stderr.value = ''
-        title.value = ''
-        description.value = ''
         editor_options.value.mode = params.language.toLowerCase()
-        start_editing_title()
     }
 })
 
@@ -191,12 +167,10 @@ async function run_code() {
     stdout.value = ''
     stderr.value = ''
     exit_code.value = 0
-    let resp = await axios.post(`${process.env.VUE_APP_API_URL}/projects`, {
+    let resp = await axios.post(`${import.meta.env.VITE_API_URL}/playgrounds`, {
         language: 'python',
         sourcecode: code.value,
         stdin: stdin.value,
-        title: title.value,
-        description: description.value,
     })
     let data = resp.data
     project_id.value = data.id

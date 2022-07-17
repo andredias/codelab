@@ -5,6 +5,14 @@ localhost {
         reverse_proxy api:5000
     }
 
+    # route /docs {
+    #     reverse_proxy api:5000
+    # }
+
+    # route /openapi.json {
+    #     reverse_proxy api:5000
+    # }
+
     @compress_exts {
         not path *.gif *.jpg *.png
     }

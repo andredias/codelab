@@ -1,11 +1,10 @@
 Development
 ===========
 
-The :code:`Code Lab` repository contains three subprojects:
+The :code:`Code Lab` repository contains two subprojects:
 
 1. Frontend
 2. Backend
-3. Codebox
 
 
 Frontend
@@ -15,19 +14,36 @@ Frontend
     :header-rows: 1
 
     Dependency, Version
-    :code:`Node.js`, 14
-    :code:`npm`, 7.9
+    :code:`Node.js`, 18.4.0
+    :code:`npm`, 8.13.2
 
 
-To install the packages, use::
+To install the packages, use:
 
+.. code:: console
+
+    $ cd frontend
     $ npm install
 
-To serve the project, execute::
+To serve the project, execute:
 
-    $ npm run serve
+.. code:: console
 
-Open the browser at :code:`http://localhost:8080`.
+    $ npm run dev
+
+In order to run the backend in development mode, run::
+
+.. code:: console
+
+    $ make dev
+
+Open the browser at :code:`http://localhost:3000` to test the frontend.
+
+
+.. tip::
+
+    ``npm run dev`` serves the frontend in an alternative way
+    than the one provided by ``make dev``.
 
 
 Backend
@@ -37,7 +53,7 @@ Backend
     :header-rows: 1
 
     Dependency, Version
-    :code:`Python`, 3.9
+    :code:`Python`, 3.10
     :code:`Poetry`, 1.1.2
     :code:`Docker`, 20.10.6
 
@@ -50,14 +66,9 @@ Then, activate the virtual environment::
 
     $ poetry shell
 
-To run the project,
-first it is necessary to have Redis running::
-
-    $ docker run -d -p 6379:6379 --rm --name redis redis:alpine
-
 And then, execute::
 
-    $ make run
+    $ make dev
 
 
 .. tip::

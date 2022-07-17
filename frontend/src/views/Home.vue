@@ -45,7 +45,7 @@ const router = useRouter()
 const new_project_language = ref("Python")
 
 // onMounted(async () => {
-//     let data = (await axios.get(`${process.env.VUE_APP_API_URL}/projects`))
+//     let data = (await axios.get(`${import.meta.env.VITE_API_URL}/projects`))
 //         .data
 //     data.map((project) => (project.timestamp = new Date(project.timestamp)))
 //     projects.value = data.sort(

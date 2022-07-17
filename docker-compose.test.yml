@@ -7,8 +7,21 @@ networks:
 services:
     codebox:
         networks:
-             - testing
+            - testing
 
     redis:
         networks:
             - testing
+
+    api:
+        networks:
+            - testing
+        ports:
+            - "5000:5000"
+        command:
+            [
+                "hypercorn",
+                "--config=hypercorn.toml",
+                "--reload",
+                "app.main:create_app()"
+            ]
