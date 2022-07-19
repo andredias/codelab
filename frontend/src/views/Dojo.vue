@@ -93,7 +93,6 @@ import AutoTextarea from '../components/AutoTextarea.vue'
 const code = ref('')
 const lint = ref({})
 const stdin = ref('')
-const checked_input = ref(false)
 const stdout = ref('')
 const stderr = ref('')
 const exit_code = ref(0)
@@ -105,7 +104,6 @@ const editor_options = ref({
 })
 const editor = ref(null)
 const code_uploader = ref(null)
-const project_id = ref(null)
 
 const i18n = inject('i18n')
 const is_light_theme = computed(() => theme.value === 'light')
@@ -148,11 +146,12 @@ const route = useRoute()
 onMounted(async () => {
     let params = route.params
     if (params.id) {
-        let resp = await axios.get(`${import.meta.VITE_API_URL}/playgrounds/${params.id}`)
+        let resp = await axios.get(`${import.meta.env.VITE_API_URL}/playgrounds/${params.id}`)
         let data = resp.data
         editor.value.editor.setValue(data.sourcecode)
-        stdout.value = data.stdout || ''
-        stderr.value = data.stderr || ''
+        let response = data.responses[0]
+        stdout.value = response.stdout || ''
+        stderr.value = response.stderr || ''
         stdin.value = data.stdin || ''
         editor_options.value.mode = data.language.toLowerCase()
     } else if (params.language) {
@@ -173,11 +172,11 @@ async function run_code() {
         stdin: stdin.value,
     })
     let data = resp.data
-    project_id.value = data.id
-    stdout.value = data.stdout
-    stderr.value = data.stderr
-    exit_code.value = data.exit_code
-    history.pushState({}, null, `/dojo/${project_id.value}`)
+    let response = data.responses[0]
+    stdout.value = response.stdout
+    stderr.value = response.stderr
+    exit_code.value = response.exit_code
+    history.pushState({}, null, `/dojo/${data.id}`)
 }
 
 </script>
