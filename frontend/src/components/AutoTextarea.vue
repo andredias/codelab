@@ -41,16 +41,15 @@ function parse_value(value) {
 
 function set_style() {
     let height = 'auto'
-    if (textarea.value) {
+    if (text.value) {
         let v = window.getComputedStyle(textarea.value)
-        height = Math.max(
-            parse_value(v.minHeight) +
+        let calculated_height = (
             number_of_lines.value * parse_value(v.lineHeight) +
             parse_value(v.paddingTop) +
             parse_value(v.paddingBottom) +
-            parse_value(v.borderWidth),
-            parse_value(textarea.value.scrollHeight)
+            parse_value(v.borderWidth)
         )
+        height = Math.max(parse_value(v.minHeight), calculated_height)
     }
     style.value.height = height + 'px'
 }
