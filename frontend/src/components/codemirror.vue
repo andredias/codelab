@@ -29,6 +29,10 @@ const emit = defineEmits(['update:modelValue', 'cursor_moved'])
 const textarea = ref(null)
 const editor = ref(null)
 
+defineExpose({
+    editor,
+})
+
 onMounted(() => {
     const defaultOptions = {
         lineNumbers: true,
