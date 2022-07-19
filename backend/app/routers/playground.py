@@ -31,7 +31,7 @@ async def run_playground(playground_input: PlaygroundInput) -> PlaygroundOutput:
     key = f'playground:{id}'
     data = await redis.get(key)
     if data:
-        logger.info(f'Cached {key}')
+        logger.debug(f'Cached {key}')
         output = PlaygroundOutput.parse_raw(data)
         return output
 
