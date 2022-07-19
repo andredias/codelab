@@ -5,8 +5,16 @@ import Dojo from '../views/Dojo.vue'
 const routes = [
     {
         path: '/',
-        name: 'Home',
-        component: Home
+        component: Dojo
+    },
+    {
+        path: '/dojo',
+        component: Dojo
+    },
+    {
+        path: '/dojo/:id',
+        name: 'Dojo',
+        component: Dojo,
     },
     {
         path: '/about',
@@ -22,16 +30,6 @@ const routes = [
         name: 'TermsOfUse',
         component: () =>
             import('../views/terms_of_use.vue')
-    },
-    {
-        path: '/dojo/:id',
-        name: 'Dojo',
-        component: Dojo,
-    },
-    {
-        path: '/dojo/new/:language',
-        name: 'NewDojo',
-        component: Dojo,
     },
 ]
 
