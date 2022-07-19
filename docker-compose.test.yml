@@ -25,3 +25,5 @@ services:
                 "--reload",
                 "app.main:create_app()"
             ]
+        environment:
+            - ENV=development
