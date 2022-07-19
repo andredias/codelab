@@ -84,14 +84,13 @@
 </template>
 
 <script setup>
-import { inject, nextTick, ref, computed, onMounted } from 'vue'
+import { inject, ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 import codemirror from '../components/codemirror.vue'
 import AutoTextarea from '../components/AutoTextarea.vue'
 
 const code = ref('')
-const lint = ref({})
 const stdin = ref('')
 const stdout = ref('')
 const stderr = ref('')
