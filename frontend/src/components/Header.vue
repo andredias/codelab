@@ -38,5 +38,5 @@ function toogle_lang() {
     set_language(i18n.locale.value === "en" ? "pt-BR" : "en")
 }
 
-const language = computed(() => idiomas[i18n.locale.value]);
+const language = computed(() => idiomas[i18n.locale.value === "en" ? "pt-BR" : "en"]);
 </script>
