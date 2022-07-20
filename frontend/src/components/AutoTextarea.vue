@@ -26,34 +26,22 @@ const text = computed({
     set: (value) => emit('update:modelValue', value),
 })
 const textarea = ref(null)
-const number_of_lines = computed(() => (text.value.match(/\n/g) || []).length + 1)
 const style = ref({
     maxHeight: props.maxHeight,
 })
 
 onMounted(() => {
-    nextTick(set_style) // so textarea.value.value is set
+    set_style() // so textarea.value.value is set
 })
-
-function parse_value(value) {
-    return parseInt(value) || 0
-}
 
 function set_style() {
     style.value.height = 'auto'
-    if (text.value) {
-        let v = window.getComputedStyle(textarea.value)
-        let calculated_height = (
-            number_of_lines.value * parse_value(v.lineHeight) +
-            parse_value(v.paddingTop) +
-            parse_value(v.paddingBottom) +
-            parse_value(v.borderWidth)
-        )
-        style.value.height = Math.max(parse_value(v.minHeight), calculated_height) + 'px'
-    }
+    nextTick(() => {
+        style.value.height = `${textarea.value.scrollHeight}px`
+    })
 }
 
-watch(number_of_lines, () => {
+watch(text, () => {
     set_style()
 })
 </script>
