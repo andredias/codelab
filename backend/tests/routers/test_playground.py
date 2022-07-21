@@ -6,12 +6,13 @@ from httpx import AsyncClient
 from app import config
 from app.models import PlaygroundInput, PlaygroundOutput, Response
 
+project = PlaygroundInput(
+    sourcecode='print("Hello World!")\n',
+    language='python',
+)
+
 
 async def test_run_project(client: AsyncClient) -> None:
-    project = PlaygroundInput(
-        sourcecode='print("Hello World!")\n',
-        language='python',
-    )
 
     # project not in cache
     resp = await client.post('/playgrounds', json=project.dict())
@@ -48,3 +49,17 @@ async def test_non_existent_language(client: AsyncClient) -> None:
     project = PlaygroundInput(sourcecode='tra-la-la', language='something else', stdin='')
     resp = await client.post('/playgrounds', json=project.dict())
     assert resp.status_code == 422
+
+
+async def test_get_playground(client: AsyncClient) -> None:
+    resp = await client.get('/playgrounds/nonexistent-id')
+    assert resp.status_code == 404
+
+    # insert a project in cache
+    resp = await client.post('/playgrounds', json=project.dict())
+    assert resp.status_code == 200
+    data = resp.json()
+    id = data['id']
+    resp = await client.get(f'/playgrounds/{id}')
+    assert resp.status_code == 200
+    assert resp.json() == (data | project.dict() | {'title': ''})
