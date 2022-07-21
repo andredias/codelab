@@ -1,8 +1,3 @@
-stdout = "Hello, world!\n"
-stderr = ""
-exit_code = 0
-id = "196547c6987b3bc91190425454d79f9c"
 title = "Hello World"
-description = ""
 language = "python"
 sourcecode = "print(\"Hello, world!\")\n"

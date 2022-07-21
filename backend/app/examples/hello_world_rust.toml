@@ -1,0 +1,7 @@
+title = "Hello World"
+language = "rust"
+sourcecode = """\
+fn main() {
+    println!("Hello World!");
+}
+"""

@@ -1,6 +1,7 @@
 from base64 import urlsafe_b64encode
+from collections.abc import Callable
 from hashlib import md5
-from typing import Any, Callable, Optional
+from typing import Any, Optional
 
 import orjson
 from pydantic import BaseModel as _BaseModel
@@ -90,4 +91,4 @@ class PlaygroundOutput(BaseModel):
 
 
 class PlaygroundProject(PlaygroundInput, PlaygroundOutput):
-    ...
+    title: str = ''

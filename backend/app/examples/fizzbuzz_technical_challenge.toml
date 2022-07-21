@@ -1,8 +1,23 @@
-stdout = "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n16\n17\nFizz\n19\nBuzz\nFizz\n22\n23\nFizz\nBuzz\n26\nFizz\n28\n29\nFizzBuzz\n31\n32\nFizz\n34\nBuzz\nFizz\n37\n38\nFizz\nBuzz\n41\nFizz\n43\n44\nFizzBuzz\n46\n47\nFizz\n49\nBuzz\nFizz\n52\n53\nFizz\nBuzz\n56\nFizz\n58\n59\nFizzBuzz\n61\n62\nFizz\n64\nBuzz\nFizz\n67\n68\nFizz\nBuzz\n71\nFizz\n73\n74\nFizzBuzz\n76\n77\nFizz\n79\nBuzz\nFizz\n82\n83\nFizz\nBuzz\n86\nFizz\n88\n89\nFizzBuzz\n91\n92\nFizz\n94\nBuzz\nFizz\n97\n98\nFizz\nBuzz\n"
-stderr = ""
-exit_code = 0
-id = "9df08d7c052292fd1f8ef1edfea170a6"
-title = "FizzBuzz Technical Challenge"
-description = "Write a program that prints the numbers from 1 to 100. But for multiples of three print \"Fizz\" instead of the number and for the multiples of five print \"Buzz\". For numbers that are multiples of both three and five print \"FizzBuzz\".\n\nsee: http://blog.codinghorror.com/why-cant-programmers-program/"
+sourcecode = """\
+\"\"\"
+Write a program that prints the numbers from 1 to 100.
+But for multiples of three print "Fizz" instead of the number
+and for the multiples of five print "Buzz".
+For numbers that are multiples of both three and five print "FizzBuzz".
+
+see: http://blog.codinghorror.com/why-cant-programmers-program/
+\"\"\"
+
+
+for x in range(1, 101):
+    line = ''
+    if x % 3 == 0:
+        line = 'Fizz'
+    if x % 5 == 0:
+        line += 'Buzz'
+    if not line:
+        line = str(x)
+    print(line)
+"""
+title = "FizzBuzz Code Challenge"
 language = "python"
-sourcecode = "for x in range(1, 101):\n    line = ''\n    if x % 3 == 0:\n        line = 'Fizz'\n    if x % 5 == 0:\n        line += 'Buzz'\n    if not line:\n        line = str(x)\n    print(line)\n"

@@ -1,8 +1,9 @@
-stdout = "0 a\n1 b\n2 c\n3 d\n4 e\n"
-stderr = ""
-exit_code = 0
-id = "6d6e0b92c5be6a77fde9cccbc2d2fa55"
 title = "Enumerate"
-description = ""
 language = "python"
-sourcecode = "a = ['a', 'b', 'c', 'd', 'e']\nfor index, item in enumerate(a):\n    print(index, item)\n"
+sourcecode = """
+# Enumerate Example
+
+a = ['a', 'b', 'c', 'd', 'e']
+for index, item in enumerate(a):
+    print(index, item)
+"""

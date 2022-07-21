@@ -1,8 +1,15 @@
-stdout = "3 4\n3 4\n"
-stderr = ""
-exit_code = 0
-id = "85b6d72ecd6d52ed5e134556e7f8a643"
 title = "Unpacking Arguments"
-description = ""
 language = "python"
-sourcecode = "def draw_point(x, y):\n    print(x, y)\n\n\npoint_foo = (3, 4)\npoint_bar = {'y': 4, 'x': 3}\ndraw_point(*point_foo)\ndraw_point(**point_bar)\n"
+sourcecode = """\
+# Unpacking Arguments
+
+
+def draw_point(x, y):
+    print(x, y)
+
+
+point_foo = (3, 4)
+point_bar = {'y': 4, 'x': 3}
+draw_point(*point_foo)
+draw_point(**point_bar)
+"""

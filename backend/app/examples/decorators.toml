@@ -1,8 +1,20 @@
-stdout = "Arguments: ('foo',) {}\nfoo\n"
-stderr = ""
-exit_code = 0
-id = "a30defa15e67dce281338c360015a50e"
 title = "Decorators"
-description = ""
 language = "python"
-sourcecode = "def print_args(function):\n    def wrapper(*args, **kwargs):\n        print('Arguments:', args, kwargs)\n        return function(*args, **kwargs)\n    return wrapper\n\n\n@print_args\ndef write(text):\n    print(text)\n\n\nwrite('foo')\n"
+sourcecode = """\
+# Decorators
+
+
+def print_args(function):
+    def wrapper(*args, **kwargs):
+        print('Arguments:', args, kwargs)
+        return function(*args, **kwargs)
+    return wrapper
+
+
+@print_args
+def write(text):
+    print(text)
+
+
+write('foo')
+"""

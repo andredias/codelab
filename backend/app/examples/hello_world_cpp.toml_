@@ -1,6 +1,10 @@
+title = "Hello World"
+language = "cpp"
+sourcecode = """\
 #include <iostream>
 
 int main() {
     std::cout << "Hello, world!";
     return 0;
 }
+"""
