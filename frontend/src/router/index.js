@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
 import Dojo from '../views/Dojo.vue'
 
 const routes = [

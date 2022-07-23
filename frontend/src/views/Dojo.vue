@@ -84,7 +84,7 @@
 </template>
 
 <script setup>
-import { inject, ref, computed, onMounted } from 'vue'
+import { inject, ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 import codemirror from '../components/codemirror.vue'
@@ -142,24 +142,27 @@ function on_file_picked(event) {
 
 const route = useRoute()
 
-onMounted(async () => {
-    let params = route.params
-    if (params.id) {
-        let resp = await axios.get(`${import.meta.env.VITE_API_URL}/playgrounds/${params.id}`)
-        let data = resp.data
-        editor.value.editor.setValue(data.sourcecode)
-        let response = data.responses[0]
-        stdout.value = response.stdout || ''
-        stderr.value = response.stderr || ''
-        stdin.value = data.stdin || ''
-        editor_options.value.mode = data.language.toLowerCase()
-    } else if (params.language) {
-        stdout.value = ''
-        stdin.value = ''
-        stderr.value = ''
-        editor_options.value.mode = params.language.toLowerCase()
-    }
-})
+watch(
+    () => route.params,
+    async (params) => {
+        if (params.id) {
+            let resp = await axios.get(`${import.meta.env.VITE_API_URL}/playgrounds/${params.id}`)
+            let data = resp.data
+            editor.value.editor.setValue(data.sourcecode)
+            let response = data.responses[0]
+            stdout.value = response.stdout || ''
+            stderr.value = response.stderr || ''
+            stdin.value = data.stdin || ''
+            editor_options.value.mode = data.language.toLowerCase()
+        } else {
+            stdout.value = ''
+            stdin.value = ''
+            stderr.value = ''
+            editor_options.value.mode = 'python'
+        }
+    },
+    { immediate: true }  // see: https://stackoverflow.com/a/71354391
+)
 
 async function run_code() {
     stdout.value = ''
