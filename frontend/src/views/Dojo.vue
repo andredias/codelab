@@ -89,6 +89,7 @@ import { useRoute } from 'vue-router'
 import axios from 'axios'
 import codemirror from '../components/codemirror.vue'
 import AutoTextarea from '../components/AutoTextarea.vue'
+import { get_project } from '../codelab.js'
 
 const code = ref('')
 const stdin = ref('')
@@ -146,14 +147,13 @@ watch(
     () => route.params,
     async (params) => {
         if (params.id) {
-            let resp = await axios.get(`${import.meta.env.VITE_API_URL}/playgrounds/${params.id}`)
-            let data = resp.data
-            editor.value.editor.setValue(data.sourcecode)
-            let response = data.responses[0]
+            let project = await get_project(params.id)
+            editor.value.editor.setValue(project.sourcecode)
+            let response = project.responses[0]
             stdout.value = response.stdout || ''
             stderr.value = response.stderr || ''
-            stdin.value = data.stdin || ''
-            editor_options.value.mode = data.language.toLowerCase()
+            stdin.value = project.stdin || ''
+            editor_options.value.mode = project.language.toLowerCase()
         } else {
             stdout.value = ''
             stdin.value = ''
