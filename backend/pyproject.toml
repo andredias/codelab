@@ -20,6 +20,7 @@ python = "^3.10"
 python-dotenv = "*"
 tenacity = "*"
 uvloop = "*"
+tomli = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
 alt-pytest-asyncio = "*"
