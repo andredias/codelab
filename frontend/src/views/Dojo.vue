@@ -89,7 +89,7 @@ import { useRoute } from 'vue-router'
 import axios from 'axios'
 import codemirror from '../components/codemirror.vue'
 import AutoTextarea from '../components/AutoTextarea.vue'
-import { get_project } from '../codelab.js'
+import { get_project, run_project } from '../codelab.js'
 
 const code = ref('')
 const stdin = ref('')
@@ -168,17 +168,12 @@ async function run_code() {
     stdout.value = ''
     stderr.value = ''
     exit_code.value = 0
-    let resp = await axios.post(`${import.meta.env.VITE_API_URL}/playgrounds`, {
-        language: 'python',
-        sourcecode: code.value,
-        stdin: stdin.value,
-    })
-    let data = resp.data
-    let response = data.responses[0]
+    let project = await run_project(editor_options.value.mode, code.value, stdin.value)
+    let response = project.responses[0]
     stdout.value = response.stdout
     stderr.value = response.stderr
     exit_code.value = response.exit_code
-    history.pushState({}, null, `/dojo/${data.id}`)
+    history.pushState({}, null, `/dojo/${project.id}`)
 }
 
 </script>
