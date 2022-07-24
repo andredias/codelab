@@ -15,7 +15,7 @@ async def test_calc_hash() -> None:
     id_proj1 = calc_hash(proj1)
     id_proj2 = calc_hash(proj2)
 
-    assert len(id_proj1) == len(id_proj2) == 24
+    assert len(id_proj1) == len(id_proj2) == 22
     assert id_proj1 != id_proj2
     assert id_proj1 == calc_hash(proj1)
 

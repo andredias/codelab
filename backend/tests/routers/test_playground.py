@@ -20,7 +20,7 @@ async def test_run_project(client: AsyncClient) -> None:
     data = resp.json()
     output = PlaygroundOutput(**data)
     assert output == PlaygroundOutput(
-        id='inMUAUBBwpoHwVB7UQ5OXQ==',
+        id='inMUAUBBwpoHwVB7UQ5OXQ',
         responses=[
             Response(
                 stdout='Hello World!\n',
