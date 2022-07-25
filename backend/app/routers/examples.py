@@ -1,3 +1,4 @@
+import asyncio
 from pathlib import Path
 
 import orjson
@@ -14,6 +15,12 @@ from ..resources import redis
 router = APIRouter(prefix='/examples', tags=['examples'])
 
 
+async def run_example(title: str, language: str, sourcecode: str, stdin: str = '') -> PlaygroundProject:
+    playground_input = PlaygroundInput(language=language, sourcecode=sourcecode, stdin=stdin)
+    output = await run_playground(playground_input)
+    return PlaygroundProject(title=title, **playground_input.dict(), **output.dict())
+
+
 @router.get('', response_model=list[PlaygroundProject])
 async def get_examples() -> list[PlaygroundProject]:
     key = 'codelab_examples'
@@ -24,15 +31,11 @@ async def get_examples() -> list[PlaygroundProject]:
 
     logger.debug('Not Cached: Examples')
     # load examples
-    examples = []
+    tasks = []
     for example in (Path(__file__).parent.parent / 'examples').glob('*.toml'):
         project = tomli.loads(example.read_text())
-        playground_input = PlaygroundInput(**project)
-        output = await run_playground(playground_input)
-        if any(r.exit_code != 0 for r in output.responses):
-            logger.error(f'Example failed: {project["title"]}, {output}')
-        playground_project = PlaygroundProject(**project, **output.dict())
-        examples.append(playground_project)
+        tasks.append(run_example(**project))
+    examples = await asyncio.gather(*tasks)
     examples.sort(key=lambda x: (x.language, x.title))
     examples_dict = [x.dict() for x in examples]
     await redis.set(key, orjson.dumps(examples_dict), ex=config.TTL)
