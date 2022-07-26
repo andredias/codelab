@@ -1,0 +1,57 @@
+sourcecode = """\
+\"\"\"
+Gathering functions in different levels make them run concurrently.
+
+                    main()
+                      |
+                 ----------- <-- gather
+                |           |
+              f3_1()       f2()
+                |           |
+   gather -> --------    f(0.02)
+            |        |
+         f(0.03)  f(0.01)
+
+stdout: 0.01 0.02 0.03
+\"\"\"
+
+import asyncio
+from time import perf_counter
+
+
+async def f(seconds: float):
+    await asyncio.sleep(seconds)
+    print(seconds)
+
+
+async def f2():
+    await f(0.02)
+
+
+async def f3_1():
+    await asyncio.gather(f(0.03), f(0.01))
+
+
+async def main():
+    title = 'Sequential Execution'
+    print(f'{title}\\n{"-" * len(title)}')
+    start = perf_counter()
+    await f(0.03)
+    await f(0.02)
+    await f(0.01)
+    elapsed_time = (perf_counter() - start) * 1000
+    print(f'total execution time: {elapsed_time:.0f}ms')
+
+    title = 'Concurrent Execution'
+    print(f'\\n{title}\\n{"-" * len(title)}')
+    start = perf_counter()
+    await asyncio.gather(f3_1(), f2())
+    elapsed_time = (perf_counter() - start) * 1000
+    print(f'total execution time: {elapsed_time:.0f}ms')
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
+"""
+title = "Asyncio Gathering Example"
+language = "python"
