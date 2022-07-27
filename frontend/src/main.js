@@ -6,6 +6,7 @@ import './assets/normalize.styl'
 import './assets/tailwind_preflight.styl'
 import './assets/main.styl'
 import './assets/home.styl'
+import './assets/tool_tip.css'
 
 const app = createApp(App)
 app.use(router)

@@ -14,7 +14,7 @@ export const messages = {
         dark: 'Dark',
         line: 'Line',
         column: 'Column',
-        upload_code_from_file: 'upload code from file',
+        upload_file: 'upload file',
         define_input_data: 'Define input data',
         statistics: 'Statistics',
         examples: 'Examples',
@@ -24,6 +24,7 @@ export const messages = {
         edit: 'edit',
         sourcecode: 'Source Code',
         terms_of_use: 'Terms of Use',
+        share_project: 'share link to the project',
     },
     'pt-BR': {
         title: 'Título',
@@ -40,7 +41,7 @@ export const messages = {
         dark: 'Escuro',
         line: 'Linha',
         column: 'Coluna',
-        upload_code_from_file: 'carregar código de um arquivo',
+        upload_file: 'carregar um arquivo',
         define_input_data: 'Definir dados de entrada',
         statistics: 'Estatísticas',
         examples: 'Exemplos',
@@ -50,5 +51,6 @@ export const messages = {
         edit: 'editar',
         sourcecode: 'Código Fonte',
         terms_of_use: 'Termos de Uso',
+        share_project: 'compartilhar link do projeto',
     }
 }
