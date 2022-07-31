@@ -28,7 +28,7 @@ def playground_to_codebox(project: PlaygroundInput) -> CodeboxInput:
         case 'rust':
             sources = {'main.rs': project.sourcecode}
             commands = [
-                Command(command='/usr/local/cargo/bin/rustc main.rs', timeout=0.5),
+                Command(command='/usr/local/cargo/bin/rustc main.rs', timeout=1.0),
                 Command(command='./main', stdin=project.stdin),
             ]
 
