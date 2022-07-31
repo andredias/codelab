@@ -12,7 +12,7 @@
 
         .botoes
             .link(
-                @click="",
+                @click="on_new_project",
                 :data-tooltip="i18n.$t('new_project')",
                 data-tooltip-location="left"
             )
@@ -72,6 +72,25 @@
                 )
 
     .editor
+        #new_project.dialog(v-if="show_new_project_dialog")
+            h1 {{ i18n.$t('new_project') }}
+            label(for="language")
+                | {{ i18n.$t('language') }}:
+            select(v-model="language", @change="on_language_changed")
+                option(v-for="lang in languages")
+                    | {{ lang }}
+
+            label(for="based_on")
+                | {{ i18n.$t('based_on') }}:
+            select(v-model="example", @change="on_example_changed")
+                option(:value="{}") {{ i18n.$t('blank_project') }}
+                option(:value="e", v-for="e in examples_by_language")
+                    | {{ e.title }}
+
+            .actions
+                button.btn(@click="close_new_project_dialog(false)") {{ i18n.$t('cancel') }}
+                button.btn-primary(@click="close_new_project_dialog(true)") {{ i18n.$t('create') }}
+
         .box
             codemirror(
                 :options="editor_options",
@@ -124,7 +143,7 @@
 </template>
 
 <script setup>
-import { inject, ref, computed, watch } from 'vue'
+import { inject, reactive, ref, computed, watch, onMounted, isProxy } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 import codemirror from '../components/codemirror.vue'
@@ -145,8 +164,37 @@ const editor_options = ref({
 const editor = ref(null)
 const code_uploader = ref(null)
 
+const show_new_project_dialog = ref(false)
+const old_code = ref('')
+const old_stdin = ref('')
+const old_stdout = ref('')
+const old_stderr = ref('')
+const old_history = ref('')
+const old_language = ref('')
+
 const i18n = inject('i18n')
 const is_light_theme = computed(() => theme.value === 'light')
+const language = computed({
+    get() {
+        return editor_options.value.mode
+    },
+    set(value) {
+        editor_options.value.mode = value
+    },
+})
+const languages = reactive([])
+const examples = reactive([])
+const example = ref({})
+
+const examples_by_language = computed(() => examples.filter(e => e.language === language.value
+))
+
+
+onMounted(() => {
+    Object.assign(examples, JSON.parse(localStorage.getItem('examples')))
+    languages.push(...JSON.parse(localStorage.getItem('languages')))
+})
+
 
 function change_theme(style) {
     theme.value = style
@@ -216,13 +264,56 @@ async function run_code() {
     history.pushState({}, null, `/dojo/${project.id}`)
 }
 
+function on_new_project() {
+    show_new_project_dialog.value = true
+    old_code.value = code.value
+    old_stdin.value = stdin.value
+    old_stdout.value = stdout.value
+    old_stderr.value = stderr.value
+    old_history.value = history.state.current
+    old_language.value = language.value
+    on_language_changed()
+}
+
+function close_new_project_dialog(create_project) {
+    show_new_project_dialog.value = false
+    if (!create_project) {
+        editor.value.editor.setValue(old_code.value)
+        stdin.value = old_stdin.value
+        stdout.value = old_stdout.value
+        stderr.value = old_stderr.value
+        language.value = old_language.value
+        history.pushState({}, null, old_history.value)
+    }
+}
+
+function on_language_changed() {
+    example.value = {}
+    on_example_changed()
+}
+
+function on_example_changed() {
+    if (example.value.id === undefined) {
+        history.pushState({}, null, '/dojo')
+        stdin.value = ''
+        stdout.value = ''
+        stderr.value = ''
+        editor.value.editor.setValue('')
+    } else {
+        history.pushState({}, null, `/dojo/${example.value.id}`)
+        stdin.value = example.value.responses[0].stdin
+        stdout.value = example.value.responses[0].stdout
+        stderr.value = example.value.responses[0].stderr
+        editor.value.editor.setValue(example.value.sourcecode)
+    }
+}
+
 </script>
 
 <style scoped lang="stylus">
 
 .dojo
     background-color background_color
-
 
     margin 0 auto
     padding 1rem 0
@@ -318,4 +409,27 @@ async function run_code() {
 
 .code
     font-family monospace
+
+input
+select
+    display block
+
+select
+option
+    text-transform capitalize
+
+.actions
+    display flex
+    justify-content space-between
+    gap 1rem
+
+input
+select
+    color black
+    background white
+    line-height 1.5
+    border 1px solid border_color
+    padding 0.4rem
+    color text_color
+    display block
 </style>

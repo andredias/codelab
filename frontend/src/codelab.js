@@ -57,27 +57,14 @@ export async function run_project(language, sourcecode, stdin) {
 
 
 export async function load_examples() {
-    let examples = localStorage.getItem('examples')
-    if (examples) {
-        return JSON.parse(examples)
-    }
     let response = await axios.get(`${import.meta.env.VITE_API_URL}/examples`)
-    examples = response.data
-    // para cada exemplo, registrar no local storage
-    // adicionar exemplo_id e título em hashmap da linguagem
-    let current_language = null
-    let language_examples = {}
+    let examples = response.data
+    localStorage.setItem('examples', JSON.stringify(examples))
+    const languages = new Set()
     for (let example of examples) {
-        if (current_language !== example.language) {
-            current_language = example.language
-            language_examples[current_language] = []
-        }
-        language_examples[current_language].push({
-            id: example.id,
-            title: example.title,
-        })
         localStorage.setItem(example.id, JSON.stringify(example))
+        languages.add(example.language)
     }
-    localStorage.setItem('examples', JSON.stringify(language_examples))
-    return language_examples
+    localStorage.setItem('languages', JSON.stringify([...languages]))
+    return examples
 }

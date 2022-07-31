@@ -25,6 +25,10 @@ export const messages = {
         sourcecode: 'Source Code',
         terms_of_use: 'Terms of Use',
         share_project: 'share link to the project',
+        language: 'Language',
+        blank_project: 'Blank Project',
+        based_on: 'Based on',
+        create: 'Create',
     },
     'pt-BR': {
         title: 'Título',
@@ -52,5 +56,9 @@ export const messages = {
         sourcecode: 'Código Fonte',
         terms_of_use: 'Termos de Uso',
         share_project: 'compartilhar link do projeto',
+        language: 'Linguagem',
+        blank_project: 'Projeto Vazio',
+        based_on: 'Baseado em',
+        create: 'Criar',
     }
 }
