@@ -74,6 +74,7 @@
     .editor
         #new_project.dialog(v-if="show_new_project_dialog")
             h1 {{ i18n.$t('new_project') }}
+            hr
             label(for="language")
                 | {{ i18n.$t('language') }}:
             select(v-model="language", @change="on_language_changed")
@@ -88,8 +89,12 @@
                     | {{ e.title }}
 
             .actions
-                button.btn(@click="close_new_project_dialog(false)") {{ i18n.$t('cancel') }}
-                button.btn-primary(@click="close_new_project_dialog(true)") {{ i18n.$t('create') }}
+                button.btn.btn-slim.btn-cancel(
+                    @click="close_new_project_dialog(false)"
+                ) {{ i18n.$t('cancel') }}
+                button.btn.btn-primary.btn-slim(
+                    @click="close_new_project_dialog(true)"
+                ) {{ i18n.$t('create') }}
 
         .box
             codemirror(
@@ -312,6 +317,8 @@ function on_example_changed() {
 
 <style scoped lang="stylus">
 
+border_color = #c7c7c7
+
 .dojo
     background-color background_color
 
@@ -420,8 +427,9 @@ option
 
 .actions
     display flex
-    justify-content space-between
+    justify-content flex-start
     gap 1rem
+    margin 1rem 0
 
 input
 select

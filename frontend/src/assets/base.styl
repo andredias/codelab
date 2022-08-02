@@ -5,6 +5,7 @@ destaque_color = #1ba94c
 secondary_color = #5336ee
 cor_titulo = darken(cor_texto, 50%)
 background_color = #f9f8f6
+border_color = #c7c7c7
 
 html
     text-rendering optimizeLegibility
@@ -83,6 +84,12 @@ label
 .btn-disabled
     background-color transparent
     color lighten(cor_texto, 70%)
+
+.btn-cancel
+    color lighten(cor_texto, 20%)
+
+    &:hover
+        color cor_texto
 
 
 twitter_blue = rgb(59, 130, 246)
