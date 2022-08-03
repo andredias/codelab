@@ -232,6 +232,9 @@ function set_cursor_position(line, ch) {
 }
 
 function upload_file() {
+    if (controls_disabled.value) {
+        return
+    }
     code_uploader.value.click()
 }
 
@@ -329,6 +332,9 @@ function on_example_changed() {
 }
 
 function copy_link() {
+    if (controls_disabled.value) {
+        return
+    }
     navigator.clipboard.writeText(`${window.location.origin}${history.state.current || '/'}`)
     alert(i18n.$t('link_copied'))
 }
