@@ -8,13 +8,19 @@
     //-                 router-link(to='/languages/python') Python
     //-                 span {{ title }}
     .menu
-        button.btn.btn-primary.btn-slim(@click="run_code") {{ i18n.$t('run_code') }}
+        button.btn.btn-slim(
+            @click="run_code",
+            :disabled="controls_disabled",
+            :class="{ 'btn-primary': !controls_disabled, 'btn-disabled': controls_disabled }"
+        ) {{ i18n.$t('run_code') }}
 
         .botoes
             .link(
                 @click="on_new_project",
                 :data-tooltip="i18n.$t('new_project')",
-                data-tooltip-location="left"
+                data-tooltip-location="left",
+                :disabled="controls_disabled",
+                :class="{ 'link-disabled': controls_disabled }"
             )
                 svg.icon(
                     xmlns="http://www.w3.org/2000/svg",
@@ -30,9 +36,11 @@
                     )
 
             .link(
-                @click="",
-                :data-tooltip="i18n.$t('share_project')",
-                data-tooltip-location="left"
+                @click="copy_link",
+                :data-tooltip="i18n.$t('copy_link')",
+                data-tooltip-location="left",
+                :disabled="controls_disabled",
+                :class="{ 'link-disabled': controls_disabled }"
             )
                 svg.icon(
                     xmlns="http://www.w3.org/2000/svg",
@@ -44,13 +52,15 @@
                     path(
                         stroke-linecap="round",
                         stroke-linejoin="round",
-                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
                     )
 
             .link(
                 @click="upload_file",
                 :data-tooltip="i18n.$t('upload_file')",
-                data-tooltip-location="left"
+                data-tooltip-location="left",
+                :disabled="controls_disabled",
+                :class="{ 'link-disabled': controls_disabled }"
             )
                 svg.icon(
                     fill="none",
@@ -194,6 +204,8 @@ const example = ref({})
 const examples_by_language = computed(() => examples.filter(e => e.language === language.value
 ))
 
+const controls_disabled = computed(() => show_new_project_dialog.value)
+
 
 onMounted(() => {
     Object.assign(examples, JSON.parse(localStorage.getItem('examples')))
@@ -270,6 +282,9 @@ async function run_code() {
 }
 
 function on_new_project() {
+    if (controls_disabled.value) {
+        return
+    }
     show_new_project_dialog.value = true
     old_code.value = code.value
     old_stdin.value = stdin.value
@@ -313,6 +328,10 @@ function on_example_changed() {
     }
 }
 
+function copy_link() {
+    navigator.clipboard.writeText(`${window.location.origin}${history.state.current || '/'}`)
+    alert(i18n.$t('link_copied'))
+}
 </script>
 
 <style scoped lang="stylus">
@@ -440,4 +459,7 @@ select
     padding 0.4rem
     color text_color
     display block
+
+.link-disabled
+    opacity 0.5
 </style>

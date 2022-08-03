@@ -24,11 +24,14 @@ export const messages = {
         edit: 'edit',
         sourcecode: 'Source Code',
         terms_of_use: 'Terms of Use',
-        share_project: 'share link to the project',
+        share_project: 'share project link',
         language: 'Language',
         blank_project: 'Blank Project',
         based_on: 'Based on',
         create: 'Create',
+        copy_link: 'Copy link to clipboard',
+        share_on_twitter: 'Share on Twitter',
+        link_copied: 'Link copied to clipboard',
     },
     'pt-BR': {
         title: 'Título',
@@ -60,5 +63,8 @@ export const messages = {
         blank_project: 'Projeto Vazio',
         based_on: 'Baseado em',
         create: 'Criar',
+        copy_link: 'Copiar link para a área de transferência',
+        share_on_twitter: 'Compartilhar no Twitter',
+        link_copied: 'Link copiado para a área de transferência',
     }
 }
