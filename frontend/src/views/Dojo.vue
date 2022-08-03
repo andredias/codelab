@@ -335,8 +335,9 @@ function copy_link() {
     if (controls_disabled.value) {
         return
     }
-    navigator.clipboard.writeText(`${window.location.origin}${history.state.current || '/'}`)
-    alert(i18n.$t('link_copied'))
+    let link = `${window.location.origin}${history.state.current || '/'}`
+    navigator.clipboard.writeText(link)
+    alert(i18n.$t('link_copied') + ':\n' + link)
 }
 </script>
 
