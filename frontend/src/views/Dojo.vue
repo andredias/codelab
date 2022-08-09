@@ -185,6 +185,7 @@ const old_code = ref('')
 const old_responses = reactive([])
 const old_stdin = ref('')
 const old_language = ref('')
+const old_history = ref('')
 
 const i18n = inject('i18n')
 const is_light_theme = computed(() => theme.value === 'light')
@@ -327,7 +328,7 @@ function copy_link() {
     if (controls_disabled.value) {
         return
     }
-    let link = `${window.location.origin}${history.state.current || '/'}`
+    let link = window.location.href
     navigator.clipboard.writeText(link)
     alert(i18n.$t('link_copied') + ':\n' + link)
 }
