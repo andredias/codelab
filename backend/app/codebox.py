@@ -15,25 +15,27 @@ from .models import (
 )
 from .resources import redis
 
+TIMEOUT = config.TIMEOUT
+COMPILATION_TIMEOUT = TIMEOUT * 10
+DATABASE_TIMEOUT = TIMEOUT * 10
+
 
 def playground_to_codebox(project: PlaygroundInput) -> CodeboxInput:
     """
     Call Codebox to run the project
     """
-    match project.language:
+    match project.language.lower():
         case 'python':
             sources = {'main.py': project.sourcecode}
             commands = [
-                Command(
-                    command='/venv/bin/python main.py', stdin=project.stdin, timeout=config.TIMEOUT
-                )
+                Command(command='/venv/bin/python main.py', stdin=project.stdin, timeout=TIMEOUT)
             ]
 
         case 'rust':
             sources = {'main.rs': project.sourcecode}
             commands = [
-                Command(command='/usr/local/cargo/bin/rustc main.rs', timeout=config.TIMEOUT * 4),
-                Command(command='./main', stdin=project.stdin, timeout=config.TIMEOUT),
+                Command(command='/usr/local/cargo/bin/rustc main.rs', timeout=COMPILATION_TIMEOUT),
+                Command(command='./main', stdin=project.stdin, timeout=TIMEOUT),
             ]
 
         case 'sqlite' | 'sql' | 'sqlite3':
@@ -41,14 +43,14 @@ def playground_to_codebox(project: PlaygroundInput) -> CodeboxInput:
             commands = [
                 Command(
                     command='/usr/bin/sqlite3 temp.db -bail -init database.sql ".exit"',
-                    timeout=config.TIMEOUT * 10,
+                    timeout=DATABASE_TIMEOUT,
                 ),
             ]
 
         case 'bash':
             sources = {'main.sh': project.sourcecode}
             commands = [
-                Command(command='/bin/bash main.sh', stdin=project.stdin, timeout=config.TIMEOUT),
+                Command(command='/bin/bash main.sh', stdin=project.stdin, timeout=TIMEOUT),
             ]
 
         case _:
