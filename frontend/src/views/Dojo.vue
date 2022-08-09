@@ -163,7 +163,7 @@ import { useRoute } from 'vue-router'
 import axios from 'axios'
 import codemirror from '../components/codemirror.vue'
 import AutoTextarea from '../components/AutoTextarea.vue'
-import { get_project, run_project } from '../codelab.js'
+import { get_project, run_project, load_examples } from '../codelab.js'
 
 const code = ref('')
 const responses = reactive([])
@@ -209,7 +209,8 @@ const examples_by_language = computed(() => examples.filter(e => e.language.toLo
 const controls_disabled = computed(() => show_new_project_dialog.value)
 
 
-onMounted(() => {
+onMounted(async () => {
+    await load_examples()
     Object.assign(examples, JSON.parse(localStorage.getItem('examples')))
     languages.push(...JSON.parse(localStorage.getItem('languages')))
 })
