@@ -23,27 +23,32 @@ def playground_to_codebox(project: PlaygroundInput) -> CodeboxInput:
     match project.language:
         case 'python':
             sources = {'main.py': project.sourcecode}
-            commands = [Command(command='/venv/bin/python main.py', stdin=project.stdin)]
+            commands = [
+                Command(
+                    command='/venv/bin/python main.py', stdin=project.stdin, timeout=config.TIMEOUT
+                )
+            ]
 
         case 'rust':
             sources = {'main.rs': project.sourcecode}
             commands = [
-                Command(command='/usr/local/cargo/bin/rustc main.rs', timeout=1.0),
-                Command(command='./main', stdin=project.stdin),
+                Command(command='/usr/local/cargo/bin/rustc main.rs', timeout=config.TIMEOUT * 4),
+                Command(command='./main', stdin=project.stdin, timeout=config.TIMEOUT),
             ]
 
         case 'sqlite' | 'sql' | 'sqlite3':
             sources = {'database.sql': project.sourcecode}
             commands = [
                 Command(
-                    command='/usr/bin/sqlite3 temp.db -bail -init database.sql ".exit"', timeout=3.0
+                    command='/usr/bin/sqlite3 temp.db -bail -init database.sql ".exit"',
+                    timeout=config.TIMEOUT * 10,
                 ),
             ]
 
         case 'bash':
             sources = {'main.sh': project.sourcecode}
             commands = [
-                Command(command='/bin/bash main.sh', stdin=project.stdin),
+                Command(command='/bin/bash main.sh', stdin=project.stdin, timeout=config.TIMEOUT),
             ]
 
         case _:

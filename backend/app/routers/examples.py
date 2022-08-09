@@ -1,5 +1,6 @@
 import asyncio
 from pathlib import Path
+from unittest.mock import patch
 
 import orjson
 import tomli
@@ -34,10 +35,11 @@ async def get_examples() -> list[PlaygroundProject]:
     logger.debug('Not Cached: Examples')
     # load examples
     tasks = []
-    for example in (Path(__file__).parent.parent / 'examples').glob('*.toml'):
-        project = tomli.loads(example.read_text())
-        tasks.append(run_example(**project))
-    examples = await asyncio.gather(*tasks)
+    with patch('app.config.TIMEOUT', config.TIMEOUT * 4):  # increase timeout for examples
+        for example in (Path(__file__).parent.parent / 'examples').glob('*.toml'):
+            project = tomli.loads(example.read_text())
+            tasks.append(run_example(**project))
+        examples = await asyncio.gather(*tasks)
     examples.sort(key=lambda x: (x.language, x.title))
     examples_dict = [x.dict() for x in examples]
     await redis.set(key, orjson.dumps(examples_dict), ex=config.TTL)
