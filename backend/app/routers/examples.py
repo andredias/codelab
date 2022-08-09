@@ -15,7 +15,9 @@ from ..resources import redis
 router = APIRouter(prefix='/examples', tags=['examples'])
 
 
-async def run_example(title: str, language: str, sourcecode: str, stdin: str = '') -> PlaygroundProject:
+async def run_example(
+    title: str, language: str, sourcecode: str, stdin: str = ''
+) -> PlaygroundProject:
     playground_input = PlaygroundInput(language=language, sourcecode=sourcecode, stdin=stdin)
     output = await run_playground(playground_input)
     return PlaygroundProject(title=title, **playground_input.dict(), **output.dict())
