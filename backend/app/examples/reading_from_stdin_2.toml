@@ -1,0 +1,13 @@
+language = "Python"
+title = "Reading from stdin - Example 2"
+sourcecode = """\
+\"\"\"
+Reading from stdin - Example 2
+\"\"\"
+
+number = int(input())  # read first line
+array = list(map(int, input().rstrip().split()))  # read and split second line
+print(number)
+print(array)
+"""
+stdin = "7\n1 3 5 2 4 6 7\n"

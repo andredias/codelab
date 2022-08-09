@@ -1,0 +1,30 @@
+sourcecode = """\
+\"\"\"
+Solving FizzBuzz with Structural Pattern Matching (PEP 634)
+
+Write a program that prints the numbers from 1 to 100.
+But for multiples of three print "Fizz" instead of the number
+and for the multiples of five print "Buzz".
+For numbers that are multiples of both three and five print "FizzBuzz".
+
+see: http://blog.codinghorror.com/why-cant-programmers-program/
+\"\"\"
+
+
+def fizzbuzz() -> None:
+    result: str = ''
+    for number in range(1, 101):
+        match number % 3, number % 5:
+            case [0, 0]: result = 'FizzBuzz'
+            case [0, _]: result = 'Fizz'
+            case [_, 0]: result = 'Buzz'
+            case _: result = str(number)
+        print(result)
+
+
+if __name__ == '__main__':
+    fizzbuzz()
+
+"""
+title = "FizzBuzz Code Challenge with Structural Pattern Matching"
+language = "Python"

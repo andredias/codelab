@@ -1,5 +1,5 @@
 title = "Generators"
-language = "python"
+language = "Python"
 sourcecode = """\
 # Generators
 

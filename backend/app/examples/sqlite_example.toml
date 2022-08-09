@@ -1,5 +1,5 @@
 title = "University"
-language = "sql"
+language = "SQL"
 sourcecode = """\
 -- University Example
 

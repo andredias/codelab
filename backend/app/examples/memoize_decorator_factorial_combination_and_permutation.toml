@@ -1,5 +1,5 @@
 title = "Memoize Decorator, Factorial, Combination and Permutation"
-language = "python"
+language = "Python"
 sourcecode = """\
 # Memoize Decorator, Factorial, Combination and Permutation
 

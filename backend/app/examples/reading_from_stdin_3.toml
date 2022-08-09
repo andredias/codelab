@@ -1,0 +1,16 @@
+title = "Reading from stdin - JSON Example"
+sourcecode = """\
+\"\"\"
+Reading from stdin - JSON Example
+\"\"\"
+
+import json
+import sys
+from pprint import pprint
+
+text = sys.stdin.read()
+obj = json.loads(text)
+pprint(obj)
+"""
+language = "Python"
+stdin = "{\"id\":\"KFF5vR9cWRbnwZ2ccoVifA\",\n\"responses\":[{\"stdout\":\"7\\n[1, 3, 5, 2, 4, 6, 7]\\n\",\n\"stderr\":\"\",\"exit_code\":0,\"elapsed_time\":0.05052914563566446}]}"

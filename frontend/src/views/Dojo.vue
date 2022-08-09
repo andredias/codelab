@@ -174,7 +174,7 @@ const stderr = computed(() => responses.map(r => r.stderr).join(''))
 const cursor_pos = ref({ line: 0, ch: 0 })
 const theme = ref('dark')
 const editor_options = ref({
-    mode: 'python',
+    mode: 'Python',
     theme: 'blackboard',
 })
 const editor = ref(null)
@@ -189,19 +189,21 @@ const old_history = ref('')
 
 const i18n = inject('i18n')
 const is_light_theme = computed(() => theme.value === 'light')
+const _language = ref('')
 const language = computed({
     get() {
-        return editor_options.value.mode
+        return _language.value
     },
     set(value) {
-        editor_options.value.mode = value
+        _language.value = value
+        editor_options.value.mode = value.toLowerCase()
     },
 })
 const languages = reactive([])
 const examples = reactive([])
 const example = ref({})
 
-const examples_by_language = computed(() => examples.filter(e => e.language === language.value
+const examples_by_language = computed(() => examples.filter(e => e.language.toLowerCase() === language.value.toLowerCase()
 ))
 
 const controls_disabled = computed(() => show_new_project_dialog.value)
@@ -260,10 +262,10 @@ watch(
             editor.value.editor.setValue(project.sourcecode)
             responses.push(...project.responses)
             stdin.value = project.stdin || ''
-            editor_options.value.mode = project.language.toLowerCase()
+            language.value = project.language
         } else {
             stdin.value = ''
-            editor_options.value.mode = 'python'
+            language.value = 'Python'
         }
     },
     { immediate: true }  // see: https://stackoverflow.com/a/71354391

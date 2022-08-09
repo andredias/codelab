@@ -1,10 +1,10 @@
 title = "Unpacking Arguments"
-language = "python"
+language = "Python"
 sourcecode = """\
 # Unpacking Arguments
 
 
-def draw_point(x, y):
+def draw_point(x: int, y: int) -> None:
     print(x, y)
 
 

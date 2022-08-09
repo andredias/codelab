@@ -12,7 +12,6 @@ Gathering functions in different levels make them run concurrently.
             |        |
          f(0.03)  f(0.01)
 
-stdout: 0.01 0.02 0.03
 \"\"\"
 
 import asyncio
@@ -54,4 +53,4 @@ if __name__ == '__main__':
     asyncio.run(main())
 """
 title = "Asyncio Gathering Example"
-language = "python"
+language = "Python"
