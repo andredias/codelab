@@ -166,10 +166,11 @@ import AutoTextarea from '../components/AutoTextarea.vue'
 import { get_project, run_project } from '../codelab.js'
 
 const code = ref('')
+const responses = reactive([])
 const stdin = ref('')
-const stdout = ref('')
-const stderr = ref('')
-const exit_code = ref(0)
+const stdout = computed(() => responses.map(r => r.stdout).join(''))
+const stderr = computed(() => responses.map(r => r.stderr).join(''))
+
 const cursor_pos = ref({ line: 0, ch: 0 })
 const theme = ref('dark')
 const editor_options = ref({
@@ -181,10 +182,8 @@ const code_uploader = ref(null)
 
 const show_new_project_dialog = ref(false)
 const old_code = ref('')
+const old_responses = reactive([])
 const old_stdin = ref('')
-const old_stdout = ref('')
-const old_stderr = ref('')
-const old_history = ref('')
 const old_language = ref('')
 
 const i18n = inject('i18n')
@@ -254,18 +253,15 @@ const route = useRoute()
 watch(
     () => route.params,
     async (params) => {
+        responses.length = 0
         if (params.id) {
             let project = await get_project(params.id)
             editor.value.editor.setValue(project.sourcecode)
-            let response = project.responses[0]
-            stdout.value = response.stdout || ''
-            stderr.value = response.stderr || ''
+            responses.push(...project.responses)
             stdin.value = project.stdin || ''
             editor_options.value.mode = project.language.toLowerCase()
         } else {
-            stdout.value = ''
             stdin.value = ''
-            stderr.value = ''
             editor_options.value.mode = 'python'
         }
     },
@@ -273,14 +269,11 @@ watch(
 )
 
 async function run_code() {
-    stdout.value = ''
-    stderr.value = ''
-    exit_code.value = 0
+
     let project = await run_project(editor_options.value.mode, code.value, stdin.value)
-    let response = project.responses[0]
-    stdout.value = response.stdout
-    stderr.value = response.stderr
-    exit_code.value = response.exit_code
+    responses.length = 0
+    responses.push(...project.responses)
+
     history.pushState({}, null, `/dojo/${project.id}`)
 }
 
@@ -291,8 +284,8 @@ function on_new_project() {
     show_new_project_dialog.value = true
     old_code.value = code.value
     old_stdin.value = stdin.value
-    old_stdout.value = stdout.value
-    old_stderr.value = stderr.value
+    old_responses.length = 0
+    old_responses.push(...responses)
     old_history.value = history.state.current
     old_language.value = language.value
     on_language_changed()
@@ -303,8 +296,8 @@ function close_new_project_dialog(create_project) {
     if (!create_project) {
         editor.value.editor.setValue(old_code.value)
         stdin.value = old_stdin.value
-        stdout.value = old_stdout.value
-        stderr.value = old_stderr.value
+        responses.length = 0
+        responses.push(...old_responses)
         language.value = old_language.value
         history.pushState({}, null, old_history.value)
     }
@@ -319,14 +312,13 @@ function on_example_changed() {
     if (example.value.id === undefined) {
         history.pushState({}, null, '/dojo')
         stdin.value = ''
-        stdout.value = ''
-        stderr.value = ''
+        responses.length = 0
         editor.value.editor.setValue('')
     } else {
         history.pushState({}, null, `/dojo/${example.value.id}`)
-        stdin.value = example.value.responses[0].stdin
-        stdout.value = example.value.responses[0].stdout
-        stderr.value = example.value.responses[0].stderr
+        stdin.value = example.value.stdin
+        responses.length = 0
+        responses.push(...example.value.responses)
         editor.value.editor.setValue(example.value.sourcecode)
     }
 }
