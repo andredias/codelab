@@ -57,6 +57,7 @@ export async function run_project(language, sourcecode, stdin) {
 
 
 export async function load_examples() {
+    localStorage.clear()
     let response = await axios.get(`${import.meta.env.VITE_API_URL}/examples`)
     let examples = response.data
     localStorage.setItem('examples', JSON.stringify(examples))
