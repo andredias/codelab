@@ -122,7 +122,7 @@ You can reach me at Twitter_ or by email (andre.dias@pronus.io).
 
 .. _Codebox project: https://github.com/andredias/codebox
 .. _Codebox: https://github.com/andredias/Codebox
-.. _issue tracker: https://github.com/andredias/codebox/issues
+.. _issue tracker: https://github.com/andredias/codelab/issues
 .. _Mercurial: https://www.mercurial-scm.org/
 .. _Poetry: https://python-poetry.org/
 .. _Twitter: https://twitter.com/andref_dias
