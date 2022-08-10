@@ -314,7 +314,7 @@ function on_language_changed() {
 
 function on_example_changed() {
     if (example.value.id === undefined) {
-        history.pushState({}, null, '/dojo')
+        history.pushState({}, null, '/')
         stdin.value = ''
         responses.length = 0
         editor.value.editor.setValue('')

@@ -1,25 +1,22 @@
+# Common Caddyfile Patterns - Single-page apps (SPA)
+# see: https://caddyserver.com/docs/caddyfile/patterns#single-page-apps-spas
+
 localhost {
 
-    route /api* {
+    handle /api* {
         uri strip_prefix /api
         reverse_proxy api:5000
     }
 
-    # route /docs {
-    #     reverse_proxy api:5000
-    # }
-
-    # route /openapi.json {
-    #     reverse_proxy api:5000
-    # }
+    handle {
+        root * /dist
+        try_files {path} /index.html
+        file_server
+    }
 
     @compress_exts {
         not path *.gif *.jpg *.png
     }
 
     encode @compress_exts gzip zstd
-
-    file_server {
-        root /dist
-    }
 }
