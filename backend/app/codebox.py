@@ -70,7 +70,7 @@ async def run_project_in_codebox(project: CodeboxInput) -> list[Response]:
         logger.error(f'{response.status_code!r} {response.content!r}')
         raise HTTPException(500)
     responses = parse_obj_as(list[Response], response.json())
-    logger.info(f'Input: {project}, Output: {responses}')
+    logger.debug(f'Input: {project}, Output: {responses}')
     return responses
 
 
@@ -82,6 +82,7 @@ async def run_playground_in_codebox(project: PlaygroundInput) -> list[Response]:
         codebox_project = playground_to_codebox(project)
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
+    logger.debug(f'Codebox project: {codebox_project}')
     responses = await run_project_in_codebox(codebox_project)
     return responses
 
@@ -92,12 +93,12 @@ async def run_playground(playground_input: PlaygroundInput) -> PlaygroundOutput:
     key = f'playground:{id}'
     data = await redis.get(key)
     if data:
-        logger.debug(f'Cached {key}')
+        logger.info(f'Cached id: {key}')
         output = PlaygroundOutput.parse_raw(data)
         return output
 
     # not cached, so run it
-    logger.debug(f'{key} not cached')
+    logger.info(f'id: {key} not cached')
     responses = await run_playground_in_codebox(playground_input)
     output = PlaygroundOutput(id=id, responses=responses)
 
