@@ -11,42 +11,11 @@ and also to help my students to use different programming languages
 without needing to install anything on their machines.
 
 
-Running Code Lab
-================
-
-Dependencies:
-
-.. csv-table::
-    :header-rows: 1
-
-    Dependency, Version
-    :code:`Node.js`, 14
-    :code:`npm`, 7.9
-    :code:`Python`, 3.9
-    :code:`Docker`, 20.10.6
-    :code:`docker-compose`, 1.27.4
-    :code:`GNU Make`, 4.2.1
-
-
-To run the project, execute::
-
-    $ make run
-
-Then, you should access you browser at :code:`https://localhost`.
-
-
-Development
-===========
-
-To use the project directly from the its development environment,
-see `DEVELOPMENT.rst <DEVELOPMENT.rst>`_.
-
-
 How It Works?
 =============
 
 Running code from an unknown source poses security risks
-because malicious code can try to take control of the system,
+because a malicious piece of code can try to take control of the system,
 access restricted areas and data or misuse available resources
 (memory, processes, disk, etc.).
 The way to mitigate those risks is to run the code in a *sandbox*,
@@ -55,7 +24,7 @@ which is a type of virtualization of a restricted and controlled environment [1]
 In the `Code Lab`_,
 the *sandbox* is based on a container Docker called Codebox_,
 which contains all the languages, libraries and tools offered by :code:`Code Lab`,
-but that runs with limitations on user permissions, time, memory and network access restriction.
+but that runs with limitations on user permissions, time, memory and network access.
 Even if there is a security breach,
 its effects will be contained and then eliminated when the container is destroyed.
 
@@ -76,10 +45,10 @@ Architecture
 
 Codebox_ is the most important part, but it doesn't work alone:
 It all starts with the web application, which follows the SPA_ standard (Single Page Application)
-and is built with Vue.js_.
+and is built with `Vue.js`_.
 The backend is hosted in a droplet of :code:`DigitalOcean`.
-The application is served through a reverse proxy by Caddy_
-and a Hypercorn_ server, which uses the `ASGI (Asynchronous Server Gateway Interface)`_ standard,
+The application is served through a reverse proxy by Caddy_ and a Hypercorn_ server,
+which uses the `ASGI (Asynchronous Server Gateway Interface)`_ standard,
 and serves the application built with FastAPI_.
 
 The execution of the projects is not immediate.
@@ -90,11 +59,11 @@ and only if it is not there, the project is executed in :code:`Codebox`.
 .. image:: frontend/src/assets/images/codelab_codebox_v2.png
 
 
-.. note ::
+Contributing to The Project
+===========================
 
-    If you notice, you will see files like :code:`.hgignore` and :code:`.hgtags` in the repository.
-    This means that I use Mercurial_ as a version control for my personal projects
-    despite hosting them on :code:`GitHub`.
+In order to contribute to the project or to try it out from your local machine,
+read `CONTRIBUTING.rst <CONTRIBUTING.rst>`_.
 
 
 References
