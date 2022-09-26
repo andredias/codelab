@@ -12,6 +12,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 
 RUN curl -sSL https://install.python-poetry.org | python -
 RUN python -m venv /venv
+RUN pip install --upgrade pip
 ENV PATH=/venv/bin:/root/.local/bin:${PATH}
 
 WORKDIR /codelab
