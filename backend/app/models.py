@@ -75,7 +75,7 @@ class Response(BaseModel):
 class PlaygroundInput(BaseModel):
     language: str
     sourcecode: str
-    stdin: str | None
+    stdin: str | None = None
 
 
 class PlaygroundOutput(BaseModel):
