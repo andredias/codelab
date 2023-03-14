@@ -44,8 +44,7 @@ The whole project has the following basic dependencies:
     :code:`npm`, 8.13.2
     :code:`Python`, 3.10.4
     :code:`poetry`, 1.1.11
-    :code:`Docker`, 20.10.9
-    :code:`docker-compose`, 1.29.2
+    :code:`Docker`, 23.01.1
     :code:`GNU Make`, 4.3
 
 With everything installed, you might be able to run the project using:

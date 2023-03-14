@@ -21,20 +21,13 @@ access restricted areas and data or misuse available resources
 The way to mitigate those risks is to run the code in a *sandbox*,
 which is a type of virtualization of a restricted and controlled environment [1]_.
 
+
 In the `Code Lab`_,
 the *sandbox* is based on a container Docker called Codebox_,
 which contains all the languages, libraries and tools offered by :code:`Code Lab`,
 but that runs with limitations on user permissions, time, memory and network access.
 Even if there is a security breach,
 its effects will be contained and then eliminated when the container is destroyed.
-
-Communication is done through :code:`Codebox`'s standard input (:code:`stdin`) and standard output (:code:`stdout`).
-The project files, input data and the commands to be executed are sent to :code:`stdin`.
-The output (:code:`stdout`) and errors (:code:`stderr`) of the commands
-are grouped and returned from :code:`Codebox`'s :code:`stdout`.
-
-
-.. image:: frontend/src/assets/images/codebox-operation.png
 
 
 The models used to exchange information are specified in the file :code:`backend/app/models.py`.

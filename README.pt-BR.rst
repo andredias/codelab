@@ -11,34 +11,6 @@ e também ajudar meus alunos a usarem diferentes linguagens de programação
 sem a necessidade de instalar nada na máquina deles.
 
 
-Executando o Code Lab
-=====================
-
-Dependências:
-
-.. csv-table::
-    :header-rows: 1
-
-    Dependência, Versão
-    :code:`Node.js`, 14
-    :code:`npm`, 7.9
-    :code:`Python`, 3.9
-    :code:`Docker`, 20.10.6
-    :code:`docker-compose`, 1.27.4
-    :code:`GNU Make`, 4.2.1
-
-Para executar o projeto, execute::
-
-    $ make run
-
-Em seguida, abra o navegador e acesse o endereço :code:`https://localhost`.
-
-
-Desenvolvimento
-===============
-
-Para usar o projeto diretamente pelo ambiente de desenvolvimento,
-veja `DEVELOPMENT.rst <DEVELOPMENT.rst>`_.
 
 
 Funcionamento
