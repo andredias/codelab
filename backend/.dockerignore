@@ -3,3 +3,5 @@
 !poetry.lock
 !hypercorn.toml
 !app
+!self-signed.*
+**/__pycache__

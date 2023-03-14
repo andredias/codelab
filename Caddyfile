@@ -3,9 +3,12 @@
 
 localhost {
 
-    handle /api* {
-        uri strip_prefix /api
-        reverse_proxy api:5000
+    handle_path /api* {
+        reverse_proxy https://api:5000 {
+            transport http {
+                tls_insecure_skip_verify
+            }
+        }
     }
 
     handle {

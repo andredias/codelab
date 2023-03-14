@@ -10,15 +10,17 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN curl -sSL https://install.python-poetry.org | python -
+ENV POETRY_VERSION=1.3.2
+RUN curl https://install.python-poetry.org | python -
+
 RUN python -m venv /venv
-RUN pip install --upgrade pip
 ENV PATH=/venv/bin:/root/.local/bin:${PATH}
 
 WORKDIR /codelab
 COPY pyproject.toml poetry.lock ./
-RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-dev
 
+RUN . /venv/bin/activate; \
+    poetry install --only main --no-interaction
 
 FROM python:3.10-slim as final
 
@@ -29,8 +31,10 @@ WORKDIR /codelab
 RUN chown -R nobody:nogroup .
 COPY --chown=nobody:nogroup app ./app
 COPY --chown=nobody:nogroup hypercorn.toml .
+COPY --chown=nobody:nogroup self-signed.* .
 
 # USER nobody
 
 EXPOSE 5000
-CMD ["hypercorn", "--config=hypercorn.toml", "app.main:create_app()"]
+CMD ["hypercorn", "--config=hypercorn.toml", "--keyfile=self-signed.key", \
+    "--certfile=self-signed.crt", "--root-path=/api", "app.main:create_app()"]
