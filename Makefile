@@ -1,11 +1,11 @@
 run: frontend/dist
-	docker-compose up
+	docker compose up
 
 dev:
-	docker-compose -f docker-compose.yml -f docker-compose.test.yml up
+	docker compose -f docker compose.yml -f docker compose.test.yml up
 
 build:
-	docker-compose build
+	docker compose build
 
 frontend/node_modules: frontend/package.json
 	cd frontend; npm install

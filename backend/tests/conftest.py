@@ -20,7 +20,7 @@ def docker() -> Generator:
     # fmt: off
     check_call(
         [
-            'docker-compose',
+            'docker', 'compose',
             '-f', root_path / 'docker-compose.yml',
             '-f', root_path / 'docker-compose.test.yml',
             'up', '-d',
@@ -35,7 +35,7 @@ def docker() -> Generator:
         # fmt: off
         check_call(
             [
-                'docker-compose',
+                'docker', 'compose',
                 '-f', root_path / 'docker-compose.yml',
                 '-f', root_path / 'docker-compose.test.yml',
                 'down',
