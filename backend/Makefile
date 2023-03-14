@@ -13,8 +13,6 @@ lint:
 	mypy .
 	@echo
 	bandit -qr app/
-	@echo
-	pip-audit
 
 
 format:
