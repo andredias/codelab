@@ -8,8 +8,6 @@ from tenacity import retry, stop_after_delay, wait_exponential
 
 from . import config
 
-# from .projects import load_examples
-
 redis = Redis.from_url(config.REDIS_URL)
 
 
@@ -21,7 +19,6 @@ async def startup() -> None:
     if config.DEBUG:
         show_config()
     await _init_redis()
-    # await load_examples()
     logger.info('started...')
 
 

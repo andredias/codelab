@@ -20,27 +20,21 @@ python = "^3.10"
 python-dotenv = "*"
 tenacity = "*"
 uvloop = "*"
-tomli = "^2.0.1"
+tomli = "*"
 
-[tool.poetry.dev-dependencies]
-alt-pytest-asyncio = "*"
+
+[tool.poetry.group.dev.dependencies]
 asgi-lifespan = "*"
-bandit = "*"
-flake8 = "*"
-flake8-debugger = "*"
-flake8-pytest-style = "*"
-isort = "*"
+alt-pytest-asyncio = "*"
+blue = "*"
+httpx = "*"
 mypy = "*"
-pep8-naming = "*"
 pip-audit = "*"
 pytest = "*"
 pytest-cov = "*"
-pyupgrade = "*"
-types-toml = "*"
+ruff = "*"
+types-aiofiles = "*"
 
-[tool.isort]
-profile = "black"
-line_length = 100
 
 [tool.blue]
 line-length = 100
@@ -51,3 +45,33 @@ filterwarnings = ["ignore::DeprecationWarning"]
 [tool.mypy]
 ignore_missing_imports = true
 disallow_untyped_defs = true
+
+[tool.ruff]
+line-length = 100
+select = [
+    "ARG",
+    "B",
+    "C4",
+    "E",
+    "ERA",
+    "F",
+    "I",
+    "N",
+    "PLC",
+    "PLE",
+    "PLR",
+    "PLW",
+    "RET",
+    "S",
+    "T10",
+    "T10",
+    "UP",
+    "W",
+]
+ignore = ["B008"]
+target-version = "py311"
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+"tests/**" = ["ARG", "PLR2004", "S"]
+"smoke_test.py" = ["S"]

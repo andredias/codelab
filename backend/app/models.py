@@ -28,7 +28,7 @@ def calc_hash(obj: BaseModel) -> str:
     """
     Calculates the hash of any pydantic model.
     """
-    return urlsafe_b64encode(md5(obj.json().encode()).digest()).decode().rstrip('=')  # nosec: B324
+    return urlsafe_b64encode(md5(obj.json().encode()).digest()).decode().rstrip('=')  # noqa: S324
 
 
 # Codebox Related

@@ -1,4 +1,4 @@
-from fastapi import HTTPException
+from fastapi import HTTPException, status
 from httpx import AsyncClient
 from loguru import logger
 from pydantic import parse_obj_as
@@ -66,9 +66,9 @@ async def run_project_in_codebox(project: CodeboxInput) -> list[Response]:
     async with AsyncClient() as client:
         response = await client.post(f'{config.CODEBOX_URL}/execute', json=project.dict())
 
-    if response.status_code != 200:
+    if response.status_code != status.HTTP_200_OK:
         logger.error(f'{response.status_code!r} {response.content!r}')
-        raise HTTPException(500)
+        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR)
     responses = parse_obj_as(list[Response], response.json())
     logger.debug(f'Input: {project}, Output: {responses}')
     return responses
@@ -81,10 +81,9 @@ async def run_playground_in_codebox(project: PlaygroundInput) -> list[Response]:
     try:
         codebox_project = playground_to_codebox(project)
     except ValueError as e:
-        raise HTTPException(422, detail=str(e))
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(e)) from None
     logger.debug(f'Codebox project: {codebox_project}')
-    responses = await run_project_in_codebox(codebox_project)
-    return responses
+    return await run_project_in_codebox(codebox_project)
 
 
 async def run_playground(playground_input: PlaygroundInput) -> PlaygroundOutput:

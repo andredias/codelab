@@ -17,6 +17,6 @@ LOG_LEVEL = os.getenv('LOG_LEVEL') or (DEBUG and 'DEBUG') or 'INFO'
 os.environ['LOGURU_DEBUG_COLOR'] = '<fg #777>'
 
 TTL = int(os.getenv('TTL', timedelta(days=3).total_seconds())) if not TESTING else 1
-TIMEOUT = float(os.getenv('TIMEOUT', 0.25))
+TIMEOUT: float = float(os.environ['TIMEOUT']) if 'TIMEOUT' in os.environ else 0.25
 REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379')
 CODEBOX_URL = os.getenv('CODEBOX_URL', 'http://localhost:8000')

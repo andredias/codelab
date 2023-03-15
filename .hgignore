@@ -13,6 +13,7 @@ htmlcov
 .mypy_cache
 server/redis
 server/data
+.ruff_cache
 
 
 # Logs

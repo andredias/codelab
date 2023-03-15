@@ -4,18 +4,15 @@ test:
 
 lint:
 	@echo
-	isort --diff -c .
+	ruff .
 	@echo
 	blue --check --diff --color .
 	@echo
-	flake8 .
-	@echo
 	mypy .
 	@echo
-	bandit -qr app/
+	pip-audit
 
 
 format:
-	isort .
+	ruff --silent --exit-zero --fix .
 	blue .
-	pyupgrade --py310-plus **/*.py
