@@ -1,16 +1,16 @@
-FROM python:3.10-slim as builder
+FROM python:3.11-slim as builder
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get -y upgrade && \
     apt-get install -y --no-install-recommends build-essential libffi-dev libxml2-dev \
     libxslt-dev curl libpq-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ENV POETRY_VERSION=1.3.2
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ENV POETRY_VERSION=1.4.1
 RUN curl https://install.python-poetry.org | python -
 
 RUN python -m venv /venv
@@ -22,7 +22,7 @@ COPY pyproject.toml poetry.lock ./
 RUN . /venv/bin/activate; \
     poetry install --only main --no-interaction
 
-FROM python:3.10-slim as final
+FROM python:3.11-slim as final
 
 COPY --chown=nobody:nogroup --from=builder /venv /venv
 ENV PATH=/venv/bin:${PATH}
