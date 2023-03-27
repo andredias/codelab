@@ -1,5 +1,3 @@
-from collections.abc import Generator
-
 import pytest
 
 from app.codebox import run_playground_in_codebox
@@ -15,9 +13,7 @@ from app.models import PlaygroundInput
         pytest.param('non-existent-language', 'tra-la-la', '123', marks=pytest.mark.xfail),
     ],
 )
-async def test_run_playground_in_codebox(
-    language: str, sourcecode: str, stdin: str | None, docker: Generator
-) -> None:
+async def test_run_playground_in_codebox(language: str, sourcecode: str, stdin: str | None) -> None:
     playground_input = PlaygroundInput(
         sourcecode=sourcecode,
         language=language,

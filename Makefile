@@ -17,6 +17,7 @@ lint:
 	cd backend; poetry run make lint
 
 test:
+	@ docker compose -f docker-compose.yml -f docker-compose.test.yml up -d redis codebox
 	cd backend; poetry run make test
 
 install_hooks:
