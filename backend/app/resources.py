@@ -75,7 +75,6 @@ def show_config() -> None:
         key: getattr(config, key) for key in sorted(dir(config)) if key[0] in ascii_uppercase
     }
     logger.debug(config_vars)
-    return
 
 
 async def _init_redis() -> None:
@@ -87,7 +86,6 @@ async def _init_redis() -> None:
         await redis.delete('test_connection')
 
     await _connect_to_redis()
-    return
 
 
 async def _stop_redis() -> None:
