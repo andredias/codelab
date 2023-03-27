@@ -1,4 +1,4 @@
-FROM python:3.11-slim as builder
+FROM python:3.10-slim as builder
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -22,7 +22,7 @@ COPY pyproject.toml poetry.lock ./
 RUN . /venv/bin/activate; \
     poetry install --only main --no-interaction
 
-FROM python:3.11-slim as final
+FROM python:3.10-slim as final
 
 COPY --chown=nobody:nogroup --from=builder /venv /venv
 ENV PATH=/venv/bin:${PATH}
