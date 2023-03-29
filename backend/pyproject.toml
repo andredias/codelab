@@ -10,14 +10,14 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
 aiofiles = "*"
-aioredis = "*"
 fastapi = "*"
 httpx = "*"
 hypercorn = "*"
 loguru = "*"
 orjson = "*"
-python = "^3.10"
+python = "^3.11"
 python-dotenv = "*"
+redis = { version = "*", extras = ["hiredis"] }
 tenacity = "*"
 uvloop = "*"
 tomli = "*"
@@ -34,6 +34,7 @@ pytest = "*"
 pytest-cov = "*"
 ruff = "*"
 types-aiofiles = "*"
+types-redis = "*"
 
 
 [tool.blue]
