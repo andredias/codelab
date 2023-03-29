@@ -37,4 +37,4 @@ COPY --chown=nobody:nogroup self-signed.* .
 
 EXPOSE 5000
 CMD ["hypercorn", "--config=hypercorn.toml", "--keyfile=self-signed.key", \
-    "--certfile=self-signed.crt", "--root-path=/api", "app.main:create_app()"]
+    "--certfile=self-signed.crt", "--root-path=/api", "app.main:app"]

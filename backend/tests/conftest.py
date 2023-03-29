@@ -8,14 +8,13 @@ from pytest import fixture
 
 os.environ['ENV'] = 'testing'
 
-from app.main import create_app  # noqa: E402
+from app.main import app as _app  # noqa: E402
 
 
 @fixture
 async def app() -> AsyncIterable[FastAPI]:
-    app = create_app()
-    async with LifespanManager(app):
-        yield app
+    async with LifespanManager(_app):
+        yield _app
 
 
 @fixture

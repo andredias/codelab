@@ -15,27 +15,20 @@ origins = [
     'http://localhost:3000',
 ]
 
+app = FastAPI(
+    title='Codelab',
+    default_response_class=ORJSONResponse,
+    on_startup=(startup,),
+    on_shutdown=(shutdown,),
+)
 
-def create_app() -> FastAPI:
+for router in routers:
+    app.include_router(router)
 
-    app = FastAPI(default_response_class=ORJSONResponse)
-    for router in routers:
-        app.include_router(router)
-
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=origins,
-        allow_credentials=True,
-        allow_methods=['*'],
-        allow_headers=['*'],
-    )
-
-    @app.on_event('startup')
-    async def startup_event() -> None:
-        await startup()
-
-    @app.on_event('shutdown')
-    async def shutdown_event() -> None:
-        await shutdown()
-
-    return app
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)

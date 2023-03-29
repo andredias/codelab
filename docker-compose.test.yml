@@ -23,10 +23,8 @@ services:
                 "hypercorn",
                 "--config=hypercorn.toml",
                 "--reload",
-                "--keyfile=self-signed.key",
-                "--certfile=self-signed.crt",
                 "--root-path=/api",
-                "app.main:create_app()"
+                "app.main:app"
             ]
         environment:
             - ENV=development
