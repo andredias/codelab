@@ -23,7 +23,7 @@ services:
             - web
             - backend
         depends_on:
-            - api
+            - codelab
 
     redis:
         container_name: redis
@@ -34,7 +34,7 @@ services:
         networks:
             - backend
 
-    api:
+    codelab:
         container_name: codelab
         build:
             context: ./backend
