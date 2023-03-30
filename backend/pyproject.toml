@@ -10,12 +10,13 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
 aiofiles = "*"
+async-timeout = "*"                             # required by redis in Python 3.10
 fastapi = "*"
 httpx = "*"
 hypercorn = "*"
 loguru = "*"
 orjson = "*"
-python = "^3.11"
+python = "^3.10"
 python-dotenv = "*"
 redis = { version = "*", extras = ["hiredis"] }
 tenacity = "*"
