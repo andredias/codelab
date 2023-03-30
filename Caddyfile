@@ -4,11 +4,7 @@
 localhost {
 
     handle_path /api* {
-        reverse_proxy https://codelab:5000 {
-            transport http {
-                tls_insecure_skip_verify
-            }
-        }
+        reverse_proxy h2c://codelab:5000
     }
 
     handle {

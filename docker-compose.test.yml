@@ -13,7 +13,7 @@ services:
         networks:
             - testing
 
-    api:
+    codelab:
         networks:
             - testing
         ports:
@@ -28,3 +28,5 @@ services:
             ]
         environment:
             - ENV=development
+        volumes:
+            - ./backend/app:/codelab/app

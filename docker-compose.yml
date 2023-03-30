@@ -49,8 +49,6 @@ services:
         environment:
             - REDIS_URL=redis://redis:6379
             - CODEBOX_URL=http://codebox:8000
-        volumes:
-            - ./backend/app:/codelab/app
 
     codebox:
         image: codebox

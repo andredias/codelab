@@ -31,10 +31,8 @@ WORKDIR /codelab
 RUN chown -R nobody:nogroup .
 COPY --chown=nobody:nogroup app ./app
 COPY --chown=nobody:nogroup hypercorn.toml .
-COPY --chown=nobody:nogroup self-signed.* .
 
 # USER nobody
 
 EXPOSE 5000
-CMD ["hypercorn", "--config=hypercorn.toml", "--keyfile=self-signed.key", \
-    "--certfile=self-signed.crt", "--root-path=/api", "app.main:app"]
+CMD ["hypercorn", "--config=hypercorn.toml", "--root-path=/api", "app.main:app"]
