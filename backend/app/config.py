@@ -13,7 +13,7 @@ if ENV not in ('production', 'development', 'testing'):
 DEBUG = ENV != 'production'
 TESTING = ENV == 'testing'
 
-LOG_LEVEL = os.getenv('LOG_LEVEL') or (DEBUG and 'DEBUG') or 'INFO'
+os.environ['LOGURU_LEVEL'] = os.getenv('LOG_LEVEL') or (DEBUG and 'DEBUG') or 'INFO'
 os.environ['LOGURU_DEBUG_COLOR'] = '<fg #777>'
 
 TTL = int(os.getenv('TTL', timedelta(days=3).total_seconds())) if not TESTING else 1
