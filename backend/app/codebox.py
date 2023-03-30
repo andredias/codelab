@@ -63,7 +63,7 @@ async def run_project_in_codebox(project: CodeboxInput) -> list[Response]:
     """
     Call Codebox to run the project
     """
-    async with AsyncClient() as client:
+    async with AsyncClient(http1=False, http2=True) as client:  # works like h2c
         response = await client.post(f'{config.CODEBOX_URL}/execute', json=project.dict())
 
     if response.status_code != status.HTTP_200_OK:
