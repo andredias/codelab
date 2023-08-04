@@ -1,8 +1,8 @@
 run: frontend/dist
 	docker compose up
 
-dev:
-	docker compose -f docker compose.yml -f docker compose.test.yml up
+dev: frontend/dist
+	docker compose -f docker-compose.yml -f docker-compose.test.yml up
 
 build:
 	docker compose build
