@@ -1,7 +1,7 @@
 from unittest.mock import patch
 
 from httpx import AsyncClient
-from pydantic import parse_obj_as
+from pydantic import TypeAdapter
 
 from app.models import PlaygroundProject
 from app.resources import redis
@@ -18,7 +18,7 @@ async def test_get_examples(client: AsyncClient) -> None:
     resp = await client.get(url)
     assert resp.status_code == 200
     assert (await redis.get(key)) == resp.content
-    examples = parse_obj_as(list[PlaygroundProject], resp.json())
+    examples = TypeAdapter(list[PlaygroundProject]).validate_python(resp.json())
     assert len(examples) > 0
 
     # second call, the project must be in cache

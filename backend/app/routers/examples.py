@@ -6,7 +6,7 @@ import orjson
 import tomli
 from fastapi import APIRouter
 from loguru import logger
-from pydantic import parse_obj_as
+from pydantic import TypeAdapter
 
 from .. import config
 from ..codebox import run_playground
@@ -21,7 +21,7 @@ async def run_example(
 ) -> PlaygroundProject:
     playground_input = PlaygroundInput(language=language, sourcecode=sourcecode, stdin=stdin)
     output = await run_playground(playground_input)
-    return PlaygroundProject(title=title, **playground_input.dict(), **output.dict())
+    return PlaygroundProject(title=title, **playground_input.model_dump(), **output.model_dump())
 
 
 @router.get('', response_model=list[PlaygroundProject])
@@ -30,7 +30,7 @@ async def get_examples() -> list[PlaygroundProject]:
     data = await redis.get(key)
     if data:
         logger.debug('Cached: Examples')
-        return parse_obj_as(list[PlaygroundProject], orjson.loads(data))
+        return TypeAdapter(list[PlaygroundProject]).validate_json(data)
 
     logger.debug('Not Cached: Examples')
     # load examples
@@ -45,6 +45,6 @@ async def get_examples() -> list[PlaygroundProject]:
             tasks.append(run_example(**project))
         examples = await asyncio.gather(*tasks)
     examples.sort(key=lambda x: (x.language, x.title))
-    examples_dict = [x.dict() for x in examples]
+    examples_dict = [x.model_dump() for x in examples]
     await redis.set(key, orjson.dumps(examples_dict), ex=config.TTL)
     return examples

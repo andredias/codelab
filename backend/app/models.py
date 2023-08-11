@@ -1,34 +1,22 @@
 from base64 import urlsafe_b64encode
-from collections.abc import Callable
 from hashlib import md5
-from typing import Any, Optional
 
-import orjson
-from pydantic import BaseModel as _BaseModel
+from pydantic import BaseModel
 
 from .config import TIMEOUT
 
 # ref: https://pydantic-docs.helpmanual.io/usage/exporting_models/#custom-json-deserialisation
-
-default_type = Optional[Callable[[Any], Any]]
-
-
-def orjson_dumps(v: _BaseModel, *, default: default_type) -> str:
-    # orjson.dumps returns bytes, to match standard json.dumps we need to decode
-    return orjson.dumps(v, default=default).decode()
-
-
-class BaseModel(_BaseModel):
-    class Config:
-        json_loads = orjson.loads
-        json_dumps = orjson_dumps
 
 
 def calc_hash(obj: BaseModel) -> str:
     """
     Calculates the hash of any pydantic model.
     """
-    return urlsafe_b64encode(md5(obj.json().encode()).digest()).decode().rstrip('=')  # noqa: S324
+    return (
+        urlsafe_b64encode(md5(obj.model_dump_json().encode()).digest())  # noqa: S324
+        .decode()
+        .rstrip('=')
+    )
 
 
 # Codebox Related

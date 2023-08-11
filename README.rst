@@ -11,6 +11,14 @@ and also to help my students to use different programming languages
 without needing to install anything on their machines.
 
 
+How to Test It Locally
+======================
+
+1. run ``make dev`` to start the backend and frontend servers
+2. open https://localhost in your browser
+
+To see the backend API documentation, open ``https://localhost/api/docs`` in your browser.
+
 How It Works?
 =============
 

@@ -20,8 +20,8 @@ async def get_playground(id: str) -> PlaygroundProject:
         # if found, cache it
         logger.info(f'{id} Not found')
         raise HTTPException(status_code=404)
-    project = PlaygroundProject.parse_raw(data)
-    logger.info(project.json())
+    project = PlaygroundProject.model_validate_json(data)
+    logger.info(project.model_dump_json())
     return project
 
 
@@ -31,5 +31,7 @@ async def run_playground_in_codelab(playground_input: PlaygroundInput) -> Playgr
     Execute a playground input
     """
     output = await run_playground(playground_input)
-    logger.info(PlaygroundProject(**playground_input.dict(), **output.dict()).json())
+    logger.info(
+        PlaygroundProject(**playground_input.model_dump(), **output.model_dump()).model_dump_json()
+    )
     return output
