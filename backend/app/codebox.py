@@ -6,11 +6,11 @@ from pydantic import TypeAdapter
 from . import config
 from .models import (
     CodeboxInput,
+    CodeboxResponse,
+    CodelabInput,
+    CodelabOutput,
+    CodelabProject,
     Command,
-    PlaygroundInput,
-    PlaygroundOutput,
-    PlaygroundProject,
-    Response,
     calc_hash,
 )
 from .resources import redis
@@ -20,7 +20,7 @@ COMPILATION_TIMEOUT = TIMEOUT * 10
 DATABASE_TIMEOUT = TIMEOUT * 10
 
 
-def playground_to_codebox(project: PlaygroundInput) -> CodeboxInput:
+def codelab_to_codebox(project: CodelabInput) -> CodeboxInput:
     """
     Call Codebox to run the project
     """
@@ -59,43 +59,43 @@ def playground_to_codebox(project: PlaygroundInput) -> CodeboxInput:
     return CodeboxInput(sources=sources, commands=commands)
 
 
-async def run_project_in_codebox(project: CodeboxInput) -> list[Response]:
+async def run_codebox_input(project: CodeboxInput) -> list[CodeboxResponse]:
     """
     Call Codebox to run the project
     """
-    async with AsyncClient(http2=True, verify=False) as client:  # works like h2c
+    async with AsyncClient(http2=True, verify=False) as client:  # works like h2c  # noqa: S501
         response = await client.post(f'{config.CODEBOX_URL}/execute', json=project.model_dump())
 
     if response.status_code != status.HTTP_200_OK:
         logger.error(f'{response.status_code!r} {response.content!r}')
         raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR)
-    responses = TypeAdapter(list[Response]).validate_python(response.json())
+    responses = TypeAdapter(list[CodeboxResponse]).validate_python(response.json())
     logger.debug(f'Input: {project!r}, Output: {responses!r}')
     return responses
 
 
-async def run_playground(playground_input: PlaygroundInput) -> PlaygroundOutput:
+async def run_codelab_project(codelab_input: CodelabInput) -> CodelabOutput:
     # first, check if the configuration is cached
-    id = calc_hash(playground_input)
-    key = f'playground:{id}'
+    id = calc_hash(codelab_input)
+    key = f'codelab:{id}'
     data = await redis.get(key)
     if data:
-        logger.info(f'Cached id: {key}')
-        return PlaygroundOutput.model_validate_json(data)
+        logger.info(f'Cached: {key}')
+        return CodelabOutput.model_validate_json(data)
 
     # not cached, so run it
-    logger.info(f'id: {key} not cached')
+    logger.info(f'Not Cached: {key}')
     try:
-        codebox_project = playground_to_codebox(playground_input)
+        codebox_input = codelab_to_codebox(codelab_input)
     except ValueError as e:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(e)) from None
-    logger.debug(repr(codebox_project))
+    logger.debug(repr(codebox_input))
 
-    responses = await run_project_in_codebox(codebox_project)
-    output = PlaygroundOutput(id=id, responses=responses)
+    responses = await run_codebox_input(codebox_input)
+    output = CodelabOutput(id=id, responses=responses)
 
     # cache result
-    project = PlaygroundProject(**playground_input.model_dump(), **output.model_dump())
+    project = CodelabProject(**codelab_input.model_dump(), **output.model_dump())
     await redis.set(key, project.model_dump_json(), ex=config.TTL)
 
     return output

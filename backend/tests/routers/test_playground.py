@@ -4,9 +4,9 @@ from unittest.mock import patch
 from httpx import AsyncClient
 
 from app import config
-from app.models import PlaygroundInput, PlaygroundOutput, Response
+from app.models import CodeboxResponse, CodelabInput, CodelabOutput
 
-project = PlaygroundInput(
+project = CodelabInput(
     sourcecode='print("Hello World!")\n',
     language='python',
 )
@@ -18,11 +18,11 @@ async def test_run_project(client: AsyncClient) -> None:
     resp = await client.post('/playgrounds', json=project.model_dump())
     assert resp.status_code == 200
     data = resp.json()
-    output = PlaygroundOutput(**data)
-    assert output == PlaygroundOutput(
+    output = CodelabOutput(**data)
+    assert output == CodelabOutput(
         id='inMUAUBBwpoHwVB7UQ5OXQ',
         responses=[
-            Response(
+            CodeboxResponse(
                 stdout='Hello World!\n',
                 stderr='',
                 exit_code=0,
@@ -31,22 +31,20 @@ async def test_run_project(client: AsyncClient) -> None:
     )
 
     # second call, the project must be in cache
-    with patch(
-        'app.codebox.run_project_in_codebox', return_value=output.responses
-    ) as run_project_in_codebox:
+    with patch('app.codebox.run_codebox_input', return_value=output.responses) as run_codebox_input:
         resp = await client.post('/playgrounds', json=project.model_dump())
         assert resp.status_code == 200
-        run_project_in_codebox.assert_not_awaited()
+        run_codebox_input.assert_not_awaited()
 
-        # third call: not in cache anymore, must call run_project_in_codebox
+        # third call: not in cache anymore, must call run_codebox_input
         sleep(config.TIMEOUT + config.TTL)
         resp = await client.post('/playgrounds', json=project.model_dump())
         assert resp.status_code == 200
-        run_project_in_codebox.assert_awaited()
+        run_codebox_input.assert_awaited()
 
 
 async def test_non_existent_language(client: AsyncClient) -> None:
-    project = PlaygroundInput(sourcecode='tra-la-la', language='something else', stdin='')
+    project = CodelabInput(sourcecode='tra-la-la', language='something else', stdin='')
     resp = await client.post('/playgrounds', json=project.model_dump())
     assert resp.status_code == 422
 

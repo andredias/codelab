@@ -1,13 +1,13 @@
-from app.models import PlaygroundInput, Response, calc_hash
+from app.models import CodeboxResponse, CodelabInput, calc_hash
 
 
 async def test_calc_hash() -> None:
     message = 'Hello World!'
-    proj1 = PlaygroundInput(
+    proj1 = CodelabInput(
         sourcecode=f'print("{message}")\n',
         language='python',
     )
-    proj2 = PlaygroundInput(
+    proj2 = CodelabInput(
         sourcecode=f'print("{message}!")\n',
         language='python',
     )
@@ -21,8 +21,8 @@ async def test_calc_hash() -> None:
 
 
 def test_response() -> None:
-    r1 = Response(stdout='Hello World!\n', stderr='', exit_code=0, elapsed_time=0.75)
-    r2 = Response(stdout='Hello World!\n', stderr='', exit_code=0, elapsed_time=1)
+    r1 = CodeboxResponse(stdout='Hello World!\n', stderr='', exit_code=0, elapsed_time=0.75)
+    r2 = CodeboxResponse(stdout='Hello World!\n', stderr='', exit_code=0, elapsed_time=1)
 
     assert r1 == r2
     assert '750ms' in str(r1)

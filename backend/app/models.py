@@ -35,7 +35,7 @@ class CodeboxInput(BaseModel):
     commands: list[Command]
 
 
-class Response(BaseModel):
+class CodeboxResponse(BaseModel):
     stdout: str = ''
     stderr: str = ''
     exit_code: int = 0
@@ -43,13 +43,13 @@ class Response(BaseModel):
 
     def __str__(self) -> str:
         return (
-            f'Response(stdout={self.stdout!r}, stderr={self.stderr!r}, '
+            f'CodeboxResponse(stdout={self.stdout!r}, stderr={self.stderr!r}, '
             f'exit_code={self.exit_code!r}, elapsed_time={self.elapsed_time * 1000:.0f}ms)'
         )
 
     def __eq__(self, other: object) -> bool:
         return (
-            isinstance(other, Response)
+            isinstance(other, CodeboxResponse)
             and self.stdout == other.stdout
             and self.stderr == other.stderr
             and self.exit_code == other.exit_code
@@ -60,23 +60,23 @@ class Response(BaseModel):
 # Code Lab related
 
 
-class PlaygroundInput(BaseModel):
+class CodelabInput(BaseModel):
     language: str
     sourcecode: str
     stdin: str | None = None
 
 
-class PlaygroundOutput(BaseModel):
+class CodelabOutput(BaseModel):
     id: str
-    responses: list[Response]
+    responses: list[CodeboxResponse]
 
     def __eq__(self, other: object) -> bool:
         return (
-            isinstance(other, PlaygroundOutput)
+            isinstance(other, CodelabOutput)
             and self.id == other.id
             and self.responses == other.responses
         )
 
 
-class PlaygroundProject(PlaygroundInput, PlaygroundOutput):
+class CodelabProject(CodelabInput, CodelabOutput):
     title: str = ''

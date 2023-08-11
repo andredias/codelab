@@ -9,8 +9,8 @@ from loguru import logger
 from pydantic import TypeAdapter
 
 from .. import config
-from ..codebox import run_playground
-from ..models import PlaygroundInput, PlaygroundProject
+from ..codebox import run_codelab_project
+from ..models import CodelabInput, CodelabProject
 from ..resources import redis
 
 router = APIRouter(prefix='/examples', tags=['examples'])
@@ -18,19 +18,19 @@ router = APIRouter(prefix='/examples', tags=['examples'])
 
 async def run_example(
     title: str, language: str, sourcecode: str, stdin: str = ''
-) -> PlaygroundProject:
-    playground_input = PlaygroundInput(language=language, sourcecode=sourcecode, stdin=stdin)
-    output = await run_playground(playground_input)
-    return PlaygroundProject(title=title, **playground_input.model_dump(), **output.model_dump())
+) -> CodelabProject:
+    codelab_input = CodelabInput(language=language, sourcecode=sourcecode, stdin=stdin)
+    output = await run_codelab_project(codelab_input)
+    return CodelabProject(title=title, **codelab_input.model_dump(), **output.model_dump())
 
 
-@router.get('', response_model=list[PlaygroundProject])
-async def get_examples() -> list[PlaygroundProject]:
+@router.get('', response_model=list[CodelabProject])
+async def get_examples() -> list[CodelabProject]:
     key = 'codelab_examples'
     data = await redis.get(key)
     if data:
         logger.debug('Cached: Examples')
-        return TypeAdapter(list[PlaygroundProject]).validate_json(data)
+        return TypeAdapter(list[CodelabProject]).validate_json(data)
 
     logger.debug('Not Cached: Examples')
     # load examples
@@ -39,7 +39,7 @@ async def get_examples() -> list[PlaygroundProject]:
         patch('app.codebox.TIMEOUT', None),
         patch('app.codebox.COMPILATION_TIMEOUT', None),
         patch('app.codebox.DATABASE_TIMEOUT', None),
-    ):  # increase timeout for examples
+    ):  # disable timeout limit for examples
         for example in (Path(__file__).parent.parent / 'examples').glob('*.toml'):
             project = tomli.loads(example.read_text())
             tasks.append(run_example(**project))
