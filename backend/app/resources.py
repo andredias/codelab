@@ -42,8 +42,7 @@ async def connect_redis() -> None:
     @retry(stop=stop_after_delay(3), wait=wait_exponential(multiplier=0.2))
     async def _connect_to_redis() -> None:
         logger.debug('Connecting to Redis...')
-        await redis.set('test_connection', '1234')
-        await redis.delete('test_connection')
+        await redis.ping()
 
     try:
         await _connect_to_redis()
