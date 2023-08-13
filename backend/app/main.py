@@ -1,30 +1,27 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import ORJSONResponse
 
-from .resources import shutdown, startup
+from . import config
+from .resources import lifespan
 from .routers import examples, playground
-
-routers = [
-    examples.router,
-    playground.router,
-]
-
-origins = [
-    'http://localhost:8080',
-    'http://localhost:3000',
-]
 
 app = FastAPI(
     title='Codelab',
-    default_response_class=ORJSONResponse,
-    on_startup=(startup,),
-    on_shutdown=(shutdown,),
+    debug=config.DEBUG,
+    lifespan=lifespan,
 )
 
+routers = (
+    examples.router,
+    playground.router,
+)
 for router in routers:
     app.include_router(router)
 
+origins = (
+    'http://localhost:8080',
+    'http://localhost:3000',
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
