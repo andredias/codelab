@@ -57,7 +57,7 @@ First, a check is made in the cache (Redis_)
 and only if it is not there, the project is executed in :code:`Codebox`.
 
 
-.. image:: frontend/src/assets/images/codelab_codebox_v2.png
+.. image:: doc/architecture.svg
 
 
 Contributing to The Project
