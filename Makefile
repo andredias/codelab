@@ -16,6 +16,12 @@ frontend/dist: frontend/node_modules frontend/src/** frontend/src/**/* frontend/
 lint:
 	cd backend; poetry run make lint
 
+format:
+	cd backend; poetry run make format
+
+audit:
+	cd backend; poetry run make audit
+
 test:
 	@ docker compose -f docker-compose.yml -f docker-compose.test.yml up -d redis codebox
 	cd backend; poetry run make test

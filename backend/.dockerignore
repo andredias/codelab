@@ -2,6 +2,6 @@
 !pyproject.toml
 !poetry.lock
 !hypercorn.toml
-!app
+!codelab
 !self-signed.*
 **/__pycache__

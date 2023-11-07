@@ -12,8 +12,8 @@ async def test_get_examples(client: AsyncClient) -> None:
     key = 'codelab_examples'
 
     # first time, there must be no cache
-    examples = await redis.get(key)
-    assert examples is None
+    cache = await redis.get(key)
+    assert cache is None
 
     resp = await client.get(url)
     assert resp.status_code == 200

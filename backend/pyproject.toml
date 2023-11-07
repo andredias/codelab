@@ -14,9 +14,11 @@ httpx = "*"
 hypercorn = "*"
 loguru = "*"
 orjson = "*"
+pygments = "*"
 python = "^3.11.4"
 python-dotenv = "*"
 redis = { version = "*", extras = ["hiredis"] }
+stackprinter = "*"
 tenacity = "*"
 uvloop = "*"
 tomli = "*"
@@ -25,8 +27,7 @@ tomli = "*"
 [tool.poetry.group.dev.dependencies]
 asgi-lifespan = "*"
 alt-pytest-asyncio = "*"
-blue = "*"
-httpx = "*"
+httpx = {version = "*", extras = ["cli"]}
 mypy = "*"
 pip-audit = "*"
 pytest = "*"
@@ -35,11 +36,9 @@ ruff = "*"
 types-redis = "*"
 
 
-[tool.blue]
-line-length = 100
-
 [tool.pytest.ini_options]
 filterwarnings = ["ignore::DeprecationWarning"]
+default_async_timeout = 600
 
 [tool.mypy]
 ignore_missing_imports = true
@@ -69,6 +68,9 @@ select = [
 ]
 ignore = ["B008"]
 target-version = "py311"
+
+[tool.ruff.format]
+quote-style = "single"
 
 [tool.ruff.per-file-ignores]
 "__init__.py" = ["F401"]

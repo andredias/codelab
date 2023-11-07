@@ -7,6 +7,7 @@ from redis.asyncio import Redis
 from tenacity import RetryError, retry, stop_after_delay, wait_exponential
 
 from . import config
+from .logging import init_loguru
 
 redis = Redis.from_url(config.REDIS_URL)
 
@@ -21,6 +22,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator:  # noqa: ARG001
 
 
 async def startup() -> None:
+    init_loguru()
     show_config()
     await connect_redis()
     logger.info('started...')
@@ -37,7 +39,6 @@ def show_config() -> None:
 
 
 async def connect_redis() -> None:
-
     # test redis connection
     @retry(stop=stop_after_delay(3), wait=wait_exponential(multiplier=0.2))
     async def _connect_to_redis() -> None:

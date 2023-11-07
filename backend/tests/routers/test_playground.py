@@ -13,7 +13,6 @@ project = CodelabInput(
 
 
 async def test_run_project(client: AsyncClient) -> None:
-
     # project not in cache
     resp = await client.post('/playgrounds', json=project.model_dump())
     assert resp.status_code == 200
@@ -31,7 +30,9 @@ async def test_run_project(client: AsyncClient) -> None:
     )
 
     # second call, the project must be in cache
-    with patch('codelab.codebox.run_codebox_input', return_value=output.responses) as run_codebox_input:
+    with patch(
+        'codelab.codebox.run_codebox_input', return_value=output.responses
+    ) as run_codebox_input:
         resp = await client.post('/playgrounds', json=project.model_dump())
         assert resp.status_code == 200
         run_codebox_input.assert_not_awaited()

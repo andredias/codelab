@@ -36,6 +36,9 @@ jobs:
         - name: Linting
           run: make lint
 
+        - name: Auditing
+          run: poetry run make audit
+
         - name: Build Docker Image
           run: docker compose build
 
