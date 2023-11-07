@@ -6,7 +6,7 @@ const languages = {
 export function filepath_to_language(filepath) {
     let filename = filepath.split('/').slice(-1)[0]
     let parts = filename.split('.')
-    if (parts.lenght < 2) {
+    if (parts.length < 2) {
         return ''
     }
     let extension = parts.slice(-1)[0]

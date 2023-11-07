@@ -1,6 +1,6 @@
 test:
 	pytest -x --cov-report term-missing --cov-report html --cov-branch \
-	       --cov app/
+	       --cov codelab/
 
 lint:
 	@echo

@@ -1,4 +1,4 @@
-from app.models import CodeboxResponse, CodelabInput, calc_hash
+from codelab.models import CodeboxResponse, CodelabInput, calc_hash
 
 
 async def test_calc_hash() -> None:

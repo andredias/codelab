@@ -7,7 +7,7 @@ It is interesting for cases where you want to do a quick experiment
 but there is no computer with the language installed and configured nearby.
 
 This project was originally made as a proof of concept
-and also to help my students to use different programming languages
+and also to help my students use different programming languages
 without needing to install anything on their machines.
 
 

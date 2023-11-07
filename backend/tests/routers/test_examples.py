@@ -3,8 +3,8 @@ from unittest.mock import patch
 from httpx import AsyncClient
 from pydantic import TypeAdapter
 
-from app.models import CodelabProject
-from app.resources import redis
+from codelab.models import CodelabProject
+from codelab.resources import redis
 
 
 async def test_get_examples(client: AsyncClient) -> None:
@@ -23,7 +23,7 @@ async def test_get_examples(client: AsyncClient) -> None:
 
     # second call, the project must be in cache
     with patch(
-        'app.routers.examples.run_codelab_project', return_value=examples
+        'codelab.routers.examples.run_codelab_project', return_value=examples
     ) as run_codelab_project:
         resp = await client.get(url)
         assert resp.status_code == 200

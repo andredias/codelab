@@ -36,9 +36,9 @@ async def get_examples() -> list[CodelabProject]:
     # load examples
     tasks = []
     with (
-        patch('app.codebox.TIMEOUT', None),
-        patch('app.codebox.COMPILATION_TIMEOUT', None),
-        patch('app.codebox.DATABASE_TIMEOUT', None),
+        patch('codelab.codebox.TIMEOUT', None),
+        patch('codelab.codebox.COMPILATION_TIMEOUT', None),
+        patch('codelab.codebox.DATABASE_TIMEOUT', None),
     ):  # disable timeout limit for examples
         for example in (Path(__file__).parent.parent / 'examples').glob('*.toml'):
             project = tomli.loads(example.read_text())

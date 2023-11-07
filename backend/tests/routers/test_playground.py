@@ -3,8 +3,8 @@ from unittest.mock import patch
 
 from httpx import AsyncClient
 
-from app import config
-from app.models import CodeboxResponse, CodelabInput, CodelabOutput
+from codelab import config
+from codelab.models import CodeboxResponse, CodelabInput, CodelabOutput
 
 project = CodelabInput(
     sourcecode='print("Hello World!")\n',
@@ -31,7 +31,7 @@ async def test_run_project(client: AsyncClient) -> None:
     )
 
     # second call, the project must be in cache
-    with patch('app.codebox.run_codebox_input', return_value=output.responses) as run_codebox_input:
+    with patch('codelab.codebox.run_codebox_input', return_value=output.responses) as run_codebox_input:
         resp = await client.post('/playgrounds', json=project.model_dump())
         assert resp.status_code == 200
         run_codebox_input.assert_not_awaited()

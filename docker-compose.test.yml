@@ -24,7 +24,7 @@ services:
                 "--config=hypercorn.toml",
                 "--reload",
                 "--root-path=/api",
-                "app.main:app"
+                "codelab.main:app"
             ]
         environment:
             - ENV=development

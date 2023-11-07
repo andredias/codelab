@@ -8,7 +8,7 @@ from pytest import fixture
 
 os.environ['ENV'] = 'testing'
 
-from app.main import app as _app  # noqa: E402
+from codelab.main import app as _app  # noqa: E402
 
 
 @fixture
