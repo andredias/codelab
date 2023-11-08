@@ -12,7 +12,7 @@
     "codemirror": "^5",
     "crypto-js": "*",
     "pug": "*",
-    "stylus": "*",
+    "stylus": "0.60.0",
     "vue": "*",
     "vue-router": "*",
     "vuex": "*"
