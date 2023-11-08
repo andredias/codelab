@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "axios": "*",
-    "codemirror": "^5",
+    "codemirror": "^5.65.13",
     "crypto-js": "*",
     "pug": "*",
     "stylus": "*",
