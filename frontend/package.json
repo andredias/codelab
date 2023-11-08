@@ -14,7 +14,7 @@
     "pug": "*",
     "stylus": "*",
     "vue": "*",
-    "vue-router": "*",
+    "vue-router": "4.2.2",
     "vuex": "*"
   },
   "devDependencies": {
