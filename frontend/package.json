@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "*",
     "codemirror": "^5",
-    "crypto-js": "*",
+    "crypto-js": "4.2.0",
     "pug": "*",
     "stylus": "*",
     "vue": "*",
