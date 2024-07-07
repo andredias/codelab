@@ -27,7 +27,7 @@ tomli = "*"
 [tool.poetry.group.dev.dependencies]
 asgi-lifespan = "*"
 alt-pytest-asyncio = "*"
-httpx = {version = "*", extras = ["cli"]}
+httpx = { version = "*", extras = ["cli"] }
 mypy = "*"
 pip-audit = "*"
 pytest = "*"
