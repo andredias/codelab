@@ -12,6 +12,8 @@ from .routers import examples, playground
 app = FastAPI(
     title='Codelab',
     lifespan=lifespan,
+    # type annotation problem. See: https://github.com/encode/starlette/pull/2403
+    exception_handlers={RequestValidationError: request_validation_exception_handler},  # type: ignore
 )
 
 routers = (
@@ -33,4 +35,3 @@ app.add_middleware(
     allow_headers=['*'],
 )
 app.add_middleware(BaseHTTPMiddleware, dispatch=log_request_middleware)
-app.add_exception_handler(RequestValidationError, request_validation_exception_handler)

@@ -46,6 +46,9 @@ disallow_untyped_defs = true
 
 [tool.ruff]
 line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
 select = [
     "ARG",
     "B",
@@ -67,12 +70,11 @@ select = [
     "W",
 ]
 ignore = ["B008"]
-target-version = "py311"
 
 [tool.ruff.format]
 quote-style = "single"
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
 "tests/**" = ["ARG", "PLR2004", "S"]
 "smoke_test.py" = ["S"]
