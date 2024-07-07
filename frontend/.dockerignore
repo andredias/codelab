@@ -1,0 +1,8 @@
+*
+!package.json
+!package-lock.json
+!index.html
+!vite.config.js
+!public
+!src
+!.env.production

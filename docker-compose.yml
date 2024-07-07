@@ -17,7 +17,7 @@ services:
             - "80:80"
             - "443:443"
         volumes:
-            - ./frontend/dist:/dist
+            - frontend:/codelab-frontend
             - ./Caddyfile:/etc/caddy/Caddyfile
         networks:
             - web
@@ -33,6 +33,13 @@ services:
             - "6379:6379"
         networks:
             - backend
+
+    frontend:
+        build:
+            context: ./frontend
+        image: codelab-frontend:latest
+        volumes:
+            - frontend:/codelab-frontend/dist
 
     codelab:
         container_name: codelab
@@ -60,3 +67,6 @@ services:
             - backend
         init: true
         privileged: true
+
+volumes:
+    frontend:

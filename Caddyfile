@@ -8,7 +8,7 @@ localhost {
     }
 
     handle {
-        root * /dist
+        root * /codelab-frontend
         try_files {path} /index.html
         file_server
     }
