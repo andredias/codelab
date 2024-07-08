@@ -1,4 +1,4 @@
-FROM python:3.11-slim as builder
+FROM python:3.13.0b1-slim as builder
 LABEL maintainer="André Felipe Dias <andref.dias@gmail.com>"
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
@@ -19,7 +19,7 @@ RUN . /venv/bin/activate; \
     $POETRY_HOME/bin/poetry install --only main --no-interaction
 
 
-FROM python:3.11-slim as final
+FROM python:3.13.0b1-slim as final
 
 COPY --from=builder /venv /venv
 ENV PATH=/venv/bin:${PATH}
