@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "*",
+    "axios": "1.7.4",
     "codemirror": "^5",
     "crypto-js": "*",
     "pug": "*",
